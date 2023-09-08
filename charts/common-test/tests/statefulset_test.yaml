@@ -1,0 +1,40 @@
+suite: test statefulset
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should overwrite defaults
+    set:
+      workload: statefulset
+
+      minReadySeconds: 10
+      ordinals:
+        start: 1
+      persistentVolumeClaimRetentionPolicy:
+        whenDeleted: Delete
+      podManagementPolicy: OrderedReady
+      replicas: 10
+      revisionHistoryLimit: 20
+      serviceName: backend
+      updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 2
+          partition: 2
+    asserts:
+      - matchSnapshot:
+          path: spec
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should pass
+    set:
+      workload: statefulset
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 0
+      - hasDocuments:
+          count: 1

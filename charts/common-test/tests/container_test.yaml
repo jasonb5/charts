@@ -1,0 +1,67 @@
+suite: test container
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should overwrite defaults
+    set:
+      workload: deployment
+
+      args:
+        - infinity
+      command:
+        - /bin/sleep
+      env:
+        CONFIG: /config/config.txt
+        PORT: "{{ .Values.service.ports.default.port }}"
+      envFrom:
+        default:
+          type: configmap
+        credentials:
+          type: secret
+      image:
+        pullPolicy: Always
+      lifecycle:
+        postStart:
+          exec:
+            command: ["curl", "..."]
+      livenessProbe:
+        tcpSocket:
+          port: "{{ .Values.service.ports.default.port }}"
+      readinessProbe:
+        tcpSocket:
+          port: "{{ .Values.service.ports.default.port }}"
+      resources:
+        limits:
+          cpu: 2
+      restartPolicy: Always
+      securityContext:
+        runAsUser: 65536
+        runAsGroup: 65536
+      startupProbe:
+        tcpSocket:
+          port: "{{ .Values.service.ports.default.port }}"
+      workingDir: /app
+
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.containers[0]
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should pass
+    set:
+      workload: deployment
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.containers[0]
+        documentIndex: 0
+      - hasDocuments:
+          count: 1

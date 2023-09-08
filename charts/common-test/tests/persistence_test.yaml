@@ -1,0 +1,207 @@
+suite: test persistence
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should reference volume from initContainers
+    set:
+      workload: deployment
+
+      initContainers:
+        db:
+          image:
+            repository: mariadb
+            tag: latest
+
+          persistence:
+            data1:
+              enabled: true
+              mountPath: /config
+
+      persistence:
+        data1:
+          enabled: true
+          type: nfs
+          path: /mnt/users/data
+          server: 192.168.0.1
+          readOnly: true
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.initContainers[0].volumeMounts
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.containers[0].volumeMounts
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.volumes
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should propagate initContainers volume
+    set:
+      workload: deployment
+
+      initContainers:
+        db:
+          image:
+            repository: mariadb
+            tag: latest
+
+          persistence:
+            data1:
+              enabled: true
+              type: nfs
+              path: /mnt/users/data
+              server: 192.168.0.1
+              readOnly: true
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.volumes
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.initContainers[0].volumeMounts
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should reference volume from extraContainers
+    set:
+      workload: deployment
+
+      extraContainers:
+        db:
+          image:
+            repository: mariadb
+            tag: latest
+
+          persistence:
+            data1:
+              enabled: true
+              mountPath: /config
+
+      persistence:
+        data1:
+          enabled: true
+          type: nfs
+          path: /mnt/users/data
+          server: 192.168.0.1
+          readOnly: true
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.containers[1].volumeMounts
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.containers[0].volumeMounts
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.volumes
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should propagate extraContainers volume
+    set:
+      workload: deployment
+
+      extraContainers:
+        db:
+          image:
+            repository: mariadb
+            tag: latest
+
+          persistence:
+            data1:
+              enabled: true
+              type: nfs
+              path: /mnt/users/data
+              server: 192.168.0.1
+              readOnly: true
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.volumes
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.containers[1].volumeMounts
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should overwrite defaults
+    set:
+      workload: deployment
+
+      persistence:
+        mount3:
+          enabled: true
+          type: nfs
+          path: /mnt/users/data
+          server: 192.168.0.1
+          readOnly: true
+          mountPath: /data
+          mountPropagation: Bidirectional
+          subPath: test
+        mount4:
+          enabled: true
+          type: pvc
+          readOnly: true
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.containers[0].volumeMounts
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.volumes
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should disable volume
+    set:
+      workload: deployment
+
+      persistence:
+        mount4:
+          enabled: false
+          type: pvc
+    asserts:
+      - isNullOrEmpty:
+          path: spec.template.spec.containers[0].volumeMounts
+        documentIndex: 0
+      - isNullOrEmpty:
+          path: spec.template.spec.volumes
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should pass
+    set:
+      workload: deployment
+
+      persistence:
+        default:
+          enabled: true
+          type: configmap
+        mount1:
+          enabled: true
+          type: emptydir
+        mount2:
+          enabled: true
+          type: hostpath
+          path: /data
+        mount3:
+          enabled: true
+          type: nfs
+          path: /mnt/users/data
+          server: 192.168.0.1
+        mount4:
+          enabled: true
+          type: pvc
+        mount5:
+          enabled: true
+          type: secret
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.containers[0].volumeMounts
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec.template.spec.volumes
+        documentIndex: 0
+      - hasDocuments:
+          count: 2

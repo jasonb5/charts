@@ -1,0 +1,87 @@
+workload:
+
+extraWorkloads:
+
+extraObjects:
+
+annotations:
+labels:
+
+# cronjob
+concurrencyPolicy:
+failedJobHistoryLimit:
+schedule:
+startingDeadlineSeconds:
+successfulJobHistoryLimit:
+timeZone:
+
+# job
+jobActiveDeadlineSeconds:
+backoffLimit:
+backoffLimitPerIndex:
+completionMode:
+completions:
+maxFailedIndexes:
+parallelism:
+podFailurePolicy:
+podReplacementPolicy:
+ttlSecondsAfterFinished:
+
+# deployment/daemonset/statefulset
+minReadySeconds:
+progressDeadlineSeconds:
+replicas: 1
+revisionHistoryLimit:
+strategy:
+  type: Recreate
+updateStrategy:
+  type: OnDelete
+ordinals:
+persistentVolumeClaimRetentionPolicy:
+podManagementPolicy:
+serviceName:
+  volumeClaimTemplates:
+
+# pod
+activeDeadlineSeconds:
+affinity:
+dnsConfig:
+dnsPolicy:
+hostAliases:
+hostIPC:
+hostNetwork:
+hostPID:
+hostUsers:
+hostname:
+initContainers:
+extraContainers:
+nodeName:
+nodeSelector:
+preemptionPolicy:
+priority:
+priorityClassName:
+podRestartPolicy:
+runtimeClassName:
+podSecurityContext:
+serviceAccount:
+terminationGracePeriodSeconds:
+tolerations:
+
+# container
+args:
+command:
+env:
+envFrom:
+image:
+  repository:
+  tag:
+  pullSecrets:
+  pullPolicy:
+lifecycle:
+livenessProbe:
+readinessProbe:
+resources:
+restartPolicy:
+securityContext:
+startupProbe:
+workingDir:

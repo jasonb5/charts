@@ -1,0 +1,54 @@
+suite: test app
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should create extra objects
+    set:
+      extraObjects:
+        - apiVersion: v1
+          data:
+            CONFIG: /config/config.txt
+            PORT: 80
+          kind: ConfigMap
+          metadata:
+            name: test
+        - |
+          apiVersion: v1
+          data:
+            CONFIG: /config/config.txt
+            PORT: {{ .Values.service.ports.default.port }}
+          kind: ConfigMap
+          metadata:
+          {{- include "common.metadata" . | nindent 2 }}
+
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - hasDocuments:
+          count: 3
+  - it: should create extra workload
+    set:
+      workload: deployment
+
+      extraWorkloads:
+        db:
+          workload: deployment
+
+          image:
+            repository: mariadb
+            tag: latest
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 1
+      - hasDocuments:
+          count: 2
+  - it: should pass
+    asserts:
+      - hasDocuments:
+          count: 0
