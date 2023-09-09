@@ -1,0 +1,92 @@
+suite: test networkpolicy
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should disable defaults
+    set:
+      workload: deployment
+
+      networkPolicy:
+        enabled: true
+        disableDefaultEgress: true
+        disableDefaultIngress: true
+        egress:
+          - to:
+              - namespaceSelector:
+                  matchLabels:
+                    kubernetes.io/metadata.name: production
+            ports:
+              - protocol: TCP
+                port: 3306
+        ingress:
+          - from:
+              - namespaceSelector:
+                  matchLabels:
+                    kubernetes.io/metadata.name: production
+            ports:
+              - protocol: TCP
+                port: 8000
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 2
+      - hasDocuments:
+          count: 3
+  - it: should merge with defaults
+    set:
+      workload: deployment
+
+      networkPolicy:
+        enabled: true
+        egress:
+          - to:
+              - namespaceSelector:
+                  matchLabels:
+                    kubernetes.io/metadata.name: production
+            ports:
+              - protocol: TCP
+                port: 3306
+        ingress:
+          - from:
+              - namespaceSelector:
+                  matchLabels:
+                    kubernetes.io/metadata.name: production
+            ports:
+              - protocol: TCP
+                port: 8000
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 2
+      - hasDocuments:
+          count: 3
+  - it: should create default policy
+    set:
+      workload: deployment
+
+      networkPolicy:
+        enabled: true
+
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 2
+      - hasDocuments:
+          count: 3
+  - it: should pass
+    asserts:
+      - hasDocuments:
+          count: 0

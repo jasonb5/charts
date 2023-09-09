@@ -1,11 +1,15 @@
 workload:
 
-extraWorkloads:
-
-extraObjects:
-
 annotations:
 labels:
+
+extraWorkloads:
+extraObjects:
+
+networkPolicy:
+  enabled: false
+  egress:
+  ingress:
 
 # cronjob
 concurrencyPolicy:

@@ -1,0 +1,106 @@
+should create default policy:
+  1: |
+    apiVersion: v1
+    kind: NetworkPolicy
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test
+      namespace: NAMESPACE
+    spec:
+      egress:
+        - {}
+      ingress:
+        - from:
+            - podSelector: {}
+          ports:
+            - port: 80
+              protocol: TCP
+      podSelector:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/name: common-test
+      policyTypes:
+        - Egress
+        - Ingress
+should disable defaults:
+  1: |
+    apiVersion: v1
+    kind: NetworkPolicy
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test
+      namespace: NAMESPACE
+    spec:
+      egress:
+        - ports:
+            - port: 3306
+              protocol: TCP
+          to:
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: production
+      ingress:
+        - from:
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: production
+          ports:
+            - port: 8000
+              protocol: TCP
+      podSelector:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/name: common-test
+      policyTypes:
+        - Egress
+        - Ingress
+should merge with defaults:
+  1: |
+    apiVersion: v1
+    kind: NetworkPolicy
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test
+      namespace: NAMESPACE
+    spec:
+      egress:
+        - ports:
+            - port: 3306
+              protocol: TCP
+          to:
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: production
+        - {}
+      ingress:
+        - from:
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: production
+          ports:
+            - port: 8000
+              protocol: TCP
+        - from:
+            - podSelector: {}
+          ports:
+            - port: 80
+              protocol: TCP
+      podSelector:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/name: common-test
+      policyTypes:
+        - Egress
+        - Ingress

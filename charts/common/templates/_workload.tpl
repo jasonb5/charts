@@ -49,4 +49,12 @@
 ---
 {{- end }}
 {{- end }}
+{{- with .Values.networkPolicy }}
+{{- if .enabled }}
+{{- $values := mustMerge . (dict "workloadName" $.Values.workloadName "name" "default" "service" $services) }}
+{{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
+{{- include "common.networkPolicy" $dot }}
+---
+{{- end }}
+{{- end }}
 {{- end }}
