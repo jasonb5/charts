@@ -1,0 +1,5 @@
+name: 'Setup Helm'
+description: 'Installs Helm tool'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

@@ -1,0 +1,48 @@
+name: testing
+
+on:
+  pull_request:
+    paths:
+      - 'charts/**'
+
+jobs:
+  changed_files:
+    runs-on: ubuntu-latest
+    name: Get changed Helm charts
+    outputs:
+      all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get all Helm charts that have changed
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v38
+        with:
+          dir_names: true
+          dir_names_exclude_current_dir: true
+          dir_names_max_depth: 1
+          escape_json: false
+          json: true
+          path: 'charts/'
+  test_chart:
+    runs-on: ubuntu-latest
+    name: Test Helm chart
+    needs: changed_files
+    strategy:
+      matrix:
+        chart: ${{ fromJSON(needs.changed_files.outputs.all_modified_files) }}
+    defaults:
+      run:
+        working-directory: ${{ format('charts/{0}', matrix.chart) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-helm
+      - name: Lint Helm chart
+        run: make lint
+      - name: Unittest Helm chart
+        run: |
+          helm plugin install https://github.com/helm-unittest/helm-unittest.git
+          make test
