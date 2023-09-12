@@ -1,0 +1,68 @@
+suite: test service
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should expose ports from extraContainers
+    set:
+      workload: deployment
+
+      extraContainers:
+        db:
+          image:
+            repository: mariadb
+            tag: latest
+
+          service:
+            ports:
+              mariadb:
+                port: 3306
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 1
+      - matchSnapshot:
+          path: spec.template.spec.containers
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should overwrite defaults
+    set:
+      workload: deployment
+
+      service:
+        loadBalancerIP: 192.168.0.1
+        type: ClusterIP
+        ports:
+          default:
+            nodePort: 80
+            port: 80
+            exposedPort: 8080
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 1
+      - matchSnapshot:
+          path: spec.template.spec.containers[0].ports
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should pass
+    set:
+      workload: deployment
+
+      service:
+        ports:
+          default:
+            port: 80
+          https:
+            port: 443
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 1
+      - matchSnapshot:
+          path: spec.template.spec.containers[0].ports
+        documentIndex: 0
+      - hasDocuments:
+          count: 2

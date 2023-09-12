@@ -1,0 +1,32 @@
+suite: test cronjob
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should overwrite defaults
+    set:
+      workload: cronjob
+
+      concurrencyPolicy: Allow
+      failedJobHistoryLimit: 10
+      schedule: "* * * * *"
+      startingDeadlineSeconds: 10
+      successfulJobHistoryLimit: 10
+      timeZone: America/Los_Angeles
+    asserts:
+      - matchSnapshot:
+          path: spec
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should pass
+    set:
+      workload: cronjob
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 0
+      - hasDocuments:
+          count: 1

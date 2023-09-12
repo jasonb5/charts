@@ -1,0 +1,108 @@
+suite: test pod
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should add extraContainers
+    set:
+      workload: deployment
+
+      extraContainers:
+        db:
+          image:
+            repository: mariadb
+            tag: latest
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.containers[1]
+      - hasDocuments:
+          count: 1
+  - it: should add initContainers
+    set:
+      workload: deployment
+
+      initContainers:
+        chmod:
+          image:
+            repository: busybox
+            tag: latest
+
+          args: ["chmod", "+0600"]
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.initContainers[0]
+      - hasDocuments:
+          count: 1
+  - it: should overwrite defaults
+    set:
+      workload: deployment
+
+      activeDeadlineSeconds: 20
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorterms:
+            - matchFields:
+              - key: kubernetes.io/hostname
+                operator: "In"
+                values:
+                - node01
+      dnsConfig:
+        options:
+        - name: ndots
+          value: "1"
+      dnsPolicy: ClusterFirst
+      hostAliases:
+      - hostnames:
+        - backend
+        ip: 192.168.0.1
+      hostIPC: true
+      hostNetwork: true
+      hostPID: true
+      hostUsers: true
+      hostname: backend
+      image:
+        pullSecrets:
+          docker.io:
+            username: user1
+            password: abcd1234
+            email: user1@domain.io
+      nodeName: node01
+      nodeSelector:
+        kubernetes.io/hostname: node01
+      preemptionPolicy: Never
+      priority: 20
+      priorityClassName: system-node-critical
+      podRestartPolicy: Always
+      runtimeClassName: nvidia
+      podSecurityContext:
+        runAsUser: 65536
+        runAsGroup: 65536
+      serviceAccount:
+        name: test
+      terminationGracePeriodSeconds: 20
+      tolerations:
+      - effect: NoSchedule
+        key: kubernetes.io/hostname
+        operator: "Equal"
+        value: node01
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 1
+      - matchSnapshot:
+          path: spec.template.spec
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should pass
+    set:
+      workload: deployment
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec
+        documentIndex: 0
+      - hasDocuments:
+          count: 1

@@ -1,0 +1,35 @@
+suite: test deployment
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should overwrite defaults
+    set:
+      workload: deployment
+
+      minReadySeconds: 30
+      progressDeadlineSeconds: 20
+      replicas: 10
+      revisionHistoryLimit: 20
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 2
+          maxUnavailable: 2
+    asserts:
+      - matchSnapshot:
+          path: spec
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should pass
+    set:
+      workload: deployment
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 0
+      - hasDocuments:
+          count: 1

@@ -1,0 +1,44 @@
+should overwrite defaults:
+  1: |
+    activeDeadlineSeconds: 10
+    backoffLimit: 10
+    backoffLimitPerIndex: 2
+    completionMode: Indexed
+    completions: 10
+    maxFailedIndexes: 2
+    parallelism: 10
+    podFailurePolicy:
+      rules:
+        - action: FailJob
+          onExitCodes:
+            containerName: test
+            operator: In
+            values:
+              - 0
+    podReplacementPolicy: TerminatingOrFailed
+    template:
+      spec:
+        activeDeadlineSeconds: 10
+        containers:
+          - image: busybox:0.1.0
+            name: common-test
+    ttlSecondsAfterFinished: 20
+should pass:
+  1: |
+    apiVersion: v1
+    kind: Job
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test
+      namespace: NAMESPACE
+    spec:
+      template:
+        spec:
+          containers:
+            - image: busybox:0.1.0
+              name: common-test

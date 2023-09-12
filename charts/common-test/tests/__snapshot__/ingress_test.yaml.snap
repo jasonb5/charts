@@ -1,0 +1,72 @@
+should overwrite defaults:
+  1: |
+    apiVersion: v1
+    kind: Ingress
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test
+      namespace: NAMESPACE
+    spec:
+      ingressClassName: traefik
+      rules:
+        - http:
+            paths:
+              - backend:
+                  name: default
+                  port:
+                    number: 80
+                path: /index
+                pathType: ImplementationSpecific
+              - backend:
+                  name: https
+                  port:
+                    number: 443
+                path: /version
+        - host: domain.io
+          http:
+            paths:
+              - backend:
+                  name: https
+                  port:
+                    number: 443
+                path: /login
+                pathType: Prefix
+      tls:
+        - hosts:
+            - domain.io
+          secretName: RELEASE-NAME-common-test-tls-certs
+should pass:
+  1: |
+    apiVersion: v1
+    kind: Ingress
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test
+      namespace: NAMESPACE
+    spec:
+      rules:
+        - http:
+            paths:
+              - backend:
+                  name: default
+                  port:
+                    number: 80
+                path: /
+        - host: domain.io
+          http:
+            paths:
+              - backend:
+                  name: https
+                  port:
+                    number: 443
+                path: /

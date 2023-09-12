@@ -1,0 +1,80 @@
+should add extraContainers:
+  1: |
+    image: mariadb:latest
+    name: db
+should add initContainers:
+  1: |
+    args:
+      - chmod
+      - "+0600"
+    image: busybox:latest
+    name: chmod
+should overwrite defaults:
+  1: |
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test-regcreds
+      namespace: NAMESPACE
+    stringData:
+      .dockerconfigjson: '{"auths":{"docker.io":{"auth":"dXNlcjE6YWJjZDEyMzQ=","email":"user1@domain.io"}}}'
+    type: kubernetes.io/dockerconfigjson
+  2: |
+    activeDeadlineSeconds: 20
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorterms:
+            - matchFields:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - node01
+    containers:
+      - image: busybox:0.1.0
+        name: common-test
+    dnsConfig:
+      options:
+        - name: ndots
+          value: "1"
+    dnsPolicy: ClusterFirst
+    hostAliases:
+      - hostnames:
+          - backend
+        ip: 192.168.0.1
+    hostIPC: true
+    hostNetwork: true
+    hostPID: true
+    hostUsers: true
+    hostname: backend
+    imagePullSecrets:
+      - name: RELEASE-NAME-common-test-regcreds
+    nodeName: node01
+    nodeSelector:
+      kubernetes.io/hostname: node01
+    preemptionPolicy: Never
+    priority: 20
+    priorityClassName: system-node-critical
+    restartPolicy: Always
+    runtimeClassName: nvidia
+    securityContext:
+      runAsGroup: 65536
+      runAsUser: 65536
+    serviceAccountName: test
+    terminationGracePeriodSeconds: 20
+    tolerations:
+      - effect: NoSchedule
+        key: kubernetes.io/hostname
+        operator: Equal
+        value: node01
+should pass:
+  1: |
+    containers:
+      - image: busybox:0.1.0
+        name: common-test

@@ -1,0 +1,50 @@
+should overwrite defaults:
+  1: |
+    args:
+      - infinity
+    command:
+      - /bin/sleep
+    env:
+      - name: CONFIG
+        value: /config/config.txt
+      - name: PORT
+        value: 80
+    envFrom:
+      - secretRef:
+          name: RELEASE-NAME-common-test-credentials
+      - configMapRef:
+          name: RELEASE-NAME-common-test
+    image: busybox:0.1.0
+    imagePullPolicy: Always
+    lifecycle:
+      postStart:
+        exec:
+          command:
+            - curl
+            - '...'
+    livenessProbe:
+      tcpSocket:
+        port: "80"
+    name: common-test
+    ports:
+      - containerPort: 80
+        name: common-test
+        protocol: TCP
+    readinessProbe:
+      tcpSocket:
+        port: "80"
+    resources:
+      limits:
+        cpu: 2
+    restartPolicy: Always
+    securityContext:
+      runAsGroup: 65536
+      runAsUser: 65536
+    startupProbe:
+      tcpSocket:
+        port: "80"
+    workingDir: /app
+should pass:
+  1: |
+    image: busybox:0.1.0
+    name: common-test

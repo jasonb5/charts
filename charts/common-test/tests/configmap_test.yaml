@@ -1,0 +1,31 @@
+suite: test configmap
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should pass
+    set:
+      workload: deployment
+
+      configmap:
+        default:
+          data:
+            CONFIG: /config/config.txt
+        config:
+          data:
+            PORT: "{{ .Values.service.ports.default.port }}"
+
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 2
+      - matchSnapshot: {}
+        documentIndex: 1
+      - hasDocuments:
+          count: 4

@@ -1,0 +1,33 @@
+suite: test daemonset
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should overwrite defaults
+    set:
+      workload: daemonset
+
+      minReadySeconds: 10
+      revisionHistoryLimit: 20
+      updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 2
+          maxUnavailable: 2
+    asserts:
+      - matchSnapshot:
+          path: spec
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
+  - it: should pass
+    set:
+      workload: daemonset
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
