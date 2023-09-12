@@ -1,5 +1,5 @@
 {{- define "common.statefulset" }}
-apiVersion: v1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
 {{- include "common.metadata" . | nindent 2 }}

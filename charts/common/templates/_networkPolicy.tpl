@@ -16,7 +16,7 @@ value:
 {{- end }}
 
 {{- define "common.networkPolicy" }}
-apiVersion: v1
+apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
 {{- include "common.metadata" . | nindent 2 }}

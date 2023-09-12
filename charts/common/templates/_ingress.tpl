@@ -1,5 +1,5 @@
 {{- define "common.ingress" }}
-apiVersion: v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
 {{- include "common.metadata" . | nindent 2 }}

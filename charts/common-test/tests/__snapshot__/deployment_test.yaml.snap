@@ -24,7 +24,7 @@ should overwrite defaults:
             name: common-test
 should pass:
   1: |
-    apiVersion: v1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       labels:

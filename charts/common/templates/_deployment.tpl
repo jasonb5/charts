@@ -1,5 +1,5 @@
 {{- define "common.deployment" }}
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
 {{- include "common.metadata" . | nindent 2 }}

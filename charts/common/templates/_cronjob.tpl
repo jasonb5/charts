@@ -1,5 +1,5 @@
 {{- define "common.cronjob" }}
-apiVersion: v1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
 {{- include "common.metadata" . | nindent 2 }}

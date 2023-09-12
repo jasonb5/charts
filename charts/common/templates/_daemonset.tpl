@@ -1,5 +1,5 @@
 {{- define "common.daemonset" }}
-apiVersion: v1
+apiVersion: app/v1
 kind: DaemonSet
 metadata:
 {{- include "common.metadata" . | nindent 2 }}
