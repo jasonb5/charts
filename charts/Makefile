@@ -2,6 +2,10 @@
 
 CHART_DIR ?= .
 
+.PHONY: bump-%
+bump-%:
+	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
+
 .PHONY: template
 template: dep
 	helm template $(ARGS) $(CHART_DIR)
