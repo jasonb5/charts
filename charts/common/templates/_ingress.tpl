@@ -20,9 +20,7 @@ spec:
             port:
               number: {{ $service.port }}
         path: {{ default "/" $path.path }}
-        {{- with $path.pathType }}
-        pathType: {{ . }}
-        {{- end }}
+        pathType: {{ default "Prefix" $path.pathType }}
       {{- end }}
     {{- if ne $domain "default" }}
     host: {{ $domain }}
