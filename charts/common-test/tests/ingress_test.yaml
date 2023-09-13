@@ -11,6 +11,7 @@ tests:
       workload: deployment
 
       ingress:
+        enabled: true
         className: traefik
         hosts:
           default:
@@ -36,11 +37,33 @@ tests:
         documentIndex: 2
       - hasDocuments:
           count: 3
+  - it: should disable
+    set:
+      workload: deployment
+
+      ingress:
+        enabled: false
+        hosts:
+          default:
+            - name: default
+          domain.io:
+            - name: https
+
+      service:
+        ports:
+          default:
+            port: 80
+          https:
+            port: 443
+    asserts:
+      - hasDocuments:
+          count: 2
   - it: should pass
     set:
       workload: deployment
 
       ingress:
+        enabled: true
         hosts:
           default:
             - name: default

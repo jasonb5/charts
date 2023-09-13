@@ -1,6 +1,6 @@
 should overwrite defaults:
   1: |
-    apiVersion: v1
+    apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
       labels:
@@ -17,23 +17,26 @@ should overwrite defaults:
         - http:
             paths:
               - backend:
-                  name: default
-                  port:
-                    number: 80
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 80
                 path: /index
                 pathType: ImplementationSpecific
               - backend:
-                  name: https
-                  port:
-                    number: 443
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 443
                 path: /version
         - host: domain.io
           http:
             paths:
               - backend:
-                  name: https
-                  port:
-                    number: 443
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 443
                 path: /login
                 pathType: Prefix
       tls:
@@ -42,7 +45,7 @@ should overwrite defaults:
           secretName: RELEASE-NAME-common-test-tls-certs
 should pass:
   1: |
-    apiVersion: v1
+    apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
       labels:
@@ -58,15 +61,17 @@ should pass:
         - http:
             paths:
               - backend:
-                  name: default
-                  port:
-                    number: 80
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 80
                 path: /
         - host: domain.io
           http:
             paths:
               - backend:
-                  name: https
-                  port:
-                    number: 443
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 443
                 path: /

@@ -29,10 +29,12 @@
 ---
 {{- end }}
 {{- with .Values.ingress }}
+{{- if .enabled }}
 {{- $values := mustMerge . (dict "workloadName" $.Values.workloadName "name" "default" "service" $.Values.service.ports) }}
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
 {{- include "common.ingress" $dot }}
 ---
+{{- end }}
 {{- end }}
 {{- $persistence := default dict .Values.persistence }}
 {{- with .Values.extraContainers }}

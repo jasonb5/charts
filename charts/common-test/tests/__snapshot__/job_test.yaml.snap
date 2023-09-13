@@ -25,7 +25,7 @@ should overwrite defaults:
     ttlSecondsAfterFinished: 20
 should pass:
   1: |
-    apiVersion: v1
+    apiVersion: batch/v1
     kind: Job
     metadata:
       labels:

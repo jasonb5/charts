@@ -36,7 +36,7 @@ ttlSecondsAfterFinished: {{ . }}
 {{- end }}
 
 {{- define "common.job" }}
-apiVersion: v1
+apiVersion: batch/v1
 kind: Job
 metadata:
 {{- include "common.metadata" . | nindent 2 }}
