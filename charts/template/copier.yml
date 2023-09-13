@@ -1,0 +1,45 @@
+name:
+  type: str
+  help: Helm chart name.
+
+description:
+  type: str
+  help: Helm chart description.
+
+image:
+  type: str
+  help: Container image for the Helm chart.
+
+version:
+  type: str
+  help: Application version.
+
+redis_enabled:
+  type: bool
+  help: Enable Redis dependency.
+
+redis_version:
+  type: str
+  help: Version of Bitnami Redis Helm chart.
+  default: 18.0.x
+  when: "{{ redis_enabled }}"
+
+mariadb_enabled:
+  type: bool
+  help: Enable MariaDB dependency.
+
+mariadb_version:
+  type: str
+  help: Version of Bitnami MariaDB Helm chart.
+  default: 13.1.x
+  when: "{{ mariadb_enabled }}"
+
+postgresql_enabled:
+  type: bool
+  help: Enable PostgreSQL dependency.
+
+postgresql_version:
+  type: str
+  help: Version of Bitnami PostgreSQL Helm chart.
+  default: 12.10.x
+  when: "{{ postgresql_enabled }}"

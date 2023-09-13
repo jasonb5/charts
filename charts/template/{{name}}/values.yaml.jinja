@@ -1,0 +1,60 @@
+workload: deployment
+
+image:
+  repository: {{ image }}
+
+{% if redis_enabled %}
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false
+    sentinel: false
+    password:
+  master:
+    persistence:
+      enabled: false
+  replica:
+    persistence:
+      enabled: false
+  sentinel:
+    enabled: false
+  metrics:
+    enabled: false
+{% endif -%}
+{%- if mariadb_enabled %}
+mariadb:
+  enabled: true
+  architecture: standalone
+  auth:
+    rootPassword:
+    database:
+    username:
+    password:
+  primary:
+    persistence:
+      enabled: false
+  secondary:
+    persistence:
+      enabled: false
+  metrics:
+    enabled: false
+{% endif -%}
+{%- if postgresql_enabled %}
+postgresql:
+  enabled: true
+  architecture: standalone
+  auth:
+    postgresPassword:
+    database:
+    username:
+    password:
+  primary:
+    persistence:
+      enabled: false
+  readReplicas:
+    persistence:
+      enabled: false
+  metrics:
+    enabled: false
+{% endif -%}
