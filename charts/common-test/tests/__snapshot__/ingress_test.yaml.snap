@@ -29,6 +29,7 @@ should overwrite defaults:
                     port:
                       number: 443
                 path: /version
+                pathType: Prefix
         - host: domain.io
           http:
             paths:
@@ -66,6 +67,7 @@ should pass:
                     port:
                       number: 80
                 path: /
+                pathType: Prefix
         - host: domain.io
           http:
             paths:
@@ -75,3 +77,4 @@ should pass:
                     port:
                       number: 443
                 path: /
+                pathType: Prefix

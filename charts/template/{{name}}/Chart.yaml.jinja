@@ -1,0 +1,29 @@
+apiVersion: v2
+name: {{ name }}
+description: |
+{{ description }}
+type: application
+version: 0.1.0
+appVersion: "{{ version }}"
+dependencies:
+- name: common
+  version: "0.1.x"
+  repository: "https://jasonb5.github.io/charts"
+{%- if redis_enabled %}
+- name: redis
+  version: {{ redis_version }}
+  repository: "oci://registry-1.docker.io/bitnamicharts/redis"
+  condition: redis.enabled
+{%- endif -%}
+{%- if mariadb_enabled %}
+- name: mariadb
+  version: {{ mariadb_version }}
+  repository: "oci://registry-1.docker.io/bitnamicharts/mariadb"
+  condition: mariadb.enabled
+{%- endif -%}
+{%- if postgresql_enabled %}
+- name: postgresql
+  version: {{ postgresql_version }}
+  repository: "oci://registry-1.docker.io/bitnamicharts/postgresql"
+  condition: postgresql.enabled
+{%- endif -%}

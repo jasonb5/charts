@@ -2,6 +2,10 @@
 
 CHART_DIR ?= .
 
+.PHONY: new-chart
+new-chart:
+	copier copy template/ .
+
 .PHONY: bump-%
 bump-%:
 	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
