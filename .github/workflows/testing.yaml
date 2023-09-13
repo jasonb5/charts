@@ -25,6 +25,7 @@ jobs:
           escape_json: false
           json: true
           path: 'charts/'
+          files_ignore: 'template'
   test_chart:
     runs-on: ubuntu-latest
     name: Test Helm chart
