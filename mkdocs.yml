@@ -1,0 +1,25 @@
+site_name: Homelab
+site_url: https://jasonb5.github.io/charts
+repo_url: https://github.com/jasonb5/charts
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: teal
+    accent: teal
+  features:
+    - navigation.tabs
+
+watch:
+  - README.md
+
+markdown_extensions: 
+  - pymdownx.snippets:
+      check_paths: true
+
+plugins:
+  - search
+  - awesome-pages
+
+dev_addr: 0.0.0.0:8000

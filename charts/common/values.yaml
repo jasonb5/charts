@@ -1,91 +1,181 @@
+# -- (string) Workload can be cronjob, daemonset, deployment, job, pod, or statefulset.
 workload:
 
+# -- (object) Map of ConfigMaps, these are not unique to the workload.
+configmap:
+
+# -- (object) Map of Secrets, these are not unique to the workload.
+secret:
+
+# -- (object) Map of ingress, these are specific to the workload.
+ingress:
+
+# -- (object) Map of persistence, these are specifi to the workload.
+persistence:
+
+# -- (object) Annotations for default workload.
 annotations:
+# -- (object) Labels for default workload.
 labels:
 
+# -- (object) Extra workloads to create.
 extraWorkloads:
+# -- (object) Extra objects to create.
 extraObjects:
 
 networkPolicy:
+  # -- (bool) Enable/disable NetworkPolicy.
   enabled: false
+  # -- (bool) Disable default egress rules.
+  disableDefaultEgress: false
+  # -- (bool) Disable default ingress rules.
+  disableDefaultIngress: false
+  # -- (list) Egress rules that will be merged with default rules.
   egress:
+  # -- (list) Ingress rules that will be merged with default rules.
   ingress:
 
 # cronjob
+# -- CronJob [concurrency policy](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#concurrency-policy)
 concurrencyPolicy:
+# -- CronJob [job history](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#jobs-history-limits)
 failedJobHistoryLimit:
+# -- CronJob [schedule](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#schedule-syntax)
 schedule:
+# -- CronJob [starting deadline](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#starting-deadline)
 startingDeadlineSeconds:
+# -- CronJob [job history](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#jobs-history-limits)
 successfulJobHistoryLimit:
+# -- CronJob [time zone](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#time-zones)
 timeZone:
 
 # job
+# -- Job [active deadline](https://kubernetes.io/docs/concepts/workloads/controllers/job/#job-termination-and-cleanup)
 jobActiveDeadlineSeconds:
+# -- Job [backoff limit](https://kubernetes.io/docs/concepts/workloads/controllers/job/#pod-backoff-failure-policy)
 backoffLimit:
+# -- Job [backoff limit per index](https://kubernetes.io/docs/concepts/workloads/controllers/job/#backoff-limit-per-index)
 backoffLimitPerIndex:
+# -- Job [completion mode](https://kubernetes.io/docs/concepts/workloads/controllers/job/#completion-mode)
 completionMode:
+# -- Job [completions](https://kubernetes.io/docs/concepts/workloads/controllers/job/#completion-mode)
 completions:
+# -- Job [max failed indexes](https://kubernetes.io/docs/concepts/workloads/controllers/job/#backoff-limit-per-index)
 maxFailedIndexes:
+# -- Job [parallelism](https://kubernetes.io/docs/concepts/workloads/controllers/job/#parallel-jobs)
 parallelism:
+# -- Job [pod failure policy](https://kubernetes.io/docs/concepts/workloads/controllers/job/#pod-failure-policy)
 podFailurePolicy:
+# -- Job [pod replacement policy](https://kubernetes.io/docs/concepts/workloads/controllers/job/#pod-replacement-policy)
 podReplacementPolicy:
+# -- Job [ttl seconds after finished](https://kubernetes.io/docs/concepts/workloads/controllers/job/#ttl-mechanism-for-finished-jobs)
 ttlSecondsAfterFinished:
 
 # deployment/daemonset/statefulset
+# -- Deployment, DaemonSet, StatefulSet [min ready seconds](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#min-ready-seconds)
 minReadySeconds:
+# -- Deployment, DaemonSet, StatefulSet [progress deadline seconds](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#progress-deadline-seconds)
 progressDeadlineSeconds:
+# -- Deployment, DaemonSet, StatefulSet number of pod replicas
 replicas: 1
+# -- Deployment, DaemonSet, StatefulSet [revision history limit](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#revision-history-limit)
 revisionHistoryLimit:
+# -- Deployment, DaemonSet, StatefulSet [strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
 strategy:
   type: Recreate
+# -- StatefulSets, DaemonSet [update strategy](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies)
 updateStrategy:
   type: OnDelete
+# -- StatefulSets [ordinals](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#start-ordinal)
 ordinals:
+# -- StatefulSets [persistent volume claim retention policy](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention)
 persistentVolumeClaimRetentionPolicy:
+# -- StatefulSets [pod management policy](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention)
 podManagementPolicy:
+# -- StatefulSets [service name](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#stable-network-id)
 serviceName:
-  volumeClaimTemplates:
+# -- StatefulSets [volume claim templates](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#volume-claim-templates)
+volumeClaimTemplates:
 
 # pod
+# -- Pod [active deadline seconds](https://kubernetes.io/docs/concepts/workloads/pods/#pod-update-and-replacement)
 activeDeadlineSeconds:
+# -- Pod [affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
 affinity:
+# -- Pod [dns config](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config)
 dnsConfig:
+# -- Pod [dns policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy)
 dnsPolicy:
+# -- Pod [host aliases](https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/)
 hostAliases:
+# -- Pod pass through host IPC
 hostIPC:
+# -- Pod pass through host network
 hostNetwork:
+# -- Pod pass through host PID
 hostPID:
+# -- Pod pass through host users
 hostUsers:
+# -- Pod hostname
 hostname:
+# -- Pod [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/#using-init-containers)
 initContainers:
+# -- Pod extra containers to include with the default container
 extraContainers:
+# -- Pod [nodeName](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename)
 nodeName:
+# -- Pod [node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)
 nodeSelector:
+# -- Pod [preemption policy](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption)
 preemptionPolicy:
+# -- Pod [priority](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority)
 priority:
+# -- Pod [priority class name](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass)
 priorityClassName:
+# -- Pod [restart poliyc](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)
 podRestartPolicy:
+# -- Pod [runtime class name](https://kubernetes.io/docs/concepts/containers/runtime-class/)
 runtimeClassName:
+# -- Pod [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 podSecurityContext:
+# -- Pod [service account](https://kubernetes.io/docs/concepts/security/service-accounts/)
 serviceAccount:
+# -- Pod [termination grace period seconds](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#deployment-and-scaling-guarantees)
 terminationGracePeriodSeconds:
+# -- Pod [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 tolerations:
 
 # container
+# -- Container [args](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/)
 args:
+# -- Container [command](https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/)
 command:
+# -- Container [env](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)
 env:
+# -- Container [envFrom](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)
 envFrom:
 image:
+  # -- Container [repository](https://kubernetes.io/docs/concepts/containers/images/#image-names)
   repository:
+  # -- Container [tag](https://kubernetes.io/docs/concepts/containers/images/#image-names)
   tag:
+  # -- Container [pullSecrets](https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry)
   pullSecrets:
+  # -- Cotnainer [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
   pullPolicy:
+# -- Container [lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 lifecycle:
+# -- Container [livenessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 livenessProbe:
+# -- Container [readinessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 readinessProbe:
+# -- Container [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 resources:
+# -- Container [restartPolicy](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)
 restartPolicy:
+# -- Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 securityContext:
+# -- Container [startupProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 startupProbe:
+# -- Container working directory
 workingDir:
