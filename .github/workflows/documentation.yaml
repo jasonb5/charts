@@ -1,0 +1,24 @@
+name: documentation
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'docs/**'
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy documentation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - run: |
+          pip install -r docs/requirements.txt
+      - run: |
+          mkdocs gh-deploy

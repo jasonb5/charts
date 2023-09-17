@@ -6,6 +6,10 @@ CHART_DIR ?= .
 new-chart:
 	copier copy template/ .
 
+.PHONY: docs
+docs:
+	helm-docs --sort-values-order file $(CHART_DIR)
+
 .PHONY: bump-%
 bump-%:
 	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
