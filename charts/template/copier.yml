@@ -14,6 +14,10 @@ version:
   type: str
   help: Application version.
 
+port:
+  type: int
+  help: Application port to expose.
+
 redis_enabled:
   type: bool
   help: Enable Redis dependency.

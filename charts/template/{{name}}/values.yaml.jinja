@@ -1,11 +1,44 @@
+# -- Default workload type
 workload: deployment
 
 image:
+  # -- Image repository
   repository: {{ image }}
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Environment variables
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+# -- Application services
+service:
+  ports:
+    default:
+      port: {{ port }}
+
+# -- Application ingress
+ingress:
+  enabled: false
+  hosts:
+    default:
+    - name: default
+
+# -- Application persistence
+persistence:
+  config:
+    enabled: false
+    type: emptydir
+
+  media:
+    enabled: false
+    type: emptydir
 
 {% if redis_enabled %}
 redis:
-  enabled: true
+  enabled: false
   architecture: standalone
   auth:
     enabled: false
@@ -24,7 +57,7 @@ redis:
 {% endif -%}
 {%- if mariadb_enabled %}
 mariadb:
-  enabled: true
+  enabled: false
   architecture: standalone
   auth:
     rootPassword:
@@ -42,7 +75,7 @@ mariadb:
 {% endif -%}
 {%- if postgresql_enabled %}
 postgresql:
-  enabled: true
+  enabled: false
   architecture: standalone
   auth:
     postgresPassword:
