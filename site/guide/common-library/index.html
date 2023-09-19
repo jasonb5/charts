@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.2">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.30068a00.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
@@ -487,6 +487,19 @@
     Ingress
   </a>
   
+    <nav class="md-nav" aria-label="Ingress">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tls" class="md-nav__link">
+    TLS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -678,6 +691,19 @@
     Ingress
   </a>
   
+    <nav class="md-nav" aria-label="Ingress">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tls" class="md-nav__link">
+    TLS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -776,16 +802,27 @@
       port: 443
 </code></pre>
 <h2 id="ingress">Ingress</h2>
-<p>Each workload has a single ingress, which is disabled by default. Each key under <code>hosts</code> is a domain referenced by the ingress. Each domain can have multiple paths. The <code>default</code> domain is the equivalent of setting <code>host</code> to <code>*</code>.</p>
+<p>Each workload has a single ingress, which is disabled by default. Each key under <code>hosts</code> references a service and the value describes the ingress for the service. A service must have atleast one path. If a <code>host</code> key is not present under a <code>service</code> then the ingress will match any host for that service.</p>
 <pre><code class="language-yaml">ingress:
   enabled: true
   hosts:
-    default:
+    default: {} # Will use the default path `/`
+    https:
+      host: domain.io
+      paths:
       - path: /home
         pathType: Prefix
-        name: https
-    domain.io:
-      - name: default
+</code></pre>
+<h3 id="tls">TLS</h3>
+<p>If the <code>tls</code> key under <code>ingress</code> is present then it's value will be the secret name containing the certs. The <code>hosts</code> key under <code>tls</code> will be auto populated with any hosts that are defined.</p>
+<pre><code class="language-yaml">ingress:
+  enabled: true
+  hosts:
+    https:
+      host: domain.io
+      paths:
+      - path: /home
+  tls: tls-certs
 </code></pre>
 <h2 id="network-policy">Network Policy</h2>
 <p>The network policy is disabled by default. Once enabled the default policy will add ingress rules for each service port and allows all egress traffic. Custom egress and ingress rules can be added to <code>egress</code> and <code>ingress</code> keys, these will be merged with the default rules. The default rules can be disabled with <code>disableDefaultEgress</code> and <code>disableDefaultIngress</code>.</p>
