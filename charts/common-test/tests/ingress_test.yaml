@@ -15,15 +15,15 @@ tests:
         className: traefik
         hosts:
           default:
-            - name: default
-              path: /index
+            paths:
+            - path: /index
               pathType: ImplementationSpecific
-            - name: https
-              path: /version
-          domain.io:
-            - name: https
-              path: /login
+          https:
+            host: domain.io
+            paths:
+            - path: /login
               pathType: Prefix
+            - path: /version
         tls: tls-certs
 
       service:
@@ -44,10 +44,9 @@ tests:
       ingress:
         enabled: false
         hosts:
-          default:
-            - name: default
-          domain.io:
-            - name: https
+          default: {}
+          https:
+            host: domain.io
 
       service:
         ports:
@@ -64,11 +63,10 @@ tests:
 
       ingress:
         enabled: true
-        hosts:
-          default:
-            - name: default
-          domain.io:
-            - name: https
+        service:
+          default: {}
+          https:
+            host: domain.io
 
       service:
         ports:

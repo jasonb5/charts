@@ -8,11 +8,11 @@ spec:
   ingressClassName: {{ . }}
   {{- end }}
   rules:
-  {{- range $domain, $paths := .Values.hosts }}
+  {{- range $serviceName, $host := .Values.hosts }}
   - http:
       paths:
-      {{- range $path := $paths }}
-      {{- $service := get $.Values.service $path.name }}
+      {{- $service := get $.Values.service $serviceName }}
+      {{- range $path := $host.paths }}
       {{- $values := dict "Values" (dict "workloadName" "default" "name" "default") "Release" $.Release "Chart" $.Chart }}
       - backend:
           service:
@@ -22,8 +22,8 @@ spec:
         path: {{ default "/" $path.path }}
         pathType: {{ default "Prefix" $path.pathType }}
       {{- end }}
-    {{- if ne $domain "default" }}
-    host: {{ $domain }}
+    {{- with $host.host }}
+    host: {{ . }}
     {{- end }}
   {{- end }}
   {{- with .Values.tls }}
@@ -31,7 +31,11 @@ spec:
   {{- $values := dict "Values" (dict "workloadName" "default" "name" .) "Release" $.Release "Chart" $.Chart }}
   tls:
   - hosts:
-    {{- toYaml $hosts | nindent 4 }}
+    {{- range $host := values $.Values.hosts }}
+    {{- with $host.host }}
+    - {{ . }}
+    {{- end }}
+    {{- end }}
     secretName: {{ include "common.fullname.postfix" $values }}
   {{- end }}
 {{- end }}

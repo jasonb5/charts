@@ -23,13 +23,6 @@ should overwrite defaults:
                       number: 80
                 path: /index
                 pathType: ImplementationSpecific
-              - backend:
-                  service:
-                    name: RELEASE-NAME-common-test
-                    port:
-                      number: 443
-                path: /version
-                pathType: Prefix
         - host: domain.io
           http:
             paths:
@@ -39,6 +32,13 @@ should overwrite defaults:
                     port:
                       number: 443
                 path: /login
+                pathType: Prefix
+              - backend:
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 443
+                path: /version
                 pathType: Prefix
       tls:
         - hosts:
@@ -58,23 +58,4 @@ should pass:
       name: RELEASE-NAME-common-test
       namespace: NAMESPACE
     spec:
-      rules:
-        - http:
-            paths:
-              - backend:
-                  service:
-                    name: RELEASE-NAME-common-test
-                    port:
-                      number: 80
-                path: /
-                pathType: Prefix
-        - host: domain.io
-          http:
-            paths:
-              - backend:
-                  service:
-                    name: RELEASE-NAME-common-test
-                    port:
-                      number: 443
-                path: /
-                pathType: Prefix
+      rules: null
