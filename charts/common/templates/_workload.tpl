@@ -23,6 +23,7 @@
 {{- end }}
 {{- end }}
 {{- if gt (len $services.ports) 0 }}
+{{- $_ := set .Values "service" $services }}
 {{- $values := mustMerge $services (dict "workloadName" $.Values.workloadName "name" "default") }}
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
 {{- include "common.service" $dot }}
