@@ -39,10 +39,18 @@
 {{- end }}
 {{- $persistence := default dict .Values.persistence }}
 {{- with .Values.extraContainers }}
+{{- range $container := . }}
+{{- with $container.persistence }}
 {{- $persistence = mustMerge $persistence . }}
 {{- end }}
+{{- end }}
+{{- end }}
 {{- with .Values.initContainers }}
+{{- range $container := . }}
+{{- with $container.persistence }}
 {{- $persistence = mustMerge $persistence . }}
+{{- end }}
+{{- end }}
 {{- end }}
 {{- range $key, $value := $persistence }}
 {{- if and (eq $value.type "pvc") $value.enabled }}
