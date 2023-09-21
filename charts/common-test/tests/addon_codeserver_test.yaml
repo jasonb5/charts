@@ -1,0 +1,63 @@
+suite: test codeserver addon
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should overwrite default
+    set:
+      workload: deployment
+
+      addons:
+        codeserver:
+          enabled: true
+          tag: 4.16.1
+          pullPolicy: IfNotPresent
+          ingress:
+            host: code.domain.io
+            path: /code
+            pathType: Prefix
+          persistence:
+            config:
+              type: pvc
+              size: 20G
+            data:
+              enabled: true
+              type: hostpath
+              path: /data
+    asserts:
+      - matchSnapshot:
+          path: spec
+        documentIndex: 3
+      - matchSnapshot:
+          path: spec
+        documentIndex: 2
+      - matchSnapshot:
+          path: spec.ports
+        documentIndex: 1
+      - matchSnapshot:
+          path: spec.template.spec.containers[1]
+        documentIndex: 0
+      - hasDocuments:
+          count: 4
+  - it: should pass
+    set:
+      workload: deployment
+
+      addons:
+        codeserver:
+          enabled: true
+    asserts:
+      - matchSnapshot:
+          path: spec
+        documentIndex: 2
+      - matchSnapshot:
+          path: spec.ports
+        documentIndex: 1
+      - matchSnapshot:
+          path: spec.template.spec.containers[1]
+        documentIndex: 0
+      - hasDocuments:
+          count: 3

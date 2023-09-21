@@ -1,0 +1,64 @@
+should overwrite default:
+  1: |
+    resources:
+      requests:
+        storage: 20G
+    volumeMode: Filesystem
+  2: |
+    rules:
+      - host: code.domain.io
+        http:
+          paths:
+            - backend:
+                service:
+                  name: RELEASE-NAME-common-test
+                  port:
+                    number: 8443
+              path: /code
+              pathType: Prefix
+  3: |
+    - name: codeserver
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+  4: |
+    image: ghcr.io/linuxserver/code-server:4.16.1
+    imagePullPolicy: IfNotPresent
+    name: codeserver
+    ports:
+      - containerPort: 8443
+        name: codeserver
+        protocol: TCP
+    volumeMounts:
+      - mountPath: /config
+        name: config
+      - mountPath: /data
+        name: data
+should pass:
+  1: |
+    rules:
+      - http:
+          paths:
+            - backend:
+                service:
+                  name: RELEASE-NAME-common-test
+                  port:
+                    number: 8443
+              path: /
+              pathType: ImplementationSpecific
+  2: |
+    - name: codeserver
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+  3: |
+    image: ghcr.io/linuxserver/code-server:latest
+    imagePullPolicy: Always
+    name: codeserver
+    ports:
+      - containerPort: 8443
+        name: codeserver
+        protocol: TCP
+    volumeMounts:
+      - mountPath: /config
+        name: config

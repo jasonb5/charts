@@ -179,3 +179,20 @@ securityContext:
 startupProbe:
 # -- Container working directory
 workingDir:
+
+addons:
+  codeserver:
+    # -- Enable Visual Studio code server
+    enabled: false
+    # -- Image [tag](https://github.com/linuxserver/docker-code-server/pkgs/container/code-server)
+    # @default -- latest
+    tag:
+    # -- Image pull policy
+    # @default -- Always
+    pullPolicy:
+    ingress:
+      host:
+      path:
+      pathType:
+    # -- Persistence has default `config`, use `config` key to override defaults. Define additional volumes to mount as would in main workload or extraContainers
+    persistence:
