@@ -123,3 +123,23 @@ networkPolicy:
   egress:
   ingress:
 ```
+
+## Addons
+The common library provides addons that are attached as `extraContainers`.
+
+### Visual Studio Code
+This addon will attach an instance of `Visual Code Studio` to the workload. The addons uses the [`ghcr.io/linuxserver/code-server`](https://github.com/linuxserver/docker-code-server/pkgs/container/code-server) container. The tag, persistence and ingress can be customized.
+```yaml
+addons:
+  codeserver:
+    enabled: true
+    tag: 4.16.1
+    pullPolicy: IfNotPresent
+    ingress:
+      host: code.domain.io
+      path: /code
+      pathType: Prefix
+    persistence:
+      config:
+        type: pvc
+```
