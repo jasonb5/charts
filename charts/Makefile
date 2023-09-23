@@ -2,6 +2,18 @@
 
 CHART_DIR ?= .
 
+.PHONY: package
+package:
+	cr package --config ../../cr.yaml $(ARGS) $(CHART_DIR)
+
+.PHONY: upload
+upload:
+	cr upload --config ../../cr.yaml --git-repo charts $(ARGS) $(CHART_DIR)
+
+.PHONY: index
+index:
+	cr index --config ../../cr.yaml --git-repo charts $(ARGS) $(CHART_DIR)
+
 .PHONY: new-chart
 new-chart:
 	copier copy template/ .
