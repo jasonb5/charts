@@ -9,14 +9,14 @@
 {{- end }}
 {{- $container := dict "image" $image "service" $service "persistence" $persistence }}
 {{- $extraContainers := default dict .Values.extraContainers }}
-{{- $ingress := default (dict "enabled" true "hosts" dict) .Values.ingress }}
+{{- $ingress := default (dict "enabled" true "hosts" list) .Values.ingress }}
 {{- $path := default "/" .Values.addons.codeserver.ingress.path }}
 {{- $pathType := default "ImplementationSpecific" .Values.addons.codeserver.ingress.pathType }}
-{{- $host := dict "codeserver" (dict "paths" (list (dict "path" $path "pathType" $pathType))) }}
+{{- $host := dict "name" "codeserver" "paths" (list (dict "path" $path "pathType" $pathType)) }}
 {{- with .Values.addons.codeserver.ingress.host }}
-{{- $_ := set $host.codeserver "host" . }}
+{{- $_ := set $host "host" . }}
 {{- end }}
-{{- $_ := set $ingress "hosts" (mustMerge $ingress.hosts $host) }}
+{{- $_ := set $ingress "hosts" (mustAppend $ingress.hosts $host) }}
 {{- $_ := set .Values "ingress" $ingress }}
 {{- $_ := set .Values "extraContainers" (mustMerge $extraContainers (dict "codeserver" $container)) }}
 {{- end }}

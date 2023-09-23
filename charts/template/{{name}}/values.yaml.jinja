@@ -1,4 +1,4 @@
-# -- Default workload type
+# -- Workload type
 workload: deployment
 
 image:
@@ -24,7 +24,8 @@ ingress:
   enabled: false
   hosts:
     default:
-    - name: default
+      paths:
+      - 
 
 # -- Application persistence
 persistence:

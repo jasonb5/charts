@@ -87,17 +87,18 @@ service:
 ```
 
 ## Ingress
-Each workload has a single ingress, which is disabled by default. Each key under `hosts` references a service and the value describes the ingress for the service. A service must have atleast one path. If a `host` key is not present under a `service` then the ingress will match any host for that service.
+Each workload has a single ingress, which is disabled by default. Each item under `hosts` is an ingress path, at a minimum `name` needs to be defined to reference the target service. If `host` is not defined on the ingress path then the host will default to "*". If the `paths` key is not defined on the ingress path, then a default path will be added for "/".
 ```yaml
 ingress:
   enabled: true
   hosts:
-    default: {} # Will use the default path `/`
-    https:
-      host: domain.io
-      paths:
-      - path: /home
-        pathType: Prefix
+  # A basic ingress path that will have a single path `/` to the default service
+  - name: default
+  - name: https
+    host: domain.io
+    paths:
+    - path: /home
+      pathType: Prefix
 ```
 ### TLS
 If the `tls` key under `ingress` is present then it's value will be the secret name containing the certs. The `hosts` key under `tls` will be auto populated with any hosts that are defined.
@@ -105,10 +106,10 @@ If the `tls` key under `ingress` is present then it's value will be the secret n
 ingress:
   enabled: true
   hosts:
-    https:
-      host: domain.io
-      paths:
-      - path: /home
+  - name: https
+    host: domain.io
+    paths:
+    - path: /home
   tls: tls-certs
 ```
 

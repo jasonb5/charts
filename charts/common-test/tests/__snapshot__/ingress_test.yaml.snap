@@ -22,7 +22,7 @@ should overwrite defaults:
                     port:
                       number: 80
                 path: /index
-                pathType: ImplementationSpecific
+                pathType: Prefix
         - host: domain.io
           http:
             paths:
@@ -32,17 +32,17 @@ should overwrite defaults:
                     port:
                       number: 443
                 path: /login
-                pathType: Prefix
+                pathType: ImplementationSpecific
               - backend:
                   service:
                     name: RELEASE-NAME-common-test
                     port:
                       number: 443
                 path: /version
-                pathType: Prefix
+                pathType: ImplementationSpecific
       tls:
         - hosts:
-            - domain.io
+            - map[host:domain.io name:https paths:[map[path:/login] map[path:/version]]]
           secretName: RELEASE-NAME-common-test-tls-certs
 should pass:
   1: |
@@ -58,4 +58,30 @@ should pass:
       name: RELEASE-NAME-common-test
       namespace: NAMESPACE
     spec:
-      rules: null
+      rules:
+        - http:
+            paths:
+              - backend:
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 80
+                path: /
+                pathType: ImplementationSpecific
+        - host: domain.io
+          http:
+            paths:
+              - backend:
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 443
+                path: /
+                pathType: ImplementationSpecific
+              - backend:
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 443
+                path: /test
+                pathType: ImplementationSpecific

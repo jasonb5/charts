@@ -37,3 +37,4 @@ Session.vim
 .history
 **/node_modules/**
 site/
+.cr-release-packages/
