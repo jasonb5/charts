@@ -13,27 +13,26 @@ env:
   # -- Set the timezone
   TZ: UTC
 
-# -- Application services
 service:
   ports:
+    # -- Default port
     default:
       port: {{ port }}
 
-# -- Application ingress
 ingress:
   enabled: false
   hosts:
-    default:
-      paths:
-      - 
+  # -- Default ingress
+  - name: default
 
-# -- Application persistence
 persistence:
+  # -- Configuration mount
   config:
     enabled: false
     type: emptydir
 
 {% if redis_enabled %}
+# -- Redis server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/redis#parameters)
 redis:
   enabled: false
   architecture: standalone
@@ -53,6 +52,7 @@ redis:
     enabled: false
 {% endif -%}
 {%- if mariadb_enabled %}
+# -- MariaDB server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#parameters)
 mariadb:
   enabled: false
   architecture: standalone
@@ -71,6 +71,7 @@ mariadb:
     enabled: false
 {% endif -%}
 {%- if postgresql_enabled %}
+# -- PostgreSQL server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#parameters)
 postgresql:
   enabled: false
   architecture: standalone

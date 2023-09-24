@@ -5,9 +5,10 @@ Methods for accessing the application:
 Open a browser to any of the following URLs:
 {{- $tls := hasKey . "tls" }}
 {{- if .enabled }}
-{{- range $host, $paths := .hosts }}
+{{- range $host := .hosts }}
+  {{- $paths := ternary $host.paths (list (dict "path" "/" "pathType" "ImplementationSpecific")) (hasKey $host "paths") }}
   {{- range $paths }}
-  http{{ if $tls }}s{{ end }}://{{ ternary "*" $host (eq $host "default") }}{{ default "/" .path }}
+  http{{ if $tls }}s{{ end }}://{{ ternary "*" $host.host (eq $host.host "default") }}{{ default "/" .path }}
   {{- end }}
 {{- end }}
 {{- end }}
