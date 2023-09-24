@@ -2,17 +2,19 @@
 
 CHART_DIR ?= .
 
+package upload index: CR_ARGS = $(if $(wildcard ../../cr.yaml),--config ../../cr.yaml,) $(ARGS) 
+
 .PHONY: package
 package:
-	cr package --config ../../cr.yaml $(ARGS) $(CHART_DIR)
+	cr package $(CR_ARGS) $(CHART_DIR)
 
 .PHONY: upload
 upload:
-	cr upload --config ../../cr.yaml --git-repo charts $(ARGS) $(CHART_DIR)
+	cr upload $(CR_ARGS) --git-repo charts $(CHART_DIR)
 
 .PHONY: index
 index:
-	cr index --config ../../cr.yaml --git-repo charts $(ARGS) $(CHART_DIR)
+	cr index $(CR_ARGS) --git-repo charts $(CHART_DIR)
 
 .PHONY: new-chart
 new-chart:
