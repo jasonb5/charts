@@ -107,35 +107,36 @@ volumes:
 {{- if $value.enabled }}
 {{- $values := dict "Values" (dict "workloadName" $.Values.workloadName "name" $key) "Release" $.Release "Chart" $.Chart }}
 - name: {{ ternary (include "common.name" $) $key (eq $key "default") }}
-  {{- if eq $value.type "configmap" }}
+  {{- $type := default "pvc" $value.type }}
+  {{- if eq $type "configmap" }}
   configMap:
     name: {{ include "common.fullname.postfix" $values }}
-  {{- else if eq $value.type "emptydir" }}
+  {{- else if eq $type "emptydir" }}
   emptyDir: {}
-  {{- else if eq $value.type "hostpath" }}
+  {{- else if eq $type "hostpath" }}
   hostPath:
     path: {{ $value.path }}
-    {{- with $value.type }}
+    {{- with $type }}
     type: {{ . }}
     {{- end }}
-  {{- else if eq $value.type "nfs" }}
+  {{- else if eq $type "nfs" }}
   nfs:
     path: {{ $value.path }}
     {{- with $value.readOnly }}
     readOnly: {{ . }}
     {{- end }}
     server: {{ $value.server }}
-  {{- else if eq $value.type "pvc" }}
+  {{- else if eq $type "pvc" }}
   persistentVolumeClaim:
     claimName: {{ include "common.fullname.postfix" $values }}
     {{- with $value.readOnly }}
     readOnly: {{ . }}
     {{- end }}
-  {{- else if eq $value.type "secret" }}
+  {{- else if eq $type "secret" }}
   secret:
     secretName: {{ include "common.fullname.postfix" $values }}
   {{- else }}
-  {{- printf "Unknown volume type %v" $value.type | fail }}
+  {{- printf "Unknown volume type %v" $type | fail }}
   {{- end }}
 {{- end }}
 {{- end }}

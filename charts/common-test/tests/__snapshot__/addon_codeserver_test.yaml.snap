@@ -1,5 +1,7 @@
 should overwrite default:
   1: |
+    accessModes:
+      - ReadWriteOnce
     resources:
       requests:
         storage: 20G
