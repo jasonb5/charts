@@ -4,10 +4,8 @@ kind: PersistentVolumeClaim
 metadata:
 {{- include "common.metadata" . | nindent 2 }}
 spec:
-  {{- with .Values.accessMode }}
   accessModes:
-  - {{ . }}
-  {{- end }}
+  - {{ default "ReadWriteOnce" .Values.accessMode }}
   {{- with .Values.dataSource }}
   dataSource:
   {{- toYaml . | nindent 4 }}
