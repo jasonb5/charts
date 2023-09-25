@@ -43,3 +43,7 @@ test: dep
 .PHONY: dep
 dep:
 	helm dep update $(CHART_DIR)
+
+.PHONY: clean
+clean:
+	rm -rf .cr-release-packages
