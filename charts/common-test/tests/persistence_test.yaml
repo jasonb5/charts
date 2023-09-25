@@ -6,6 +6,22 @@ templates:
 chart:
   appVersion: 0.1.0
 tests:
+  - it: should use existingClaim
+    set:
+      workload: deployment
+
+      persistence:
+        data1:
+          enabled: true
+          type: pvc
+          existingClaim: test-data
+    asserts:
+      - equal:
+          path: spec.template.spec.volumes[0].persistentVolumeClaim.claimName
+          value: test-data
+        documentIndex: 0
+      - hasDocuments:
+          count: 1
   - it: should reference volume from initContainers
     set:
       workload: deployment

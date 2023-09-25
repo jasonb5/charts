@@ -53,7 +53,7 @@
 {{- end }}
 {{- end }}
 {{- range $key, $value := $persistence }}
-{{- if and (eq $value.type "pvc") $value.enabled }}
+{{- if and (eq $value.type "pvc") $value.enabled (not $value.existingClaim) }}
 {{- $values := mustMerge $value (dict "workloadName" $.Values.workloadName "name" $key) }}
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
 {{- include "common.pvc" $dot }}

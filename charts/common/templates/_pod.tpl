@@ -128,7 +128,7 @@ volumes:
     server: {{ $value.server }}
   {{- else if eq $type "pvc" }}
   persistentVolumeClaim:
-    claimName: {{ include "common.fullname.postfix" $values }}
+    claimName: {{ ternary $value.existingClaim (include "common.fullname.postfix" $values) (hasKey $value "existingClaim") }}
     {{- with $value.readOnly }}
     readOnly: {{ . }}
     {{- end }}
