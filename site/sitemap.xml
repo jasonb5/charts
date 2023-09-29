@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jasonb5.github.io/charts/charts/gotify/</loc>
+         <lastmod>2023-09-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jasonb5.github.io/charts/charts/jellyfin/</loc>
          <lastmod>2023-09-29</lastmod>
          <changefreq>daily</changefreq>
