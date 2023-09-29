@@ -21,3 +21,8 @@
 .idea/
 *.tmproj
 .vscode/
+# Extras
+.copier-answers.yml
+Makefile
+tbump.toml
+README.md
