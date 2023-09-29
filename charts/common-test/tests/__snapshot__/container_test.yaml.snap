@@ -8,9 +8,9 @@ should overwrite defaults:
       - name: CONFIG
         value: /config/config.txt
       - name: PORT
-        value: 80
+        value: "80"
       - name: RETRIES
-        value: 8
+        value: "8"
     envFrom:
       - secretRef:
           name: RELEASE-NAME-common-test-credentials

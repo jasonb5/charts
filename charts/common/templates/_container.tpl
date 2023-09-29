@@ -12,7 +12,7 @@
   env:
     {{- range $key, $value := . }}
     - name: {{ $key }}
-      value: {{ tpl (toString $value) $.TemplateValues }}
+      value: {{ tpl (toString $value) $.TemplateValues | quote }}
     {{- end }}
   {{- end }}
   {{- with .Values.envFrom }}
