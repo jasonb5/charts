@@ -1,0 +1,44 @@
+# -- Workload type
+workload: deployment
+
+image:
+  # -- Image repository
+  repository: ghcr.io/linuxserver/jellyfin
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Environment variables
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+# -- Enable host network to expose discovery ports
+hostNetwork: true
+
+service:
+  ports:
+    # -- Default port
+    default:
+      port: 8096
+    # -- Service discovery port
+    svc-discovery:
+      port: 1900
+    # -- Discovery port
+    discovery:
+      port: 7359
+
+ingress:
+  enabled: false
+  hosts:
+  # -- Default ingress
+  - name: default
+
+persistence:
+  # -- Configuration mount
+  data:
+    enabled: false
+
+  # -- Media mount
+  media:
+    enabled: false
