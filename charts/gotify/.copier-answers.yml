@@ -1,0 +1,9 @@
+_src_path: template/
+description: a simple server for sending and receiving messages
+image: gotify/server
+mariadb_enabled: false
+name: gotify
+port: 80
+postgresql_enabled: false
+redis_enabled: false
+version: 2.4.0

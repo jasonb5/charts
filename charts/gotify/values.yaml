@@ -1,0 +1,38 @@
+# -- Workload type
+workload: deployment
+
+image:
+  # -- Image repository
+  repository: gotify/server
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Environment variables
+env:
+  # -- Set the timezone
+  TZ: UTC
+  # -- Default server port
+  GOTIFY_SERVER_PORT: "{{ .Values.service.ports.default.port }}"
+  # -- Default username
+  GOTIFY_DEFAULTUSER_NAME: admin
+  # -- Default password
+  GOTIFY_DEFAULTUSER_PASS: admin
+
+service:
+  ports:
+    # -- Default port
+    default:
+      port: 80
+
+ingress:
+  enabled: false
+  hosts:
+  # -- Default ingress
+  - name: default
+
+persistence:
+  # -- Configuration mount
+  data:
+    enabled: false
+
