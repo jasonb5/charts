@@ -23,6 +23,10 @@ new-chart:
 .PHONY: docs
 docs:
 	helm-docs --sort-values-order file $(CHART_DIR)
+ifneq ($(wildcard ../../docs/charts),)
+	chart=$(shell basename $(PWD)); \
+		ln -sf ../../charts/$${chart}/README.md ../../docs/charts/$${chart}.md
+endif
 
 .PHONY: bump-%
 bump-%:
