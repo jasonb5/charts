@@ -17,6 +17,7 @@ tests:
       env:
         CONFIG: /config/config.txt
         PORT: "{{ .Values.service.ports.default.port }}"
+        RETRIES: 8
       envFrom:
         default:
           type: configmap
