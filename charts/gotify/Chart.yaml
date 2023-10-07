@@ -8,4 +8,4 @@ appVersion: "2.4.0"
 dependencies:
 - name: common
   version: "0.1.x"
-  repository: "file://../common"
+  repository: "https://jasonb5.github.io/charts"
