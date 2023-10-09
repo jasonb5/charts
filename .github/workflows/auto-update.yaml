@@ -1,0 +1,52 @@
+name: auto-update
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  list_charts:
+    runs-on: ubuntu-latest
+    name: List charts
+    outputs:
+      charts: ${{ steps.list_charts.outputs.charts }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list_charts
+        run: |
+          echo "charts=$(ls charts/ | grep -vE 'common(-test)?|template|Makefile' | jq --raw-input --slurp --compact-output 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+
+  check_update:
+    runs-on: ubuntu-latest
+    name: Check for chart updates
+    needs: list_charts
+    strategy:
+      matrix:
+        chart: ${{ fromJson(needs.list_charts.outputs.charts) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          path: main
+      - run: |
+          pushd main/
+          git fetch
+          git reset --hard HEAD
+          git checkout main
+      - run: |
+          pip install semver requests tbump pyyaml
+
+          python scripts/update-chart.py --log --in-place --token ${{ secrets.GITHUB_TOKEN }} main/charts/${{ matrix.chart }}
+
+          pushd main/
+
+          if [ -n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
+            git checkout -b update_${{ matrix.chart }}
+            pushd charts/${{ matrix.chart }}
+            make bump-patch
+            git add .
+            git commit -m "Updates ${{ matrix.chart }}"
+            gh pr create --fill
+          fi
