@@ -33,6 +33,10 @@ jobs:
           python-version: '3.9'
       - run: pip install semver requests pyyaml tbump
       - run: |
+          git fetch origin
+          git checkout main
+          git checkout -b updates_${{ matrix.chart_dir }} main
+      - run: |
           python scripts/update-chart.py charts/${{ matrix.chart_dir }} --token ${{ secrets.GITHUB_TOKEN }} --in-place
       - name: Verify changed files
         uses: tj-actions/verify-changed-files@v16
@@ -40,11 +44,6 @@ jobs:
       - name: Create PR
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
-          git remote -v
-          cat .git/config
-          git fetch origin
-          git checkout main
-          git checkout -b updates_${{ matrix.chart_dir }} main
           pushd charts/${{ matrix.charts_dir }}
           make bump-patch
           git add .
