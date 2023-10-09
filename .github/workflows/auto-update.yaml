@@ -41,6 +41,7 @@ jobs:
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
           git remote -v
+          cat .git/config
           git checkout -b updates_${{ matrix.chart_dir }} main
           pushd charts/${{ matrix.charts_dir }}
           make bump-patch
