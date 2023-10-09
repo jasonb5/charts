@@ -43,6 +43,7 @@ jobs:
           git remote -v
           cat .git/config
           git fetch origin
+          git checkout main
           git checkout -b updates_${{ matrix.chart_dir }} main
           pushd charts/${{ matrix.charts_dir }}
           make bump-patch
