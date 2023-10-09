@@ -40,6 +40,7 @@ jobs:
       - name: Create PR
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
+          git remote -v
           git checkout -b updates_${{ matrix.chart_dir }} main
           pushd charts/${{ matrix.charts_dir }}
           make bump-patch
