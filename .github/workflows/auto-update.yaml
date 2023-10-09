@@ -37,8 +37,8 @@ jobs:
       - name: Verify changed files
         uses: tj-actions/verify-changed-files@v16
         id: verify-changed-files
-      - name: Create Pr
-        if: steps.verify-changed-files.output.files_changed == 'true'
+      - name: Create PR
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
           git checkout -b updates_${{ matrix.chart_dir }} main
           pushd charts/${{ matrix.charts_dir }}
