@@ -33,6 +33,7 @@ jobs:
           path: main
       - run: |
           pushd main/
+          git fetch
           git reset --hard HEAD
           git checkout main
       - run: |
