@@ -45,8 +45,9 @@ jobs:
           if [ -n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
             git checkout -b update_${{ matrix.chart }}
             pushd charts/${{ matrix.chart }}
-            make bump-patch
             git add .
             git commit -m "Updates ${{ matrix.chart }}"
+            git push -u origin update_${{ matrix.chart }}
+            make bump-patch
             gh pr create --fill
           fi
