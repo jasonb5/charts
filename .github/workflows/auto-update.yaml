@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Check for chart updates
     needs: list_charts
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       contents: write
       pull-requests: write
