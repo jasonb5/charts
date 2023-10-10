@@ -43,6 +43,8 @@ jobs:
           pushd main/
 
           if [ -n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
+            git config user.email ${{ github.actor }}@users.noreply.github.com
+            git config user.name ${{ github.actor }}
             git checkout -b update_${{ matrix.chart }}
             pushd charts/${{ matrix.chart }}
             git add .
