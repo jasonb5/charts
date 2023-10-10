@@ -53,6 +53,6 @@ jobs:
             git add .
             git commit -m "Updates ${{ matrix.chart }}"
             git push -u origin update_${{ matrix.chart }}
-            make bump-patch
+            make bump-patch ARGS="--non-interactive"
             gh pr create --fill
           fi
