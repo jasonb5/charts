@@ -1,12 +1,9 @@
 import argparse
-import json
 import logging
 import os
 import re
 import requests
-import semver
 import yaml
-from datetime import datetime
 from semver.version import Version
 
 logger = logging.getLogger("update-chart")
@@ -20,17 +17,7 @@ def str_presenter(dumper, data):
 
 yaml.add_representer(str, str_presenter)
 
-BASEVERSION = re.compile(
-    r"""(?P<major>0|[1-9]\d*)
-        (\.
-        (?P<minor>0|[1-9]\d*)
-        (\.
-        (?P<patch>0|[1-9]\d*)
-        )?
-        )?
-    """,
-    re.VERBOSE,
-)
+BASEVERSION = r"(?P<major>0|[1-9]\d*)(\.(?P<minor>0|[1-9]\d*)(\.(?P<patch>0|[1-9]\d*))?)?(?:-(?P<prerelease>.*))?"
 
 
 def update_chart():
@@ -49,12 +36,9 @@ def update_chart():
         new_version = check_docker_hub(repository, app_version, **kwargs)
 
     if new_version is None:
-        print(f"Found no update from {app_version}")
+        print("Found no new version")
     else:
-        print(f"Update version {app_version} -> {new_version}")
-
-        if kwargs["in_place"]:
-            update_app_version(new_version, **kwargs)
+        update_app_version(new_version, **kwargs)
 
 
 def get_args():
@@ -72,13 +56,15 @@ def get_args():
     return vars(parser.parse_args())
 
 
-def parse_chart(chart_dir, **kwargs):
+def parse_chart(chart_dir, **_):
     values_file = os.path.join(chart_dir, "values.yaml")
 
     with open(values_file) as fd:
         values_data = yaml.load(fd, Loader=yaml.SafeLoader)
 
     repository = values_data["image"]["repository"]
+
+    logger.info(f"Found image repository {repository!r}")
 
     chart_file = os.path.join(chart_dir, "Chart.yaml")
 
@@ -87,11 +73,15 @@ def parse_chart(chart_dir, **kwargs):
 
     app_version = chart_data["appVersion"]
 
+    logger.info(f"Found appVersion {app_version!r}")
+
     return repository, app_version
 
 
-def check_ghcr(repository, app_version, token, **kwargs):
+def check_ghcr(repository, app_version, token, **_):
     org, package_name = repository.split("/")[1:]
+
+    logger.info(f"Searching GitHub {org!r} org for {package_name!r} package")
 
     url = (
         f"https://api.github.com/orgs/{org}/packages/container/{package_name}/versions"
@@ -103,49 +93,39 @@ def check_ghcr(repository, app_version, token, **kwargs):
         "X-GitHub-Api-Version": "2022-11-28",
     }
 
+    logger.debug(f"Searching url {url!r}")
+
     response = requests.get(url, headers=headers)
 
     response.raise_for_status()
 
     data = response.json()
 
-    prefix, app_version, _, orig = parse_version(app_version)
+    pattern = re.compile(BASEVERSION, re.VERBOSE)
 
-    if app_version is None:
-        logger.info(f"Could not parse appVersion {orig}")
+    prefix, version, _, orig = parse_version(app_version, pattern)
 
-        return None
+    if prefix == "":
+        pattern = re.compile(r"^" + BASEVERSION, re.VERBOSE)
+    else:
+        pattern = re.compile(r"^" + prefix + BASEVERSION, re.VERBOSE)
 
-    # filter tags with matching prefix
-    versions = [
-        parse_version(y)
+    candidates = [
+        y
         for x in data
         for y in x["metadata"]["container"]["tags"]
         if y.startswith(prefix)
     ]
 
-    new_version = None
-
-    for _, version, _, orig in versions:
-        if version is None:
-            logger.debug(f"Could not parse {orig}")
-
-            continue
-
-        if version > app_version:
-            new_version = orig
-
-            break
-
-        logger.debug(f"Version {version!s} is not newer than {app_version!s}")
-
-    return new_version
+    return find_new_version(version, orig, candidates, pattern)
 
 
-def check_docker_hub(repository, app_version, **kwargs):
+def check_docker_hub(repository, app_version, **_):
     namespace, repository = repository.split("/")
 
     url = f"https://hub.docker.com/v2/namespaces/{namespace}/repositories/{repository}/tags"
+
+    logger.debug(f"Searching url {url!r}")
 
     response = requests.get(url)
 
@@ -153,46 +133,34 @@ def check_docker_hub(repository, app_version, **kwargs):
 
     data = response.json()
 
-    _, app_version, _, orig = parse_version(app_version)
+    pattern = re.compile(BASEVERSION, re.VERBOSE)
 
-    if app_version is None:
-        logger.info(f"Could not parse appVersion {orig}")
+    _, version, _, orig = parse_version(app_version, pattern)
 
-        return None
+    candidates = [x["name"] for x in data["results"]]
 
-    versions = [parse_version(x["name"]) for x in data["results"]]
-
-    new_version = None
-
-    for _, version, _, orig in versions:
-        if version is None:
-            logger.debug(f"Could not parse {orig}")
-
-            continue
-
-        if version > app_version:
-            new_version = orig
-
-            break
-
-        logger.debug(f"Version {version!s} is not newer than {app_version!s}")
-
-    return new_version
+    return find_new_version(version, orig, candidates, pattern)
 
 
-def parse_version(version):
+def parse_version(version, pattern):
+    prefix = ""
+    postfix = ""
+
     try:
         ver = Version.parse(version)
     except ValueError:
-        ver = coerce(version)
-    else:
-        ver = ["", ver, "", version]
+        prefix, ver, postfix, _ = coerce(version, pattern)
 
-    return ver
+    if ver is None:
+        raise Exception(f"Failed to parse {version!r}")
+
+    logger.info(f"Parsed version {str(ver)}")
+
+    return prefix, ver, postfix, version
 
 
-def coerce(version):
-    match = BASEVERSION.search(version)
+def coerce(version, pattern):
+    match = pattern.search(version)
 
     if not match:
         return ("", None, "", version)
@@ -211,10 +179,41 @@ def coerce(version):
 
     postfix = version[match.end() :]
 
+    logger.debug(
+        f"Coerced {version} to {str(ver)}, prefix {prefix!r}, postfix {postfix!r}"
+    )
+
     return prefix, ver, postfix, version
 
 
-def update_app_version(version, chart_dir, **kwargs):
+def find_new_version(version, version_orig, candidates, pattern):
+    new_version = None
+
+    logger.info(f"Looking at {len(candidates)} update candidates")
+
+    for x in candidates:
+        try:
+            _, ver, _, orig = parse_version(x, pattern)
+        except Exception as e:
+            logger.debug(str(e))
+
+            continue
+
+        if ver > version:
+            new_version = orig
+
+            logger.info(f"Found new version {new_version}")
+
+            break
+
+        logger.info(
+            f"Version {str(ver)} ({orig}) is not newer than {str(version)} ({version_orig})"
+        )
+
+    return new_version
+
+
+def update_app_version(version, chart_dir, in_place, **_):
     chart_file = os.path.join(chart_dir, "Chart.yaml")
 
     with open(chart_file) as fd:
@@ -222,8 +221,14 @@ def update_app_version(version, chart_dir, **kwargs):
 
     data["appVersion"] = version
 
-    with open(chart_file, "wb") as fd:
-        yaml.dump(data, fd, encoding="utf-8", sort_keys=False)
+    updated_chart = yaml.dump(data, sort_keys=False)
+
+    if in_place:
+        with open(chart_file, "wb") as fd:
+            fd.write(updated_chart.encode("utf-8"))
+        print(version)
+    else:
+        print(updated_chart)
 
 
 if __name__ == "__main__":
