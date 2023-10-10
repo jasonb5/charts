@@ -28,6 +28,20 @@ entries:
   gotify:
   - apiVersion: v2
     appVersion: 2.4.0
+    created: "2023-10-10T07:19:43.616939917Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'a simple server for sending and receiving messages '
+    digest: 41a8f70f25f3977fefca385d5108a978886fecf5cf3dc83a0a9df54793a0ac29
+    name: gotify
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/gotify-0.1.2/gotify-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 2.4.0
     created: "2023-10-07T19:42:24.724514605Z"
     dependencies:
     - name: common
@@ -76,4 +90,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.0/jellyfin-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-07T19:42:24.724547508Z"
+generated: "2023-10-10T07:19:43.616958117Z"
