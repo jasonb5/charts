@@ -48,6 +48,8 @@ jobs:
 
           new_version="$(python scripts/chart-updater.py --log --log-level DEBUG --log-file ./output.log update --in-place --token ${{ secrets.GITHUB_TOKEN }} main/charts/${{ matrix.chart }})"
 
+          cat output.log
+
           pushd main/
 
           if [-n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
@@ -61,6 +63,8 @@ jobs:
         working-directory: ./main
         if: steps.check_chart.outputs.changed == 'true'
         run: |
+          pip install -r docs/requirements.txt
+
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config user.name ${{ github.actor }}
 
@@ -68,6 +72,7 @@ jobs:
 
           pushd charts/${{ matrix.chart }}
 
+          make docs
           git add .
           git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
           git push -u origin updates_${{ matrix.chart }}
