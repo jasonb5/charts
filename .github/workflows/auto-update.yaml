@@ -35,26 +35,43 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: main
-      - run: |
-          pushd main/
+      - name: Fix branch to target main
+        working-directory: ./main
+        run: |
           git fetch
           git reset --hard HEAD
           git checkout main
-      - run: |
+      - name: Check for container tag update
+        id: check_chart
+        run: |
           pip install semver requests tbump pyyaml
 
-          python scripts/update-chart.py --log --in-place --token ${{ secrets.GITHUB_TOKEN }} main/charts/${{ matrix.chart }}
+          new_version="$(python scripts/chart-updater.py --log --log-level DEBUG --log-file ./output.log update --in-place --token ${{ secrets.GITHUB_TOKEN }} main/charts/${{ matrix.chart }})"
 
           pushd main/
 
-          if [ -n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
-            git config user.email ${{ github.actor }}@users.noreply.github.com
-            git config user.name ${{ github.actor }}
-            git checkout -b update_${{ matrix.chart }}
-            pushd charts/${{ matrix.chart }}
-            git add .
-            git commit -m "Updates ${{ matrix.chart }}"
-            git push -u origin update_${{ matrix.chart }}
-            make bump-patch ARGS="--non-interactive"
-            gh pr create --fill
+          if [-n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "new_version=${new_version}" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "new_version=" >> $GITHUB_OUTPUT
           fi
+      - name: Make new branch and create PR
+        working-directory: ./main
+        if: ${{ steps.check_chart.outputs.changed == "true" }}
+        run: |
+          git config user.email ${{ github.actor }}@users.noreply.github.com
+          git config user.name ${{ github.actor }}
+
+          git checkout -b updates_${{ matrix.chart }}
+
+          pushd charts/${{ matrix.chart }}
+
+          git add .
+          git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
+          git push -u origin updates_${{ matrix.chart }}
+
+          make bump-patch ARGS="--non-interactive"
+
+          gh pr create --fill
