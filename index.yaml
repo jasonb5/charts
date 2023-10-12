@@ -90,4 +90,21 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.0/jellyfin-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-10T07:19:43.616958117Z"
+  kavita:
+  - apiVersion: v2
+    appVersion: 0.7.8
+    created: "2023-10-12T09:35:45.450604702Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Kavita is a fast, feature rich, cross platform reading server. Built
+      with a focus for being a full solution for all your reading needs. Setup your
+      own server and share your reading collection with your friends and family! '
+    digest: ee86b686567eed3dbd61c4df73425d854697b37a88a5431afec8c02767bede94
+    name: kavita
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/kavita-0.1.0/kavita-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-10-12T09:35:45.450618202Z"
