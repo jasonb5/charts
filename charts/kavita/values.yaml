@@ -1,0 +1,35 @@
+# -- Workload type
+workload: deployment
+
+image:
+  # -- Image repository
+  repository: ghcr.io/linuxserver/kavita
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Environment variables
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+service:
+  ports:
+    # -- Default port
+    default:
+      port: 5000
+
+ingress:
+  enabled: false
+  hosts:
+  # -- Default ingress
+  - name: default
+
+persistence:
+  # -- Configuration mount
+  config:
+    enabled: false
+
+  # -- Media mount
+  media:
+    enabled: false
