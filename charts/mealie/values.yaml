@@ -1,0 +1,33 @@
+# -- Workload type
+workload: deployment
+
+image:
+  # -- Image repository
+  repository: ghcr.io/mealie-recipes/mealie
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Environment variables
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+service:
+  ports:
+    # -- Default port
+    default:
+      port: 9000
+
+ingress:
+  enabled: false
+  hosts:
+  # -- Default ingress
+  - name: default
+
+persistence:
+  # -- Configuration mount
+  config:
+    enabled: false
+    mountPath: /app/data
+

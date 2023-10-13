@@ -1,0 +1,11 @@
+_src_path: template/
+description: ' A self-hosted recipe manager and meal planner with a RestAPI backend
+    and a reactive frontend application built in Vue for a pleasant user experience
+    for the whole family. '
+image: ghcr.io/mealie-recipes/mealie
+mariadb_enabled: false
+name: mealie
+port: 9000
+postgresql_enabled: false
+redis_enabled: false
+version: nightly
