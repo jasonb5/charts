@@ -107,4 +107,21 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/kavita-0.1.0/kavita-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-12T09:35:45.450618202Z"
+  mealie:
+  - apiVersion: v2
+    appVersion: nightly
+    created: "2023-10-13T10:55:55.172144774Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'A self-hosted recipe manager and meal planner with a RestAPI backend
+      and a reactive frontend application built in Vue for a pleasant user experience
+      for the whole family.  '
+    digest: 1d3904eea7efe04a48dd49c45de0edb20b4b1f5870d755ae9b3a307a8b7c639d
+    name: mealie
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-10-13T10:55:55.172159074Z"
