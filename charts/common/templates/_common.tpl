@@ -144,3 +144,76 @@ namespace: {{ .Release.Namespace }}
 {{- end }}
 {{- printf "%s" (toYaml $auths) }}
 {{- end }}
+
+{{- define "common.mergePersistence" -}}
+{{- $values := first . }}
+{{- $others := rest . }}
+{{- $persistence := default dict $values.persistence }}
+{{- range $item := $others }}
+{{- range $_, $value := $item }}
+{{- with $value.persistence }}
+{{- $persistence = mustMerge $persistence . }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- $_ := set $values "persistence" $persistence }}
+{{- end }}
+
+{{- define "common.mergeServices" -}}
+{{- $values := first . }}
+{{- $others := rest . }}
+{{- $service := default dict $values.service }}
+{{- $ports := default dict $service.ports }}
+{{- range $item := $others }}
+{{- range $_, $value := $item }}
+{{- with $value.service }}
+{{- range $k, $v := .ports }}
+{{- if hasKey $ports $k }}
+{{- (printf "Found duplicate service %v" $k) | fail }}
+{{- else }}
+{{- $ports = mustMerge $ports (dict $k $v) }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- if gt (len $ports) 0 }}
+{{- $_ := set $service "ports" $ports }}
+{{- end }}
+{{- $_ := set $values "service" $service }}
+{{- end }}
+
+{{- define "common.mergeIngress" -}}
+{{- $values := first . }}
+{{- $others := rest . }}
+{{- $ingress := default dict $values.ingress }}
+{{- $enabled := default false $ingress.enabled }}
+{{- $hosts := default list $ingress.hosts }}
+{{- $hostKeys := fromYaml (include "common.listToDict" $hosts) }}
+{{- range $item := $others }}
+{{- range $_, $value := $item }}
+{{- with $value.ingress }}
+{{- if and .enabled (hasKey . "hosts") }}
+{{- $enabled = true }}
+{{- range $v := .hosts }}
+{{- $hosts = mustAppend $hosts $v }}
+{{- $hostKeys = mustMerge $hostKeys (dict $v.name "") }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- if gt (len $hosts) 0 }}
+{{- $_ := set $ingress "enabled" $enabled }}
+{{- $_ := set $ingress "hosts" $hosts }}
+{{- end }}
+{{- $_ := set $values "ingress" $ingress }}
+{{- end }}
+
+{{- define "common.listToDict" -}}
+{{- $keys := dict }}
+{{- range . }}
+{{- $keys := mustMerge $keys (dict .name "") }}
+{{- end }}
+{{- printf "%s" (toYaml $keys) }}
+{{- end }}

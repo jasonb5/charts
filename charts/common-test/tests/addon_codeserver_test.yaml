@@ -13,14 +13,22 @@ tests:
       addons:
         codeserver:
           enabled: true
-          tag: 4.16.1
-          pullPolicy: IfNotPresent
+
+          image:
+            tag: 4.16.1
+            pullPolicy: Always
+
           ingress:
-            host: code.domain.io
-            path: /code
-            pathType: Prefix
+            enabled: true
+            hosts:
+              - name: codeserver
+                host: code.domain.io
+                path: /code
+                pathType: Prefix
+
           persistence:
             config:
+              enabled: true
               type: pvc
               size: 20G
             data:
@@ -51,13 +59,10 @@ tests:
           enabled: true
     asserts:
       - matchSnapshot:
-          path: spec
-        documentIndex: 2
-      - matchSnapshot:
           path: spec.ports
         documentIndex: 1
       - matchSnapshot:
           path: spec.template.spec.containers[1]
         documentIndex: 0
       - hasDocuments:
-          count: 3
+          count: 2

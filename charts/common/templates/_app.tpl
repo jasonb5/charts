@@ -1,6 +1,5 @@
 {{- define "common.app" }}
 {{- include "common.merge" . }}
-{{- include "common.addons" . }}
 {{- include "common.workload" . }}
 {{- with .Values.configmap }}
 {{- range $key, $value := . }}

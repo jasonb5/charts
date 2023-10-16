@@ -1,4 +1,5 @@
 {{- define "common.workload" }}
+{{- include "common.addons" . }}
 {{- with .Values.workload }}
 {{- $name := lower . }}
 {{- if eq $name "cronjob" }}
@@ -14,21 +15,14 @@
 {{- end }}
 ---
 {{- end }}
-{{- $services := default (dict "ports" dict) .Values.service }}
-{{- with .Values.extraContainers }}
-{{- range $value := values . }}
-{{- with $value.service }}
-{{- $_ := mustMerge $services.ports .ports }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- if gt (len $services.ports) 0 }}
-{{- $_ := set .Values "service" $services }}
-{{- $values := mustMerge $services (dict "workloadName" $.Values.workloadName "name" "default") }}
+{{- include "common.mergeServices" (list .Values .Values.extraContainers .Values.initContainers) }}
+{{- with .Values.service }}
+{{- $values := mustMerge . (dict "workloadName" $.Values.workloadName "name" "default") }}
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
 {{- include "common.service" $dot }}
 ---
 {{- end }}
+{{- include "common.mergeIngress" (list .Values .Values.extraContainers .Values.initContainers) }}
 {{- with .Values.ingress }}
 {{- if .enabled }}
 {{- $values := mustMerge . (dict "workloadName" $.Values.workloadName "name" "default" "service" $.Values.service.ports) }}
@@ -37,22 +31,8 @@
 ---
 {{- end }}
 {{- end }}
-{{- $persistence := default dict .Values.persistence }}
-{{- with .Values.extraContainers }}
-{{- range $container := . }}
-{{- with $container.persistence }}
-{{- $persistence = mustMerge $persistence . }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- with .Values.initContainers }}
-{{- range $container := . }}
-{{- with $container.persistence }}
-{{- $persistence = mustMerge $persistence . }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- range $key, $value := $persistence }}
+{{- include "common.mergePersistence" (list .Values .Values.extraContainers .Values.initContainers) }}
+{{- range $key, $value := .Values.persistence }}
 {{- if and (eq $value.type "pvc") $value.enabled (not $value.existingClaim) }}
 {{- $values := mustMerge $value (dict "workloadName" $.Values.workloadName "name" $key) }}
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
@@ -62,7 +42,7 @@
 {{- end }}
 {{- with .Values.networkPolicy }}
 {{- if .enabled }}
-{{- $values := mustMerge . (dict "workloadName" $.Values.workloadName "name" "default" "service" $services) }}
+{{- $values := mustMerge . (dict "workloadName" $.Values.workloadName "name" "default" "service" $.Values.service) }}
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
 {{- include "common.networkPolicy" $dot }}
 ---

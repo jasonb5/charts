@@ -182,17 +182,22 @@ workingDir:
 
 addons:
   codeserver:
-    # -- Enable Visual Studio code server
     enabled: false
-    # -- Image [tag](https://github.com/linuxserver/docker-code-server/pkgs/container/code-server)
-    # @default -- latest
-    tag:
-    # -- Image pull policy
-    # @default -- Always
-    pullPolicy:
+
+    image:
+      repository: ghcr.io/linuxserver/code-server
+      tag: 4.17.1
+
+    service:
+      ports:
+        codeserver:
+          port: 8443
+
     ingress:
-      host:
-      path:
-      pathType:
-    # -- Persistence has default `config`, use `config` key to override defaults. Define additional volumes to mount as would in main workload or extraContainers
+      enabled: false
+      hosts:
+        - name: codeserver
+
     persistence:
+      config:
+        enabled: false
