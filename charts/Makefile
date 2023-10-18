@@ -33,20 +33,24 @@ bump-%:
 	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
-template: dep
+template: update-dep
 	helm template $(ARGS) $(CHART_DIR)
 
 .PHONY: lint
-lint: dep
+lint: update-dep
 	helm lint $(ARGS) $(CHART_DIR)
 
 .PHONY: test
-test: dep
+test: update-dep
 	helm unittest $(ARGS) $(CHART_DIR)
 
-.PHONY: dep
-dep:
+.PHONY: update-dep
+update-dep:
 	helm dep update $(CHART_DIR)
+
+.PHONY: update-all-dep
+update-all-dep:
+	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\)' | xargs -I% -P 4 make -C % update-dep
 
 .PHONY: clean
 clean:
