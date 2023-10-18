@@ -37,6 +37,20 @@ entries:
   gotify:
   - apiVersion: v2
     appVersion: 2.4.0
+    created: "2023-10-18T16:15:36.908983409Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'a simple server for sending and receiving messages '
+    digest: 6f78418286cd3487bf764780f7250bfd72730d06f7336ffb678e5bef6dba18a8
+    name: gotify
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/gotify-0.1.3/gotify-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 2.4.0
     created: "2023-10-10T07:19:43.616939917Z"
     dependencies:
     - name: common
@@ -133,4 +147,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-18T15:30:52.759319572Z"
+generated: "2023-10-18T16:15:37.736677767Z"
