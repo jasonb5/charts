@@ -35,4 +35,4 @@ persistence:
   # -- Configuration mount
   data:
     enabled: false
-
+    mountPath: /app/data
