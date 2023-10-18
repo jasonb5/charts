@@ -10,4 +10,4 @@ COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["tini", "-g"]
 
-CMD ["/bin/sh", "/entrypoint.sh", "crond", "-f"]
+CMD ["/bin/sh", "/entrypoint.sh"]

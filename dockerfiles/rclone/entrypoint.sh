@@ -6,4 +6,6 @@ cat << EOF | crontab -
 ${CRON} rclone sync ${SOURCE} ${DESTINATION} ${FLAGS}
 EOF
 
-exec $@
+CROND_ARGS=${CROND_ARGS:-"-d 8"}
+
+crond -f ${CROND_ARGS}
