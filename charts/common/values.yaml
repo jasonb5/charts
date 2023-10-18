@@ -201,3 +201,16 @@ addons:
     persistence:
       config:
         enabled: false
+
+  rclone:
+    enabled: false
+
+    env:
+      CRON:
+      SOURCE:
+      DESTINATION:
+      FLAGS:
+
+    image:
+      repository: ghcr.io/jasonb5/rclone
+      tag: 0.1.0

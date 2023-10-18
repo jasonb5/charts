@@ -1,0 +1,44 @@
+suite: test rclone addon
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should pass
+    set:
+      workload: deployment
+
+      persistence:
+        config:
+          enabled: true
+          type: emptydir
+
+      addons:
+        rclone:
+          enabled: true
+
+          env:
+            CRON: '0 */15 * * *'
+            SOURCE: /config
+            DESTINATION: /backup
+            FLAGS: --checksum
+
+          persistence:
+            config:
+              enabled: true
+              type: emptydir
+
+            backup:
+              enabled: true
+              type: nfs
+              server: 192.168.1.1
+              path: /mnt/user/backup
+              subPath: app
+    asserts:
+      - matchSnapshot:
+          path: spec.template.spec.containers
+        documentIndex: 0
+      - hasDocuments:
+          count: 1

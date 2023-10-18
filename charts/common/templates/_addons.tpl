@@ -1,13 +1,15 @@
 {{- define "common.addons" }}
-{{- if .Values.addons.codeserver.enabled }}
-{{- include "common.addons.codeserver" . }}
-{{- end }}
+{{- include "common.addon" (list "codeserver" .Values) }}
+{{- include "common.addon" (list "rclone" .Values) }}
 {{- end }}
 
-{{- define "common.addons.codeserver" }}
-{{- $extraContainers := default dict .Values.extraContainers }}
-{{- with .Values.addons.codeserver }}
-{{- $extraContainers := mustMerge $extraContainers (dict "codeserver" .) }}
+{{- define "common.addon" }}
+{{- $name := first . }}
+{{- $values := last . }}
+{{- $addon := get $values.addons $name }}
+{{- if $addon.enabled }}
+{{- $extraContainers := default dict $values.extraContainers }}
+{{- $extraContainers = mustMerge $extraContainers (dict $name $addon) }}
+{{- $_ := set $values "extraContainers" $extraContainers }}
 {{- end }}
-{{- $_ := set .Values "extraContainers" $extraContainers }}
 {{- end }}
