@@ -18,7 +18,7 @@ index:
 
 .PHONY: new-chart
 new-chart:
-	copier copy template/ .
+	copier copy $(ARGS) template/ .
 
 .PHONY: docs
 docs:
