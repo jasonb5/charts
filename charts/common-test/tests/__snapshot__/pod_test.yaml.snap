@@ -19,6 +19,7 @@ should overwrite defaults:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
         app.kubernetes.io/version: 0.1.0
+        common/workload: default
         helm.sh/chart: common-test-0.1.0
       name: RELEASE-NAME-common-test-regcreds
       namespace: NAMESPACE

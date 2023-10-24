@@ -23,7 +23,7 @@
 {{- end }}
 {{- with .Values.extraWorkloads }}
 {{- range $key, $value := . }}
-{{- $values := mustMergeOverwrite $.Defaults $value (dict "workloadName" $key "name" "default") }}
+{{- $values := mustMergeOverwrite $value (dict "workloadName" $key "name" "default") }}
 {{- $dot := dict "Values" $values "TemplateValues" $.TemplateValues "Release" $.Release "Chart" $.Chart }}
 {{- include "common.workload" $dot }}
 {{- end }}

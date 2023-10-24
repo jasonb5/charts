@@ -10,6 +10,7 @@ should pass:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
         app.kubernetes.io/version: 0.1.0
+        common/workload: default
         helm.sh/chart: common-test-0.1.0
       name: RELEASE-NAME-common-test-config
       namespace: NAMESPACE
@@ -22,6 +23,7 @@ should pass:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
         app.kubernetes.io/version: 0.1.0
+        common/workload: default
         helm.sh/chart: common-test-0.1.0
       name: RELEASE-NAME-common-test
       namespace: NAMESPACE
@@ -34,3 +36,4 @@ should pass:
       selector:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: common-test
+        common/workload: default

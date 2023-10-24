@@ -8,6 +8,7 @@ should create default policy:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
         app.kubernetes.io/version: 0.1.0
+        common/workload: default
         helm.sh/chart: common-test-0.1.0
       name: RELEASE-NAME-common-test
       namespace: NAMESPACE
@@ -23,6 +24,7 @@ should create default policy:
       podSelector:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: common-test
+        common/workload: default
       policyTypes:
         - Egress
         - Ingress
@@ -36,6 +38,7 @@ should disable defaults:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
         app.kubernetes.io/version: 0.1.0
+        common/workload: default
         helm.sh/chart: common-test-0.1.0
       name: RELEASE-NAME-common-test
       namespace: NAMESPACE
@@ -59,6 +62,7 @@ should disable defaults:
       podSelector:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: common-test
+        common/workload: default
       policyTypes:
         - Egress
         - Ingress
@@ -72,6 +76,7 @@ should merge with defaults:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
         app.kubernetes.io/version: 0.1.0
+        common/workload: default
         helm.sh/chart: common-test-0.1.0
       name: RELEASE-NAME-common-test
       namespace: NAMESPACE
@@ -101,6 +106,7 @@ should merge with defaults:
       podSelector:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: common-test
+        common/workload: default
       policyTypes:
         - Egress
         - Ingress
