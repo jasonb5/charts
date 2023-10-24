@@ -58,6 +58,7 @@ helm.sh/chart: {{ include "common.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+common/workload: {{ .Values.workloadName }}
 {{- end }}
 
 {{/*
@@ -66,6 +67,7 @@ Selector labels
 {{- define "common.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "common.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+common/workload: {{ .Values.workloadName }}
 {{- end }}
 
 {{/*
@@ -96,12 +98,12 @@ Common metadata for objects
 annotations:
 {{- toYaml . | nindent 2 }}
 {{- end }}
-{{- $labels := include "common.labels" . }}
+{{- $labels := include "common.labels" . | fromYaml }}
 {{- with .Values.labels }}
 {{- $labels = mustMerge $labels . }}
 {{- end }}
 labels:
-{{- $labels | nindent 2 }}
+{{- toYaml $labels | nindent 2 }}
 name: {{ include "common.fullname.postfix" . }}
 namespace: {{ .Release.Namespace }}
 {{- end }}
