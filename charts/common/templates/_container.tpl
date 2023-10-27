@@ -18,7 +18,7 @@
   {{- with .Values.envFrom }}
   envFrom:
     {{- range $key, $value := . }}
-    {{- $dot := dict "Values" (dict "workloadName" $.Values.workloadName "name" $key) "Release" $.Release "Chart" $.Chart }}
+    {{- $dot := dict "Values" (dict "workloadName" "default" "name" $key) "Release" $.Release "Chart" $.Chart }}
     {{- if eq $value.type "configmap" }}
     - configMapRef:
         name: {{ include "common.fullname.postfix" $dot }}
