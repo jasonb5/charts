@@ -52,7 +52,7 @@ jobs:
 
           pushd main/
 
-          if [-n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
+          if [ -n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "new_version=${new_version}" >> $GITHUB_OUTPUT
           else
