@@ -4,8 +4,8 @@ description: |
   Kavita is a fast, feature rich, cross platform reading server. Built with a focus for being a full solution for all your reading needs. Setup your own server and share your reading collection with your friends and family!
 type: application
 version: 0.1.0
-appVersion: "0.7.8"
+appVersion: 0.7.10
 dependencies:
 - name: common
-  version: "0.1.x"
-  repository: "https://jasonb5.github.io/charts"
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
