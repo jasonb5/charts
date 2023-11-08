@@ -102,6 +102,27 @@ entries:
     version: 0.1.0
   jellyfin:
   - apiVersion: v2
+    appVersion: version-10.8.12-1
+    created: "2023-11-08T17:34:54.083706405Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Jellyfin is a Free Software Media System that puts you in control
+      of managing and streaming your media. It is an alternative to the proprietary
+      Emby and Plex, to provide media from a dedicated server to end-user devices
+      via multiple apps. Jellyfin is descended from Emby''s 3.5.2 release and ported
+      to the .NET Core framework to enable full cross-platform support. There are
+      no strings attached, no premium licenses or features, and no hidden agendas:
+      just a team who want to build something better and work together to achieve
+      it. '
+    digest: 7688f99e42e8440939452e2e82669f4cf67046defaf766074781c4d67a2fa3e3
+    name: jellyfin
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.1/jellyfin-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: version-10.8.11-1
     created: "2023-09-29T02:40:28.058424051-07:00"
     dependencies:
@@ -172,4 +193,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-01T03:17:44.479125876Z"
+generated: "2023-11-08T17:34:54.083725705Z"
