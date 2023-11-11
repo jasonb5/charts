@@ -23,14 +23,12 @@ service:
       port: 8123
 
 ingress:
-  enabled: true
+  enabled: false
   hosts:
   # -- Default ingress
   - name: default
-    host: ha.angrydonkey.io
 
 persistence:
   # -- Configuration mount
   config:
-    enabled: true
-    type: emptydir
+    enabled: false
