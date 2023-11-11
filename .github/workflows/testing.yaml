@@ -48,3 +48,5 @@ jobs:
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
           make test
+      - name: Install k3d
+        uses: nolar/setup-k3d-k3s@v1
