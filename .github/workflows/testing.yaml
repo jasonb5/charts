@@ -52,5 +52,5 @@ jobs:
         uses: nolar/setup-k3d-k3s@v1
       - name: Install helm chart
         run: |
-          helm install --wait .
+          helm install --wait test .
           kubectl get pods
