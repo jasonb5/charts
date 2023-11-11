@@ -1,0 +1,11 @@
+apiVersion: v2
+name: home-assistant
+description: |
+  Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts. Perfect to run on a Raspberry Pi or a local server.
+type: application
+version: 0.1.0
+appVersion: "2023.11.2"
+dependencies:
+- name: common
+  version: "0.1.x"
+  repository: "https://jasonb5.github.io/charts"
