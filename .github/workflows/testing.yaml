@@ -53,4 +53,6 @@ jobs:
       - name: Install helm chart
         run: |
           helm install --wait test .
-          kubectl get pods
+          name=$(kubectl get pods -oname)
+          kubectl port-forward $name 8000:8123 &
+          killall kubectl
