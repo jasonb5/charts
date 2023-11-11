@@ -48,5 +48,9 @@ jobs:
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
           make test
-      - name: Install k3d
+      - name: Install k3d/setup k3s cluster
         uses: nolar/setup-k3d-k3s@v1
+      - name: Install helm chart
+        run: |
+          helm install --wait .
+          kubectl get pods
