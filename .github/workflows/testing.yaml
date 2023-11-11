@@ -55,4 +55,5 @@ jobs:
           helm install --wait test .
           name=$(kubectl get pods -oname)
           kubectl port-forward $name 8000:8123 &
+          curl http://127.0.0.1:8000 -vvv
           killall kubectl
