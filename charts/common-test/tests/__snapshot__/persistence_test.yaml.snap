@@ -40,7 +40,6 @@ should pass:
       name: mount1
     - hostPath:
         path: /data
-        type: hostpath
       name: mount2
     - name: mount3
       nfs:

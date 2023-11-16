@@ -51,6 +51,7 @@ jobs:
       - name: Install k3d/setup k3s cluster
         uses: nolar/setup-k3d-k3s@v1
       - name: Install helm chart
+        if: ${{ ! contains(matrix.chart, 'common') }}
         run: |
           helm install --wait test .
           name=$(kubectl get pods -oname)
