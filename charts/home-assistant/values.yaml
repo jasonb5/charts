@@ -1,0 +1,34 @@
+# -- Workload type
+workload: deployment
+
+image:
+  # -- Image repository
+  repository: ghcr.io/home-assistant/home-assistant
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Use host's network namespace, may need to be set to `true` for device discovery.
+hostNetwork: false
+
+# -- Environment variables
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+service:
+  ports:
+    # -- Default port
+    default:
+      port: 8123
+
+ingress:
+  enabled: false
+  hosts:
+  # -- Default ingress
+  - name: default
+
+persistence:
+  # -- Configuration mount
+  config:
+    enabled: false

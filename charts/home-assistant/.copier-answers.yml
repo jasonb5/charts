@@ -1,0 +1,11 @@
+_src_path: template/
+description: Open source home automation that puts local control and privacy first.
+    Powered by a worldwide community of tinkerers and DIY enthusiasts. Perfect to
+    run on a Raspberry Pi or a local server.
+image: ghcr.io/home-assistant/home-assistant
+mariadb_enabled: false
+name: home-assistant
+port: 8123
+postgresql_enabled: false
+redis_enabled: false
+version: 2023.11.2

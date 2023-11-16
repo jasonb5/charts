@@ -1,0 +1,1 @@
+../../charts/home-assistant/README.md
