@@ -116,7 +116,7 @@ volumes:
   {{- else if eq $type "hostpath" }}
   hostPath:
     path: {{ $value.path }}
-    {{- with $type }}
+    {{- with $value.mountType }}
     type: {{ . }}
     {{- end }}
   {{- else if eq $type "nfs" }}
