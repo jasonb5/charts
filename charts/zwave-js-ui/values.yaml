@@ -1,0 +1,45 @@
+# -- Workload type
+workload: deployment
+
+image:
+  # -- Image repository
+  repository: ghcr.io/zwave-js/zwave-js-ui
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Environment variables
+# Customize environment [variables](https://zwave-js.github.io/zwave-js-ui/#/guide/env-vars)
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+service:
+  ports:
+    # -- Default port
+    default:
+      port: 8091
+
+    websocket:
+      port: 3000
+
+ingress:
+  enabled: false
+  hosts:
+  # -- Default ingress
+  - name: default
+
+persistence:
+  # -- Configuration mount
+  config:
+    enabled: false
+    mountPath: /usr/src/app/store
+
+  # -- Z-Wave device mount
+  zwave:
+    enabled: false
+    type: hostpath
+    # -- Host path to Z-Wave device e.g. /dev/serial/by-id/...
+    path:
+    mountType: CharDevice
+    mountPath: /dev/zwave

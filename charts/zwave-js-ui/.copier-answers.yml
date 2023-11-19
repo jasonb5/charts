@@ -1,0 +1,9 @@
+_src_path: template/
+description: Full featured Z-Wave Control Panel and MQTT Gateway.
+image: ghcr.io/zwave-js/zwave-js-ui
+mariadb_enabled: false
+name: zwave-js-ui
+port: 8091
+postgresql_enabled: false
+redis_enabled: false
+version: 9.3.2
