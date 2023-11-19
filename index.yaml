@@ -237,4 +237,19 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/node-red-0.1.0/node-red-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-19T23:30:33.827922619Z"
+  zwave-js-ui:
+  - apiVersion: v2
+    appVersion: 9.3.2
+    created: "2023-11-19T23:41:24.502238242Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Full featured Z-Wave Control Panel and MQTT Gateway. '
+    digest: fbe2f2c5f3d035ab4a60e3ccca41603e306fac2c825350f66e1534aeb0dd8ecd
+    name: zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-11-19T23:41:24.502266425Z"
