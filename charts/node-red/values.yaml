@@ -1,0 +1,32 @@
+# -- Workload type
+workload: deployment
+
+image:
+  # -- Image repository
+  repository: nodered/node-red
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Environment variables
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+service:
+  ports:
+    # -- Default port
+    default:
+      port: 1880
+
+ingress:
+  enabled: false
+  hosts:
+  # -- Default ingress
+  - name: default
+
+persistence:
+  # -- Configuration mount
+  config:
+    enabled: false
+    mountPath: /data
