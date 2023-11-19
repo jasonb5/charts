@@ -219,4 +219,22 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-16T10:44:11.637235431Z"
+  node-red:
+  - apiVersion: v2
+    appVersion: 3.1.0-18
+    created: "2023-11-19T23:30:33.827894507Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Node-RED is a programming tool for wiring together hardware devices,
+      APIs and online services in new and interesting ways.It provides a browser-based
+      editor that makes it easy to wire together flows using the wide range of nodes
+      in the palette that can be deployed to its runtime in a single-click. '
+    digest: dfbc6651ac04f9ac8e5859f16d6078bbe4df9ebfc0845a0a6e0e351ec71507eb
+    name: node-red
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/node-red-0.1.0/node-red-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-11-19T23:30:33.827922619Z"
