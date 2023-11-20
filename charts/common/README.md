@@ -13,7 +13,7 @@ A Helm chart for Kubernetes
 | secret | object | `nil` | Map of Secrets, these are not unique to the workload. |
 | service.loadBalancerIP | str | `nil` | Load baalancer IP, used when `service.type` is set to LoadBalancer. |
 | service.type | str | `"ClusterIP"` | How the service is exposed. |
-| service.ports | object | `nil` | Map of service ports. |
+| service.ports | object | `{"default":{"port":null}}` | Map of service ports. |
 | ingress.enabled | bool | `false` | Enable/disable ingress. |
 | ingress.hosts | list | `nil` | List of ingress hosts. |
 | persistence | object | `nil` | Map of persistence, these are specifi to the workload. |
@@ -85,8 +85,10 @@ A Helm chart for Kubernetes
 | image.pullSecrets | string | `nil` | Container [pullSecrets](https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry) |
 | image.pullPolicy | string | `nil` | Cotnainer [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy) |
 | lifecycle | string | `nil` | Container [lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/) |
-| livenessProbe | string | `nil` | Container [livenessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
-| readinessProbe | string | `nil` | Container [readinessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| livenessProbe | object | `{"tcpSocket":{"port":"default"}}` | Container [livenessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| livenessProbe.tcpSocket.port | str | `"default"` | Liveness probe port target |
+| readinessProbe | object | `{"tcpSocket":{"port":"default"}}` | Container [readinessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| readinessProbe.tcpSocket.port | str | `"default"` | Readiness probe port target |
 | resources | string | `nil` | Container [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) |
 | restartPolicy | string | `nil` | Container [restartPolicy](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy) |
 | securityContext | string | `nil` | Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) |

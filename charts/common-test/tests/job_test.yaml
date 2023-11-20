@@ -32,7 +32,7 @@ tests:
           path: spec
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2
   - it: should pass
     set:
       workload: job
@@ -40,4 +40,4 @@ tests:
       - matchSnapshot: {}
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2

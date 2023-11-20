@@ -21,7 +21,17 @@ should overwrite defaults:
         activeDeadlineSeconds: 10
         containers:
           - image: busybox:0.1.0
+            livenessProbe:
+              tcpSocket:
+                port: default
             name: common-test
+            ports:
+              - containerPort: null
+                name: default
+                protocol: TCP
+            readinessProbe:
+              tcpSocket:
+                port: default
     ttlSecondsAfterFinished: 20
 should pass:
   1: |
@@ -42,4 +52,14 @@ should pass:
         spec:
           containers:
             - image: busybox:0.1.0
+              livenessProbe:
+                tcpSocket:
+                  port: default
               name: common-test
+              ports:
+                - containerPort: null
+                  name: default
+                  protocol: TCP
+              readinessProbe:
+                tcpSocket:
+                  port: default

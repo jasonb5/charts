@@ -1,31 +1,25 @@
 should create extra workload:
   1: |
-    apiVersion: apps/v1
-    kind: Deployment
+    apiVersion: v1
+    kind: Service
     metadata:
       labels:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
         app.kubernetes.io/version: 0.1.0
-        common/workload: db
+        common/workload: default
         helm.sh/chart: common-test-0.1.0
-      name: RELEASE-NAME-common-test-db
+      name: RELEASE-NAME-common-test
       namespace: NAMESPACE
     spec:
-      replicas: null
+      ports:
+        - name: default
+          port: null
+          protocol: TCP
+          targetPort: null
       selector:
-        matchLabels:
-          app.kubernetes.io/instance: RELEASE-NAME
-          app.kubernetes.io/name: common-test
-          common/workload: db
-      template:
-        metadata:
-          labels:
-            app.kubernetes.io/instance: RELEASE-NAME
-            app.kubernetes.io/name: common-test
-            common/workload: db
-        spec:
-          containers:
-            - image: mariadb:latest
-              name: common-test
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/name: common-test
+        common/workload: default
+      type: ClusterIP

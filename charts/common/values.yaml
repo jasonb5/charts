@@ -14,6 +14,8 @@ service:
   type: ClusterIP
   # -- (object) Map of service ports.
   ports:
+    default:
+      port:
 
 ingress:
   # -- (bool) Enable/disable ingress.
@@ -182,8 +184,14 @@ image:
 lifecycle:
 # -- Container [livenessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 livenessProbe:
+  tcpSocket:
+    # -- (str) Liveness probe port target
+    port: default
 # -- Container [readinessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 readinessProbe:
+  tcpSocket:
+    # -- (str) Readiness probe port target
+    port: default
 # -- Container [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 resources:
 # -- Container [restartPolicy](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)

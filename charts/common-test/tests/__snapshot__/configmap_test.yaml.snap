@@ -37,3 +37,4 @@ should pass:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: common-test
         common/workload: default
+      type: ClusterIP
