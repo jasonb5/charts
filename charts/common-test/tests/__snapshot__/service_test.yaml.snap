@@ -48,7 +48,7 @@ should overwrite defaults:
     spec:
       loadBalancerIP: 192.168.0.1
       ports:
-        - name: common-test
+        - name: default
           nodePort: 80
           port: 8080
           protocol: TCP
@@ -60,7 +60,7 @@ should overwrite defaults:
       type: ClusterIP
   2: |
     - containerPort: 80
-      name: common-test
+      name: default
       protocol: TCP
 should pass:
   1: |
@@ -78,7 +78,7 @@ should pass:
       namespace: NAMESPACE
     spec:
       ports:
-        - name: common-test
+        - name: default
           port: 80
           protocol: TCP
           targetPort: 80
@@ -92,7 +92,7 @@ should pass:
         common/workload: default
   2: |
     - containerPort: 80
-      name: common-test
+      name: default
       protocol: TCP
     - containerPort: 443
       name: https

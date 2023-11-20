@@ -9,7 +9,7 @@ spec:
   {{- end }}
   ports:
   {{- range $key, $value := .Values.ports }}
-  - name: {{ ternary (include "common.name" $) $key (eq $key "default") }}
+  - name: {{ $key }}
     {{- with $value.nodePort }}
     nodePort: {{ . }}
     {{- end }}

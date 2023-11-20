@@ -47,7 +47,7 @@
     {{- with $value.hostPort }}
     hostPort: {{ . }}
     {{- end }}
-    name: {{ ternary (include "common.name" $) $key (eq $key "default") }}
+    name: {{ $key }}
     protocol: {{ default "TCP" $value.protocol }}
   {{- end }}
   {{- end }}

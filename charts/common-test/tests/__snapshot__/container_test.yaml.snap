@@ -30,7 +30,7 @@ should overwrite defaults:
     name: common-test
     ports:
       - containerPort: 80
-        name: common-test
+        name: default
         protocol: TCP
     readinessProbe:
       tcpSocket:
