@@ -20,7 +20,7 @@ configmap:
   app:
     PORT: "{{ .Values.service.ports.default.port }}"
 ```
-### Reference ConfigMap
+### Referencing a ConfigMap
 To reference a ConfigMap in the default container using `envFrom` you simply use the key of the ConfigMap.
 ```yaml 
 envFrom:
@@ -28,7 +28,7 @@ envFrom:
     type: configmap
 ```
 
-This works for containers defined in `extraContainers` as well.
+This works for `extraContainers` as well.
 ```yaml
 extraContainers:
   sidecar:
@@ -42,9 +42,11 @@ Secrets like ConfigMaps are defined in a map, where each key is a separate Secre
 ```yaml
 secret:
   default:
-    PASSWORD: abcd1234
+    data:
+      PASSWORD: abcd1234
   app:
-    DB_PASSWORD: 1234
+    data:
+      DB_PASSWORD: 1234
 ```
 ### Reference Secret
 To reference a Secret in the default container using `envFrom` you simply use the key of the Secret.
@@ -54,7 +56,7 @@ envFrom:
     type: secret
 ```
 
-This works for containers defined in `extraContainers` as well.
+This works for `extraContainers` as well.
 ```yaml
 extraContainers:
   sidecar:
@@ -128,18 +130,49 @@ networkPolicy:
 The common library provides addons that are attached as `extraContainers`.
 
 ### Visual Studio Code
-This addon will attach an instance of `Visual Code Studio` to the workload. The addons uses the [`ghcr.io/linuxserver/code-server`](https://github.com/linuxserver/docker-code-server/pkgs/container/code-server) container. The tag, persistence and ingress can be customized.
+This addon will attach a sidecar running `Visual Code Studio`. The addons uses the [`ghcr.io/linuxserver/code-server`](https://github.com/linuxserver/docker-code-server/pkgs/container/code-server) container. The minimal configuration requires an ingress and persistence be defined.
 ```yaml
 addons:
   codeserver:
     enabled: true
-    tag: 4.16.1
-    pullPolicy: IfNotPresent
     ingress:
-      host: code.domain.io
-      path: /code
-      pathType: Prefix
+      hosts:
+      - name: codeserver
+        host: code.domain.io
     persistence:
       config:
         type: pvc
+```
+
+### Rclone
+This addon will attach a sidecar to run `Rclone` using Cron. The minimum configuration requires an rclone configuration file and the `CRON`, `SOURCE`, and `DESTINATION` environment variables be defined.
+```yaml
+secret:
+  rclone:
+    data: 
+      rclone.conf: |
+        [host]
+        type = local
+
+        [home]
+        type = alias
+        remote = host:/home/user
+
+        [external]
+        type = alias
+        remote = host:/mnt/external
+
+addons:
+  rclone:
+    enabled: true
+    env:
+      CRON: '0 2 * * *'
+      SOURCE: home
+      DESTINATION: external
+      FLAGS: '--create-empty-src-dirs'
+    persistence:
+      rclone:
+        type: secret
+        subPath: rclone.conf
+        mountPath: /root/.config/rclone/rclone.conf
 ```
