@@ -47,8 +47,8 @@ tests:
       - matchSnapshot: {}
         documentIndex: 1
       - hasDocuments:
-          count: 2
+          count: 3
   - it: should pass
     asserts:
       - hasDocuments:
-          count: 0
+          count: 1

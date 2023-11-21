@@ -89,4 +89,4 @@ tests:
   - it: should pass
     asserts:
       - hasDocuments:
-          count: 0
+          count: 1

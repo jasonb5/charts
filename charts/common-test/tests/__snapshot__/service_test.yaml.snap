@@ -14,6 +14,10 @@ should expose ports from extraContainers:
       namespace: NAMESPACE
     spec:
       ports:
+        - name: default
+          port: null
+          protocol: TCP
+          targetPort: null
         - name: mariadb
           port: 3306
           protocol: TCP
@@ -22,9 +26,20 @@ should expose ports from extraContainers:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: common-test
         common/workload: default
+      type: ClusterIP
   2: |
     - image: busybox:0.1.0
+      livenessProbe:
+        tcpSocket:
+          port: default
       name: common-test
+      ports:
+        - containerPort: null
+          name: default
+          protocol: TCP
+      readinessProbe:
+        tcpSocket:
+          port: default
     - image: mariadb:latest
       name: db
       ports:
@@ -48,7 +63,7 @@ should overwrite defaults:
     spec:
       loadBalancerIP: 192.168.0.1
       ports:
-        - name: common-test
+        - name: default
           nodePort: 80
           port: 8080
           protocol: TCP
@@ -60,7 +75,7 @@ should overwrite defaults:
       type: ClusterIP
   2: |
     - containerPort: 80
-      name: common-test
+      name: default
       protocol: TCP
 should pass:
   1: |
@@ -78,7 +93,7 @@ should pass:
       namespace: NAMESPACE
     spec:
       ports:
-        - name: common-test
+        - name: default
           port: 80
           protocol: TCP
           targetPort: 80
@@ -90,9 +105,10 @@ should pass:
         app.kubernetes.io/instance: RELEASE-NAME
         app.kubernetes.io/name: common-test
         common/workload: default
+      type: ClusterIP
   2: |
     - containerPort: 80
-      name: common-test
+      name: default
       protocol: TCP
     - containerPort: 443
       name: https

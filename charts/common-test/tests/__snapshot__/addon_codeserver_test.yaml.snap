@@ -23,6 +23,10 @@ should overwrite default:
       port: 8443
       protocol: TCP
       targetPort: 8443
+    - name: default
+      port: null
+      protocol: TCP
+      targetPort: null
   4: |
     image: ghcr.io/linuxserver/code-server:4.16.1
     imagePullPolicy: Always
@@ -42,6 +46,10 @@ should pass:
       port: 8443
       protocol: TCP
       targetPort: 8443
+    - name: default
+      port: null
+      protocol: TCP
+      targetPort: null
   2: |
     image: ghcr.io/linuxserver/code-server:4.17.1
     name: codeserver

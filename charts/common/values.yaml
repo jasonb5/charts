@@ -7,19 +7,34 @@ configmap:
 # -- (object) Map of Secrets, these are not unique to the workload.
 secret:
 
-# -- (object) Map of ingress, these are specific to the workload.
+service:
+  # -- (str) Load baalancer IP, used when `service.type` is set to LoadBalancer.
+  loadBalancerIP:
+  # -- (str) How the service is exposed.
+  type: ClusterIP
+  # -- (object) Map of service ports.
+  ports:
+    default:
+      port:
+
 ingress:
+  # -- (bool) Enable/disable ingress.
+  enabled: false
+  # -- (list) List of ingress hosts.
+  hosts:
 
 # -- (object) Map of persistence, these are specifi to the workload.
 persistence:
 
 # -- (object) Annotations for default workload.
 annotations:
+
 # -- (object) Labels for default workload.
 labels:
 
 # -- (object) Extra workloads to create.
 extraWorkloads:
+
 # -- (object) Extra objects to create.
 extraObjects:
 
@@ -154,6 +169,7 @@ command:
 env:
 # -- Container [envFrom](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)
 envFrom:
+
 image:
   # -- Container [repository](https://kubernetes.io/docs/concepts/containers/images/#image-names)
   repository:
@@ -163,12 +179,19 @@ image:
   pullSecrets:
   # -- Cotnainer [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
   pullPolicy:
+
 # -- Container [lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 lifecycle:
 # -- Container [livenessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 livenessProbe:
+  tcpSocket:
+    # -- (str) Liveness probe port target
+    port: default
 # -- Container [readinessProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 readinessProbe:
+  tcpSocket:
+    # -- (str) Readiness probe port target
+    port: default
 # -- Container [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 resources:
 # -- Container [restartPolicy](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)
@@ -182,8 +205,10 @@ workingDir:
 
 addons:
   codeserver:
+    # -- (bool) Enable/disable code server addon
     enabled: false
 
+    # -- (object) Code server container image
     image:
       repository: ghcr.io/linuxserver/code-server
       tag: 4.17.1
@@ -191,26 +216,36 @@ addons:
     service:
       ports:
         codeserver:
+          # -- (int) Code server port
           port: 8443
 
     ingress:
+      # -- (bool) Enable/disable code server ingress
       enabled: false
       hosts:
+          # -- (object) Default code server host
         - name: codeserver
 
     persistence:
       config:
+        # -- (bool) Enable/disable code server configuration persistence
         enabled: false
 
   rclone:
+    # -- (bool) Enable/disable rclone addon
     enabled: false
 
     env:
+      # -- (str) Cron schedule.
       CRON:
+      # -- (str) Source remote name.
       SOURCE:
+      # -- (str) Destination remote name.
       DESTINATION:
+      # -- (str) Flags for the Rclone `[sync](https://rclone.org/commands/rclone_sync/)` command.
       FLAGS:
 
+    # -- (object) Rclone container image
     image:
       repository: ghcr.io/jasonb5/rclone
       tag: 0.1.0

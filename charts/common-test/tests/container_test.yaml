@@ -65,4 +65,4 @@ tests:
           path: spec.template.spec.containers[0]
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2

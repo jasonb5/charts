@@ -21,7 +21,7 @@ tests:
           value: test-data
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2
   - it: should reference volume from initContainers
     set:
       workload: deployment
@@ -55,7 +55,7 @@ tests:
           path: spec.template.spec.volumes
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2
   - it: should propagate initContainers volume
     set:
       workload: deployment
@@ -81,7 +81,7 @@ tests:
           path: spec.template.spec.initContainers[0].volumeMounts
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2
   - it: should reference volume from extraContainers
     set:
       workload: deployment
@@ -115,7 +115,7 @@ tests:
           path: spec.template.spec.volumes
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2
   - it: should propagate extraContainers volume
     set:
       workload: deployment
@@ -141,7 +141,7 @@ tests:
           path: spec.template.spec.containers[1].volumeMounts
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2
   - it: should overwrite defaults
     set:
       workload: deployment
@@ -168,7 +168,7 @@ tests:
           path: spec.template.spec.volumes
         documentIndex: 0
       - hasDocuments:
-          count: 2
+          count: 3
   - it: should disable volume
     set:
       workload: deployment
@@ -185,7 +185,7 @@ tests:
           path: spec.template.spec.volumes
         documentIndex: 0
       - hasDocuments:
-          count: 1
+          count: 2
   - it: should pass
     set:
       workload: deployment
@@ -220,4 +220,4 @@ tests:
           path: spec.template.spec.volumes
         documentIndex: 0
       - hasDocuments:
-          count: 2
+          count: 3

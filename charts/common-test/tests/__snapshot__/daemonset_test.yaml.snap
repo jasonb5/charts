@@ -16,7 +16,17 @@ should overwrite defaults:
       spec:
         containers:
           - image: busybox:0.1.0
+            livenessProbe:
+              tcpSocket:
+                port: default
             name: common-test
+            ports:
+              - containerPort: null
+                name: default
+                protocol: TCP
+            readinessProbe:
+              tcpSocket:
+                port: default
     updateStrategy:
       rollingUpdate:
         maxSurge: 2
@@ -51,6 +61,16 @@ should pass:
         spec:
           containers:
             - image: busybox:0.1.0
+              livenessProbe:
+                tcpSocket:
+                  port: default
               name: common-test
+              ports:
+                - containerPort: null
+                  name: default
+                  protocol: TCP
+              readinessProbe:
+                tcpSocket:
+                  port: default
       updateStrategy:
         type: OnDelete

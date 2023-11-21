@@ -12,7 +12,7 @@ should add initContainers:
 should overwrite defaults:
   1: |
     apiVersion: v1
-    kind: Secret
+    kind: Service
     metadata:
       labels:
         app.kubernetes.io/instance: RELEASE-NAME
@@ -21,11 +21,19 @@ should overwrite defaults:
         app.kubernetes.io/version: 0.1.0
         common/workload: default
         helm.sh/chart: common-test-0.1.0
-      name: RELEASE-NAME-common-test-regcreds
+      name: RELEASE-NAME-common-test
       namespace: NAMESPACE
-    stringData:
-      .dockerconfigjson: '{"auths":{"docker.io":{"auth":"dXNlcjE6YWJjZDEyMzQ=","email":"user1@domain.io"}}}'
-    type: kubernetes.io/dockerconfigjson
+    spec:
+      ports:
+        - name: default
+          port: null
+          protocol: TCP
+          targetPort: null
+      selector:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/name: common-test
+        common/workload: default
+      type: ClusterIP
   2: |
     activeDeadlineSeconds: 20
     affinity:
@@ -39,7 +47,17 @@ should overwrite defaults:
                     - node01
     containers:
       - image: busybox:0.1.0
+        livenessProbe:
+          tcpSocket:
+            port: default
         name: common-test
+        ports:
+          - containerPort: null
+            name: default
+            protocol: TCP
+        readinessProbe:
+          tcpSocket:
+            port: default
     dnsConfig:
       options:
         - name: ndots
@@ -78,4 +96,14 @@ should pass:
   1: |
     containers:
       - image: busybox:0.1.0
+        livenessProbe:
+          tcpSocket:
+            port: default
         name: common-test
+        ports:
+          - containerPort: null
+            name: default
+            protocol: TCP
+        readinessProbe:
+          tcpSocket:
+            port: default

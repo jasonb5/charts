@@ -1,7 +1,17 @@
 should pass:
   1: |
     - image: busybox:0.1.0
+      livenessProbe:
+        tcpSocket:
+          port: default
       name: common-test
+      ports:
+        - containerPort: null
+          name: default
+          protocol: TCP
+      readinessProbe:
+        tcpSocket:
+          port: default
       volumeMounts:
         - mountPath: /config
           name: config
