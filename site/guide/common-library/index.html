@@ -448,9 +448,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reference-configmap" class="md-nav__link">
+  <a href="#referencing-a-configmap" class="md-nav__link">
     <span class="md-ellipsis">
-      Reference ConfigMap
+      Referencing a ConfigMap
     </span>
   </a>
   
@@ -550,6 +550,15 @@
   <a href="#visual-studio-code" class="md-nav__link">
     <span class="md-ellipsis">
       Visual Studio Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rclone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rclone
     </span>
   </a>
   
@@ -843,9 +852,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reference-configmap" class="md-nav__link">
+  <a href="#referencing-a-configmap" class="md-nav__link">
     <span class="md-ellipsis">
-      Reference ConfigMap
+      Referencing a ConfigMap
     </span>
   </a>
   
@@ -950,6 +959,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rclone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rclone
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -990,13 +1008,13 @@
   app:
     PORT: &quot;{{ .Values.service.ports.default.port }}&quot;
 </code></pre>
-<h3 id="reference-configmap">Reference ConfigMap</h3>
+<h3 id="referencing-a-configmap">Referencing a ConfigMap</h3>
 <p>To reference a ConfigMap in the default container using <code>envFrom</code> you simply use the key of the ConfigMap.</p>
 <pre><code class="language-yaml">envFrom:
   default:
     type: configmap
 </code></pre>
-<p>This works for containers defined in <code>extraContainers</code> as well.</p>
+<p>This works for <code>extraContainers</code> as well.</p>
 <pre><code class="language-yaml">extraContainers:
   sidecar:
     envFrom:
@@ -1007,9 +1025,11 @@
 <p>Secrets like ConfigMaps are defined in a map, where each key is a separate Secret. The following example would create two Secret objects. The values of the Secret keys can be templates to reference other resource definitions.</p>
 <pre><code class="language-yaml">secret:
   default:
-    PASSWORD: abcd1234
+    data:
+      PASSWORD: abcd1234
   app:
-    DB_PASSWORD: 1234
+    data:
+      DB_PASSWORD: 1234
 </code></pre>
 <h3 id="reference-secret">Reference Secret</h3>
 <p>To reference a Secret in the default container using <code>envFrom</code> you simply use the key of the Secret.</p>
@@ -1017,7 +1037,7 @@
   default:
     type: secret
 </code></pre>
-<p>This works for containers defined in <code>extraContainers</code> as well.</p>
+<p>This works for <code>extraContainers</code> as well.</p>
 <pre><code class="language-yaml">extraContainers:
   sidecar:
     envFrom:
@@ -1079,19 +1099,48 @@
 <h2 id="addons">Addons</h2>
 <p>The common library provides addons that are attached as <code>extraContainers</code>.</p>
 <h3 id="visual-studio-code">Visual Studio Code</h3>
-<p>This addon will attach an instance of <code>Visual Code Studio</code> to the workload. The addons uses the <a href="https://github.com/linuxserver/docker-code-server/pkgs/container/code-server"><code>ghcr.io/linuxserver/code-server</code></a> container. The tag, persistence and ingress can be customized.</p>
+<p>This addon will attach a sidecar running <code>Visual Code Studio</code>. The addons uses the <a href="https://github.com/linuxserver/docker-code-server/pkgs/container/code-server"><code>ghcr.io/linuxserver/code-server</code></a> container. The minimal configuration requires an ingress and persistence be defined.</p>
 <pre><code class="language-yaml">addons:
   codeserver:
     enabled: true
-    tag: 4.16.1
-    pullPolicy: IfNotPresent
     ingress:
-      host: code.domain.io
-      path: /code
-      pathType: Prefix
+      hosts:
+      - name: codeserver
+        host: code.domain.io
     persistence:
       config:
         type: pvc
+</code></pre>
+<h3 id="rclone">Rclone</h3>
+<p>This addon will attach a sidecar to run <code>Rclone</code> using Cron. The minimum configuration requires an rclone configuration file and the <code>CRON</code>, <code>SOURCE</code>, and <code>DESTINATION</code> environment variables be defined.</p>
+<pre><code class="language-yaml">secret:
+  rclone:
+    data: 
+      rclone.conf: |
+        [host]
+        type = local
+
+        [home]
+        type = alias
+        remote = host:/home/user
+
+        [external]
+        type = alias
+        remote = host:/mnt/external
+
+addons:
+  rclone:
+    enabled: true
+    env:
+      CRON: '0 2 * * *'
+      SOURCE: home
+      DESTINATION: external
+      FLAGS: '--create-empty-src-dirs'
+    persistence:
+      rclone:
+        type: secret
+        subPath: rclone.conf
+        mountPath: /root/.config/rclone/rclone.conf
 </code></pre>
 
 
