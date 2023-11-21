@@ -184,7 +184,7 @@ def search_new_tag(tag, candidates, pattern, prefix):
 
             continue
 
-        if prefix != "" and prefix != candidate_prefix:
+        if prefix != candidate_prefix:
             logger.debug(
                 f"Skipping {x} mismatch prefixes {prefix!r} and {candidate_prefix!r}"
             )
@@ -224,6 +224,8 @@ def coerce(version, pattern):
     else:
         prefix = ""
 
+        ver = ver.replace(prerelease=None, build=None)
+
     if ver is None:
         match = pattern.match(version)
 
@@ -241,6 +243,9 @@ def coerce(version, pattern):
         for x in ["major", "minor", "patch"]:
             if groups[x] is None:
                 groups[x] = 0
+
+        groups.pop("prerelease")
+        groups.pop("build")
 
         try:
             ver = Version(**groups)
