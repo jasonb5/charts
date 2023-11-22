@@ -35,6 +35,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: main
+      - uses: ./.github/actions/setup-helm-docs
       - name: Fix branch to target main
         working-directory: ./main
         run: |
@@ -71,6 +72,9 @@ jobs:
           git checkout -b updates_${{ matrix.chart }}
 
           pushd charts/${{ matrix.chart }}
+
+          make update-dep
+          make docs
 
           git add .
           git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
