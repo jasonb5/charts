@@ -1,0 +1,5 @@
+name: 'Setup Helm-docs'
+description: 'Installs helm-docs'
+runs:
+  using: 'node20'
+  main: 'public/index.js'

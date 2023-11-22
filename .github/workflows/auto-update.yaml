@@ -31,6 +31,7 @@ jobs:
       matrix:
         chart: ${{ fromJson(needs.list_charts.outputs.charts) }}
     steps:
+      - uses: .github/actions/setup-helm-docs
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
@@ -71,6 +72,9 @@ jobs:
           git checkout -b updates_${{ matrix.chart }}
 
           pushd charts/${{ matrix.chart }}
+
+          make update-dep
+          make docs
 
           git add .
           git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
