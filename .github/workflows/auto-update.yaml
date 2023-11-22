@@ -31,11 +31,11 @@ jobs:
       matrix:
         chart: ${{ fromJson(needs.list_charts.outputs.charts) }}
     steps:
-      - uses: ./.github/actions/setup-helm-docs
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           path: main
+      - uses: ./.github/actions/setup-helm-docs
       - name: Fix branch to target main
         working-directory: ./main
         run: |
