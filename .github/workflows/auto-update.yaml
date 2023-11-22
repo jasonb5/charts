@@ -31,7 +31,7 @@ jobs:
       matrix:
         chart: ${{ fromJson(needs.list_charts.outputs.charts) }}
     steps:
-      - uses: .github/actions/setup-helm-docs
+      - uses: ./.github/actions/setup-helm-docs
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
