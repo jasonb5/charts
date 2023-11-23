@@ -120,6 +120,22 @@ entries:
     version: 0.1.0
   home-assistant:
   - apiVersion: v2
+    appVersion: 2023.11.3
+    created: "2023-11-23T20:48:46.187745321Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Open source home automation that puts local control and privacy
+      first. Powered by a worldwide community of tinkerers and DIY enthusiasts. Perfect
+      to run on a Raspberry Pi or a local server. '
+    digest: ef76b066fad477281a73bab04112e2edaf7fc35ced0d12cd8882667e9c0e16a2
+    name: home-assistant
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/home-assistant-0.1.1/home-assistant-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 2023.11.2
     created: "2023-11-16T10:24:22.442718902Z"
     dependencies:
@@ -261,4 +277,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-21T06:48:08.983414467Z"
+generated: "2023-11-23T20:48:46.415321165Z"
