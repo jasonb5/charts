@@ -16,11 +16,15 @@ jobs:
     outputs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
     steps:
-      - run: |
-          echo ${{ github.event_name }}
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Checkout PR
+        if: ${{ github.event_name == "issue_comment" }}
+        run: |
+          PR_URL=${{ github.event.issue.pull_request.url }}
+          PR_NUMBER=${PR_URL##*/}
+          hub pr checkout $PR_NUMBER
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v38
