@@ -26,11 +26,9 @@ jobs:
         if: ${{ github.event_name == 'issue_comment' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
         run: |
-          git checkout origin main
-          PR_URL=${{ github.event.issue.pull_request.url }}
-          PR_NUMBER=${PR_URL##*/}
-          gh pr checkout $PR_NUMBER
+          gh co ${PR_NUMBER}
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40.1.1
@@ -42,7 +40,6 @@ jobs:
           json: true
           path: 'charts/'
           files_ignore: 'template'
-          base_sha: ${{ github.event.issue.pull_request && '' || 'main' }}
   test_chart:
     runs-on: ubuntu-latest
     name: Test Helm chart
