@@ -33,7 +33,6 @@ jobs:
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40.1.1
-        if: ${{ github.event_name == 'pull_request' }}
         with:
           dir_names: true
           dir_names_exclude_current_dir: true
@@ -42,19 +41,6 @@ jobs:
           json: true
           path: 'charts/'
           files_ignore: 'template'
-      - name: Get all Helm charts that have changed
-        id: changed-files-yaml
-        uses: tj-actions/changed-files@v40.1.1
-        if: ${{ github.event_name == 'issue_comment' }}
-        with:
-          dir_names: true
-          dir_names_exclude_current_dir: true
-          dir_names_max_depth: 1
-          escape_json: false
-          json: true
-          path: 'charts/'
-          files_ignore: 'template'
-          sha: 'main'
   test_chart:
     runs-on: ubuntu-latest
     name: Test Helm chart
