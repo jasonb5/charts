@@ -4,6 +4,19 @@
 
 Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.
 
+**Homepage:** <https://jasonb5.github.io/charts/site/charts/node-red/>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| jasonb5 |  |  |
+
+## Source Code
+
+* <https://github.io/jasonb5/charts/tree/main/charts/node-red>
+* <https://github.com/node-red/node-red>
+
 ## Requirements
 
 | Repository | Name | Version |

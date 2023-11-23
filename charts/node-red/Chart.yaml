@@ -1,11 +1,20 @@
 apiVersion: v2
 name: node-red
+version: 0.1.0
 description: |
   Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.
 type: application
-version: 0.1.0
-appVersion: "3.1.0-18"
+keywords:
+  - automation
+  - event-driven
+home: https://jasonb5.github.io/charts/site/charts/node-red/
+sources:
+  - https://github.io/jasonb5/charts/tree/main/charts/node-red
+  - https://github.com/node-red/node-red
 dependencies:
 - name: common
-  version: "0.1.x"
-  repository: "https://jasonb5.github.io/charts"
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 3.1.0-18

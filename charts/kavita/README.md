@@ -4,6 +4,19 @@
 
 Kavita is a fast, feature rich, cross platform reading server. Built with a focus for being a full solution for all your reading needs. Setup your own server and share your reading collection with your friends and family!
 
+**Homepage:** <https://jasonb5.github.io/charts/site/charts/kavita/>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| jasonb5 |  |  |
+
+## Source Code
+
+* <https://github.io/jasonb5/charts/tree/main/charts/kavita>
+* <https://github.com/Kareadita/Kavita>
+
 ## Requirements
 
 | Repository | Name | Version |

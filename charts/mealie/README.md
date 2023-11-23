@@ -4,6 +4,19 @@
 
 A self-hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.
 
+**Homepage:** <https://jasonb5.github.io/charts/site/charts/mealie/>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| jasonb5 |  |  |
+
+## Source Code
+
+* <https://github.io/jasonb5/charts/tree/main/charts/mealie>
+* <https://github.com/mealie-recipes/mealie>
+
 ## Requirements
 
 | Repository | Name | Version |

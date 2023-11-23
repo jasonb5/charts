@@ -1,11 +1,20 @@
 apiVersion: v2
 name: zwave-js-ui
+version: 0.1.0
 description: |
   Full featured Z-Wave Control Panel and MQTT Gateway.
 type: application
-version: 0.1.0
-appVersion: "9.3.2"
+keywords:
+  - z-wave
+  - mqtt
+home: https://jasonb5.github.io/charts/site/charts/zwave-js-ui/
+sources:
+  - https://github.io/jasonb5/charts/tree/main/charts/zwave-js-ui
+  - https://github.com/zwave-js/zwave-js-ui
 dependencies:
 - name: common
-  version: "0.1.x"
-  repository: "https://jasonb5.github.io/charts"
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 9.3.2

@@ -2,7 +2,19 @@
 
 ![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 
-A Helm chart for Kubernetes
+A Helm library chart for building application charts.
+
+**Homepage:** <https://jasonb5.github.io/charts/site/charts/common/>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| jasonb5 |  |  |
+
+## Source Code
+
+* <https://github.io/jasonb5/charts/tree/main/charts/common>
 
 ## Values
 

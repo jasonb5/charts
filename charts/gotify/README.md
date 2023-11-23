@@ -4,6 +4,19 @@
 
 a simple server for sending and receiving messages
 
+**Homepage:** <https://jasonb5.github.io/charts/site/charts/gotify/>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| jasonb5 |  |  |
+
+## Source Code
+
+* <https://github.io/jasonb5/charts/tree/main/charts/gotify>
+* <https://github.com/gotify>
+
 ## Requirements
 
 | Repository | Name | Version |

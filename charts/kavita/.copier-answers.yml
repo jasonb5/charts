@@ -3,9 +3,11 @@ description: Kavita is a fast, feature rich, cross platform reading server. Buil
     with a focus for being a full solution for all your reading needs. Setup your
     own server and share your reading collection with your friends and family!
 image: ghcr.io/linuxserver/kavita
+keywords: books,comics
 mariadb_enabled: false
 name: kavita
 port: 5000
 postgresql_enabled: false
 redis_enabled: false
+sources: https://github.com/Kareadita/Kavita
 version: 0.7.8

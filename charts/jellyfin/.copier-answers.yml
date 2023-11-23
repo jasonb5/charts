@@ -7,9 +7,11 @@ description: 'Jellyfin is a Free Software Media System that puts you in control 
     no premium licenses or features, and no hidden agendas: just a team who want to
     build something better and work together to achieve it.'
 image: ghcr.io/linuxserver/jellyfin
+keywords: media,video,audio
 mariadb_enabled: false
 name: jellyfin
 port: 896
 postgresql_enabled: false
 redis_enabled: false
+sources: https://github.com/jellyfin/jellyfin
 version: version-10.8.11-1

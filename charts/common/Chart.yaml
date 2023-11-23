@@ -1,5 +1,13 @@
 apiVersion: v2
 name: common
-description: A Helm chart for Kubernetes
-type: library
 version: 0.1.4
+description: |
+  A Helm library chart for building application charts.
+type: library
+keywords:
+  - common
+home: https://jasonb5.github.io/charts/site/charts/common/
+sources:
+  - https://github.io/jasonb5/charts/tree/main/charts/common
+maintainers:
+  - name: jasonb5

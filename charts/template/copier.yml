@@ -6,6 +6,14 @@ description:
   type: str
   help: Helm chart description.
 
+keywords:
+  type: str
+  help: Comma separated list of keywords.
+
+sources:
+  type: str
+  help: Comma separated list of extra sources.
+
 image:
   type: str
   help: Container image for the Helm chart.
