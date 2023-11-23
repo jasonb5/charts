@@ -24,17 +24,17 @@ jobs:
           fetch-depth: 0
       - name: Checkout PR
         id: issue_ref
-        if: ${{ github.event_name == 'issue_comment' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.issue.number }}
         run: |
           echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          gh co ${PR_NUMBER}
+          if [[ "${{ github.event_name }}" == "pull_request" ]];
+          then
+            git checkout origin ${{ github.head_ref }}
+          else
+            gh co ${{ github.event.issue.number }}
+          fi
           echo "head_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-      - run: |
-          echo ${{ github.base_ref }}
-          echo ${{ github.head_ref }}
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40.1.1
@@ -47,8 +47,8 @@ jobs:
           path: 'charts/'
           files_ignore: 'template'
           fetch_depth: 0
-          base_sha: ${{ github.event.pull_request && github.base_ref || steps.issue_ref.outputs.base_ref }}
-          sha: ${{ github.event.pull_request && github.head_ref || steps.issue_ref.outputs.head_ref }}
+          base_sha: ${{ steps.issue_ref.outputs.base_ref }}
+          sha: ${{ steps.issue_ref.outputs.head_ref }}
   test_chart:
     runs-on: ubuntu-latest
     name: Test Helm chart
