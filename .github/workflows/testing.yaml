@@ -30,7 +30,7 @@ jobs:
           echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           if [[ "${{ github.event_name }}" == "pull_request" ]];
           then
-            git checkout origin ${{ github.head_ref }}
+            git checkout ${{ github.head_ref }}
           else
             gh co ${{ github.event.issue.number }}
           fi
