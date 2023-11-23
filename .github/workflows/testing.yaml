@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Checkout PR
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'issue_comment' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.issue.number }}
