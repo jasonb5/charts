@@ -15,6 +15,9 @@ jobs:
     name: Get changed Helm charts
     outputs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
+    if: |
+      github.event_name == 'pull_request' ||
+      contins(github.event.issue.comment, '/test')
     steps:
       - uses: actions/checkout@v4
         with:
