@@ -27,14 +27,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           if [[ "${{ github.event_name }}" == "pull_request" ]];
           then
+            git checkout ${{ github.base_ref }}
+            echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
             git checkout ${{ github.head_ref }}
+            echo "head_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           else
+            echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
             gh co ${{ github.event.issue.number }}
+            echo "head_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           fi
-          echo "head_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40.1.1
