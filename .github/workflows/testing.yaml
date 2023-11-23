@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Checkout PR
-        if: ${{ contains(github.event_name, "issue_comment") }}
+        if: ${{ contains(github.event_name, 'issue_comment') }}
         run: |
           PR_URL=${{ github.event.issue.pull_request.url }}
           PR_NUMBER=${PR_URL##*/}
