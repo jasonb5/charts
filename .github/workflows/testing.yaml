@@ -41,7 +41,7 @@ jobs:
           json: true
           path: 'charts/'
           files_ignore: 'template'
-          sha: ${{ contains(github.event_name, 'pull_request') && '' || 'main' }}
+          sha: ${{ github.event_name == 'pull_request' && '' || 'main' }}
   test_chart:
     runs-on: ubuntu-latest
     name: Test Helm chart
