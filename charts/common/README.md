@@ -14,7 +14,7 @@ A Helm library chart for building application charts.
 
 ## Source Code
 
-* <https://github.io/jasonb5/charts/tree/main/charts/common>
+* <https://github.com/jasonb5/charts/tree/main/charts/common>
 
 ## Values
 

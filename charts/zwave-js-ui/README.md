@@ -4,7 +4,7 @@
 
 Full featured Z-Wave Control Panel and MQTT Gateway.
 
-**Homepage:** <https://jasonb5.github.io/charts/site/charts/zwave-js-ui/>
+**Homepage:** <https://zwave-js.github.io/zwave-js-ui/#/>
 
 ## Maintainers
 
@@ -14,7 +14,7 @@ Full featured Z-Wave Control Panel and MQTT Gateway.
 
 ## Source Code
 
-* <https://github.io/jasonb5/charts/tree/main/charts/zwave-js-ui>
+* <https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui>
 * <https://github.com/zwave-js/zwave-js-ui>
 
 ## Requirements

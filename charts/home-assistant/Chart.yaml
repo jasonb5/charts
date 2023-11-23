@@ -7,9 +7,9 @@ type: application
 keywords:
   - automation
   - smart home
-home: https://jasonb5.github.io/charts/site/charts/home-assistant/
+home: https://www.home-assistant.io/
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/home-assistant
+  - https://github.com/jasonb5/charts/tree/main/charts/home-assistant
   - https://github.com/home-assistant
 dependencies:
 - name: common

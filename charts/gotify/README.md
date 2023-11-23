@@ -4,7 +4,7 @@
 
 a simple server for sending and receiving messages
 
-**Homepage:** <https://jasonb5.github.io/charts/site/charts/gotify/>
+**Homepage:** <https://gotify.net/>
 
 ## Maintainers
 
@@ -14,7 +14,7 @@ a simple server for sending and receiving messages
 
 ## Source Code
 
-* <https://github.io/jasonb5/charts/tree/main/charts/gotify>
+* <https://github.com/jasonb5/charts/tree/main/charts/gotify>
 * <https://github.com/gotify>
 
 ## Requirements

@@ -6,9 +6,9 @@ description: |
 type: application
 keywords:
   - messaging
-home: https://jasonb5.github.io/charts/site/charts/gotify/
+home: https://gotify.net/
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/gotify
+  - https://github.com/jasonb5/charts/tree/main/charts/gotify
   - https://github.com/gotify
 dependencies:
 - name: common

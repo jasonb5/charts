@@ -4,7 +4,7 @@
 
 Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts. Perfect to run on a Raspberry Pi or a local server.
 
-**Homepage:** <https://jasonb5.github.io/charts/site/charts/home-assistant/>
+**Homepage:** <https://www.home-assistant.io/>
 
 ## Maintainers
 
@@ -14,7 +14,7 @@ Open source home automation that puts local control and privacy first. Powered b
 
 ## Source Code
 
-* <https://github.io/jasonb5/charts/tree/main/charts/home-assistant>
+* <https://github.com/jasonb5/charts/tree/main/charts/home-assistant>
 * <https://github.com/home-assistant>
 
 ## Requirements

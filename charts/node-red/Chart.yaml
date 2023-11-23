@@ -7,9 +7,9 @@ type: application
 keywords:
   - automation
   - event-driven
-home: https://jasonb5.github.io/charts/site/charts/node-red/
+home: https://nodered.org/
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/node-red
+  - https://github.com/jasonb5/charts/tree/main/charts/node-red
   - https://github.com/node-red/node-red
 dependencies:
 - name: common

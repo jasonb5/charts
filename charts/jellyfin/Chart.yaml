@@ -8,9 +8,9 @@ keywords:
   - media
   - video
   - audio
-home: https://jasonb5.github.io/charts/site/charts/jellyfin/
+home: https://jellyfin.org/
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/jellyfin
+  - https://github.com/jasonb5/charts/tree/main/charts/jellyfin
   - https://github.com/jellyfin/jellyfin
 dependencies:
 - name: common

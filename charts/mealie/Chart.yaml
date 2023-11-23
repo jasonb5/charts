@@ -7,9 +7,9 @@ type: application
 keywords:
   - recipes
   - management
-home: https://jasonb5.github.io/charts/site/charts/mealie/
+home: https://mealie.io/
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/mealie
+  - https://github.com/jasonb5/charts/tree/main/charts/mealie
   - https://github.com/mealie-recipes/mealie
 dependencies:
 - name: common

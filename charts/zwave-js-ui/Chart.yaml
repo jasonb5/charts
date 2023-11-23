@@ -7,9 +7,9 @@ type: application
 keywords:
   - z-wave
   - mqtt
-home: https://jasonb5.github.io/charts/site/charts/zwave-js-ui/
+home: https://zwave-js.github.io/zwave-js-ui/#/
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/zwave-js-ui
+  - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
   - https://github.com/zwave-js/zwave-js-ui
 dependencies:
 - name: common

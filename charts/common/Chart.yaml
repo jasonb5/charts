@@ -6,8 +6,9 @@ description: |
 type: library
 keywords:
   - common
+  - library
 home: https://jasonb5.github.io/charts/site/charts/common/
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/common
+  - https://github.com/jasonb5/charts/tree/main/charts/common
 maintainers:
   - name: jasonb5
