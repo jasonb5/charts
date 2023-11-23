@@ -21538,11 +21538,11 @@ var require_tool_cache = __commonJS({
 var core = require_core();
 var tc = require_tool_cache();
 var downloadTool = async () => {
-  const cachedPath = tc.find("helm-docs", "1.11.3");
-  if (cachedPath === null) {
+  let cachedPath = tc.find("helm-docs", "1.11.3");
+  if (cachedPath === "") {
     const helmDocsPath = await tc.downloadTool("https://github.com/norwoodj/helm-docs/releases/download/v1.11.3/helm-docs_1.11.3_Linux_x86_64.tar.gz");
     const helmDocsExtractedPath = await tc.extractTar(helmDocsPath);
-    const cachedPath2 = await tc.cacheDir(helmDocsExtractedPath, "helm-docs", "1.11.3");
+    cachedPath = await tc.cacheDir(helmDocsExtractedPath, "helm-docs", "1.11.3");
   }
   core.addPath(cachedPath);
 };
