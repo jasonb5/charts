@@ -43,6 +43,7 @@ jobs:
           json: true
           path: 'charts/'
           files_ignore: 'template'
+          fetch_depth: 0
           base_sha: ${{ github.event.pull_request && github.base_ref || steps.issue_ref.outputs.base_ref }}
           sha: ${{ github.event.pull_request && github.head_ref || steps.issue_ref.outputs.head_ref }}
   test_chart:
