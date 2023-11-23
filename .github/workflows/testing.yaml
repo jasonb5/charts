@@ -17,7 +17,7 @@ jobs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
     if: |
       github.event_name == 'pull_request' ||
-      contains(github.event.issue.comment.body, '/test')
+      contains(github.event.comment.body, '/test')
     steps:
       - uses: actions/checkout@v4
         with:
