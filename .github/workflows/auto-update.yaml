@@ -35,7 +35,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: main
-      - uses: ./.github/actions/setup-helm-docs
       - name: Fix branch to target main
         working-directory: ./main
         run: |
@@ -64,8 +63,6 @@ jobs:
         working-directory: ./main
         if: steps.check_chart.outputs.changed == 'true'
         run: |
-          pip install -r docs/requirements.txt
-
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config user.name ${{ github.actor }}
 
@@ -74,12 +71,9 @@ jobs:
           pushd charts/${{ matrix.chart }}
 
           make update-dep
-          make docs
 
           git add .
           git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
           git push -u origin updates_${{ matrix.chart }}
 
-          make bump-patch ARGS="--non-interactive"
-
-          gh pr create --fill
+          gh pr create --fill --label needs-testing
