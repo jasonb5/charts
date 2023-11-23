@@ -32,6 +32,9 @@ jobs:
           echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           gh co ${PR_NUMBER}
           echo "head_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+      - run: |
+          echo ${{ github.base_ref }}
+          echo ${{ github.head_ref }}
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40.1.1
