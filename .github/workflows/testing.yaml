@@ -19,18 +19,17 @@ jobs:
       github.event_name == 'pull_request' ||
       contains(github.event.comment.body, '/test')
     steps:
+      - name: Get PR HEAD ref
+        id: get_ref
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          echo "pr_ref=$(gh pr view $PR_NUMBER --repo ${{ github.repository }} --json headRefName | jq -r '.headRefName')" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout PR
-        if: ${{ github.event_name == 'issue_comment' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git checkout origin main
-          PR_URL=${{ github.event.issue.pull_request.url }}
-          PR_NUMBER=${PR_URL##*/}
-          gh pr checkout $PR_NUMBER
+          ref: ${{ steps.get_ref.outputs.pr_ref }}
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40.1.1
