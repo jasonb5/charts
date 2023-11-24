@@ -79,7 +79,9 @@ def get_args():
     coerce_parser = subparsers.add_parser("coerce", help="coerce tag")
     coerce_parser.add_argument("tag", help="tag to coerce")
 
-    os_check_parser = subparsers.add_parser("os-check", help="Prints content of /etc/os-release")
+    os_check_parser = subparsers.add_parser(
+        "os-check", help="Prints content of /etc/os-release"
+    )
     os_check_parser.add_argument("chart_dir", help="path to chart directory")
 
     args = vars(parser.parse_args())
@@ -271,6 +273,7 @@ def os_check(chart_dir, **args):
 
     print(f"Found ID {data['ID']!r}")
 
+
 def parse_helm_chart(chart_dir, **_):
     values_file = os.path.join(chart_dir, "values.yaml")
 
@@ -291,6 +294,7 @@ def parse_helm_chart(chart_dir, **_):
     logger.info(f"Using appVersion {app_version!r}")
 
     return chart_repo, app_version
+
 
 if __name__ == "__main__":
     main()
