@@ -10,9 +10,9 @@ keywords:
   - {{ item|trim }}
   {%- endfor %}
 {%- endif %}
-home: https://jasonb5.github.io/charts/site/charts/{{ name }}/
+home: {{ homepage }}
 sources:
-  - https://github.io/jasonb5/charts/tree/main/charts/{{ name }}
+  - https://github.com/jasonb5/charts/tree/main/charts/{{ name }}
 {%- if sources %}
   {%- for item in sources.split(',') %}
   - {{ item|trim }}

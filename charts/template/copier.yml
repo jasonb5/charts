@@ -6,6 +6,10 @@ description:
   type: str
   help: Helm chart description.
 
+homepage:
+  type: str
+  help: Application homepage.
+
 keywords:
   type: str
   help: Comma separated list of keywords.
