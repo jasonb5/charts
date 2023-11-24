@@ -1,44 +1,58 @@
-# -- Workload type
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
 workload: deployment
 
 image:
-  # -- Image repository
+  # -- Container image repository
   repository: ghcr.io/linuxserver/jellyfin
   # -- Image tag
   # @default -- Chart.AppVersion
   tag:
 
-# -- Environment variables
 env:
   # -- Set the timezone
   TZ: UTC
 
 # -- Enable host network to expose discovery ports
-hostNetwork: true
+hostNetwork: false
 
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
 service:
   ports:
-    # -- Default port
     default:
+      # -- HTTP port
       port: 8096
-    # -- Service discovery port
     svc-discovery:
+      # -- Service discovery port
       port: 1900
-    # -- Discovery port
     discovery:
+      # -- Discovery port
       port: 7359
 
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
 ingress:
+  # -- Enable/disable ingress
   enabled: false
   hosts:
-  # -- Default ingress
+    # -- Reference default service
   - name: default
-
-persistence:
-  # -- Configuration mount
-  data:
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
     enabled: false
+
+# -- [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence)
+persistence:
+  data:
+    # -- Enable/disable data mount
+    enabled: false
+    # -- Type of volume mount
+    type:
 
   # -- Media mount
   media:
+    # -- Enable/disable media mount
     enabled: false
+    # -- Type of volume mount
+    type: 

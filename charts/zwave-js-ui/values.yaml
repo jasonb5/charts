@@ -1,8 +1,8 @@
-# -- Workload type
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
 workload: deployment
 
 image:
-  # -- Image repository
+  # -- Container image repository
   repository: ghcr.io/zwave-js/zwave-js-ui
   # -- Image tag
   # @default -- Chart.AppVersion
@@ -14,32 +14,50 @@ env:
   # -- Set the timezone
   TZ: UTC
 
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
 service:
   ports:
-    # -- Default port
     default:
+      # -- Default port
       port: 8091
 
     websocket:
+      # -- Web socket port
       port: 3000
 
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
 ingress:
+  # -- Enable/disable ingress
   enabled: false
   hosts:
-  # -- Default ingress
+    # -- Reference default service
   - name: default
-
-persistence:
-  # -- Configuration mount
-  config:
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
     enabled: false
+
+# -- [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence)
+persistence:
+  config:
+    # -- Enable/disable config mount
+    enabled: false
+    # -- Config mount path
     mountPath: /usr/src/app/store
+    # -- Type of volume mount
+    type:
 
   # -- Z-Wave device mount
   zwave:
+    # -- Enable/disable zwave device mount
     enabled: false
+    # -- Mount must be a hostpath
     type: hostpath
     # -- Host path to Z-Wave device e.g. /dev/serial/by-id/...
     path:
+    # -- Hostpath mount type must be CharDevice
     mountType: CharDevice
+    # -- Mount zwave device path
     mountPath: /dev/zwave

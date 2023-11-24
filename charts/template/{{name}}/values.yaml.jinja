@@ -1,34 +1,45 @@
-# -- Workload type
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
 workload: deployment
 
 image:
-  # -- Image repository
+  # -- Container image repository
   repository: {{ image }}
   # -- Image tag
   # @default -- Chart.AppVersion
   tag:
 
-# -- Environment variables
 env:
   # -- Set the timezone
   TZ: UTC
 
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
 service:
   ports:
-    # -- Default port
     default:
+      # -- Default port
       port: {{ port }}
 
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
 ingress:
+  # -- Enable/disable ingress
   enabled: false
   hosts:
-  # -- Default ingress
+    # -- Reference default service
   - name: default
-
-persistence:
-  # -- Configuration mount
-  config:
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
     enabled: false
+
+# -- [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence)
+persistence:
+  config:
+    # -- Enable/disable persistence
+    enabled: false
+    # -- Type of volume mount
+    type:
 
 {% if redis_enabled %}
 # -- Redis server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/redis#parameters)

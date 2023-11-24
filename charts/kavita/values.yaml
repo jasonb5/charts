@@ -1,35 +1,48 @@
-# -- Workload type
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
 workload: deployment
 
 image:
-  # -- Image repository
+  # -- Container image repository
   repository: ghcr.io/linuxserver/kavita
   # -- Image tag
   # @default -- Chart.AppVersion
   tag:
 
-# -- Environment variables
 env:
   # -- Set the timezone
   TZ: UTC
 
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
 service:
   ports:
-    # -- Default port
     default:
+      # -- Default port
       port: 5000
 
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
 ingress:
+  # -- Enable/disable ingress
   enabled: false
   hosts:
-  # -- Default ingress
+    # -- Reference default service
   - name: default
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
+    enabled: false
 
+# -- [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence)
 persistence:
-  # -- Configuration mount
   config:
+    # -- Enable/disable config mount
     enabled: false
+    # -- Type of volume mount
+    type:
 
-  # -- Media mount
   media:
+    # -- Eanble/disable media mount
     enabled: false
+    # -- Type of volume mount
+    type:
