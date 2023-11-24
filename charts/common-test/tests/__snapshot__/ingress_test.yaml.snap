@@ -1,3 +1,33 @@
+should enable tls:
+  1: |
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: common-test
+        app.kubernetes.io/version: 0.1.0
+        common/workload: default
+        helm.sh/chart: common-test-0.1.0
+      name: RELEASE-NAME-common-test
+      namespace: NAMESPACE
+    spec:
+      rules:
+        - host: domain.io
+          http:
+            paths:
+              - backend:
+                  service:
+                    name: RELEASE-NAME-common-test
+                    port:
+                      number: 80
+                path: /
+                pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - domain.io
+          secretName: cluster-certs
 should overwrite defaults:
   1: |
     apiVersion: networking.k8s.io/v1
@@ -41,10 +71,6 @@ should overwrite defaults:
                       number: 443
                 path: /version
                 pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - map[host:domain.io name:https paths:[map[path:/login] map[path:/version]]]
-          secretName: RELEASE-NAME-common-test-tls-certs
 should pass:
   1: |
     apiVersion: networking.k8s.io/v1

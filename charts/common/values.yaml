@@ -23,6 +23,12 @@ ingress:
   # -- (list) List of ingress hosts.
   hosts:
 
+  tls:
+    # -- (bool) Enable/disable tls
+    enabled: false
+    # -- (str) Name of the secret containing the TLS certificates
+    secretName:
+
 # -- (object) Map of persistence, these are specifi to the workload.
 persistence:
 
