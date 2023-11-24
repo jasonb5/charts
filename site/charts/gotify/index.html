@@ -809,25 +809,19 @@
 <td>workload</td>
 <td>string</td>
 <td><code>"deployment"</code></td>
-<td>Workload type</td>
+<td>The default <a href="https://jasonb5.github.io/charts/site/guide/common-library/#workload">workload</a> type</td>
 </tr>
 <tr>
 <td>image.repository</td>
 <td>string</td>
 <td><code>"gotify/server"</code></td>
-<td>Image repository</td>
+<td>Container image repository</td>
 </tr>
 <tr>
 <td>image.tag</td>
 <td>string</td>
 <td>Chart.AppVersion</td>
 <td>Image tag</td>
-</tr>
-<tr>
-<td>env</td>
-<td>object</td>
-<td><code>{"GOTIFY_DEFAULTUSER_NAME":"admin","GOTIFY_DEFAULTUSER_PASS":"admin","GOTIFY_SERVER_PORT":"{{ .Values.service.ports.default.port }}","TZ":"UTC"}</code></td>
-<td>Environment variables</td>
 </tr>
 <tr>
 <td>env.TZ</td>
@@ -854,28 +848,76 @@
 <td>Default password</td>
 </tr>
 <tr>
-<td>service.ports.default</td>
+<td>service</td>
 <td>object</td>
-<td><code>{"port":80}</code></td>
+<td><code>{"ports":{"default":{"port":80}}}</code></td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#service">Service</a></td>
+</tr>
+<tr>
+<td>service.ports.default.port</td>
+<td>int</td>
+<td><code>80</code></td>
 <td>Default port</td>
+</tr>
+<tr>
+<td>ingress</td>
+<td>object</td>
+<td><code>{"enabled":false,"hosts":[{"host":null,"name":"default"}],"tls":{"enabled":false}}</code></td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#ingress">Ingress</a></td>
 </tr>
 <tr>
 <td>ingress.enabled</td>
 <td>bool</td>
 <td><code>false</code></td>
-<td></td>
+<td>Enable/disable ingress</td>
 </tr>
 <tr>
 <td>ingress.hosts[0]</td>
 <td>object</td>
-<td><code>{"name":"default"}</code></td>
-<td>Default ingress</td>
+<td><code>{"host":null,"name":"default"}</code></td>
+<td>Reference default service</td>
 </tr>
 <tr>
-<td>persistence.data</td>
+<td>ingress.hosts[0].host</td>
+<td>string</td>
+<td><code>nil</code></td>
+<td>Ingress host</td>
+</tr>
+<tr>
+<td>ingress.tls</td>
 <td>object</td>
-<td><code>{"enabled":false,"mountPath":"/app/data"}</code></td>
-<td>Configuration mount</td>
+<td><code>{"enabled":false}</code></td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#tls">TLS</a></td>
+</tr>
+<tr>
+<td>ingress.tls.enabled</td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable/disable tls</td>
+</tr>
+<tr>
+<td>persistence</td>
+<td>object</td>
+<td><code>{"data":{"enabled":false,"mountPath":"/app/data","type":null}}</code></td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#persistence">Persistence</a></td>
+</tr>
+<tr>
+<td>persistence.data.enabled</td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable/disable data mount</td>
+</tr>
+<tr>
+<td>persistence.data.mountPath</td>
+<td>string</td>
+<td><code>"/app/data"</code></td>
+<td>Data mount path</td>
+</tr>
+<tr>
+<td>persistence.data.type</td>
+<td>string</td>
+<td><code>nil</code></td>
+<td>Type of volume mount</td>
 </tr>
 </tbody>
 </table>

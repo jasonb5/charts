@@ -809,13 +809,13 @@
 <td>workload</td>
 <td>string</td>
 <td><code>"deployment"</code></td>
-<td>Workload type</td>
+<td>The default <a href="https://jasonb5.github.io/charts/site/guide/common-library/#workload">workload</a> type</td>
 </tr>
 <tr>
 <td>image.repository</td>
 <td>string</td>
 <td><code>"ghcr.io/home-assistant/home-assistant"</code></td>
-<td>Image repository</td>
+<td>Container image repository</td>
 </tr>
 <tr>
 <td>image.tag</td>
@@ -830,40 +830,76 @@
 <td>Use host's network namespace, may need to be set to <code>true</code> for device discovery.</td>
 </tr>
 <tr>
-<td>env</td>
-<td>object</td>
-<td><code>{"TZ":"UTC"}</code></td>
-<td>Environment variables</td>
-</tr>
-<tr>
 <td>env.TZ</td>
 <td>string</td>
 <td><code>"UTC"</code></td>
 <td>Set the timezone</td>
 </tr>
 <tr>
-<td>service.ports.default</td>
+<td>service</td>
 <td>object</td>
-<td><code>{"port":8123}</code></td>
+<td><code>{"ports":{"default":{"port":8123}}}</code></td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#service">Service</a></td>
+</tr>
+<tr>
+<td>service.ports.default.port</td>
+<td>int</td>
+<td><code>8123</code></td>
 <td>Default port</td>
+</tr>
+<tr>
+<td>ingress</td>
+<td>object</td>
+<td><code>{"enabled":false,"hosts":[{"host":null,"name":"default"}],"tls":{"enabled":false}}</code></td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#ingress">Ingress</a></td>
 </tr>
 <tr>
 <td>ingress.enabled</td>
 <td>bool</td>
 <td><code>false</code></td>
-<td></td>
+<td>Enable/disable ingress</td>
 </tr>
 <tr>
 <td>ingress.hosts[0]</td>
 <td>object</td>
-<td><code>{"name":"default"}</code></td>
-<td>Default ingress</td>
+<td><code>{"host":null,"name":"default"}</code></td>
+<td>Reference default service</td>
 </tr>
 <tr>
-<td>persistence.config</td>
+<td>ingress.hosts[0].host</td>
+<td>string</td>
+<td><code>nil</code></td>
+<td>Ingress hostname</td>
+</tr>
+<tr>
+<td>ingress.tls</td>
 <td>object</td>
 <td><code>{"enabled":false}</code></td>
-<td>Configuration mount</td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#tls">TLS</a></td>
+</tr>
+<tr>
+<td>ingress.tls.enabled</td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable/disable tls</td>
+</tr>
+<tr>
+<td>persistence</td>
+<td>object</td>
+<td><code>{"config":{"enabled":false,"type":null}}</code></td>
+<td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#persistence">Persistence</a></td>
+</tr>
+<tr>
+<td>persistence.config.enabled</td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable/disable config path</td>
+</tr>
+<tr>
+<td>persistence.config.type</td>
+<td>string</td>
+<td><code>nil</code></td>
+<td>Type of volume mount</td>
 </tr>
 </tbody>
 </table>
