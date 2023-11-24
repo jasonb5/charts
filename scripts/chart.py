@@ -5,9 +5,10 @@ import re
 import requests
 import json
 import yaml
+import subprocess
 from semver.version import Version
 
-logger = logging.getLogger("chart-updater")
+logger = logging.getLogger("chart")
 
 
 def str_presenter(dumper, data):
@@ -52,10 +53,12 @@ def main():
         update_chart(**args)
     elif args["action"] == "coerce":
         coerce_tag(**args)
+    elif args["action"] == "os-check":
+        os_check(**args)
 
 
 def get_args():
-    parser = argparse.ArgumentParser(prog="chart-updater")
+    parser = argparse.ArgumentParser(prog="chart")
 
     parser.add_argument("--log", action="store_true", help="enable logging")
     levels = ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL")
@@ -75,6 +78,9 @@ def get_args():
 
     coerce_parser = subparsers.add_parser("coerce", help="coerce tag")
     coerce_parser.add_argument("tag", help="tag to coerce")
+
+    os_check_parser = subparsers.add_parser("os-check", help="Prints content of /etc/os-release")
+    os_check_parser.add_argument("chart_dir", help="path to chart directory")
 
     args = vars(parser.parse_args())
 
@@ -107,28 +113,6 @@ def update_chart(**args):
         print("Found no updated tag")
     else:
         update_chart_tag(tag=new_tag, **args)
-
-
-def parse_helm_chart(chart_dir, **_):
-    values_file = os.path.join(chart_dir, "values.yaml")
-
-    with open(values_file) as fd:
-        data = yaml.load(fd, Loader=yaml.SafeLoader)
-
-    chart_repo = data["image"]["repository"]
-
-    logger.info(f"Using chart repo {chart_repo!r}")
-
-    chart_file = os.path.join(chart_dir, "Chart.yaml")
-
-    with open(chart_file) as fd:
-        data = yaml.load(fd, Loader=yaml.SafeLoader)
-
-    app_version = data["appVersion"]
-
-    logger.info(f"Using appVersion {app_version!r}")
-
-    return chart_repo, app_version
 
 
 def search_ghcr(chart_repo, token, **_):
@@ -273,6 +257,40 @@ def update_chart_tag(chart_dir, tag, in_place, **args):
     else:
         print(yaml.dump(data, sort_keys=False))
 
+
+def os_check(chart_dir, **args):
+    chart_repo, app_version = parse_helm_chart(chart_dir)
+
+    cmd = f"docker run -it --rm --entrypoint=cat {chart_repo}:{app_version} /etc/os-release"
+
+    result = subprocess.run(cmd.split(" "), capture_output=True)
+
+    lines = result.stdout.decode("utf-8").split("\r\n")
+
+    data = dict([x.split("=") for x in lines if x != ""])
+
+    print(f"Found ID {data['ID']!r}")
+
+def parse_helm_chart(chart_dir, **_):
+    values_file = os.path.join(chart_dir, "values.yaml")
+
+    with open(values_file) as fd:
+        data = yaml.load(fd, Loader=yaml.SafeLoader)
+
+    chart_repo = data["image"]["repository"]
+
+    logger.info(f"Using chart repo {chart_repo!r}")
+
+    chart_file = os.path.join(chart_dir, "Chart.yaml")
+
+    with open(chart_file) as fd:
+        data = yaml.load(fd, Loader=yaml.SafeLoader)
+
+    app_version = data["appVersion"]
+
+    logger.info(f"Using appVersion {app_version!r}")
+
+    return chart_repo, app_version
 
 if __name__ == "__main__":
     main()

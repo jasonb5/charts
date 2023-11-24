@@ -46,7 +46,7 @@ jobs:
         run: |
           pip install semver requests tbump pyyaml
 
-          new_version="$(python scripts/chart-updater.py --log --log-level DEBUG --log-file ./output.log update --in-place --token ${{ secrets.GITHUB_TOKEN }} main/charts/${{ matrix.chart }})"
+          new_version="$(python scripts/chart.py --log --log-level DEBUG --log-file ./output.log update --in-place --token ${{ secrets.GITHUB_TOKEN }} main/charts/${{ matrix.chart }})"
 
           cat output.log
 
