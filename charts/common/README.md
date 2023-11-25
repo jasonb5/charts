@@ -1,6 +1,6 @@
 # common
 
-![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
+![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 
 A Helm library chart for building application charts.
 
@@ -28,6 +28,8 @@ A Helm library chart for building application charts.
 | service.ports | object | `{"default":{"port":null}}` | Map of service ports. |
 | ingress.enabled | bool | `false` | Enable/disable ingress. |
 | ingress.hosts | list | `nil` | List of ingress hosts. |
+| ingress.tls.enabled | bool | `false` | Enable/disable tls |
+| ingress.tls.secretName | str | `nil` | Name of the secret containing the TLS certificates |
 | persistence | object | `nil` | Map of persistence, these are specifi to the workload. |
 | annotations | object | `nil` | Annotations for default workload. |
 | labels | object | `nil` | Labels for default workload. |

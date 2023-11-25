@@ -6,6 +6,30 @@ templates:
 chart:
   appVersion: 0.1.0
 tests:
+  - it: should enable tls
+    set:
+      workload: deployment
+
+      ingress:
+        enabled: true
+
+        hosts:
+        - name: default
+          host: domain.io
+
+        tls:
+          enabled: true
+          secretName: cluster-certs
+
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - matchSnapshot: {}
+        documentIndex: 2
+      - hasDocuments:
+          count: 3
   - it: should overwrite defaults
     set:
       workload: deployment
@@ -23,7 +47,9 @@ tests:
           paths:
           - path: /login
           - path: /version
-        tls: tls-certs
+        tls:
+          enabled: false
+          secretName: cluster-certs
 
       service:
         ports:

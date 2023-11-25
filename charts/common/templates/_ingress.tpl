@@ -27,19 +27,18 @@ spec:
     host: {{ . }}
     {{- end }}
   {{- end }}
-  {{- with .Values.tls }}
+  {{- if .Values.tls.enabled }}
   {{- $hosts := list }}
-  {{- range $.Values.hosts }}
-  {{- if and (ne .name "default") (hasKey . "host") }}
-  {{- $hosts = append $hosts . }}
+  {{- range .Values.hosts }}
+  {{- if hasKey . "host" }}
+  {{- $hosts = append $hosts .host }}
   {{- end }}
   {{- end }}
-  {{- $values := dict "Values" (dict "workloadName" "default" "name" .) "Release" $.Release "Chart" $.Chart }}
   tls:
   - hosts:
     {{- range $hosts }}
     - {{ . }}
     {{- end }}
-    secretName: {{ include "common.fullname.postfix" $values }}
+    secretName: {{ .Values.tls.secretName }}
   {{- end }}
 {{- end }}
