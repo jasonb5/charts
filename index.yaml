@@ -279,6 +279,31 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/node-red-0.1.0/node-red-0.1.0.tgz
     version: 0.1.0
+  photoprism:
+  - apiVersion: v2
+    appVersion: 231021-ce
+    created: "2023-11-25T01:05:52.236609727-08:00"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: 0.1.x
+    description: "AI-Powered Photos App for the Decentralized Web \U0001F308\U0001F48E✨
+      \ "
+    digest: d4e298024468be37dda69f29645a2ae57159293ce085051c36fbb05391a6fd19
+    home: https://www.photoprism.app/
+    keywords:
+    - photos
+    - management
+    maintainers:
+    - name: jasonb5
+    name: photoprism
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/photoprism
+    - https://github.com/photoprism/photoprism
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.1/photoprism-0.1.1.tgz
+    version: 0.1.1
   zwave-js-ui:
   - apiVersion: v2
     appVersion: 9.3.2
@@ -294,4 +319,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-25T04:11:22.897096637Z"
+generated: "2023-11-25T01:05:52.236666457-08:00"
