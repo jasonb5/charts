@@ -83,7 +83,8 @@ jobs:
             helm dep update ../common-test
           fi
 
-          git add .
+          # back out to root, to add linked docs
+          git add ../../
           git commit -m "Updates ${{ matrix.chart }} docs and dependencies"
           git push -u origin ${{ github.head_ref }}
   auto_merge:
