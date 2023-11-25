@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch_depth: 0
+          fetch-depth: 0
       - uses: ./.github/actions/setup-helm-docs
       - name: Bump patch
         env:
