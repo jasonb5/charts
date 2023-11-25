@@ -64,6 +64,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          gh co ${{ github.event.number }}
+
           pip install tbump semver
 
           git config user.email ${{ github.actor }}@users.noreply.github.com
