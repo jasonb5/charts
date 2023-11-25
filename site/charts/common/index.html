@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.11">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.12">
     
     
       
@@ -734,7 +734,7 @@
 
 
 <h1 id="common">common</h1>
-<p><img alt="Version: 0.1.4" src="https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square" /> <img alt="Type: library" src="https://img.shields.io/badge/Type-library-informational?style=flat-square" /></p>
+<p><img alt="Version: 0.1.5" src="https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square" /> <img alt="Type: library" src="https://img.shields.io/badge/Type-library-informational?style=flat-square" /></p>
 <p>A Helm library chart for building application charts.</p>
 <p><strong>Homepage:</strong> <a href="https://jasonb5.github.io/charts/site/charts/common/">https://jasonb5.github.io/charts/site/charts/common/</a></p>
 <h2 id="maintainers">Maintainers</h2>
@@ -816,6 +816,18 @@
 <td>list</td>
 <td><code>nil</code></td>
 <td>List of ingress hosts.</td>
+</tr>
+<tr>
+<td>ingress.tls.enabled</td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable/disable tls</td>
+</tr>
+<tr>
+<td>ingress.tls.secretName</td>
+<td>str</td>
+<td><code>nil</code></td>
+<td>Name of the secret containing the TLS certificates</td>
 </tr>
 <tr>
 <td>persistence</td>
