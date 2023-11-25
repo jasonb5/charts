@@ -16,7 +16,7 @@ jobs:
     if: ${{ github.event.label.name == 'merge' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: ./github/actions/setup-helm-docs
+      - uses: ./.github/actions/setup-helm-docs
       - name: Bump patch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
