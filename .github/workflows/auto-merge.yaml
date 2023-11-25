@@ -26,9 +26,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          gh co ${{ github.event.number }}
           echo "head_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          git checkout main
+          echo "base_ref=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
       - name: Get all Helm charts that have changed
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40.1.1
