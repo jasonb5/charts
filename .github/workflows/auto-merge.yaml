@@ -50,6 +50,7 @@ jobs:
     name: Auto merge PR based on label
     needs: changed_files
     strategy:
+      max-parallel: 1
       matrix:
         chart: ${{ fromJSON(needs.changed_files.outputs.all_modified_files) }}
     defaults:
@@ -91,4 +92,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr merge ${{ github.event.number }} --delete-branch
+          gh pr merge ${{ github.event.number }} --delete-branch --merge
