@@ -5,16 +5,16 @@ description: |
   Full featured Z-Wave Control Panel and MQTT Gateway.
 type: application
 keywords:
-  - z-wave
-  - mqtt
+- z-wave
+- mqtt
 home: https://zwave-js.github.io/zwave-js-ui/#/
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
-  - https://github.com/zwave-js/zwave-js-ui
+- https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+- https://github.com/zwave-js/zwave-js-ui
 dependencies:
 - name: common
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 9.3.2
+- name: jasonb5
+appVersion: '9.4'
