@@ -86,10 +86,10 @@ jobs:
           helm install --wait test .
           name=$(kubectl get pods -oname)
           port=$(cat values.yaml | yq '.service.ports.default.port')
+          trap "killall kubectl" 0
           kubectl port-forward $name 8000:${port} &
           sleep 2
-          curl http://127.0.0.1:8000 -vvv
-          killall kubectl
+          python ${GITHUB_WORKSPACE}/scripts/screen_capture.py http://127.0.0.1:8000
       - name: Remove needs-testing label on success
         if: ${{ success() }}
         env:
