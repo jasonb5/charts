@@ -170,6 +170,37 @@ entries:
     version: 0.1.0
   jellyfin:
   - apiVersion: v2
+    appVersion: version-10.8.13-1
+    created: "2023-12-05T08:13:51.647947713Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Jellyfin is a Free Software Media System that puts you in control
+      of managing and streaming your media. It is an alternative to the proprietary
+      Emby and Plex, to provide media from a dedicated server to end-user devices
+      via multiple apps. Jellyfin is descended from Emby''s 3.5.2 release and ported
+      to the .NET Core framework to enable full cross-platform support. There are
+      no strings attached, no premium licenses or features, and no hidden agendas:
+      just a team who want to build something better and work together to achieve
+      it. '
+    digest: ca2bc21751e1e1bea8f327151e93df2f44af6b4bc720aa77040f11ac0d7f8462
+    home: https://jellyfin.org/
+    keywords:
+    - media
+    - video
+    - audio
+    maintainers:
+    - name: jasonb5
+    name: jellyfin
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/jellyfin
+    - https://github.com/jellyfin/jellyfin
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.2/jellyfin-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: version-10.8.12-1
     created: "2023-11-08T17:34:54.083706405Z"
     dependencies:
@@ -391,4 +422,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-05T08:05:18.808243752Z"
+generated: "2023-12-05T08:13:51.647998377Z"
