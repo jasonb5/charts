@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kavita
-version: 0.1.1
+version: 0.1.2
 description: |
   Kavita is a fast, feature rich, cross platform reading server. Built with a focus for being a full solution for all your reading needs. Setup your own server and share your reading collection with your friends and family!
 type: application
