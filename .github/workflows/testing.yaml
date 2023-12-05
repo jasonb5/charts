@@ -90,3 +90,11 @@ jobs:
           sleep 2
           curl http://127.0.0.1:8000 -vvv
           killall kubectl
+      - name: Remove needs-testing label on success
+        if: ${{ success() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_URL=${{ github.event.issue.pull_request.url }}
+          PR_NUM=${PR_URL##*/}
+          gh pr edit $PR_NUM --remove-label needs-testing
