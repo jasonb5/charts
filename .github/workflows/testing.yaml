@@ -94,7 +94,7 @@ jobs:
         if: ${{ success() }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.issue.pull_request.url }}
+          PR_URL: ${{ github.event.number && github.event.number || github.event.issue.pull_request.url }}
         run: |
           PR_NUM=${PR_URL##*/}
           gh pr edit $PR_NUM --remove-label needs-testing
