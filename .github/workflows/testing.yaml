@@ -70,14 +70,16 @@ jobs:
           fetch-depth: 0
       - name: Install Helm
         uses: azure/setup-helm@v3
+      - name: Install k3s
+        uses: debianmaster/actions-k3s@v1.0.5
+        with:
+          version: 'latest'
       - name: Lint Helm chart
         run: make lint
       - name: Unittest Helm chart
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
           make test
-      - name: Install k3d/setup k3s cluster
-        uses: nolar/setup-k3d-k3s@v1
       - name: Install helm chart
         if: ${{ ! contains(matrix.chart, 'common') }}
         run: |
