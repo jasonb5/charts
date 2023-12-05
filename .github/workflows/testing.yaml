@@ -68,23 +68,35 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-python@v4
       - name: Install Helm
         uses: azure/setup-helm@v3
+      - name: Install k3s
+        uses: debianmaster/actions-k3s@v1.0.5
+        with:
+          version: 'latest'
       - name: Lint Helm chart
         run: make lint
       - name: Unittest Helm chart
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
           make test
-      - name: Install k3d/setup k3s cluster
-        uses: nolar/setup-k3d-k3s@v1
       - name: Install helm chart
         if: ${{ ! contains(matrix.chart, 'common') }}
         run: |
+          pip install selenium
           helm install --wait test .
           name=$(kubectl get pods -oname)
           port=$(cat values.yaml | yq '.service.ports.default.port')
+          trap "killall kubectl" 0
           kubectl port-forward $name 8000:${port} &
           sleep 2
-          curl http://127.0.0.1:8000 -vvv
-          killall kubectl
+          python ../../scripts/screen_capture.py http://127.0.0.1:8000
+      - name: Remove needs-testing label on success
+        if: ${{ success() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.number && github.event.number || github.event.issue.pull_request.url }}
+        run: |
+          PR_NUM=${PR_URL##*/}
+          gh pr edit $PR_NUM --remove-label needs-testing
