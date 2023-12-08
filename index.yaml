@@ -294,6 +294,32 @@ entries:
     version: 0.1.0
   node-red:
   - apiVersion: v2
+    appVersion: 3.1.3-debian
+    created: "2023-12-08T04:16:00.809121214Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Node-RED is a programming tool for wiring together hardware devices,
+      APIs and online services in new and interesting ways.It provides a browser-based
+      editor that makes it easy to wire together flows using the wide range of nodes
+      in the palette that can be deployed to its runtime in a single-click. '
+    digest: d3e2319aaeae77cf5c9c599c97c6a2067db984901b0ce79edf0878b793dab883
+    home: https://nodered.org/
+    keywords:
+    - automation
+    - event-driven
+    maintainers:
+    - name: jasonb5
+    name: node-red
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/node-red
+    - https://github.com/node-red/node-red
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/node-red-0.1.2/node-red-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 3.1.1-debian
     created: "2023-12-05T08:05:18.68369845Z"
     dependencies:
@@ -469,4 +495,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-05T08:30:12.814989284Z"
+generated: "2023-12-08T04:16:00.809176257Z"
