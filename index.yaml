@@ -2,6 +2,23 @@ apiVersion: v1
 entries:
   common:
   - apiVersion: v2
+    created: "2023-12-12T09:37:18.466614897Z"
+    description: 'A Helm library chart for building application charts. '
+    digest: f089fb1656984797d83097c1ebcd014e11ef1ff877c8d47541fce54c2364c385
+    home: https://jasonb5.github.io/charts/site/charts/common/
+    keywords:
+    - common
+    - library
+    maintainers:
+    - name: jasonb5
+    name: common
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/common
+    type: library
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/common-0.1.6/common-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
     created: "2023-11-25T04:11:21.970268396Z"
     description: 'A Helm library chart for building application charts. '
     digest: 1737a06077badf28b399e319c2d5cc79906a5c1a04a102a37d20519a983b4d43
@@ -545,4 +562,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-12T07:04:17.213937498Z"
+generated: "2023-12-12T09:37:18.619533002Z"
