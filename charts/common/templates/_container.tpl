@@ -11,8 +11,10 @@
   {{- with .Values.env }}
   env:
     {{- range $key, $value := . }}
+    {{- if $value }}
     - name: {{ $key }}
       value: {{ tpl (toString $value) $.TemplateValues | quote }}
+    {{- end }}
     {{- end }}
   {{- end }}
   {{- with .Values.envFrom }}
