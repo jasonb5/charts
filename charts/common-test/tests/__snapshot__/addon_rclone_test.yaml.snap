@@ -24,7 +24,7 @@ should pass:
           value: --checksum
         - name: SOURCE
           value: /config
-      image: ghcr.io/jasonb5/rclone:0.1.0
+      image: ghcr.io/jasonb5/rclone:0.1.1
       name: rclone
       volumeMounts:
         - mountPath: /backup
