@@ -1,1 +1,0 @@
-../../charts/node-red/README.md
