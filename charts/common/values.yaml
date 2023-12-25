@@ -236,25 +236,3 @@ addons:
       config:
         # -- (bool) Enable/disable code server configuration persistence
         enabled: false
-
-  rclone:
-    # -- (bool) Enable/disable rclone addon
-    enabled: false
-
-    env:
-      # -- (str) Cron schedule.
-      CRON:
-      # -- (str) Source remote name.
-      SOURCE:
-      # -- (str) Destination remote name.
-      DESTINATION:
-      # -- (str) Flags for the Rclone `[sync](https://rclone.org/commands/rclone_sync/)` command.
-      FLAGS:
-      # -- (str) Custom command overrides `rclone sync ${SOURCE} ${DESTINATION}`.
-      CUSTOM_COMMAND:
-      # -- (str) Script that is ran before `rclone sync` or `CUSTOM_COMMAND` to prepare data.
-
-    # -- (object) Rclone container image
-    image:
-      repository: ghcr.io/jasonb5/rclone
-      tag: 0.1.1
