@@ -1,6 +1,5 @@
 {{- define "common.addons" }}
 {{- include "common.addon" (list "codeserver" .Values) }}
-{{- include "common.addon" (list "rclone" .Values) }}
 {{- end }}
 
 {{- define "common.addon" }}
