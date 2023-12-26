@@ -621,22 +621,22 @@
 <p>This repository provides many homelab related Helm charts. There is a common library designed to simplify creating new Helm charts.</p>
 <h2 id="adding-chart-repository">Adding chart repository</h2>
 <p>To install the Helm charts provided by this repository you'll need to install Helm and add this repository.</p>
-<pre><code class="language-shell">helm repo add homelab https://jasonb5.github.io/charts
-</code></pre>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>homelab<span class="w"> </span>https://jasonb5.github.io/charts
+</span></code></pre></div>
 <h2 id="list-charts">List charts</h2>
 <p>List the charts available in the repository.</p>
-<pre><code class="language-shell">helm search repo homelab
-</code></pre>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>helm<span class="w"> </span>search<span class="w"> </span>repo<span class="w"> </span>homelab
+</span></code></pre></div>
 <h2 id="install-a-chart">Install a chart</h2>
 <p>A Helm chart can be install with the following command.</p>
-<pre><code class="language-shell">helm install homelab/&lt;chart name&gt; --generate-name
-</code></pre>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>helm<span class="w"> </span>install<span class="w"> </span>homelab/&lt;chart<span class="w"> </span>name&gt;<span class="w"> </span>--generate-name
+</span></code></pre></div>
 <h2 id="creating-a-new-chart">Creating a new chart</h2>
 <p>A <a href="https://copier.readthedocs.io/en/stable/">copier</a> template is provided to create new Helm charts. The template uses the common library to build the chart. It also provides scaffolding for common dependencies e.g. Redis, MariaDB, and PostgreSQL.</p>
-<pre><code class="language-shell">pip install copier
-
-make new-chart
-</code></pre>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>copier
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>make<span class="w"> </span>new-chart
+</span></code></pre></div>
 
 
 
@@ -683,7 +683,7 @@ make new-chart
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>

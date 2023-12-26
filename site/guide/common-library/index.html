@@ -424,21 +424,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Workload">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#no-workload" class="md-nav__link">
-    <span class="md-ellipsis">
-      No Workload
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -448,21 +433,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="ConfigMap">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#referencing-a-configmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Referencing a ConfigMap
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -471,21 +441,6 @@
       Secret
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Secret">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reference-secret" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference Secret
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -554,15 +509,6 @@
   <a href="#visual-studio-code" class="md-nav__link">
     <span class="md-ellipsis">
       Visual Studio Code
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rclone" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rclone
     </span>
   </a>
   
@@ -690,21 +636,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Workload">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#no-workload" class="md-nav__link">
-    <span class="md-ellipsis">
-      No Workload
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -714,21 +645,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="ConfigMap">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#referencing-a-configmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Referencing a ConfigMap
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -737,21 +653,6 @@
       Secret
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Secret">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reference-secret" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference Secret
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -825,15 +726,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#rclone" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rclone
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -859,155 +751,97 @@
 
 <h1 id="common-library">Common library</h1>
 <p>This Helm library chart is used to build application charts.</p>
-<p>Everything in the <code>values.yaml</code> is defined as a map, where the key is the name of the Kubernetes resource. There can only be a single <code>default</code> key, any other key will be appended to the default resource name, e.g. <code>config</code> would be appended as <code>-config</code> to the default name.</p>
 <h2 id="workload">Workload</h2>
-<p>Workload can be set to <code>deployment</code>, <code>statefulset</code>, <code>daemonset</code>, <code>job</code>, or <code>cronjob</code>.</p>
-<pre><code class="language-yaml">workload: deployment
-</code></pre>
-<h3 id="no-workload">No Workload</h3>
-<p>If workload is not defined then no default workload is generated. This can be useful to create any top-level objects e.g. <code>configmap</code>, <code>secret</code>, or <code>extraObjects</code>.</p>
+<p>The <code>workload</code> key defines the workload type. The value can be <code>deployment</code>, <code>statefulset</code>, <code>daemonset</code>, <code>job</code>, or <code>cronjob</code>. The default is <code>null</code> which can be useful to create only top-level objects e.g. <code>configmap</code>, <code>secret</code>, <code>extraObjects</code>.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">workload</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deployment</span>
+</span></code></pre></div>
 <h2 id="configmap">ConfigMap</h2>
-<p>ConfigMaps are defined in a map, where each key is a separate ConfigMap. The following example would create two ConfigMap objects. The values of the ConfigMap keys can be templates to reference other resource definitions.</p>
-<pre><code class="language-yaml">configmap:
-  default:
-    CONFIG_PATH: /config
-  app:
-    PORT: &quot;{{ .Values.service.ports.default.port }}&quot;
-</code></pre>
-<h3 id="referencing-a-configmap">Referencing a ConfigMap</h3>
-<p>To reference a ConfigMap in the default container using <code>envFrom</code> you simply use the key of the ConfigMap.</p>
-<pre><code class="language-yaml">envFrom:
-  default:
-    type: configmap
-</code></pre>
-<p>This works for <code>extraContainers</code> as well.</p>
-<pre><code class="language-yaml">extraContainers:
-  sidecar:
-    envFrom:
-      default:
-        type: configmap
-</code></pre>
+<p>The <code>configmap</code> key defines a map, each key/value pair is a unique ConfigMap. The key can be used to reference the specific ConfigMap. The ConfigMap data is stored unied the <code>data</code> key. The values can be static values or templates.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">configmap</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">default</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">data</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">CONFIG_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/config</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">PORT</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">.Values.service.ports.default.port</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</span></code></pre></div>
+<p>Examples using a ConfigMap.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">envFrom</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">default</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configmap</span>
+</span></code></pre></div>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">persistence</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">config</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configmap</span>
+</span></code></pre></div>
 <h2 id="secret">Secret</h2>
-<p>Secrets like ConfigMaps are defined in a map, where each key is a separate Secret. The following example would create two Secret objects. The values of the Secret keys can be templates to reference other resource definitions.</p>
-<pre><code class="language-yaml">secret:
-  default:
-    data:
-      PASSWORD: abcd1234
-  app:
-    data:
-      DB_PASSWORD: 1234
-</code></pre>
-<h3 id="reference-secret">Reference Secret</h3>
-<p>To reference a Secret in the default container using <code>envFrom</code> you simply use the key of the Secret.</p>
-<pre><code class="language-yaml">envFrom:
-  default:
-    type: secret
-</code></pre>
-<p>This works for <code>extraContainers</code> as well.</p>
-<pre><code class="language-yaml">extraContainers:
-  sidecar:
-    envFrom:
-      default:
-        type: secret
-</code></pre>
+<p>The <code>secret</code> key defines a map, each key/value pair is a unique Secret. The key can be used to reference the specific Secret. The Secret data is stored unied the <code>data</code> key. The values can be static values or templates.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">secret</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">default</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">data</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">abcd1234</span>
+</span></code></pre></div>
+<p>Examples using a Secret.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">envFrom</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">default</span><span class="p">:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+</span></code></pre></div>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">persistence</span><span class="p">:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">config</span><span class="p">:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+</span></code></pre></div>
 <h2 id="persistence">Persistence</h2>
-<p>Persistence is defined as a map, the key can be used to reference the storage. The <code>type</code> can be <code>configmap</code>, <code>emptydir</code>, <code>hostpath</code>, <code>nfs</code>, <code>pvc</code>, or <code>secret</code>.</p>
-<pre><code class="language-yaml">persistence:
-  config:
-    type: emptydir
-  data:
-    type: nfs
-    server: 192.168.0.1
-    path: /mnt/user/appdata
-</code></pre>
+<p>The <code>persistence</code> key is a map, the keys are unique identifiers for the volume. Each volume is disabled by default. The <code>type</code> can be <code>configmap</code>, <code>emptydir</code>, <code>hostpath</code>, <code>nfs</code>, <code>pvc</code>, or <code>secret</code>.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">persistence</span><span class="p">:</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">config</span><span class="p">:</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">emptydir</span>
+</span></code></pre></div>
 <h2 id="service">Service</h2>
-<p>Each workload has a single service. Each key under <code>ports</code> references a single port of the default container.</p>
-<pre><code class="language-yaml">service:
-  ports:
-    default:
-      port: 80
-    https:
-      port: 443
-</code></pre>
+<p>The <code>service</code> key defines the service for the workflow. Each workflow has a single service. Each key/value under <code>ports</code> defines a single backend. The key can be used to reference the service port.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">service</span><span class="p">:</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</span></code></pre></div>
 <h2 id="ingress">Ingress</h2>
-<p>Each workload has a single ingress, which is disabled by default. Each item under <code>hosts</code> is an ingress path, at a minimum <code>name</code> needs to be defined to reference the target service. If <code>host</code> is not defined on the ingress path then the host will default to "*". If the <code>paths</code> key is not defined on the ingress path, then a default path will be added for "/".</p>
-<pre><code class="language-yaml">ingress:
-  enabled: true
-  hosts:
-  # A basic ingress path that will have a single path `/` to the default service
-  - name: default
-  - name: https
-    host: domain.io
-    paths:
-    - path: /home
-      pathType: Prefix
-</code></pre>
+<p>The <code>ingress</code> key defines the ingress for the workflow. Each workload has a single ingress, which is disabled by default. Each value under <code>hosts</code> is a unique path.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">ingress</span><span class="p">:</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span></code></pre></div>
 <h3 id="tls">TLS</h3>
-<p>If the <code>tls</code> key under <code>ingress</code> is present then it's value will be the secret name containing the certs. The <code>hosts</code> key under <code>tls</code> will be auto populated with any hosts that are defined.</p>
-<pre><code class="language-yaml">ingress:
-  enabled: true
-  hosts:
-  - name: https
-    host: domain.io
-    paths:
-    - path: /home
-  tls: tls-certs
-</code></pre>
+<p>TLS is enabled by setting <code>ingress.tls.enabled</code> to true. The <code>secretName</code> should reference a secret containing a key/cert pair.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">ingress</span><span class="p">:</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tls-certs</span>
+</span></code></pre></div>
 <h2 id="network-policy">Network Policy</h2>
-<p>The network policy is disabled by default. Once enabled the default policy will add ingress rules for each service port and allows all egress traffic. Custom egress and ingress rules can be added to <code>egress</code> and <code>ingress</code> keys, these will be merged with the default rules. The default rules can be disabled with <code>disableDefaultEgress</code> and <code>disableDefaultIngress</code>.</p>
-<pre><code class="language-yaml">networkPolicy:
-  enabled: true
-  disableDefaultEgress: false
-  disableDefaultIngress: false
-  egress:
-  ingress:
-</code></pre>
+<p>The <code>networkPolicy</code> key defines the network policy for the workflow. Each workflow has a single network policy, which is disabled by default. The default network policy adds a single rule for ingress and blocks egress. Additional ingress/egress rules can be added under the <code>ingress</code> and <code>egress</code> keys. To default ingress/egress rules can be disabled with <code>disableDefaultEgress</code> and <code>disableDefaultIngress</code> keys.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">networkPolicy</span><span class="p">:</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
 <h2 id="addons">Addons</h2>
 <p>The common library provides addons that are attached as <code>extraContainers</code>.</p>
 <h3 id="visual-studio-code">Visual Studio Code</h3>
 <p>This addon will attach a sidecar running <code>Visual Code Studio</code>. The addons uses the <a href="https://github.com/linuxserver/docker-code-server/pkgs/container/code-server"><code>ghcr.io/linuxserver/code-server</code></a> container. The minimal configuration requires an ingress and persistence be defined.</p>
-<pre><code class="language-yaml">addons:
-  codeserver:
-    enabled: true
-    ingress:
-      hosts:
-      - name: codeserver
-        host: code.domain.io
-    persistence:
-      config:
-        type: pvc
-</code></pre>
-<h3 id="rclone">Rclone</h3>
-<p>This addon will attach a sidecar to run <code>Rclone</code> using Cron. The minimum configuration requires an rclone configuration file and the <code>CRON</code>, <code>SOURCE</code>, and <code>DESTINATION</code> environment variables be defined.</p>
-<pre><code class="language-yaml">secret:
-  rclone:
-    data: 
-      rclone.conf: |
-        [host]
-        type = local
-
-        [home]
-        type = alias
-        remote = host:/home/user
-
-        [external]
-        type = alias
-        remote = host:/mnt/external
-
-addons:
-  rclone:
-    enabled: true
-    env:
-      CRON: '0 2 * * *'
-      SOURCE: home
-      DESTINATION: external
-      FLAGS: '--create-empty-src-dirs'
-    persistence:
-      rclone:
-        type: secret
-        subPath: rclone.conf
-        mountPath: /root/.config/rclone/rclone.conf
-</code></pre>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">addons</span><span class="p">:</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">codeserver</span><span class="p">:</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">ingress</span><span class="p">:</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">codeserver</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="nt">host</span><span class="p">:</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="nt">persistence</span><span class="p">:</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="nt">config</span><span class="p">:</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pvc</span>
+</span></code></pre></div>
 
 
 
@@ -1054,7 +888,7 @@ addons:
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
