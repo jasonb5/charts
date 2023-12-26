@@ -1,0 +1,16 @@
+apiVersion: v2
+name: commonlib
+version: 0.1.0
+description: |
+  Empty chart.
+type: application
+home: https://github.com/jasonb5/charts
+sources:
+  - https://github.com/jasonb5/charts/tree/main/charts/commonlib
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 0.1.0

@@ -1,0 +1,8 @@
+# -- (object) Map of ConfigMaps, these are not unique to the workload.
+configmap:
+
+# -- (object) Map of Secrets, these are not unique to the workload.
+secret:
+
+# -- (object) Extra objects to create.
+extraObjects:
