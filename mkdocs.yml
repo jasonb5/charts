@@ -10,16 +10,24 @@ theme:
     accent: teal
   features:
     - navigation.tabs
+    - content.code.copy
 
 watch:
   - README.md
 
 markdown_extensions: 
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
   - pymdownx.snippets:
       check_paths: true
+  - pymdownx.superfences
 
 plugins:
   - search
   - awesome-pages
+  - htmlproofer
 
 dev_addr: 0.0.0.0:8000

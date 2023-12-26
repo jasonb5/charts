@@ -1,178 +1,142 @@
 # Common library
+
 This Helm library chart is used to build application charts.
 
-Everything in the `values.yaml` is defined as a map, where the key is the name of the Kubernetes resource. There can only be a single `default` key, any other key will be appended to the default resource name, e.g. `config` would be appended as `-config` to the default name.
-
 ## Workload
-Workload can be set to `deployment`, `statefulset`, `daemonset`, `job`, or `cronjob`.
+
+The `workload` key defines the workload type. The value can be `deployment`, `statefulset`, `daemonset`, `job`, or `cronjob`. The default is `null` which can be useful to create only top-level objects e.g. `configmap`, `secret`, `extraObjects`.
+
 ```yaml
 workload: deployment
 ```
-### No Workload
-If workload is not defined then no default workload is generated. This can be useful to create any top-level objects e.g. `configmap`, `secret`, or `extraObjects`.
 
 ## ConfigMap
-ConfigMaps are defined in a map, where each key is a separate ConfigMap. The following example would create two ConfigMap objects. The values of the ConfigMap keys can be templates to reference other resource definitions.
+
+The `configmap` key defines a map, each key/value pair is a unique ConfigMap. The key can be used to reference the specific ConfigMap. The ConfigMap data is stored unied the `data` key. The values can be static values or templates.
+
 ```yaml
 configmap:
   default:
-    CONFIG_PATH: /config
-  app:
-    PORT: "{{ .Values.service.ports.default.port }}"
+    data:
+      CONFIG_PATH: /config
+      PORT: "{{ .Values.service.ports.default.port }}"
 ```
-### Referencing a ConfigMap
-To reference a ConfigMap in the default container using `envFrom` you simply use the key of the ConfigMap.
-```yaml 
+
+Examples using a ConfigMap.
+
+```yaml
 envFrom:
   default:
     type: configmap
 ```
 
-This works for `extraContainers` as well.
 ```yaml
-extraContainers:
-  sidecar:
-    envFrom:
-      default:
-        type: configmap
+persistence:
+  config:
+    enabled: true
+    type: configmap
 ```
 
 ## Secret
-Secrets like ConfigMaps are defined in a map, where each key is a separate Secret. The following example would create two Secret objects. The values of the Secret keys can be templates to reference other resource definitions.
+
+The `secret` key defines a map, each key/value pair is a unique Secret. The key can be used to reference the specific Secret. The Secret data is stored unied the `data` key. The values can be static values or templates.
+
 ```yaml
 secret:
   default:
     data:
       PASSWORD: abcd1234
-  app:
-    data:
-      DB_PASSWORD: 1234
 ```
-### Reference Secret
-To reference a Secret in the default container using `envFrom` you simply use the key of the Secret.
-```yaml 
+
+Examples using a Secret.
+
+```yaml
 envFrom:
   default:
     type: secret
 ```
 
-This works for `extraContainers` as well.
-```yaml
-extraContainers:
-  sidecar:
-    envFrom:
-      default:
-        type: secret
-```
-
-## Persistence
-Persistence is defined as a map, the key can be used to reference the storage. The `type` can be `configmap`, `emptydir`, `hostpath`, `nfs`, `pvc`, or `secret`.
 ```yaml
 persistence:
   config:
+    enabled: true
+    type: secret
+```
+
+## Persistence
+
+The `persistence` key is a map, the keys are unique identifiers for the volume. Each volume is disabled by default. The `type` can be `configmap`, `emptydir`, `hostpath`, `nfs`, `pvc`, or `secret`.
+
+```yaml
+persistence:
+  config:
+    enabled: true
     type: emptydir
-  data:
-    type: nfs
-    server: 192.168.0.1
-    path: /mnt/user/appdata
 ```
 
 ## Service
-Each workload has a single service. Each key under `ports` references a single port of the default container.
+
+The `service` key defines the service for the workflow. Each workflow has a single service. Each key/value under `ports` defines a single backend. The key can be used to reference the service port.
+
 ```yaml
 service:
   ports:
     default:
       port: 80
-    https:
-      port: 443
 ```
 
 ## Ingress
-Each workload has a single ingress, which is disabled by default. Each item under `hosts` is an ingress path, at a minimum `name` needs to be defined to reference the target service. If `host` is not defined on the ingress path then the host will default to "*". If the `paths` key is not defined on the ingress path, then a default path will be added for "/".
+
+The `ingress` key defines the ingress for the workflow. Each workload has a single ingress, which is disabled by default. Each value under `hosts` is a unique path.
+
 ```yaml
 ingress:
   enabled: true
   hosts:
-  # A basic ingress path that will have a single path `/` to the default service
   - name: default
-  - name: https
-    host: domain.io
-    paths:
-    - path: /home
-      pathType: Prefix
 ```
+
 ### TLS
-If the `tls` key under `ingress` is present then it's value will be the secret name containing the certs. The `hosts` key under `tls` will be auto populated with any hosts that are defined.
+
+TLS is enabled by setting `ingress.tls.enabled` to true. The `secretName` should reference a secret containing a key/cert pair.
+
 ```yaml
 ingress:
   enabled: true
   hosts:
-  - name: https
-    host: domain.io
-    paths:
-    - path: /home
-  tls: tls-certs
+  - name: default
+  tls:
+    enabled: true
+    secretName: tls-certs
 ```
 
 ## Network Policy
-The network policy is disabled by default. Once enabled the default policy will add ingress rules for each service port and allows all egress traffic. Custom egress and ingress rules can be added to `egress` and `ingress` keys, these will be merged with the default rules. The default rules can be disabled with `disableDefaultEgress` and `disableDefaultIngress`.
+
+The `networkPolicy` key defines the network policy for the workflow. Each workflow has a single network policy, which is disabled by default. The default network policy adds a single rule for ingress and blocks egress. Additional ingress/egress rules can be added under the `ingress` and `egress` keys. To default ingress/egress rules can be disabled with `disableDefaultEgress` and `disableDefaultIngress` keys.
+
 ```yaml
 networkPolicy:
   enabled: true
-  disableDefaultEgress: false
-  disableDefaultIngress: false
-  egress:
-  ingress:
 ```
 
 ## Addons
+
 The common library provides addons that are attached as `extraContainers`.
 
 ### Visual Studio Code
+
 This addon will attach a sidecar running `Visual Code Studio`. The addons uses the [`ghcr.io/linuxserver/code-server`](https://github.com/linuxserver/docker-code-server/pkgs/container/code-server) container. The minimal configuration requires an ingress and persistence be defined.
+
 ```yaml
 addons:
   codeserver:
     enabled: true
     ingress:
+      enabled: false
       hosts:
       - name: codeserver
-        host: code.domain.io
+        host:
     persistence:
       config:
         type: pvc
-```
-
-### Rclone
-This addon will attach a sidecar to run `Rclone` using Cron. The minimum configuration requires an rclone configuration file and the `CRON`, `SOURCE`, and `DESTINATION` environment variables be defined.
-```yaml
-secret:
-  rclone:
-    data: 
-      rclone.conf: |
-        [host]
-        type = local
-
-        [home]
-        type = alias
-        remote = host:/home/user
-
-        [external]
-        type = alias
-        remote = host:/mnt/external
-
-addons:
-  rclone:
-    enabled: true
-    env:
-      CRON: '0 2 * * *'
-      SOURCE: home
-      DESTINATION: external
-      FLAGS: '--create-empty-src-dirs'
-    persistence:
-      rclone:
-        type: secret
-        subPath: rclone.conf
-        mountPath: /root/.config/rclone/rclone.conf
 ```

@@ -3,5 +3,6 @@ mkdocs-awesome-pages-plugin
 mkdocs-include-markdown-plugin
 mkdocs-material
 mkdocs-material-extensions
+mkdocs-htmlproofer-plugin
 Pygments
 pymdown-extensions
