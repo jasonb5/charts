@@ -21,12 +21,15 @@ tests:
           path: spec
         documentIndex: 0
       - hasDocuments:
-          count: 2
+          count: 1
   - it: should pass
     set:
       workload: cronjob
     asserts:
-      - matchSnapshot: {}
+      - isKind:
+          of: CronJob
+      - matchSnapshot:
+          path: spec
         documentIndex: 0
       - hasDocuments:
-          count: 2
+          count: 1

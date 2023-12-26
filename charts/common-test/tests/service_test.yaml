@@ -21,11 +21,31 @@ tests:
               mariadb:
                 port: 3306
     asserts:
-      - matchSnapshot: {}
-        documentIndex: 1
-      - matchSnapshot:
-          path: spec.template.spec.containers
+      - equal:
+          path: spec.template.spec.containers[1].ports
+          value:
+            - containerPort: 3306
+              name: mariadb
+              protocol: TCP
         documentIndex: 0
+      - equal:
+          path: spec
+          value:
+            ports:
+              - name: default
+                port: null
+                protocol: TCP
+                targetPort: null
+              - name: mariadb
+                port: 3306
+                protocol: TCP
+                targetPort: 3306
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            type: ClusterIP
+        documentIndex: 1
       - hasDocuments:
           count: 2
   - it: should overwrite defaults
@@ -41,14 +61,32 @@ tests:
             port: 80
             exposedPort: 8080
     asserts:
-      - matchSnapshot: {}
-        documentIndex: 1
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[0].ports
+          value:
+            - containerPort: 80
+              name: default
+              protocol: TCP
         documentIndex: 0
+      - equal:
+          path: spec
+          value:
+            loadBalancerIP: 192.168.0.1
+            ports:
+              - name: default
+                nodePort: 80
+                port: 8080
+                protocol: TCP
+                targetPort: 80
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            type: ClusterIP
+        documentIndex: 1
       - hasDocuments:
           count: 2
-  - it: should pass
+  - it: should enable service
     set:
       workload: deployment
 
@@ -56,13 +94,36 @@ tests:
         ports:
           default:
             port: 80
-          https:
-            port: 443
     asserts:
-      - matchSnapshot: {}
-        documentIndex: 1
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[0].ports
+          value:
+            - containerPort: 80
+              name: default
+              protocol: TCP
         documentIndex: 0
+      - equal:
+          path: spec
+          value:
+            ports:
+              - name: default
+                port: 80
+                protocol: TCP
+                targetPort: 80
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            type: ClusterIP
+        documentIndex: 1
       - hasDocuments:
           count: 2
+  - it: should disable service without workload
+    set:
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - hasDocuments:
+          count: 0

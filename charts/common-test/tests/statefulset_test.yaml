@@ -25,6 +25,9 @@ tests:
           maxUnavailable: 2
           partition: 2
     asserts:
+      - isKind:
+          of: StatefulSet
+        documentIndex: 0
       - matchSnapshot:
           path: spec
         documentIndex: 0
@@ -34,7 +37,11 @@ tests:
     set:
       workload: statefulset
     asserts:
-      - matchSnapshot: {}
+      - isKind:
+          of: StatefulSet
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec
         documentIndex: 0
       - hasDocuments:
           count: 2

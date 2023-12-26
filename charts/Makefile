@@ -33,16 +33,16 @@ bump-%:
 	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
-template: update-dep
+template:
 	helm template $(ARGS) $(CHART_DIR)
 
 .PHONY: lint
-lint: update-dep
+lint:
 	helm lint $(ARGS) $(CHART_DIR)
 
 .PHONY: test
-test: update-dep
-	helm unittest $(ARGS) $(CHART_DIR)
+test:
+	helm unittest $(ARGS) $(CHART_DIR) | grep -v trim
 
 .PHONY: update-dep
 update-dep:

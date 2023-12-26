@@ -12,22 +12,96 @@ tests:
 
       ingress:
         enabled: true
-
         hosts:
         - name: default
           host: domain.io
-
         tls:
           enabled: true
-          secretName: cluster-certs
+          secretName: tls-certs
 
       service:
         ports:
           default:
             port: 80
     asserts:
-      - matchSnapshot: {}
+      - equal:
+          path: spec
+          value:
+            rules:
+              - host: domain.io
+                http:
+                  paths:
+                    - backend:
+                        service:
+                          name: RELEASE-NAME-common-test
+                          port:
+                            number: 80
+                      path: /
+                      pathType: ImplementationSpecific
+            tls:
+              - hosts:
+                - domain.io 
+                secretName: tls-certs
         documentIndex: 2
+      - isKind:
+          of: Ingress
+        documentIndex: 2
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: Deployment
+        documentIndex: 0
+      - hasDocuments:
+          count: 3
+  - it: should use multiple services
+    set:
+      workload: deployment
+
+      ingress:
+        enabled: true
+        hosts:
+        - name: default
+        - name: https
+
+      service:
+        ports:
+          default:
+            port: 80
+          https:
+            port: 443
+    asserts:
+      - equal:
+          path: spec.rules[0].http.paths[0]
+          value:
+            backend:
+              service:
+                name: RELEASE-NAME-common-test
+                port:
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific
+        documentIndex: 2
+      - equal:
+          path: spec.rules[1].http.paths[0]
+          value:
+            backend:
+              service:
+                name: RELEASE-NAME-common-test
+                port:
+                  number: 443
+            path: /
+            pathType: ImplementationSpecific
+        documentIndex: 2
+      - isKind:
+          of: Ingress
+        documentIndex: 2
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: Deployment
+        documentIndex: 0
       - hasDocuments:
           count: 3
   - it: should overwrite defaults
@@ -39,50 +113,52 @@ tests:
         className: traefik
         hosts:
         - name: default
-          paths:
-          - path: /index
-            pathType: Prefix
-        - name: https
           host: domain.io
           paths:
-          - path: /login
-          - path: /version
-        tls:
-          enabled: false
-          secretName: cluster-certs
+            - path: /
+            - path: /api
+              pathType: Prefix
 
       service:
         ports:
           default:
             port: 80
-          https:
-            port: 443
     asserts:
-      - matchSnapshot: {}
+      - equal:
+          path: spec
+          value:
+            ingressClassName: traefik
+            rules:
+              - host: domain.io
+                http:
+                  paths:
+                    - backend:
+                        service:
+                          name: RELEASE-NAME-common-test
+                          port:
+                            number: 80
+                      path: /
+                      pathType: ImplementationSpecific
+                    - backend:
+                        service:
+                          name: RELEASE-NAME-common-test
+                          port:
+                            number: 80
+                      path: /api
+                      pathType: Prefix
         documentIndex: 2
+      - isKind:
+          of: Ingress
+        documentIndex: 2
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: Deployment
+        documentIndex: 0
       - hasDocuments:
           count: 3
-  - it: should disable
-    set:
-      workload: deployment
-
-      ingress:
-        enabled: false
-        hosts:
-        - name: default
-        - name: https
-          host: domain.io
-
-      service:
-        ports:
-          default:
-            port: 80
-          https:
-            port: 443
-    asserts:
-      - hasDocuments:
-          count: 2
-  - it: should pass
+  - it: should be enabled
     set:
       workload: deployment
 
@@ -90,20 +166,55 @@ tests:
         enabled: true
         hosts:
         - name: default
-        - name: https
-          host: domain.io
-          paths:
-          - path: /
-          - path: /test
 
       service:
         ports:
           default:
             port: 80
-          https:
-            port: 443
     asserts:
-      - matchSnapshot: {}
+      - equal:
+          path: spec
+          value:
+            rules:
+              - http:
+                  paths:
+                    - backend:
+                        service:
+                          name: RELEASE-NAME-common-test
+                          port:
+                            number: 80
+                      path: /
+                      pathType: ImplementationSpecific
         documentIndex: 2
+      - isKind:
+          of: Ingress
+        documentIndex: 2
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: Deployment
+        documentIndex: 0
       - hasDocuments:
           count: 3
+  - it: should be disabled
+    set:
+      workload: deployment
+
+      ingress:
+        hosts:
+        - name: default
+
+      service:
+        ports:
+          default:
+            port: 80
+    asserts:
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: Deployment
+        documentIndex: 0
+      - hasDocuments:
+          count: 2

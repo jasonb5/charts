@@ -55,9 +55,15 @@ tests:
       - matchSnapshot:
           path: spec.template.spec.containers[0]
         documentIndex: 0
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: Deployment
+        documentIndex: 0
       - hasDocuments:
           count: 2
-  - it: should pass
+  - it: should use defaults
     set:
       workload: deployment
     asserts:

@@ -40,19 +40,26 @@ tests:
       persistence:
         data1:
           enabled: true
-          type: nfs
-          path: /mnt/users/data
-          server: 192.168.0.1
-          readOnly: true
+          type: configmap
     asserts:
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.initContainers[0].volumeMounts
+          value:
+            - mountPath: /config
+              name: data1
         documentIndex: 0
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /data1
+              name: data1
         documentIndex: 0
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-common-test-data1
+              name: data1
         documentIndex: 0
       - hasDocuments:
           count: 2
@@ -69,16 +76,20 @@ tests:
           persistence:
             data1:
               enabled: true
-              type: nfs
-              path: /mnt/users/data
-              server: 192.168.0.1
-              readOnly: true
+              type: configmap
     asserts:
-      - matchSnapshot:
-          path: spec.template.spec.volumes
-        documentIndex: 0
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.initContainers[0].volumeMounts
+          value:
+            - mountPath: /data1
+              name: data1
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-common-test-data1
+              name: data1
         documentIndex: 0
       - hasDocuments:
           count: 2
@@ -100,19 +111,26 @@ tests:
       persistence:
         data1:
           enabled: true
-          type: nfs
-          path: /mnt/users/data
-          server: 192.168.0.1
-          readOnly: true
+          type: configmap
     asserts:
-      - matchSnapshot:
-          path: spec.template.spec.containers[1].volumeMounts
-        documentIndex: 0
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /data1
+              name: data1
         documentIndex: 0
-      - matchSnapshot:
+      - equal:
+          path: spec.template.spec.containers[1].volumeMounts
+          value:
+            - mountPath: /config
+              name: data1
+        documentIndex: 0
+      - equal:
           path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-common-test-data1
+              name: data1
         documentIndex: 0
       - hasDocuments:
           count: 2
@@ -129,64 +147,166 @@ tests:
           persistence:
             data1:
               enabled: true
-              type: nfs
-              path: /mnt/users/data
-              server: 192.168.0.1
-              readOnly: true
+              type: configmap
     asserts:
-      - matchSnapshot:
-          path: spec.template.spec.volumes
-        documentIndex: 0
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[1].volumeMounts
+          value:
+            - mountPath: /data1
+              name: data1
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-common-test-data1
+              name: data1
         documentIndex: 0
       - hasDocuments:
           count: 2
-  - it: should overwrite defaults
+  - it: should configure a secret
     set:
       workload: deployment
 
       persistence:
-        mount3:
+        default:
           enabled: true
-          type: nfs
-          path: /mnt/users/data
-          server: 192.168.0.1
-          readOnly: true
-          mountPath: /data
-          mountPropagation: Bidirectional
-          subPath: test
-        mount4:
+          type: secret
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /default
+              name: common-test
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - secret:
+                secretName: RELEASE-NAME-common-test
+              name: common-test
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should configure a pvc
+    set:
+      workload: deployment
+
+      persistence:
+        default:
           enabled: true
           type: pvc
+          size: 10Gi
           readOnly: true
     asserts:
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /default
+              name: common-test
+              readOnly: true
         documentIndex: 0
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.volumes
+          value:
+            - persistentVolumeClaim:
+                claimName: RELEASE-NAME-common-test
+                readOnly: true
+              name: common-test
         documentIndex: 0
+      - equal:
+          path: spec
+          value:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            volumeMode: Filesystem
+        documentIndex: 2
       - hasDocuments:
           count: 3
-  - it: should disable volume
+  - it: should configure nfs
     set:
       workload: deployment
 
       persistence:
-        mount4:
-          enabled: false
-          type: pvc
+        default:
+          enabled: true
+          type: nfs
+          server: 127.0.0.1
+          path: /mnt/user/appdata
+          readOnly: true
     asserts:
-      - isNullOrEmpty:
+      - equal:
           path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /default
+              name: common-test
+              readOnly: true
         documentIndex: 0
-      - isNullOrEmpty:
+      - equal:
           path: spec.template.spec.volumes
+          value:
+            - nfs:
+                path: /mnt/user/appdata
+                server: 127.0.0.1
+                readOnly: true
+              name: common-test
         documentIndex: 0
       - hasDocuments:
           count: 2
-  - it: should pass
+  - it: should configure a hostpath
+    set:
+      workload: deployment
+
+      persistence:
+        default:
+          enabled: true
+          type: hostpath
+          path: /data
+          mountType: CharDevice
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /default
+              name: common-test
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - hostPath:
+                path: /data
+                type: CharDevice
+              name: common-test
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should configure an emptydir
+    set:
+      workload: deployment
+
+      persistence:
+        default:
+          enabled: true
+          type: emptydir
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /default
+              name: common-test
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - emptyDir: {}
+              name: common-test
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should configur a configmap
     set:
       workload: deployment
 
@@ -194,30 +314,90 @@ tests:
         default:
           enabled: true
           type: configmap
-        mount1:
-          enabled: true
-          type: emptydir
-        mount2:
-          enabled: true
-          type: hostpath
-          path: /data
-        mount3:
-          enabled: true
-          type: nfs
-          path: /mnt/users/data
-          server: 192.168.0.1
-        mount4:
-          enabled: true
-          type: pvc
-        mount5:
-          enabled: true
-          type: secret
     asserts:
-      - matchSnapshot:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /default
+              name: common-test
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-common-test
+              name: common-test
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should overwrite default volumeMounts
+    set:
+      workload: deployment
+
+      persistence:
+        default:
+          enabled: true
+          type: configmap
+          mountPath: /config
+          mountPropagation: HostToContainer
+          readOnly: true
+          subPath: /custom_config
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /config
+              mountPropagation: HostToContainer
+              readOnly: true
+              subPath: /custom_config
+              name: common-test
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-common-test
+              name: common-test
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should enable persistence
+    set:
+      workload: deployment
+
+      persistence:
+        default:
+          enabled: true
+          type: configmap
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /default
+              name: common-test
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-common-test
+              name: common-test
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should be disabled
+    set:
+      workload: deployment
+
+      persistence:
+        default:
+          type: configmap
+    asserts:
+      - isNullOrEmpty:
           path: spec.template.spec.containers[0].volumeMounts
         documentIndex: 0
-      - matchSnapshot:
+      - isNullOrEmpty:
           path: spec.template.spec.volumes
         documentIndex: 0
       - hasDocuments:
-          count: 3
+          count: 2

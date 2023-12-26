@@ -8,14 +8,10 @@ chart:
 tests:
   - it: should pass
     set:
-      workload: deployment
-
       configmap:
         default:
           data:
             CONFIG: /config/config.txt
-        config:
-          data:
             PORT: "{{ .Values.service.ports.default.port }}"
 
       service:
@@ -23,9 +19,12 @@ tests:
           default:
             port: 80
     asserts:
-      - matchSnapshot: {}
-        documentIndex: 2
-      - matchSnapshot: {}
-        documentIndex: 1
+      - isKind:
+          of: ConfigMap
+        documentIndex: 0
+      - equal:
+          path: metadata.name
+          value: RELEASE-NAME-common-test
+        documentIndex: 0
       - hasDocuments:
-          count: 4
+          count: 1

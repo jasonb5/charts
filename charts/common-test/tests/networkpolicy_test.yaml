@@ -35,7 +35,32 @@ tests:
           default:
             port: 80
     asserts:
-      - matchSnapshot: {}
+      - equal:
+          path: spec
+          value:
+            egress:
+              - to:
+                  - namespaceSelector:
+                      matchLabels:
+                        kubernetes.io/metadata.name: production
+                ports:
+                  - protocol: TCP
+                    port: 3306
+            ingress:
+              - from:
+                  - namespaceSelector:
+                      matchLabels:
+                        kubernetes.io/metadata.name: production
+                ports:
+                  - protocol: TCP
+                    port: 8000
+            podSelector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            policyTypes:
+              - Egress
+              - Ingress
         documentIndex: 2
       - hasDocuments:
           count: 3
@@ -66,7 +91,38 @@ tests:
           default:
             port: 80
     asserts:
-      - matchSnapshot: {}
+      - equal:
+          path: spec
+          value:
+            egress:
+              - ports:
+                  - port: 3306
+                    protocol: TCP
+                to:
+                  - namespaceSelector:
+                      matchLabels:
+                        kubernetes.io/metadata.name: production
+              - {}
+            ingress:
+              - from:
+                  - namespaceSelector:
+                      matchLabels:
+                        kubernetes.io/metadata.name: production
+                ports:
+                  - port: 8000
+                    protocol: TCP
+              - from:
+                  - podSelector: {}
+                ports:
+                  - port: 80
+                    protocol: TCP
+            podSelector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            policyTypes:
+              - Egress
+              - Ingress
         documentIndex: 2
       - hasDocuments:
           count: 3
@@ -82,11 +138,33 @@ tests:
           default:
             port: 80
     asserts:
-      - matchSnapshot: {}
+      - isKind:
+          of: NetworkPolicy
+        documentIndex: 2
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: Deployment
+        documentIndex: 0
+      - equal:
+          path: spec
+          value:
+            egress:
+              - {}
+            ingress:
+              - from:
+                  - podSelector: {}
+                ports:
+                  - port: 80
+                    protocol: TCP
+            podSelector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            policyTypes:
+              - Egress
+              - Ingress
         documentIndex: 2
       - hasDocuments:
           count: 3
-  - it: should pass
-    asserts:
-      - hasDocuments:
-          count: 1

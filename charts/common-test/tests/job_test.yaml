@@ -32,12 +32,14 @@ tests:
           path: spec
         documentIndex: 0
       - hasDocuments:
-          count: 2
+          count: 1
   - it: should pass
     set:
       workload: job
     asserts:
-      - matchSnapshot: {}
-        documentIndex: 0
+      - isKind:
+          of: Job
+      - matchSnapshot:
+          path: spec
       - hasDocuments:
-          count: 2
+          count: 1

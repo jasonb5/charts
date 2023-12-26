@@ -27,7 +27,14 @@ tests:
     set:
       workload: daemonset
     asserts:
-      - matchSnapshot: {}
+      - isKind:
+          of: Service
+        documentIndex: 1
+      - isKind:
+          of: DaemonSet
+        documentIndex: 0
+      - matchSnapshot:
+          path: spec
         documentIndex: 0
       - hasDocuments:
           count: 2

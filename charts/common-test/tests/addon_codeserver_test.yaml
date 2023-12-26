@@ -23,33 +23,65 @@ tests:
             hosts:
               - name: codeserver
                 host: code.domain.io
-                path: /code
-                pathType: Prefix
+                paths:
+                  - path: /code
+                    pathType: Prefix
 
           persistence:
-            config:
-              enabled: true
-              type: pvc
-              size: 20G
             data:
               enabled: true
               type: hostpath
               path: /data
     asserts:
-      - matchSnapshot:
-          path: spec
-        documentIndex: 3
-      - matchSnapshot:
-          path: spec
-        documentIndex: 2
-      - matchSnapshot:
-          path: spec.ports
-        documentIndex: 1
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[1]
+          value:
+            image: ghcr.io/linuxserver/code-server:4.16.1
+            imagePullPolicy: Always
+            name: codeserver
+            ports:
+              - containerPort: 8443
+                name: codeserver
+                protocol: TCP
+            volumeMounts:
+              - mountPath: /data
+                name: data
         documentIndex: 0
+      - equal:
+          path: spec
+          value:
+            ports:
+              - name: codeserver
+                port: 8443
+                protocol: TCP
+                targetPort: 8443
+              - name: default
+                port: null
+                protocol: TCP
+                targetPort: null
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            type: ClusterIP
+        documentIndex: 1
+      - equal:
+          path: spec
+          value:
+            rules:
+              - host: code.domain.io
+                http:
+                  paths:
+                    - backend:
+                        service:
+                          name: RELEASE-NAME-common-test
+                          port:
+                            number: 8443
+                      path: /code
+                      pathType: Prefix
+        documentIndex: 2
       - hasDocuments:
-          count: 4
+          count: 3
   - it: should pass
     set:
       workload: deployment
@@ -58,11 +90,34 @@ tests:
         codeserver:
           enabled: true
     asserts:
-      - matchSnapshot:
-          path: spec.ports
-        documentIndex: 1
-      - matchSnapshot:
+      - equal:
           path: spec.template.spec.containers[1]
+          value:
+            image: ghcr.io/linuxserver/code-server:4.17.1
+            name: codeserver
+            ports:
+              - containerPort: 8443
+                name: codeserver
+                protocol: TCP
+            volumeMounts: null
         documentIndex: 0
+      - equal:
+          path: spec
+          value:
+            ports:
+              - name: codeserver
+                port: 8443
+                protocol: TCP
+                targetPort: 8443
+              - name: default
+                port: null
+                protocol: TCP
+                targetPort: null
+            selector:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/name: common-test
+              common/workload: default
+            type: ClusterIP
+        documentIndex: 1
       - hasDocuments:
           count: 2

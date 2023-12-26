@@ -30,12 +30,28 @@ tests:
           default:
             port: 80
     asserts:
+      - equal:
+          path: data
+          value:
+            CONFIG: /config/config.txt
+            PORT: 80
+        documentIndex: 1
+      - isKind:
+          of: ConfigMap
+        documentIndex: 1
+      - equal:
+          path: data
+          value:
+            CONFIG: /config/config.txt
+            PORT: 80
+        documentIndex: 0
+      - isKind:
+          of: ConfigMap
+        documentIndex: 0
       - hasDocuments:
-          count: 3
+          count: 2
   - it: should create extra workload
     set:
-      workload: deployment
-
       extraWorkloads:
         db:
           workload: deployment
@@ -44,11 +60,23 @@ tests:
             repository: mariadb
             tag: latest
     asserts:
-      - matchSnapshot: {}
-        documentIndex: 1
-      - hasDocuments:
-          count: 3
-  - it: should pass
-    asserts:
+      - equal:
+          path: metadata
+          value:
+            labels:
+              app.kubernetes.io/instance: RELEASE-NAME
+              app.kubernetes.io/managed-by: Helm
+              app.kubernetes.io/name: common-test
+              app.kubernetes.io/version: 0.1.0
+              common/workload: db
+              helm.sh/chart: common-test-0.1.0
+            name: RELEASE-NAME-common-test-db
+            namespace: NAMESPACE
+      - isKind:
+          of: Deployment
       - hasDocuments:
           count: 1
+  - it: should be empty
+    asserts:
+      - hasDocuments:
+          count: 0

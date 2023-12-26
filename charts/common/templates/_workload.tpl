@@ -3,24 +3,28 @@
 {{- with .Values.workload }}
 {{- $name := lower . }}
 {{- if eq $name "cronjob" }}
-{{- include "common.cronjob" $ }}
+  {{- include "common.cronjob" $ }}
 {{- else if eq $name "daemonset" }}
-{{- include "common.daemonset" $ }}
+  {{- include "common.daemonset" $ }}
 {{- else if eq $name "deployment" }}
-{{- include "common.deployment" $ }}
+  {{- include "common.deployment" $ }}
 {{- else if eq $name "job" }}
-{{- include "common.job" $ }}
+  {{- include "common.job" $ }}
 {{- else if eq $name "statefulset" }}
-{{- include "common.statefulset" $ }}
+  {{- include "common.statefulset" $ }}
 {{- end }}
 ---
 {{- end }}
+
+{{- if .Values.workload }}
 {{- include "common.mergeServices" (list .Values .Values.extraContainers .Values.initContainers) }}
+{{- if not (contains "job" .Values.workload) }}
 {{- with .Values.service }}
 {{- $values := mustMerge . (dict "workloadName" $.Values.workloadName "name" "default") }}
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
 {{- include "common.service" $dot }}
 ---
+{{- end }}
 {{- end }}
 {{- include "common.mergeIngress" (list .Values .Values.extraContainers .Values.initContainers) }}
 {{- with .Values.ingress }}
@@ -46,6 +50,7 @@
 {{- $dot := dict "Values" $values "Release" $.Release "Chart" $.Chart }}
 {{- include "common.networkPolicy" $dot }}
 ---
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

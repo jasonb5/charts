@@ -46,7 +46,7 @@ should overwrite defaults:
       tcpSocket:
         port: "80"
     workingDir: /app
-should pass:
+should use defaults:
   1: |
     image: busybox:0.1.0
     livenessProbe:

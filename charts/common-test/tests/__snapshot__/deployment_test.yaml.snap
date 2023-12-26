@@ -36,44 +36,31 @@ should overwrite defaults:
                 port: default
 should pass:
   1: |
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      labels:
+    replicas: 1
+    selector:
+      matchLabels:
         app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: common-test
-        app.kubernetes.io/version: 0.1.0
         common/workload: default
-        helm.sh/chart: common-test-0.1.0
-      name: RELEASE-NAME-common-test
-      namespace: NAMESPACE
-    spec:
-      replicas: 1
-      selector:
-        matchLabels:
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
           app.kubernetes.io/instance: RELEASE-NAME
           app.kubernetes.io/name: common-test
           common/workload: default
-      strategy:
-        type: Recreate
-      template:
-        metadata:
-          labels:
-            app.kubernetes.io/instance: RELEASE-NAME
-            app.kubernetes.io/name: common-test
-            common/workload: default
-        spec:
-          containers:
-            - image: busybox:0.1.0
-              livenessProbe:
-                tcpSocket:
-                  port: default
-              name: common-test
-              ports:
-                - containerPort: null
-                  name: default
-                  protocol: TCP
-              readinessProbe:
-                tcpSocket:
-                  port: default
+      spec:
+        containers:
+          - image: busybox:0.1.0
+            livenessProbe:
+              tcpSocket:
+                port: default
+            name: common-test
+            ports:
+              - containerPort: null
+                name: default
+                protocol: TCP
+            readinessProbe:
+              tcpSocket:
+                port: default

@@ -25,34 +25,21 @@ should overwrite defaults:
     timeZone: America/Los_Angeles
 should pass:
   1: |
-    apiVersion: batch/v1
-    kind: CronJob
-    metadata:
-      labels:
-        app.kubernetes.io/instance: RELEASE-NAME
-        app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/name: common-test
-        app.kubernetes.io/version: 0.1.0
-        common/workload: default
-        helm.sh/chart: common-test-0.1.0
-      name: RELEASE-NAME-common-test
-      namespace: NAMESPACE
-    spec:
-      jobTemplate:
-        spec:
-          template:
-            spec:
-              containers:
-                - image: busybox:0.1.0
-                  livenessProbe:
-                    tcpSocket:
-                      port: default
-                  name: common-test
-                  ports:
-                    - containerPort: null
-                      name: default
-                      protocol: TCP
-                  readinessProbe:
-                    tcpSocket:
-                      port: default
-      schedule: null
+    jobTemplate:
+      spec:
+        template:
+          spec:
+            containers:
+              - image: busybox:0.1.0
+                livenessProbe:
+                  tcpSocket:
+                    port: default
+                name: common-test
+                ports:
+                  - containerPort: null
+                    name: default
+                    protocol: TCP
+                readinessProbe:
+                  tcpSocket:
+                    port: default
+    schedule: null
