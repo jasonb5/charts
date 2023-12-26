@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jasonb5.github.io/charts/charts/commonlib/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jasonb5.github.io/charts/guide/common-library/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
