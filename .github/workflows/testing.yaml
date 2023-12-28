@@ -76,7 +76,9 @@ jobs:
         with:
           version: 'latest'
       - name: Lint Helm chart
-        run: make lint
+        run: |
+          make update-dep
+          make lint
       - name: Unittest Helm chart
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
