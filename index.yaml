@@ -1,0 +1,21 @@
+apiVersion: v1
+entries:
+  common:
+  - apiVersion: v2
+    created: "2023-12-28T00:06:32.01331823-08:00"
+    description: 'A Helm library chart for building application charts. '
+    digest: b75b73e7741f6c7e80c51396651bbeb28343f920b313f0c64fd5bef9c6fc376d
+    home: https://jasonb5.github.io/charts/site/charts/common/
+    keywords:
+    - common
+    - library
+    maintainers:
+    - name: jasonb5
+    name: common
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/common
+    type: library
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/common-0.1.0/common-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-12-28T00:06:32.01332585-08:00"
