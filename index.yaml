@@ -18,4 +18,24 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/common-0.1.0/common-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-28T00:06:32.01332585-08:00"
+  commonlib:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-12-28T01:21:41.966616296-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Empty chart. '
+    digest: 6583292383592e7f69f839d786ffa350093cd99d178be50631319e59b345c14b
+    home: https://github.com/jasonb5/charts
+    maintainers:
+    - name: jasonb5
+    name: commonlib
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/commonlib
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/commonlib-0.1.0/commonlib-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-12-28T01:21:41.966622706-08:00"
