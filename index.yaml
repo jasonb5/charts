@@ -20,6 +20,25 @@ entries:
     version: 0.1.0
   commonlib:
   - apiVersion: v2
+    appVersion: 0.1.1
+    created: "2023-12-29T06:42:26.000276882Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Empty chart. '
+    digest: 2975fafd2a6729cc5ba00e280b9d18f4e8b1bad58a87d9d9eb35a7cff765c0c1
+    home: https://github.com/jasonb5/charts
+    maintainers:
+    - name: jasonb5
+    name: commonlib
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/commonlib
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/commonlib-0.1.1/commonlib-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2023-12-28T01:21:41.966616296-08:00"
     dependencies:
@@ -38,4 +57,27 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/commonlib-0.1.0/commonlib-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-28T01:21:41.966622706-08:00"
+  gotify:
+  - apiVersion: v2
+    appVersion: 2.4.0
+    created: "2023-12-29T06:42:26.124403414Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'a simple server for sending and receiving messages '
+    digest: 2a74119c84bcd914d14eb6fed1694cb0e10abfaf2f9f7d5b150151f5c6d15b0e
+    home: https://gotify.net/
+    keywords:
+    - push-notifications
+    maintainers:
+    - name: jasonb5
+    name: gotify
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/gotify
+    - https://github.com/gotify/server
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/gotify-0.1.1/gotify-0.1.1.tgz
+    version: 0.1.1
+generated: "2023-12-29T06:42:26.124437207Z"
