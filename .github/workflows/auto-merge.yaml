@@ -57,26 +57,33 @@ jobs:
       run:
         working-directory: ${{ format('charts/{0}', matrix.chart) }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./.github/actions/setup-helm-docs
-      - name: Bump patch
+      - name: Setup helm-docs
+        uses: ./.github/actions/setup-helm-docs
+      - name: Instll tools
+        run: |
+          pip install tbump semver
+      - name: Configure git
+        run: |
+          git config user.email ${{ github.actor }}@users.noreply.github.com
+          git config user.name ${{ github.actor }}
+      - name: Checkout PR branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh co ${{ github.event.number }}
-
-          pip install tbump semver
-
-          git config user.email ${{ github.actor }}@users.noreply.github.com
-          git config user.name ${{ github.actor }}
-
+      - name: Bump patch, update dependencies, and documents
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           make bump-patch ARGS="--non-interactive"
 
           # Must update after semver bump
-          make docs
           make update-dep
+          make docs
 
           if [[ "${{ matrix.chart }}" == "common" ]];
           then
