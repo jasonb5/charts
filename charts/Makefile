@@ -14,6 +14,7 @@ upload:
 
 .PHONY: index
 index:
+	mkdir .cr-index || exit 0
 	cr index $(CR_ARGS) --git-repo charts $(CHART_DIR)
 
 .PHONY: new-chart
