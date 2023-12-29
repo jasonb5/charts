@@ -1,0 +1,78 @@
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
+workload: deployment
+
+image:
+  # -- Container image repository
+  repository: photoprism/photoprism
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Photoprism [configuration](https://docs.photoprism.app/getting-started/config-options/)
+env:
+  # -- Set the timezone
+  TZ: UTC
+  # -- Authentication mode, choices: password or public
+  PHOTOPRISM_AUTH_MODE: password
+  # -- Admin username
+  PHOTOPRISM_ADMIN_USER: admin
+  # -- Admin password
+  PHOTOPRISM_ADMIN_PASSWORD: admin
+  # -- Enable experimental features
+  PHOTOPRISM_EXPERIMENTAL: true
+  # -- Number of index workers
+  PHOTOPRISM_WORKERS: 4
+
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
+service:
+  ports:
+    default:
+      # -- Default port
+      port: 2342
+
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
+ingress:
+  # -- Enable/disable ingress
+  enabled: false
+  hosts:
+    # -- Reference default service
+  - name: default
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
+    enabled: false
+
+# -- [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence)
+persistence:
+  config:
+    # -- Enable/disable persistence
+    enabled: false
+    # -- Type of volume mount
+    type: pvc
+    # -- Size of volume
+    size: 1Gi
+    # -- Mount path
+    mountPath: /photoprism/storage
+
+  originals:
+    # -- Enable/disable persistence
+    enabled: false
+    # -- Type of volume mount
+    type: pvc
+    # -- Size of volume
+    size: 1Gi
+    # -- Mount path
+    mountPath: /photoprism/originals
+
+  import:
+    # -- Enable/disable persistence
+    enabled: false
+    # -- Type of volume mount
+    type: pvc
+    # -- Size of volume
+    size: 1Gi
+    # -- Mount path
+    mountPath: /photoprism/import
+

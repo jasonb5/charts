@@ -1,0 +1,1 @@
+../../charts/photoprism/README.md
