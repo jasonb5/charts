@@ -75,13 +75,17 @@ jobs:
         uses: debianmaster/actions-k3s@v1.0.5
         with:
           version: 'latest'
+      - name: Install tools
+        run: |
+          helm plugin install https://github.com/helm-unittest/helm-unittest.git
+
+          pip install requests
       - name: Lint Helm chart
         run: |
           make update-dep
           make lint
       - name: Unittest Helm chart
         run: |
-          helm plugin install https://github.com/helm-unittest/helm-unittest.git
           make test
       - name: Install helm chart
         if: ${{ ! contains(matrix.chart, 'common') }}
@@ -93,7 +97,7 @@ jobs:
           trap "killall kubectl" 0
           kubectl port-forward $name 8000:${port} &
           sleep 2
-          python ../../scripts/screen_capture.py http://127.0.0.1:8000
+          python ../../scripts/check_url.py http://127.0.0.1:8000 --success 200
       - name: Remove needs-testing label on success
         if: ${{ success() }}
         env:
