@@ -102,6 +102,31 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/gotify-0.1.1/gotify-0.1.1.tgz
     version: 0.1.1
+  homeassistant:
+  - apiVersion: v2
+    appVersion: 2023.12.4
+    created: "2023-12-29T15:50:06.189816119-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "\U0001F3E1 Open source home automation that puts local control and
+      privacy first.  "
+    digest: e5c658c2ea6694fd6cf00a18f8b990e4cdf6d04252b02cd08e56d8e5363008c0
+    home: https://www.home-assistant.io/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: homeassistant
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homeassistant
+    - https://github.com/home-assistant/core
+    - https://github.com/linuxserver/docker-homeassistant
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homeassistant-0.1.0/homeassistant-0.1.0.tgz
+    version: 0.1.0
   jellyfin:
   - apiVersion: v2
     appVersion: 10.8.13
@@ -153,4 +178,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.0/photoprism-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-29T14:49:58.828194379-08:00"
+generated: "2023-12-29T15:50:06.189826119-08:00"
