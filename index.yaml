@@ -128,4 +128,29 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.0/jellyfin-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-29T13:03:46.019275874-08:00"
+  photoprism:
+  - apiVersion: v2
+    appVersion: 231128-ce
+    created: "2023-12-29T14:49:58.828187359-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "AI-Powered Photos App for the Decentralized Web \U0001F308\U0001F48E✨
+      \ "
+    digest: a96a9d0578ea14599cce575450162bc1db9d601dbfe077a4aa7d3673b701674f
+    home: https://www.photoprism.app/
+    keywords:
+    - media
+    - images
+    maintainers:
+    - name: jasonb5
+    name: photoprism
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/photoprism
+    - https://github.com/photoprism/photoprism
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.0/photoprism-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-12-29T14:49:58.828194379-08:00"
