@@ -1,0 +1,12 @@
+_src_path: ../template/
+description: a simple server for sending and receiving messages
+homepage: https://gotify.net/
+image: gotify/server
+keywords: push-notifications
+mariadb_enabled: false
+name: gotify
+port: 80
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/gotify/server
+version: 2.4.0

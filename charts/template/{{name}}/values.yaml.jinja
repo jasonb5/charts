@@ -39,7 +39,9 @@ persistence:
     # -- Enable/disable persistence
     enabled: false
     # -- Type of volume mount
-    type:
+    type: pvc
+    # -- Size of volume
+    size: 1Gi
 
 {% if redis_enabled %}
 # -- Redis server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/redis#parameters)

@@ -20,13 +20,26 @@ index:
 new-chart:
 	copier copy $(ARGS) template/ .
 
+.PHONY: update-chart
+update-chart:
+	copier copy $(ARGS) -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
+
 .PHONY: docs
 docs:
-	helm-docs --sort-values-order file $(CHART_DIR)
+	helm-docs --log-level DEBUG --sort-values-order file $(CHART_DIR)
 ifneq ($(wildcard ../../docs/charts),)
 	chart=$(shell basename $(PWD)); \
 		ln -sf ../../charts/$${chart}/README.md ../../docs/charts/$${chart}.md
 endif
+
+.PHONY: changelog
+changelog: FILENAME := _changelog.gotmpl
+changelog:
+	echo '{{ define "changelog" -}}' > $(FILENAME)
+	echo '## Changelog' >> $(FILENAME)
+	git log --pretty="- %s (%as)" --after="2023-12-28" . >> $(FILENAME)
+	echo '{{- end }}' >> $(FILENAME)
+
 
 .PHONY: bump-%
 bump-%:

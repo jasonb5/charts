@@ -12,8 +12,8 @@ regex = '''
   '''
 
 [git]
-message_template = "Bump commonlib to {new_version}"
-tag_template = "commonlib_v{new_version}"
+message_template = "Bump gotify to {new_version}"
+tag_template = "gotify_v{new_version}"
 
 [[file]]
 src = "Chart.yaml"
