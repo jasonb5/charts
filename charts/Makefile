@@ -20,6 +20,9 @@ index:
 new-chart:
 	copier copy $(ARGS) template/ .
 
+.PHONY: init-chart
+init-chart: update-dep docs
+
 .PHONY: update-chart
 update-chart:
 	copier copy $(ARGS) -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../

@@ -1,0 +1,14 @@
+_src_path: template/
+description: Jellyfin is the volunteer-built media solution that puts you in control
+    of your media. Stream to any device from your own server, with no strings attached.
+    Your media, your server, your way.
+homepage: https://jellyfin.org/
+image: ghcr.io/linuxserver/jellyfin
+keywords: media
+mariadb_enabled: false
+name: jellyfin
+port: 8096
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/jellyfin/jellyfin,https://github.com/linuxserver/docker-jellyfin
+version: 10.8.13
