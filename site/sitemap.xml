@@ -2,27 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://jasonb5.github.io/charts/</loc>
-         <lastmod>2023-12-26</lastmod>
+         <lastmod>2023-12-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jasonb5.github.io/charts/charts/common/</loc>
-         <lastmod>2023-12-26</lastmod>
+         <lastmod>2023-12-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jasonb5.github.io/charts/charts/commonlib/</loc>
-         <lastmod>2023-12-26</lastmod>
+         <lastmod>2023-12-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jasonb5.github.io/charts/charts/gotify/</loc>
+         <lastmod>2023-12-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jasonb5.github.io/charts/guide/common-library/</loc>
-         <lastmod>2023-12-26</lastmod>
+         <lastmod>2023-12-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jasonb5.github.io/charts/guide/getting-started/</loc>
-         <lastmod>2023-12-26</lastmod>
+         <lastmod>2023-12-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
