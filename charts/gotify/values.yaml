@@ -8,9 +8,16 @@ image:
   # @default -- Chart.AppVersion
   tag:
 
+# -- Gotify [configuration](https://gotify.net/docs/config#config-file)
 env:
   # -- Set the timezone
   TZ: UTC
+  # -- Default user name
+  GOTIFY_DEFAULTUSER_NAME: "admin"
+  # -- Default user password
+  GOTIFY_DEFAULTUSER_PASS: "admin"
+  # -- Enable user registration
+  GOTIFY_REGISTRATION: "false"
 
 # -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
 service:
@@ -42,4 +49,5 @@ persistence:
     type: pvc
     # -- Size of volume
     size: 1Gi
-
+    # -- Mount path
+    mountPath: /app/data
