@@ -1,0 +1,12 @@
+_src_path: template/
+description: ' 🏡 Open source home automation that puts local control and privacy first. '
+homepage: https://www.home-assistant.io/
+image: ghcr.io/linuxserver/homeassistant
+keywords: automation
+mariadb_enabled: false
+name: homeassistant
+port: 8123
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/home-assistant/core,https://github.com/linuxserver/docker-homeassistant
+version: 2023.12.4

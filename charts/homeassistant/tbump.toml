@@ -1,0 +1,19 @@
+github_url = "https://github.com/jasonb5/charts/"
+
+[version]
+current = "0.1.0"
+
+regex = '''
+  (?P<major>\d+)
+  \.
+  (?P<minor>\d+)
+  \.
+  (?P<patch>\d+)
+  '''
+
+[git]
+message_template = "Bump homeassistant to {new_version}"
+tag_template = "homeassistant_v{new_version}"
+
+[[file]]
+src = "Chart.yaml"
