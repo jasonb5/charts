@@ -1,6 +1,6 @@
 apiVersion: v2
 name: commonlib
-version: 0.1.0
+version: 0.1.1
 description: |
   Empty chart.
 type: application
@@ -13,4 +13,4 @@ dependencies:
   repository: https://jasonb5.github.io/charts
 maintainers:
   - name: jasonb5
-appVersion: 0.1.0
+appVersion: 0.1.1
