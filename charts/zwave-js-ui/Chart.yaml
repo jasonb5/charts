@@ -1,0 +1,19 @@
+apiVersion: v2
+name: zwave-js-ui
+version: 0.1.0
+description: |
+  Full featured Z-Wave Control Panel UI and MQTT gateway. Built using Nodejs, and Vue/Vuetify 
+type: application
+keywords:
+  - automation
+home: https://zwave-js.github.io/zwave-js-ui/#/
+sources:
+  - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+  - https://github.com/zwave-js/zwave-js-ui
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 9.6.2

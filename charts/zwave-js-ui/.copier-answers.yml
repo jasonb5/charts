@@ -1,0 +1,13 @@
+_src_path: template/
+description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
+    Nodejs, and Vue/Vuetify '
+homepage: https://zwave-js.github.io/zwave-js-ui/#/
+image: zwavejs/zwave-js-ui
+keywords: automation
+mariadb_enabled: false
+name: zwave-js-ui
+port: 8091
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/zwave-js/zwave-js-ui
+version: 9.6.2
