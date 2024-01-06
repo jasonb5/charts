@@ -182,6 +182,29 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
     version: 0.1.0
+  node-red:
+  - apiVersion: v2
+    appVersion: 2.2.3
+    created: "2024-01-05T21:41:23.02499608-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Low-code programming for event-driven applications '
+    digest: 93864c51fb874a02ce06b321851debc51cf2446863b90529d1eb055faf3d57c0
+    home: https://nodered.org/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: node-red
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/node-red
+    - https://github.com/node-red/node-red
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/node-red-0.1.0/node-red-0.1.0.tgz
+    version: 0.1.0
   photoprism:
   - apiVersion: v2
     appVersion: 231128-ce
@@ -207,4 +230,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.0/photoprism-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-05T21:32:48.875425078-08:00"
+generated: "2024-01-05T21:41:23.025019904-08:00"
