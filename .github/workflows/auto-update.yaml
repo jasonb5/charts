@@ -66,7 +66,9 @@ jobs:
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config user.name ${{ github.actor }}
 
-          git checkout -b updates_${{ matrix.chart }}_${{ steps.check_chart.outputs.new_version }}
+          branch_name=updates_${{ matrix.chart }}_${{ steps.check_chart.outputs.new_version }}
+
+          git checkout -b ${branch_name}
 
           pushd charts/${{ matrix.chart }}
 
@@ -74,6 +76,6 @@ jobs:
 
           git add .
           git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
-          git push -u origin updates_${{ matrix.chart }}
+          git push -u origin ${branch_name}
 
           gh pr create --fill --label needs-testing
