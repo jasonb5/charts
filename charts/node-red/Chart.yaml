@@ -1,0 +1,19 @@
+apiVersion: v2
+name: node-red
+version: 0.1.0
+description: |
+  Low-code programming for event-driven applications
+type: application
+keywords:
+  - automation
+home: https://nodered.org/
+sources:
+  - https://github.com/jasonb5/charts/tree/main/charts/node-red
+  - https://github.com/node-red/node-red
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 2.2.3

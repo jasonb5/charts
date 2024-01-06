@@ -1,0 +1,12 @@
+_src_path: template/
+description: Low-code programming for event-driven applications
+homepage: https://nodered.org/
+image: nodered/node-red
+keywords: automation
+mariadb_enabled: false
+name: node-red
+port: 1880
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/node-red/node-red
+version: 2.2.3
