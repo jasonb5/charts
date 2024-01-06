@@ -230,4 +230,28 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.0/photoprism-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-05T21:41:23.025019904-08:00"
+  zwave-js-ui:
+  - apiVersion: v2
+    appVersion: 9.6.2
+    created: "2024-01-05T21:55:42.466215642-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
+      Nodejs, and Vue/Vuetify  '
+    digest: 1bacc58b0b608741ac790746054fd1922a8e89b83d3097f3a26bd50cc0cac4de
+    home: https://zwave-js.github.io/zwave-js-ui/#/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: zwave-js-ui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+    - https://github.com/zwave-js/zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-01-05T21:55:42.466236985-08:00"
