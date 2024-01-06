@@ -36,6 +36,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jasonb5.github.io/charts/charts/node-red/</loc>
+         <lastmod>2024-01-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jasonb5.github.io/charts/charts/photoprism/</loc>
          <lastmod>2024-01-06</lastmod>
          <changefreq>daily</changefreq>
