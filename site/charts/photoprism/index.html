@@ -858,6 +858,12 @@
 <td>Image tag</td>
 </tr>
 <tr>
+<td>env</td>
+<td>object</td>
+<td><code>{"PHOTOPRISM_ADMIN_PASSWORD":"admin","PHOTOPRISM_ADMIN_USER":"admin","PHOTOPRISM_AUTH_MODE":"password","PHOTOPRISM_EXPERIMENTAL":true,"PHOTOPRISM_WORKERS":4,"TZ":"UTC"}</code></td>
+<td>Photoprism <a href="https://docs.photoprism.app/getting-started/config-options/">configuration</a></td>
+</tr>
+<tr>
 <td>env.TZ</td>
 <td>string</td>
 <td><code>"UTC"</code></td>
@@ -882,16 +888,16 @@
 <td>Admin password</td>
 </tr>
 <tr>
-<td>env.PHOTOPRISM_WORKERS</td>
-<td>int</td>
-<td><code>4</code></td>
-<td>Number of workers</td>
-</tr>
-<tr>
 <td>env.PHOTOPRISM_EXPERIMENTAL</td>
 <td>bool</td>
 <td><code>true</code></td>
 <td>Enable experimental features</td>
+</tr>
+<tr>
+<td>env.PHOTOPRISM_WORKERS</td>
+<td>int</td>
+<td><code>4</code></td>
+<td>Number of index workers</td>
 </tr>
 <tr>
 <td>service</td>
@@ -944,7 +950,7 @@
 <tr>
 <td>persistence</td>
 <td>object</td>
-<td><code>{"config":{"enabled":false,"size":"1Gi","type":"pvc"}}</code></td>
+<td><code>{"config":{"enabled":false,"mountPath":"/photoprism/storage","size":"1Gi","type":"pvc"},"import":{"enabled":false,"mountPath":"/photoprism/import","size":"1Gi","type":"pvc"},"originals":{"enabled":false,"mountPath":"/photoprism/originals","size":"1Gi","type":"pvc"}}</code></td>
 <td><a href="https://jasonb5.github.io/charts/site/guide/common-library/#persistence">Persistence</a></td>
 </tr>
 <tr>
@@ -964,6 +970,60 @@
 <td>string</td>
 <td><code>"1Gi"</code></td>
 <td>Size of volume</td>
+</tr>
+<tr>
+<td>persistence.config.mountPath</td>
+<td>string</td>
+<td><code>"/photoprism/storage"</code></td>
+<td>Mount path</td>
+</tr>
+<tr>
+<td>persistence.originals.enabled</td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable/disable persistence</td>
+</tr>
+<tr>
+<td>persistence.originals.type</td>
+<td>string</td>
+<td><code>"pvc"</code></td>
+<td>Type of volume mount</td>
+</tr>
+<tr>
+<td>persistence.originals.size</td>
+<td>string</td>
+<td><code>"1Gi"</code></td>
+<td>Size of volume</td>
+</tr>
+<tr>
+<td>persistence.originals.mountPath</td>
+<td>string</td>
+<td><code>"/photoprism/originals"</code></td>
+<td>Mount path</td>
+</tr>
+<tr>
+<td>persistence.import.enabled</td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable/disable persistence</td>
+</tr>
+<tr>
+<td>persistence.import.type</td>
+<td>string</td>
+<td><code>"pvc"</code></td>
+<td>Type of volume mount</td>
+</tr>
+<tr>
+<td>persistence.import.size</td>
+<td>string</td>
+<td><code>"1Gi"</code></td>
+<td>Size of volume</td>
+</tr>
+<tr>
+<td>persistence.import.mountPath</td>
+<td>string</td>
+<td><code>"/photoprism/import"</code></td>
+<td>Mount path</td>
 </tr>
 </tbody>
 </table>
