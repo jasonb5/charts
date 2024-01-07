@@ -5,3 +5,7 @@ docs-build:
 .PHONY: docs
 docs:
 	mkdocs serve -a 0.0.0.0:8000
+
+.PHONY: helm-docs
+helm-docs:
+	helm-docs --sort-values-order file

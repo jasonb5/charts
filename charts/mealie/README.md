@@ -36,10 +36,10 @@ Mealie is a self hosted recipe manager and meal planner with a RestAPI backend a
 | env.BASE_URL | string | `nil` | Application URL |
 | service | object | `{"ports":{"default":{"port":9000}}}` | [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service) |
 | service.ports.default.port | int | `9000` | Default port |
-| ingress | object | `{"enabled":true,"hosts":[{"host":"test.angrydonkey.io","name":"default"}],"tls":{"enabled":false}}` | [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress) |
-| ingress.enabled | bool | `true` | Enable/disable ingress |
-| ingress.hosts[0] | object | `{"host":"test.angrydonkey.io","name":"default"}` | Reference default service |
-| ingress.hosts[0].host | string | `"test.angrydonkey.io"` | Ingress hostname |
+| ingress | object | `{"enabled":false,"hosts":[{"host":null,"name":"default"}],"tls":{"enabled":false}}` | [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress) |
+| ingress.enabled | bool | `false` | Enable/disable ingress |
+| ingress.hosts[0] | object | `{"host":null,"name":"default"}` | Reference default service |
+| ingress.hosts[0].host | string | `nil` | Ingress hostname |
 | ingress.tls | object | `{"enabled":false}` | [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls) |
 | ingress.tls.enabled | bool | `false` | Enable/disable tls |
 | persistence | object | `{"config":{"enabled":false,"mountPath":"/app/data","size":"1Gi","type":"pvc"}}` | [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence) |
