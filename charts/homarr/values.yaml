@@ -22,12 +22,12 @@ service:
 # -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
 ingress:
   # -- Enable/disable ingress
-  enabled: true
+  enabled: false
   hosts:
     # -- Reference default service
   - name: default
     # -- Ingress hostname
-    host: test.angrydonkey.io
+    host:
   # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
   tls:
     # -- Enable/disable tls
