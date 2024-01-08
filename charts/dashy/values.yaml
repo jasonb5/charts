@@ -42,3 +42,5 @@ persistence:
     type: pvc
     # -- Size of pvc
     size: 1Gi
+    # -- Volume mount path
+    mountPath: /app/public
