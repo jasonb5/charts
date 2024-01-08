@@ -1,0 +1,12 @@
+_src_path: template/
+description: Useful tools for developer and people working in IT.
+homepage: https://it-tools.tech/
+image: ghcr.io/corentinth/it-tools
+keywords: tools
+mariadb_enabled: false
+name: it-tools
+port: 80
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/CorentinTh/it-tools
+version: 2023.12.21-5ed3693
