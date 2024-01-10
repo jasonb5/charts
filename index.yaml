@@ -226,6 +226,31 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/homeassistant-0.1.0/homeassistant-0.1.0.tgz
     version: 0.1.0
+  homebox:
+  - apiVersion: v2
+    appVersion: v0.10.3
+    created: "2024-01-09T23:02:17.916607346-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Homebox is the inventory and organization system built for the Home
+      User! With a focus on simplicity and ease of use, Homebox is the perfect solution
+      for your home inventory, organization, and management needs. '
+    digest: 3939cad1fea576628755770d0dddc31c2e2d180bc9c471e43fc43cae5ac3ec42
+    home: https://hay-kot.github.io/homebox/
+    keywords:
+    - inventory
+    maintainers:
+    - name: jasonb5
+    name: homebox
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homebox
+    - https://github.com/hay-kot/homebox
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homebox-0.1.0/homebox-0.1.0.tgz
+    version: 0.1.0
   it-tools:
   - apiVersion: v2
     appVersion: 2023.12.21-5ed3693
@@ -404,4 +429,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-08T00:59:33.802012688-08:00"
+generated: "2024-01-09T23:02:17.916644741-08:00"
