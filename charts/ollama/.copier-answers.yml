@@ -1,0 +1,13 @@
+_src_path: template/
+description: Ollama makes it easy to get up and running with large language models
+    locally.
+homepage: https://ollama.ai/
+image: ollama/ollama
+keywords: ''
+mariadb_enabled: false
+name: ollama
+port: 11434
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/jmorganca/ollama
+version: 0.1.19
