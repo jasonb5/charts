@@ -407,6 +407,28 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/node-red-0.1.0/node-red-0.1.0.tgz
     version: 0.1.0
+  ollama:
+  - apiVersion: v2
+    appVersion: 0.1.19
+    created: "2024-01-11T00:30:54.786686962-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Ollama makes it easy to get up and running with large language models
+      locally. '
+    digest: 1194f71b25894ef9cfc5296c76485379bd04aa9cc35699e9c307cc2ed157e225
+    home: https://ollama.ai/
+    maintainers:
+    - name: jasonb5
+    name: ollama
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/ollama
+    - https://github.com/jmorganca/ollama
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/ollama-0.1.0/ollama-0.1.0.tgz
+    version: 0.1.0
   photoprism:
   - apiVersion: v2
     appVersion: 231128-ce
@@ -484,4 +506,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-09T23:38:03.83187237-08:00"
+generated: "2024-01-11T00:30:54.786726426-08:00"
