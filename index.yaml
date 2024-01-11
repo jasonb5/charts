@@ -429,6 +429,26 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/ollama-0.1.0/ollama-0.1.0.tgz
     version: 0.1.0
+  ollama-webui:
+  - apiVersion: v2
+    appVersion: main
+    created: "2024-01-11T00:58:44.314595415-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "ChatGPT-Style Web Interface for Ollama \U0001F999 "
+    digest: 6defd4e9349b60f1fb5b63c2b671be0f09435fc0e360e772cf80dff6a6a2f06b
+    home: https://github.com/ollama-webui/ollama-webui
+    maintainers:
+    - name: jasonb5
+    name: ollama-webui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/ollama-webui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/ollama-webui-0.1.0/ollama-webui-0.1.0.tgz
+    version: 0.1.0
   photoprism:
   - apiVersion: v2
     appVersion: 231128-ce
@@ -506,4 +526,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-11T00:30:54.786726426-08:00"
+generated: "2024-01-11T00:58:44.314621966-08:00"
