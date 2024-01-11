@@ -1,0 +1,16 @@
+apiVersion: v2
+name: ollama-webui
+version: 0.1.0
+description: |
+  ChatGPT-Style Web Interface for Ollama 🦙
+type: application
+home: https://github.com/ollama-webui/ollama-webui
+sources:
+  - https://github.com/jasonb5/charts/tree/main/charts/ollama-webui
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: main

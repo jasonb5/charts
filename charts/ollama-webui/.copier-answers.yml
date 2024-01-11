@@ -1,0 +1,12 @@
+_src_path: template/
+description: ChatGPT-Style Web Interface for Ollama 🦙
+homepage: https://github.com/ollama-webui/ollama-webui
+image: ghcr.io/ollama-webui/ollama-webui
+keywords: ''
+mariadb_enabled: false
+name: ollama-webui
+port: 8080
+postgresql_enabled: false
+redis_enabled: false
+sources: ''
+version: main
