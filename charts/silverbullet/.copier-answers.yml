@@ -1,0 +1,14 @@
+_src_path: template/
+description: 'SilverBullet aims to be a **workshop for the mind**: a creative space
+    where you collect, create and expand your personal knowledge, while simultaneously
+    letting you evolve the tools you use to do so.'
+homepage: https://silverbullet.md/
+image: zefhemel/silverbullet
+keywords: note-taking
+mariadb_enabled: false
+name: silverbullet
+port: 3000
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/silverbulletmd/silverbullet
+version: 0.5.11
