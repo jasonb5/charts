@@ -6,12 +6,12 @@ description: |
 type: application
 home: https://ollama.ai/
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/ollama
-  - https://github.com/jmorganca/ollama
+- https://github.com/jasonb5/charts/tree/main/charts/ollama
+- https://github.com/jmorganca/ollama
 dependencies:
 - name: common
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 0.1.19
+- name: jasonb5
+appVersion: 0.1.20
