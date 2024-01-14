@@ -181,6 +181,8 @@ def list_versions(chart_dir, raw, newer, **args):
 
     candidates = get_candidate_versions(chart_repo, **args)
 
+    skip_prerelease = current_version.prerelease is None
+
     for version in candidates:
         if raw:
             print(version)
@@ -189,6 +191,11 @@ def list_versions(chart_dir, raw, newer, **args):
                 prefix, new_version = coerce_version(version, BASEPATTERN)
             except ValueError:
                 logger.debug(f"Could not parse {version}")
+
+                continue
+
+            if skip_prerelease and new_version.prerelease is not None:
+                logger.debug(f"Skipping verion {new_version!s} with pre-release")
 
                 continue
 
@@ -211,11 +218,18 @@ def list_versions(chart_dir, raw, newer, **args):
 def search_new_tag(tag, candidates, pattern, prefix):
     new_tag = None
 
+    skip_prerelease = tag.prerelease is None
+
     for x in candidates:
         try:
             candidate_prefix, candidate_tag = coerce_version(x, pattern)
         except ValueError as e:
             logger.info(e)
+
+            continue
+
+        if skip_prerelease and candidate_tag.prerelease is not None:
+            logger.debug(f"Skipping {x}, current version doesn't allow prerelease")
 
             continue
 
@@ -259,8 +273,6 @@ def coerce_version(version, pattern):
     else:
         prefix = ""
 
-        ver = ver.replace(prerelease=None, build=None)
-
     if ver is None:
         match = pattern.match(version)
 
@@ -278,9 +290,6 @@ def coerce_version(version, pattern):
         for x in ["major", "minor", "patch"]:
             if groups[x] is None:
                 groups[x] = 0
-
-        groups.pop("prerelease")
-        groups.pop("build")
 
         try:
             ver = Version(**groups)
