@@ -1,0 +1,1 @@
+../../charts/esphome/README.md

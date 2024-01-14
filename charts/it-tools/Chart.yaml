@@ -1,0 +1,19 @@
+apiVersion: v2
+name: it-tools
+version: 0.1.0
+description: |
+  Useful tools for developer and people working in IT.
+type: application
+keywords:
+  - tools
+home: https://it-tools.tech/
+sources:
+  - https://github.com/jasonb5/charts/tree/main/charts/it-tools
+  - https://github.com/CorentinTh/it-tools
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 2023.12.21-5ed3693

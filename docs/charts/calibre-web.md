@@ -1,0 +1,1 @@
+../../charts/calibre-web/README.md

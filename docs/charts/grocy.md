@@ -1,0 +1,1 @@
+../../charts/grocy/README.md

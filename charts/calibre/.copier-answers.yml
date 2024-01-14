@@ -1,0 +1,15 @@
+_src_path: template/
+description: Calibre is a powerful and easy to use e-book manager. Users say it's
+    outstanding and a must-have. It'll allow you to do nearly everything and it takes
+    things a step beyond normal e-book software. It's also completely free and open
+    source and great for both casual users and computer experts.
+homepage: https://calibre-ebook.com/
+image: ghcr.io/linuxserver/calibre
+keywords: ebooks,management
+mariadb_enabled: false
+name: calibre
+port: 8080
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/kovidgoyal/calibre,https://github.com/linuxserver/docker-calibre
+version: 7.3.0

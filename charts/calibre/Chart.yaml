@@ -1,0 +1,21 @@
+apiVersion: v2
+name: calibre
+version: 0.1.0
+description: |
+  Calibre is a powerful and easy to use e-book manager. Users say it's outstanding and a must-have. It'll allow you to do nearly everything and it takes things a step beyond normal e-book software. It's also completely free and open source and great for both casual users and computer experts.
+type: application
+keywords:
+  - ebooks
+  - management
+home: https://calibre-ebook.com/
+sources:
+  - https://github.com/jasonb5/charts/tree/main/charts/calibre
+  - https://github.com/kovidgoyal/calibre
+  - https://github.com/linuxserver/docker-calibre
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 7.3.0
