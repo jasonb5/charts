@@ -240,14 +240,23 @@ def search_new_tag(tag, candidates, pattern, prefix):
 
             continue
 
-        if candidate_tag > tag:
-            new_tag = x
+        if new_tag is None:
+            if candidate_tag > tag:
+                new_tag = candidate_tag
 
-            logger.info(f"Found new tag {new_tag}")
+                logger.info(f"Found new tag {new_tag}")
+            else:
+                logger.info(f"Tag {x} is not newer than {tag}")
+        else:
+            if candidate_tag > new_tag:
+                new_tag = candidate_tag
 
-            break
+                logger.info(f"Found new tag {new_tag}")
+            else:
+                logger.info(f"Tag {x} is not newer than {tag}")
 
-        logger.info(f"Tag {x} is not newer than {tag}")
+    if new_tag is not None:
+        new_tag = str(new_tag)
 
     return new_tag
 
