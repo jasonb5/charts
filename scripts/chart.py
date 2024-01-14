@@ -55,6 +55,8 @@ def main():
         coerce_tag(**args)
     elif args["action"] == "os-check":
         os_check(**args)
+    elif args["action"] == "version":
+        version(**args)
 
 
 def get_args():
@@ -83,6 +85,11 @@ def get_args():
         "os-check", help="Prints content of /etc/os-release"
     )
     os_check_parser.add_argument("chart_dir", help="path to chart directory")
+
+    version_parser = subparsers.add_parser(
+        "version", help="Prints chart version"
+    )
+    version_parser.add_argument("chart_dir", help="path to chart directory")
 
     args = vars(parser.parse_args())
 
@@ -267,11 +274,19 @@ def os_check(chart_dir, **args):
 
     result = subprocess.run(cmd.split(" "), capture_output=True)
 
-    lines = result.stdout.decode("utf-8").split("\r\n")
+    output = result.stdout.decode("utf-8")
 
-    data = dict([x.split("=") for x in lines if x != ""])
+    logger.debug(f"Output\n{output}")
 
-    print(f"Found ID {data['ID']!r}")
+    data = dict([x.split("=") for x in output.split("\r\n") if x != ""])
+
+    print(f"{data['ID']}")
+
+
+def version(chart_dir, **args):
+    _, app_version = parse_helm_chart(chart_dir)
+
+    print(f"{app_version}")
 
 
 def parse_helm_chart(chart_dir, **_):
