@@ -43,6 +43,9 @@ BASEVERSION = r"""
                """
 
 
+BASEPATTERN = re.compile(BASEVERSION, re.VERBOSE)
+
+
 def main():
     args = get_args()
 
@@ -57,6 +60,8 @@ def main():
         os_check(**args)
     elif args["action"] == "version":
         version(**args)
+    elif args["action"] == "list":
+        list_versions(**args)
 
 
 def get_args():
@@ -86,10 +91,16 @@ def get_args():
     )
     os_check_parser.add_argument("chart_dir", help="path to chart directory")
 
-    version_parser = subparsers.add_parser(
-        "version", help="Prints chart version"
-    )
+    version_parser = subparsers.add_parser("version", help="Prints chart version")
     version_parser.add_argument("chart_dir", help="path to chart directory")
+
+    list_parser = subparsers.add_parser("list", help="list candidates")
+    list_parser.add_argument("chart_dir", help="path to chart directory")
+    list_parser.add_argument("--token", help="GitHub token", required=True)
+    list_parser.add_argument("--raw", action="store_true", help="Print raw tags")
+    list_parser.add_argument(
+        "--newer", action="store_true", help="Filters only newer versions"
+    )
 
     args = vars(parser.parse_args())
 
@@ -102,21 +113,16 @@ def get_args():
 def update_chart(**args):
     chart_repo, tag = parse_helm_chart(**args)
 
-    pattern = re.compile(BASEVERSION, re.VERBOSE)
-
     try:
-        prefix, parsed_tag = coerce(tag, pattern)
+        prefix, parsed_tag = coerce_version(tag, BASEPATTERN)
     except ValueError:
         print(f"Could not parse tag {tag}")
 
         return
 
-    if "ghcr.io" in chart_repo:
-        candidates = search_ghcr(chart_repo, **args)
-    else:
-        candidates = search_docker_hub(chart_repo, **args)
+    candidates = get_candidate_versions(chart_repo, **args)
 
-    new_tag = search_new_tag(parsed_tag, candidates, pattern, prefix)
+    new_tag = search_new_tag(parsed_tag, candidates, BASEPATTERN, prefix)
 
     if new_tag is None:
         print("Found no updated tag")
@@ -161,9 +167,45 @@ def search_docker_hub(chart_repo, **_):
 
     data = response.json()
 
-    logger.info(f"Found {data['count']} candidates")
+    candidates = [x["name"] for x in data["results"]]
 
-    return [x["name"] for x in data["results"]]
+    logger.info(f"Found {len(candidates)} candidates")
+
+    return candidates
+
+
+def list_versions(chart_dir, raw, newer, **args):
+    chart_repo, app_version = parse_helm_chart(chart_dir)
+
+    current_prefix, current_version = coerce_version(app_version, BASEPATTERN)
+
+    candidates = get_candidate_versions(chart_repo, **args)
+
+    for version in candidates:
+        if raw:
+            print(version)
+        else:
+            try:
+                prefix, new_version = coerce_version(version, BASEPATTERN)
+            except ValueError:
+                logger.debug(f"Could not parse {version}")
+
+                continue
+
+            if current_prefix != prefix:
+                logger.debug(f"Missmatched prefixes {current_prefix} != {prefix}")
+
+                continue
+
+            if not newer or (newer and new_version > current_version):
+                if prefix == "":
+                    print(f"{version}")
+                else:
+                    print(f"{prefix}-{version}")
+            else:
+                logger.debug(f"Skipping old version {version}")
+
+                continue
 
 
 def search_new_tag(tag, candidates, pattern, prefix):
@@ -171,7 +213,7 @@ def search_new_tag(tag, candidates, pattern, prefix):
 
     for x in candidates:
         try:
-            candidate_prefix, candidate_tag = coerce(x, pattern)
+            candidate_prefix, candidate_tag = coerce_version(x, pattern)
         except ValueError as e:
             logger.info(e)
 
@@ -200,14 +242,14 @@ def coerce_tag(tag, **args):
     pattern = re.compile(BASEVERSION, re.VERBOSE)
 
     try:
-        prefix, coerced_tag = coerce(tag, pattern)
+        prefix, coerced_tag = coerce_version(tag, pattern)
     except ValueError as e:
         print(e)
     else:
         print(f"Coerced tag {tag} to {str(coerced_tag)}, prefix {prefix!r}")
 
 
-def coerce(version, pattern):
+def coerce_version(version, pattern):
     ver = None
 
     try:
@@ -287,6 +329,15 @@ def version(chart_dir, **args):
     _, app_version = parse_helm_chart(chart_dir)
 
     print(f"{app_version}")
+
+
+def get_candidate_versions(chart_repo, **args):
+    if "ghcr.io" in chart_repo:
+        candidates = search_ghcr(chart_repo, **args)
+    else:
+        candidates = search_docker_hub(chart_repo, **args)
+
+    return candidates
 
 
 def parse_helm_chart(chart_dir, **_):
