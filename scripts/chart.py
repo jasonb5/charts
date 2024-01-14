@@ -82,6 +82,9 @@ def get_args():
         "--in-place", action="store_true", help="update chart yaml in place"
     )
     update_parser.add_argument("--token", help="GitHub token")
+    update_parser.add_argument(
+        "--match-prerelease", action="store_true", help="Pre-release must match"
+    )
 
     coerce_parser = subparsers.add_parser("coerce", help="coerce tag")
     coerce_parser.add_argument("tag", help="tag to coerce")
@@ -100,6 +103,11 @@ def get_args():
     list_parser.add_argument("--raw", action="store_true", help="Print raw tags")
     list_parser.add_argument(
         "--newer", action="store_true", help="Filters only newer versions"
+    )
+    list_parser.add_argument(
+        "--match-prerelease",
+        action="store_true",
+        help="List versions that match prerelease",
     )
 
     args = vars(parser.parse_args())
@@ -122,7 +130,7 @@ def update_chart(**args):
 
     candidates = get_candidate_versions(chart_repo, **args)
 
-    new_tag = search_new_tag(parsed_tag, candidates, BASEPATTERN, prefix)
+    new_tag = search_new_tag(parsed_tag, candidates, BASEPATTERN, prefix, **args)
 
     if new_tag is None:
         print("Found no updated tag")
@@ -174,7 +182,7 @@ def search_docker_hub(chart_repo, **_):
     return candidates
 
 
-def list_versions(chart_dir, raw, newer, **args):
+def list_versions(chart_dir, raw, newer, match_prerelease, **args):
     chart_repo, app_version = parse_helm_chart(chart_dir)
 
     current_prefix, current_version = coerce_version(app_version, BASEPATTERN)
@@ -191,6 +199,14 @@ def list_versions(chart_dir, raw, newer, **args):
                 prefix, new_version = coerce_version(version, BASEPATTERN)
             except ValueError:
                 logger.debug(f"Could not parse {version}")
+
+                continue
+
+            if (
+                match_prerelease
+                and new_version.prerelease != current_version.prerelease
+            ):
+                logger.info(f"Skipping, missmatched prerelease")
 
                 continue
 
@@ -215,7 +231,7 @@ def list_versions(chart_dir, raw, newer, **args):
                 continue
 
 
-def search_new_tag(tag, candidates, pattern, prefix):
+def search_new_tag(tag, candidates, pattern, prefix, match_prerelease, **args):
     new_tag = None
 
     skip_prerelease = tag.prerelease is None
@@ -225,6 +241,11 @@ def search_new_tag(tag, candidates, pattern, prefix):
             candidate_prefix, candidate_tag = coerce_version(x, pattern)
         except ValueError as e:
             logger.info(e)
+
+            continue
+
+        if match_prerelease and tag.prerelease != candidate_tag.prerelease:
+            logger.info(f"Skipping, missmatched prerelease")
 
             continue
 
