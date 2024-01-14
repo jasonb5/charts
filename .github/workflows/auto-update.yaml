@@ -46,9 +46,15 @@ jobs:
         run: |
           pip install semver requests tbump pyyaml
 
-          new_version="$(python scripts/chart.py --log --log-level DEBUG --log-file ./output.log update --in-place --token ${{ secrets.GITHUB_TOKEN }} main/charts/${{ matrix.chart }})"
+          pushd main/charts/${{ matrix.chart }}
+
+          make update GLOBAL="--log --log-level DEBUG --log-file ./output.log" ARGS="--in-place --token ${{ secrets.GITHUB_TOKEN }}"
 
           cat output.log
+
+          new_version=`make version`
+
+          popd
 
           pushd main/
 

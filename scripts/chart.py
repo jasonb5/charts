@@ -160,7 +160,7 @@ def search_ghcr(chart_repo, token, **_):
     if response.status_code == 404:
         response = requests.get(user_url, headers=headers)
 
-        response.raise_for_status()
+    response.raise_for_status()
 
     data = response.json()
 

@@ -2,6 +2,8 @@
 
 CHART_DIR ?= .
 
+include $(wildcard custom.mk)
+
 package upload index: CR_ARGS = $(if $(wildcard ../../cr.yaml),--config ../../cr.yaml,) $(ARGS) 
 
 .PHONY: package
@@ -16,6 +18,14 @@ upload:
 index:
 	mkdir .cr-index || exit 0
 	cr index $(CR_ARGS) --git-repo charts $(CHART_DIR)
+
+.PHONY: update
+update:
+	python ../../scripts/chart.py $(GLOBAL) update $(ARGS) $(_ARGS) .
+
+.PHONY: version
+version:
+	@printf "%s\n" $(shell python ../../scripts/chart.py version .)
 
 .PHONY: new-chart
 new-chart:
