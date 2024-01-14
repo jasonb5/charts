@@ -145,6 +145,10 @@ def search_ghcr(chart_repo, token, **_):
         f"https://api.github.com/orgs/{org}/packages/container/{package_name}/versions"
     )
 
+    user_url = (
+        f"https://api.github.com/users/{org}/packages/container/{package_name}/versions"
+    )
+
     headers = {
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {token}",
@@ -153,9 +157,14 @@ def search_ghcr(chart_repo, token, **_):
 
     response = requests.get(url, headers=headers)
 
-    response.raise_for_status()
+    if response.status_code == 404:
+        response = requests.get(user_url, headers=headers)
+
+        response.raise_for_status()
 
     data = response.json()
+
+    # logger.debug(f"Raw response\n{data}")
 
     candidates = [y for x in data for y in x["metadata"]["container"]["tags"]]
 
