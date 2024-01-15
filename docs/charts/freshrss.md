@@ -1,0 +1,1 @@
+../../charts/freshrss/README.md

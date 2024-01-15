@@ -1,0 +1,14 @@
+_src_path: template/
+description: FreshRSS is an RSS aggregator and reader. It allows you to read and follow
+    several news websites at a glance without the need to browse from one website
+    to another.
+homepage: http://freshrss.github.io/FreshRSS/
+image: freshrss/freshrss
+keywords: rss
+mariadb_enabled: false
+name: freshrss
+port: 80
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/FreshRSS/FreshRSS
+version: 1.23.1
