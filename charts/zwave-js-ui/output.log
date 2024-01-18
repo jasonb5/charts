@@ -1,0 +1,19 @@
+INFO:chart:Using chart repo 'zwavejs/zwave-js-ui'
+INFO:chart:Using appVersion '9.6.2'
+INFO:chart:Coerced version 9.6.2 to 9.6.2 with prefix ''
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): hub.docker.com:443
+DEBUG:urllib3.connectionpool:https://hub.docker.com:443 "GET /v2/namespaces/zwavejs/repositories/zwave-js-ui/tags HTTP/1.1" 200 None
+INFO:chart:Found 10 candidates
+INFO:chart:Could not parse 'latest'
+INFO:chart:Could not parse 'sha-76802d5'
+INFO:chart:Could not parse 'master'
+INFO:chart:Could not parse 'sha-04fdaf5'
+INFO:chart:Coerced version 9 to 9.0.0 with prefix ''
+INFO:chart:Tag 9 is not newer than 9.6.2
+INFO:chart:Coerced version 9.7 to 9.7.0 with prefix ''
+INFO:chart:Found new tag 9.7.0
+INFO:chart:Coerced version 9.7.1 to 9.7.1 with prefix ''
+INFO:chart:Found new tag 9.7.1
+INFO:chart:Could not parse 'sha-22bd7ab'
+INFO:chart:Could not parse 'sha-d7db465'
+INFO:chart:Could not parse 'sha-51c53a1'
