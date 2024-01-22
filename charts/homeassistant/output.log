@@ -1,0 +1,97 @@
+INFO:chart:Using chart repo 'ghcr.io/linuxserver/homeassistant'
+INFO:chart:Using appVersion '2024.1.3'
+INFO:chart:Coerced version 2024.1.3 to 2024.1.3 with prefix ''
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.github.com:443
+DEBUG:urllib3.connectionpool:https://api.github.com:443 "GET /orgs/linuxserver/packages/container/homeassistant/versions HTTP/1.1" 200 None
+INFO:chart:Found 69 candidates
+INFO:chart:Coerced version 2024.1.4 to 2024.1.4 with prefix ''
+INFO:chart:Found new tag 2024.1.4
+INFO:chart:Coerced version version-2024.1.4 to 2024.1.4 with prefix 'version'
+DEBUG:chart:Skipping version-2024.1.4 mismatch prefixes '' and 'version'
+INFO:chart:Coerced version 2024.1.4-ls223 to 2024.1.4-ls223 with prefix ''
+DEBUG:chart:Skipping 2024.1.4-ls223, current version doesn't allow prerelease
+INFO:chart:Could not parse 'latest'
+INFO:chart:Could not parse 'arm64v8-2024.1.4'
+INFO:chart:Could not parse 'arm64v8-version-2024.1.4'
+INFO:chart:Could not parse 'arm64v8-2024.1.4-ls223'
+INFO:chart:Could not parse 'arm64v8-latest'
+INFO:chart:Could not parse 'amd64-2024.1.4'
+INFO:chart:Could not parse 'amd64-version-2024.1.4'
+INFO:chart:Could not parse 'amd64-2024.1.4-ls223'
+INFO:chart:Could not parse 'amd64-latest'
+INFO:chart:Coerced version 2024.1.3-ls222 to 2024.1.3-ls222 with prefix ''
+DEBUG:chart:Skipping 2024.1.3-ls222, current version doesn't allow prerelease
+INFO:chart:Coerced version 2024.1.3 to 2024.1.3 with prefix ''
+INFO:chart:Tag 2024.1.3 is not newer than 2024.1.3
+INFO:chart:Coerced version version-2024.1.3 to 2024.1.3 with prefix 'version'
+DEBUG:chart:Skipping version-2024.1.3 mismatch prefixes '' and 'version'
+INFO:chart:Could not parse 'arm64v8-2024.1.3-ls222'
+INFO:chart:Could not parse 'arm64v8-2024.1.3'
+INFO:chart:Could not parse 'arm64v8-version-2024.1.3'
+INFO:chart:Could not parse 'amd64-2024.1.3-ls222'
+INFO:chart:Could not parse 'amd64-2024.1.3'
+INFO:chart:Could not parse 'amd64-version-2024.1.3'
+INFO:chart:Coerced version 2024.1.3-ls221 to 2024.1.3-ls221 with prefix ''
+DEBUG:chart:Skipping 2024.1.3-ls221, current version doesn't allow prerelease
+INFO:chart:Could not parse 'arm64v8-2024.1.3-ls221'
+INFO:chart:Could not parse 'amd64-2024.1.3-ls221'
+INFO:chart:Coerced version 2024.1.2-ls220 to 2024.1.2-ls220 with prefix ''
+DEBUG:chart:Skipping 2024.1.2-ls220, current version doesn't allow prerelease
+INFO:chart:Coerced version 2024.1.2 to 2024.1.2 with prefix ''
+INFO:chart:Tag 2024.1.2 is not newer than 2024.1.3
+INFO:chart:Coerced version version-2024.1.2 to 2024.1.2 with prefix 'version'
+DEBUG:chart:Skipping version-2024.1.2 mismatch prefixes '' and 'version'
+INFO:chart:Could not parse 'arm64v8-2024.1.2-ls220'
+INFO:chart:Could not parse 'arm64v8-2024.1.2'
+INFO:chart:Could not parse 'arm64v8-version-2024.1.2'
+INFO:chart:Could not parse 'amd64-2024.1.2-ls220'
+INFO:chart:Could not parse 'amd64-2024.1.2'
+INFO:chart:Could not parse 'amd64-version-2024.1.2'
+INFO:chart:Coerced version 2024.1.2-ls219 to 2024.1.2-ls219 with prefix ''
+DEBUG:chart:Skipping 2024.1.2-ls219, current version doesn't allow prerelease
+INFO:chart:Could not parse 'arm64v8-2024.1.2-ls219'
+INFO:chart:Could not parse 'amd64-2024.1.2-ls219'
+INFO:chart:Coerced version 2024.1.1 to 2024.1.1 with prefix ''
+INFO:chart:Tag 2024.1.1 is not newer than 2024.1.3
+INFO:chart:Coerced version version-2024.1.1 to 2024.1.1 with prefix 'version'
+DEBUG:chart:Skipping version-2024.1.1 mismatch prefixes '' and 'version'
+INFO:chart:Coerced version 2024.1.1-ls218 to 2024.1.1-ls218 with prefix ''
+DEBUG:chart:Skipping 2024.1.1-ls218, current version doesn't allow prerelease
+INFO:chart:Could not parse 'arm64v8-2024.1.1'
+INFO:chart:Could not parse 'arm64v8-version-2024.1.1'
+INFO:chart:Could not parse 'arm64v8-2024.1.1-ls218'
+INFO:chart:Could not parse 'amd64-2024.1.1'
+INFO:chart:Could not parse 'amd64-version-2024.1.1'
+INFO:chart:Could not parse 'amd64-2024.1.1-ls218'
+INFO:chart:Coerced version 2024.1.0 to 2024.1.0 with prefix ''
+INFO:chart:Tag 2024.1.0 is not newer than 2024.1.3
+INFO:chart:Coerced version version-2024.1.0 to 2024.1.0 with prefix 'version'
+DEBUG:chart:Skipping version-2024.1.0 mismatch prefixes '' and 'version'
+INFO:chart:Coerced version 2024.1.0-ls217 to 2024.1.0-ls217 with prefix ''
+DEBUG:chart:Skipping 2024.1.0-ls217, current version doesn't allow prerelease
+INFO:chart:Could not parse 'arm64v8-2024.1.0'
+INFO:chart:Could not parse 'arm64v8-version-2024.1.0'
+INFO:chart:Could not parse 'arm64v8-2024.1.0-ls217'
+INFO:chart:Could not parse 'amd64-2024.1.0'
+INFO:chart:Could not parse 'amd64-version-2024.1.0'
+INFO:chart:Could not parse 'amd64-2024.1.0-ls217'
+INFO:chart:Coerced version 2023.12.4-ls216 to 2023.12.4-ls216 with prefix ''
+DEBUG:chart:Skipping 2023.12.4-ls216, current version doesn't allow prerelease
+INFO:chart:Coerced version 2023.12.4 to 2023.12.4 with prefix ''
+INFO:chart:Tag 2023.12.4 is not newer than 2024.1.3
+INFO:chart:Coerced version version-2023.12.4 to 2023.12.4 with prefix 'version'
+DEBUG:chart:Skipping version-2023.12.4 mismatch prefixes '' and 'version'
+INFO:chart:Could not parse 'arm64v8-2023.12.4-ls216'
+INFO:chart:Could not parse 'arm64v8-2023.12.4'
+INFO:chart:Could not parse 'arm64v8-version-2023.12.4'
+INFO:chart:Could not parse 'amd64-2023.12.4-ls216'
+INFO:chart:Could not parse 'amd64-2023.12.4'
+INFO:chart:Could not parse 'amd64-version-2023.12.4'
+INFO:chart:Coerced version 2023.12.4-ls215 to 2023.12.4-ls215 with prefix ''
+DEBUG:chart:Skipping 2023.12.4-ls215, current version doesn't allow prerelease
+INFO:chart:Could not parse 'arm64v8-2023.12.4-ls215'
+INFO:chart:Could not parse 'amd64-2023.12.4-ls215'
+INFO:chart:Coerced version 2023.12.4-ls214 to 2023.12.4-ls214 with prefix ''
+DEBUG:chart:Skipping 2023.12.4-ls214, current version doesn't allow prerelease
+INFO:chart:Could not parse 'arm64v8-2023.12.4-ls214'
+INFO:chart:Could not parse 'amd64-2023.12.4-ls214'
