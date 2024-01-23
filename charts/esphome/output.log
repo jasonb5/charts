@@ -16,3 +16,21 @@ DEBUG:chart:Skipping 2024.1.0-dev20240119, current version doesn't allow prerele
 INFO:chart:Could not parse 'dev'
 INFO:chart:Coerced version 2024.1.0-dev20240118 to 2024.1.0-dev20240118 with prefix ''
 DEBUG:chart:Skipping 2024.1.0-dev20240118, current version doesn't allow prerelease
+INFO:chart:Using chart repo 'ghcr.io/esphome/esphome'
+INFO:chart:Using appVersion '2023.12.8'
+INFO:chart:Coerced version 2023.12.8 to 2023.12.8 with prefix ''
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.github.com:443
+DEBUG:urllib3.connectionpool:https://api.github.com:443 "GET /orgs/esphome/packages/container/esphome/versions HTTP/1.1" 200 None
+INFO:chart:Found 8 candidates
+INFO:chart:Coerced version 2023.12.9 to 2023.12.9 with prefix ''
+INFO:chart:Found new tag 2023.12.9
+INFO:chart:Coerced version 2023.12 to 2023.12.0 with prefix ''
+INFO:chart:Tag 2023.12 is not newer than 2023.12.8
+INFO:chart:Could not parse 'stable'
+INFO:chart:Could not parse 'latest'
+INFO:chart:Could not parse 'beta'
+INFO:chart:Coerced version 2024.1.0-dev20240122 to 2024.1.0-dev20240122 with prefix ''
+DEBUG:chart:Skipping 2024.1.0-dev20240122, current version doesn't allow prerelease
+INFO:chart:Could not parse 'dev'
+INFO:chart:Coerced version 2024.1.0-dev20240121 to 2024.1.0-dev20240121 with prefix ''
+DEBUG:chart:Skipping 2024.1.0-dev20240121, current version doesn't allow prerelease
