@@ -17,3 +17,20 @@ INFO:chart:Found new tag 9.7.1
 INFO:chart:Could not parse 'sha-22bd7ab'
 INFO:chart:Could not parse 'sha-d7db465'
 INFO:chart:Could not parse 'sha-51c53a1'
+INFO:chart:Using chart repo 'zwavejs/zwave-js-ui'
+INFO:chart:Using appVersion '9.7.1'
+INFO:chart:Coerced version 9.7.1 to 9.7.1 with prefix ''
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): hub.docker.com:443
+DEBUG:urllib3.connectionpool:https://hub.docker.com:443 "GET /v2/namespaces/zwavejs/repositories/zwave-js-ui/tags HTTP/1.1" 200 None
+INFO:chart:Found 10 candidates
+INFO:chart:Could not parse 'sha-b1a34df'
+INFO:chart:Could not parse 'master'
+INFO:chart:Could not parse 'sha-3035d65'
+INFO:chart:Could not parse 'test'
+INFO:chart:Could not parse 'sha-b9ac2e4'
+INFO:chart:Could not parse 'sha-383ad83'
+INFO:chart:Could not parse 'sha-3048fed'
+INFO:chart:Coerced version sha-8906358 to 8906358.0.0 with prefix 'sha'
+DEBUG:chart:Skipping sha-8906358 mismatch prefixes '' and 'sha'
+INFO:chart:Could not parse 'sha-f85f225'
+INFO:chart:Could not parse 'sha-76802d5'
