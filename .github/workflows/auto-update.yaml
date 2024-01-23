@@ -52,6 +52,8 @@ jobs:
 
           cat output.log
 
+          rm output.log
+
           new_version=`make version`
 
           popd
