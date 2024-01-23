@@ -1,0 +1,24 @@
+INFO:chart:Using chart repo 'zefhemel/silverbullet'
+INFO:chart:Using appVersion '0.5.11'
+INFO:chart:Coerced version 0.5.11 to 0.5.11 with prefix ''
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): hub.docker.com:443
+DEBUG:urllib3.connectionpool:https://hub.docker.com:443 "GET /v2/namespaces/zefhemel/repositories/silverbullet/tags HTTP/1.1" 200 None
+INFO:chart:Found 10 candidates
+INFO:chart:Could not parse 'latest'
+INFO:chart:Could not parse 'edge'
+INFO:chart:Coerced version 0.6.0 to 0.6.0 with prefix ''
+INFO:chart:Found new tag 0.6.0
+INFO:chart:Coerced version 0.5.11 to 0.5.11 with prefix ''
+INFO:chart:Tag 0.5.11 is not newer than 0.5.11
+INFO:chart:Coerced version 0.5.10 to 0.5.10 with prefix ''
+INFO:chart:Tag 0.5.10 is not newer than 0.5.11
+INFO:chart:Coerced version 0.5.9 to 0.5.9 with prefix ''
+INFO:chart:Tag 0.5.9 is not newer than 0.5.11
+INFO:chart:Coerced version 0.5.8 to 0.5.8 with prefix ''
+INFO:chart:Tag 0.5.8 is not newer than 0.5.11
+INFO:chart:Coerced version 0.5.7 to 0.5.7 with prefix ''
+INFO:chart:Tag 0.5.7 is not newer than 0.5.11
+INFO:chart:Coerced version 0.5.6 to 0.5.6 with prefix ''
+INFO:chart:Tag 0.5.6 is not newer than 0.5.11
+INFO:chart:Coerced version 0.5.5 to 0.5.5 with prefix ''
+INFO:chart:Tag 0.5.5 is not newer than 0.5.11
