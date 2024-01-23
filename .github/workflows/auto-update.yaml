@@ -46,26 +46,32 @@ jobs:
         run: |
           pip install semver requests tbump pyyaml
 
-          pushd main/charts/${{ matrix.chart }}
-
-          make update GLOBAL="--log --log-level DEBUG --log-file ./output.log" ARGS="--in-place --token ${{ secrets.GITHUB_TOKEN }}"
-
-          cat output.log
-
-          rm output.log
+          python scripts/chart.py \
+            --log --log-level DEBUG \
+            update --in-place --token ${{ secrets.GITHUB_TOKEN }} \
+            main/charts/${{ matrix.chart }}
 
           new_version=`make version`
 
-          popd
+          branch_name=updates_${{ matrix.chart }}_${ new_version }
 
           pushd main/
 
           if [ -n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
             echo "new_version=${new_version}" >> $GITHUB_OUTPUT
+
+            if [ -n "$(git branch -a | grep ${branch_name})" ]
+            then
+              echo "changed=false" >> $GITHUB_OUTPUT
+            else
+              git checkout -b ${branch_name}
+
+              echo "changed=true" >> $GITHUB_OUTPUT
+              echo "branch_name=${branch_name}" >> $GITHUB_OUTPUT
+            fi
           else
-            echo "changed=false" >> $GITHUB_OUTPUT
             echo "new_version=" >> $GITHUB_OUTPUT
+            echo "changed=false" >> $GITHUB_OUTPUT
           fi
       - name: Make new branch and create PR
         working-directory: ./main
@@ -74,16 +80,12 @@ jobs:
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config user.name ${{ github.actor }}
 
-          branch_name=updates_${{ matrix.chart }}_${{ steps.check_chart.outputs.new_version }}
-
-          git checkout -b ${branch_name}
-
           pushd charts/${{ matrix.chart }}
 
           make update-dep
 
           git add .
           git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
-          git push -u origin ${branch_name}
+          git push -u origin ${{ steps.check_chart.outputs.branch_name }}
 
           gh pr create --fill --label needs-testing
