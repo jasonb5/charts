@@ -51,7 +51,7 @@ jobs:
             update --in-place --token ${{ secrets.GITHUB_TOKEN }} \
             main/charts/${{ matrix.chart }}
 
-          new_version=`make version`
+          new_version=`python scripts/chart.py version main/charts/${{ matrix.chart }}`
 
           branch_name=updates_${{ matrix.chart }}_${ new_version }
 
