@@ -53,12 +53,12 @@ jobs:
 
           new_version=`python scripts/chart.py version main/charts/${{ matrix.chart }}`
 
-          branch_name="updates_${{ matrix.chart }}_${ new_version }"
-
           pushd main/
 
           if [ -n "$(git diff --name-only charts/${{ matrix.chart }})" ]; then
             echo "new_version=${new_version}" >> $GITHUB_OUTPUT
+
+            branch_name="updates_${{ matrix.chart }}_${ new_version }"
 
             if [ -n "$(git branch -a | grep ${branch_name})" ]
             then
