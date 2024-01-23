@@ -53,7 +53,7 @@ jobs:
 
           new_version=`python scripts/chart.py version main/charts/${{ matrix.chart }}`
 
-          branch_name=updates_${{ matrix.chart }}_${ new_version }
+          branch_name="updates_${{ matrix.chart }}_${ new_version }"
 
           pushd main/
 
