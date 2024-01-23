@@ -5,15 +5,15 @@ description: |
   SilverBullet aims to be a **workshop for the mind**: a creative space where you collect, create and expand your personal knowledge, while simultaneously letting you evolve the tools you use to do so.
 type: application
 keywords:
-  - note-taking
+- note-taking
 home: https://silverbullet.md/
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/silverbullet
-  - https://github.com/silverbulletmd/silverbullet
+- https://github.com/jasonb5/charts/tree/main/charts/silverbullet
+- https://github.com/silverbulletmd/silverbullet
 dependencies:
 - name: common
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 0.5.11
+- name: jasonb5
+appVersion: 0.6.0
