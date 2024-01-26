@@ -110,7 +110,11 @@ volumes:
   {{- $type := default "pvc" $value.type }}
   {{- if eq $type "configmap" }}
   configMap:
+    {{- if $value.configMapName }}
+    name: {{ $value.configMapName }}
+    {{- else }}
     name: {{ include "common.fullname.postfix" $values }}
+    {{- end }}
   {{- else if eq $type "emptydir" }}
   emptyDir: {}
   {{- else if eq $type "hostpath" }}
@@ -134,7 +138,11 @@ volumes:
     {{- end }}
   {{- else if eq $type "secret" }}
   secret:
+    {{- if $value.secretName }}
+    secretName: {{ $value.secretName }}
+    {{- else }}
     secretName: {{ include "common.fullname.postfix" $values }}
+    {{- end }}
   {{- else }}
   {{- printf "Unknown volume type %v" $type | fail }}
   {{- end }}
