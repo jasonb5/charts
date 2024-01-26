@@ -210,6 +210,20 @@ startupProbe:
 workingDir:
 
 addons:
+  rclone:
+    # -- (bool) Enable/disable rclone addon
+    enabled: false
+
+    # -- (object) Rclone image
+    image:
+      repository: ghcr.io/jasonb5/rclone
+      tag: 0.1.1
+
+    persistence:
+      config:
+        # -- (bool) Enable/disable rclone configuration persistence
+        enabled: false
+
   codeserver:
     # -- (bool) Enable/disable code server addon
     enabled: false
