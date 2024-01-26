@@ -23,9 +23,11 @@
 {{- end }}
 {{- with .Values.extraWorkloads }}
 {{- range $key, $value := . }}
+{{- if (default false $value.enabled) }}
 {{- $values := mustMergeOverwrite $value (dict "workloadName" $key "name" "default") }}
 {{- $dot := dict "Values" $values "TemplateValues" $.TemplateValues "Release" $.Release "Chart" $.Chart }}
 {{- include "common.workload" $dot }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- with .Values.extraObjects }}

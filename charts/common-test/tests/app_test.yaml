@@ -54,6 +54,7 @@ tests:
     set:
       extraWorkloads:
         db:
+          enabled: true
           workload: deployment
 
           image:
@@ -76,6 +77,18 @@ tests:
           of: Deployment
       - hasDocuments:
           count: 1
+  - it: should default to disabled
+    set:
+      extraWorkloads:
+        db:
+          workload: deployment
+
+          image:
+            repository: mariadb
+            tag: latest
+    asserts:
+      - hasDocuments:
+          count: 0
   - it: should be empty
     asserts:
       - hasDocuments:

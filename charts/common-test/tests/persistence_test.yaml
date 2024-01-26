@@ -172,16 +172,26 @@ tests:
         default:
           enabled: true
           type: secret
+
+        custom:
+          enabled: true
+          type: secret
+          secretName: custom-secret
     asserts:
       - equal:
           path: spec.template.spec.containers[0].volumeMounts
           value:
+            - mountPath: /custom
+              name: custom
             - mountPath: /default
               name: common-test
         documentIndex: 0
       - equal:
           path: spec.template.spec.volumes
           value:
+            - secret:
+                secretName: custom-secret
+              name: custom
             - secret:
                 secretName: RELEASE-NAME-common-test
               name: common-test
@@ -314,16 +324,25 @@ tests:
         default:
           enabled: true
           type: configmap
+        custom:
+          enabled: true
+          type: configmap
+          configMapName: custom-secret
     asserts:
       - equal:
           path: spec.template.spec.containers[0].volumeMounts
           value:
+            - mountPath: /custom
+              name: custom
             - mountPath: /default
               name: common-test
         documentIndex: 0
       - equal:
           path: spec.template.spec.volumes
           value:
+            - configMap:
+                name: custom-secret
+              name: custom
             - configMap:
                 name: RELEASE-NAME-common-test
               name: common-test

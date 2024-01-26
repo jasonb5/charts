@@ -1,0 +1,28 @@
+suite: test addons
+values:
+  - values/common.yaml
+templates:
+  - app.yaml
+chart:
+  appVersion: 0.1.0
+tests:
+  - it: should add rclone sidecar
+    set:
+      workload: deployment
+
+      addons:
+        rclone:
+          enabled: true
+    asserts:
+      - hasDocuments:
+          count: 2
+  - it: should add codeserver sidecar
+    set:
+      workload: deployment
+
+      addons:
+        codeserver:
+          enabled: true
+    asserts:
+      - hasDocuments:
+          count: 2
