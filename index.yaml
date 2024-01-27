@@ -802,6 +802,28 @@ entries:
   it-tools:
   - apiVersion: v2
     appVersion: 2023.12.21-5ed3693
+    created: "2024-01-26T20:34:00.826476467-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Useful tools for developer and people working in IT. '
+    digest: ea7e4b1a385e9b9378204c27fa5e042d3303bba9b82e2ad89e0a45bb8ec35237
+    home: https://it-tools.tech/
+    keywords:
+    - tools
+    maintainers:
+    - name: jasonb5
+    name: it-tools
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/it-tools
+    - https://github.com/CorentinTh/it-tools
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/it-tools-0.1.1/it-tools-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 2023.12.21-5ed3693
     created: "2024-01-07T23:11:39.43731325-08:00"
     dependencies:
     - name: common
@@ -1300,4 +1322,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-26T20:33:58.075755862-08:00"
+generated: "2024-01-26T20:34:00.826535314-08:00"
