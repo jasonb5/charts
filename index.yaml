@@ -337,6 +337,28 @@ entries:
   gotify:
   - apiVersion: v2
     appVersion: 2.4.0
+    created: "2024-01-26T20:33:33.68527181-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'a simple server for sending and receiving messages '
+    digest: 9bc8a422a4bd115c594c028732ed519f6c699037696e27978455cfc3e6c45807
+    home: https://gotify.net/
+    keywords:
+    - push-notifications
+    maintainers:
+    - name: jasonb5
+    name: gotify
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/gotify
+    - https://github.com/gotify/server
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/gotify-0.1.3/gotify-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 2.4.0
     created: "2023-12-29T09:11:27.99965238Z"
     dependencies:
     - name: common
@@ -1102,4 +1124,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-26T10:27:01.148210139Z"
+generated: "2024-01-26T20:33:33.685435494-08:00"
