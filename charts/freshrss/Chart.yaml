@@ -1,6 +1,6 @@
 apiVersion: v2
 name: freshrss
-version: 0.1.0
+version: 0.1.1
 description: |
   FreshRSS is an RSS aggregator and reader. It allows you to read and follow several news websites at a glance without the need to browse from one website to another.
 type: application
