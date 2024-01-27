@@ -1083,6 +1083,25 @@ entries:
   ollama-webui:
   - apiVersion: v2
     appVersion: main
+    created: "2024-01-26T20:36:29.033582717-08:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "ChatGPT-Style Web Interface for Ollama \U0001F999 "
+    digest: 7dd68b9cb0e0a19f03da5627bbb80e3244285c0f7c8e61959706437ed2f1557d
+    home: https://github.com/ollama-webui/ollama-webui
+    maintainers:
+    - name: jasonb5
+    name: ollama-webui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/ollama-webui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/ollama-webui-0.1.1/ollama-webui-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: main
     created: "2024-01-11T00:58:44.314595415-08:00"
     dependencies:
     - name: common
@@ -1372,4 +1391,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-26T20:36:25.488607122-08:00"
+generated: "2024-01-26T20:36:29.033693675-08:00"
