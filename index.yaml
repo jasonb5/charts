@@ -1214,6 +1214,30 @@ entries:
     version: 0.1.0
   silverbullet:
   - apiVersion: v2
+    appVersion: 0.6.1
+    created: "2024-02-10T08:01:33.217951504Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'SilverBullet aims to be a **workshop for the mind**: a creative
+      space where you collect, create and expand your personal knowledge, while simultaneously
+      letting you evolve the tools you use to do so. '
+    digest: 1c640ef001f98c4c64ee7b2448912885913a84ed5a13e7d7da1d862f9fff4621
+    home: https://silverbullet.md/
+    keywords:
+    - note-taking
+    maintainers:
+    - name: jasonb5
+    name: silverbullet
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/silverbullet
+    - https://github.com/silverbulletmd/silverbullet
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/silverbullet-0.1.3/silverbullet-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     appVersion: 0.6.0
     created: "2024-01-23T04:47:19.946903212Z"
     dependencies:
@@ -1486,4 +1510,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-10T08:00:09.082411131Z"
+generated: "2024-02-10T08:01:33.218025101Z"
