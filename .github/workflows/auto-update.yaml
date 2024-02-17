@@ -23,7 +23,7 @@ jobs:
     name: Check for chart updates
     needs: list_charts
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     permissions:
       contents: write
       pull-requests: write
@@ -79,6 +79,8 @@ jobs:
       - name: Make new branch and create PR
         working-directory: ./main
         if: steps.check_chart.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config user.name ${{ github.actor }}
