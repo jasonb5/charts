@@ -734,6 +734,30 @@ entries:
     version: 0.1.0
   homeassistant:
   - apiVersion: v2
+    appVersion: 2024.2.2
+    created: "2024-02-17T06:07:01.489084912Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "\U0001F3E1 Open source home automation that puts local control and
+      privacy first.  "
+    digest: 5a0d0a3ad6dda6adc285ba04fe6c76105fa8fc3ab6c67bc45bc5a1d9a55bc964
+    home: https://www.home-assistant.io/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: homeassistant
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homeassistant
+    - https://github.com/home-assistant/core
+    - https://github.com/linuxserver/docker-homeassistant
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homeassistant-0.1.10/homeassistant-0.1.10.tgz
+    version: 0.1.10
+  - apiVersion: v2
     appVersion: 2024.2.1
     created: "2024-02-10T09:15:48.031257007Z"
     dependencies:
@@ -1669,6 +1693,29 @@ entries:
     version: 0.1.0
   zwave-js-ui:
   - apiVersion: v2
+    appVersion: 9.9.0
+    created: "2024-02-17T06:07:01.658529425Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
+      Nodejs, and Vue/Vuetify  '
+    digest: 6c30d93f1c4984ba57ffa2d43d749b3c5529e806b04fa28bce96506e6624b68e
+    home: https://zwave-js.github.io/zwave-js-ui/#/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: zwave-js-ui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+    - https://github.com/zwave-js/zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.7/zwave-js-ui-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
     appVersion: 9.8.3
     created: "2024-02-10T09:10:43.719480683Z"
     dependencies:
@@ -1829,4 +1876,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-10T09:18:08.916426277Z"
+generated: "2024-02-17T06:07:01.658706486Z"
