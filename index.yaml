@@ -598,6 +598,33 @@ entries:
     version: 0.1.0
   homarr:
   - apiVersion: v2
+    appVersion: 0.15.0
+    created: "2024-02-22T05:35:26.797461711Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Simplify the management of your server with Homarr - a sleek, modern
+      dashboard that puts all of your apps and services at your fingertips. With Homarr,
+      you can access and control everything in one convenient location. Homarr seamlessly
+      integrates with the apps you''ve added, providing you with valuable information
+      and giving you complete control. Installation is a breeze, and Homarr supports
+      a wide range of deployment methods. '
+    digest: b279f4c56b649463b122768dd1dd0397087c70e8844fc3ad361288996f2073e6
+    home: https://homarr.dev/
+    keywords:
+    - dashboard
+    maintainers:
+    - name: jasonb5
+    name: homarr
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homarr
+    - https://github.com/ajnart/homarr
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homarr-0.1.5/homarr-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
     appVersion: 0.14.6
     created: "2024-02-10T09:07:35.794358054Z"
     dependencies:
@@ -1876,4 +1903,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-17T06:07:01.658706486Z"
+generated: "2024-02-22T05:35:26.797607604Z"
