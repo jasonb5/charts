@@ -782,6 +782,30 @@ entries:
     version: 0.1.0
   homeassistant:
   - apiVersion: v2
+    appVersion: 2024.2.3
+    created: "2024-03-01T09:00:45.401090336Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "\U0001F3E1 Open source home automation that puts local control and
+      privacy first.  "
+    digest: b6be0eff0e21ef6ed4de18676c5861255b409fa5ee6043cbdf6eff7289a6ca49
+    home: https://www.home-assistant.io/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: homeassistant
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homeassistant
+    - https://github.com/home-assistant/core
+    - https://github.com/linuxserver/docker-homeassistant
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homeassistant-0.1.11/homeassistant-0.1.11.tgz
+    version: 0.1.11
+  - apiVersion: v2
     appVersion: 2024.2.2
     created: "2024-02-17T06:07:01.489084912Z"
     dependencies:
@@ -1951,4 +1975,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-01T08:13:18.661624803Z"
+generated: "2024-03-01T09:00:45.401253381Z"
