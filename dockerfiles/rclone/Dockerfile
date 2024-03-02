@@ -1,6 +1,6 @@
 FROM alpine:3.18.4
 
-ENV VERSION=0.1.1
+ENV VERSION=0.1.2
 
 RUN apk add rclone restic tini && \
 	mkdir -p /root/.config/rclone && \
