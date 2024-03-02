@@ -1,31 +1,38 @@
 #!/bin/sh
 
-if [[ -n "${CUSTOM_COMMAND}" ]];
-then
-	CRON_ENTRY="${CUSTOM_COMMAND}"
+RESTORE="${RESTORE:-false}"
+BACKUP_APP="${BACKUP_APP:-rclone}"
+
+if [[ "${RESTORE}" == "true" ]]; then
+	if [[ "${BACKUP_APP}" == "rclone" ]]; then
+		rclone ${RCLONE_GLOBAL_FLAGS} sync ${RCLONE_FLAGS} ${RCLONE_SOURCE} ${RCLONE_DESTINATION}
+	elif [[ "${BACKUP_APP}" == "restic" ]]; then
+		restic -r ${RESTIC_REPO} ${RESTIC_GLOBAL_FLAGS} restore ${RESTIC_SNAPSHOT:-latest} --target ${RESTIC_PATH} ${RESTIC_FLAGS} 
+	fi
 else
-	CRON_ENTRY="rclone sync ${SOURCE} ${DESTINATION}"
-fi
+	if [[ "${BACKUP_APP}" == "rclone" ]]; then
+		CRON_ENTRY="rclone ${RCLONE_GLOBAL_FLAGS} sync ${RCLONE_FLAGS} ${RCLONE_SOURCE} ${RCLONE_DESTINATION}"
+	elif [[ "${BACKUP_APP}" == "restic" ]]; then
+		CRON_ENTRY="restic -r ${RESTIC_REPO} ${RESTIC_GLOBAL_FLAGS} backup ${RESTIC_FLAGS} ${RESTIC_PATH}"
+	fi
 
+	if [[ -n "${PRE_SCRIPT}" ]] && [[ -e "${PRE_SCRIPT}" ]]; then
+		CRON_ENTRY="${PRE_SCRIPT}; ${CRON_ENTRY}"
+	fi
 
-if [[ -n "${PREPARE_SCRIPT}" ]] && [[ -e "${PREPARE_SCRIPT}" ]];
-then
-	CRON_ENTRY="${PREPARE_SCRIPT}; ${CRON_ENTRY}"
-fi
+	if [[ -n "${POST_SCRIPT}" ]] && [[ -e "${POST_SCRIPT}" ]]; then
+		CRON_ENTRY="${CRON_ENTRY}; ${POST_SCRIPT}"
+	fi
 
-if [[ -n "${FLAGS}" ]];
-then
-	CRON_ENTRY="${CRON_ENTRY} ${FLAGS}"
-fi
-
-echo "Adding cron entry \"${CRON} ${CRON_ENTRY}\""
+	echo "Adding cron entry \"${CRON} ${CRON_ENTRY}\""
 
 cat << EOF | crontab -
 ${CRON} ${CRON_ENTRY}
 EOF
 
-CROND_ARGS="-f ${CROND_ARGS:--d 8}"
+	CROND_ARGS="-f ${CROND_ARGS:--d 8}"
 
-echo "Running crond with \"${CROND_ARGS}\""
+	echo "Running crond with \"${CROND_ARGS}\""
 
-crond ${CROND_ARGS}
+	crond ${CROND_ARGS}
+fi
