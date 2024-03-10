@@ -10,14 +10,30 @@ package upload index: CR_ARGS = $(if $(wildcard ../../cr.yaml),--config ../../cr
 package:
 	cr package $(CR_ARGS) $(CHART_DIR)
 
+.PHONY: package-all
+package-all:
+	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common.*\|template\|\.cr-.*\)' \
+		| xargs -I% -P 4 /bin/bash -c "pushd %; make package ARGS='--package-path ../.cr-release-packages'"
+
 .PHONY: upload
 upload:
 	cr upload $(CR_ARGS) --git-repo charts $(CHART_DIR)
+
+.PHONY: upload-all
+upload-all:
+	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common.*\|template\|\.cr-.*\)' \
+		| xargs -I% -P 4 /bin/bash -c "pushd %; make upload ARGS='--package-path ../.cr-release-packages $(ARGS)'"
 
 .PHONY: index
 index:
 	mkdir .cr-index || exit 0
 	cr index $(CR_ARGS) --git-repo charts $(CHART_DIR)
+
+.PHONY: index-all
+index-all:
+	mkdir .cr-index || exit 0
+	git checkout gh-pages; git pull; git checkout main
+	cr index --config ../cr.yaml --git-repo charts --package-path .cr-release-packages $(ARGS) $(CHART_DIR)
 
 .PHONY: update
 update:
