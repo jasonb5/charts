@@ -1,6 +1,6 @@
 # common
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 
 A Helm library chart for building application charts.
 
@@ -108,6 +108,18 @@ A Helm library chart for building application charts.
 | securityContext | string | `nil` | Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) |
 | startupProbe | string | `nil` | Container [startupProbe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | workingDir | string | `nil` | Container working directory |
+| addons.rclone.enabled | bool | `false` | Enable/disable rclone addon |
+| addons.rclone.image | object | `{"repository":"ghcr.io/jasonb5/rclone","tag":"0.1.1"}` | Rclone image |
+| addons.rclone.cronSchedule | string | `"0 2 * * *"` | Cron schedule |
+| addons.rclone.restore | bool | `false` | Enable restoring the destination to the source |
+| addons.rclone.globalFlags | string | `nil` | Global flags used for either rclone or restic |
+| addons.rclone.flags | string | `nil` | Flags for `rclone sync` or `restic backup` |
+| addons.rclone.preScript | string | `nil` | Path to script to run before each job |
+| addons.rclone.postScript | string | `nil` | Path to script to run after each job |
+| addons.rclone.rclone.destination | string | `nil` | Name of destination could be local path or rclone remote |
+| addons.rclone.restic.enabled | bool | `false` | Enable using restic rather than rclone |
+| addons.rclone.restic.repo | string | `nil` | Restic repo to use as destination |
+| addons.rclone.restic.snapshot | string | `nil` | Snapshot to use when restoring |
 | addons.codeserver.enabled | bool | `false` | Enable/disable code server addon |
 | addons.codeserver.image | object | `{"repository":"ghcr.io/linuxserver/code-server","tag":"4.17.1"}` | Code server container image |
 | addons.codeserver.service.ports.codeserver.port | int | `8443` | Code server port |
