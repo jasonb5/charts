@@ -35,6 +35,9 @@ index-all:
 	git checkout gh-pages; git pull; git checkout main
 	cr index --config ../cr.yaml --git-repo charts --package-path .cr-release-packages $(ARGS) $(CHART_DIR)
 
+.PHONY: release-all
+release-all: package-all upload-all index-all
+
 .PHONY: update
 update:
 	python ../../scripts/chart.py $(GLOBAL) update $(ARGS) $(_ARGS) .
