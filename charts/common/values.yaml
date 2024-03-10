@@ -219,10 +219,37 @@ addons:
       repository: ghcr.io/jasonb5/rclone
       tag: 0.1.1
 
-    persistence:
-      config:
-        # -- (bool) Enable/disable rclone configuration persistence
-        enabled: false
+    # -- (string) Cron schedule
+    cronSchedule: '0 2 * * *'
+
+    # -- (bool) Enable restoring the destination to the source
+    restore: false
+
+    # -- (string) Global flags used for either rclone or restic
+    globalFlags:
+
+    # -- (string) Flags for `rclone sync` or `restic backup`
+    flags:
+
+    # -- (string) Path to script to run before each job
+    preScript:
+
+    # -- (string) Path to script to run after each job
+    postScript:
+
+    rclone:
+      # -- (string) Name of destination could be local path or rclone remote
+      destination:
+
+    restic:
+      # -- (bool) Enable using restic rather than rclone
+      enabled: false
+
+      # -- (string) Restic repo to use as destination
+      repo:
+
+      # -- (string) Snapshot to use when restoring
+      snapshot:
 
   codeserver:
     # -- (bool) Enable/disable code server addon
