@@ -3,6 +3,33 @@ entries:
   calibre:
   - apiVersion: v2
     appVersion: 7.6.0
+    created: "2024-03-10T14:50:45.90123672-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Calibre is a powerful and easy to use e-book manager. Users say
+      it''s outstanding and a must-have. It''ll allow you to do nearly everything
+      and it takes things a step beyond normal e-book software. It''s also completely
+      free and open source and great for both casual users and computer experts. '
+    digest: 6ebe7d7c6221b4b95284e82d6ee04bc451030e5d44f3a429f6c65f3ea12ba68f
+    home: https://calibre-ebook.com/
+    keywords:
+    - ebooks
+    - management
+    maintainers:
+    - name: jasonb5
+    name: calibre
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/calibre
+    - https://github.com/kovidgoyal/calibre
+    - https://github.com/linuxserver/docker-calibre
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/calibre-0.1.5/calibre-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 7.6.0
     created: "2024-03-02T06:28:32.992597245Z"
     dependencies:
     - name: common
@@ -137,6 +164,32 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/calibre-0.1.0/calibre-0.1.0.tgz
     version: 0.1.0
   calibre-web:
+  - apiVersion: v2
+    appVersion: 0.6.21
+    created: "2024-03-10T14:50:46.292021555-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Calibre-web is a web app providing a clean interface for browsing,
+      reading and downloading eBooks using an existing Calibre database. It is also
+      possible to integrate google drive and edit metadata and your calibre library
+      through the app itself. '
+    digest: c04f9c863fdbaedb18fef9e5ff74d04602ed815fd97da02a0181a2533e37be26
+    home: https://github.com/janeczku/calibre-web
+    keywords:
+    - ebooks
+    - management
+    maintainers:
+    - name: jasonb5
+    name: calibre-web
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/calibre-web
+    - https://github.com/linuxserver/docker-calibre-web
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/calibre-web-0.1.2/calibre-web-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: 0.6.21
     created: "2024-01-26T20:33:49.77257687-08:00"
@@ -298,6 +351,29 @@ entries:
   dashy:
   - apiVersion: v2
     appVersion: 2.1.2
+    created: "2024-03-10T14:50:46.692716934-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Dashy is an open source, highly customizable, easy to use, privacy-respecting
+      dashboard app. '
+    digest: 118f7061b889ce7b0e0cc4e4bce6dfada17485e7b21d609ea16e57b16d45433a
+    home: https://dashy.to/
+    keywords:
+    - dashboard
+    maintainers:
+    - name: jasonb5
+    name: dashy
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/dashy
+    - https://github.com/Lissy93/dashy
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/dashy-0.1.4/dashy-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 2.1.2
     created: "2024-03-10T06:43:15.519189148Z"
     dependencies:
     - name: common
@@ -389,6 +465,27 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/dashy-0.1.0/dashy-0.1.0.tgz
     version: 0.1.0
   esphome:
+  - apiVersion: v2
+    appVersion: 2024.2.2
+    created: "2024-03-10T14:50:46.877161817-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'ESPHome is the perfect solution for creating custom firmwares for
+      your ESP8266/ESP32 boards. '
+    digest: a8c4c8ffd374a973e9f61a7d61c322022a0fc422f44437510d01cd28533664fe
+    home: https://esphome.io/
+    maintainers:
+    - name: jasonb5
+    name: esphome
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/esphome
+    - https://github.com/esphome/esphome
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/esphome-0.1.9/esphome-0.1.9.tgz
+    version: 0.1.9
   - apiVersion: v2
     appVersion: 2024.2.2
     created: "2024-03-10T08:35:54.108061784Z"
@@ -581,6 +678,30 @@ entries:
   freshrss:
   - apiVersion: v2
     appVersion: 1.23.1
+    created: "2024-03-10T14:50:47.204163385-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'FreshRSS is an RSS aggregator and reader. It allows you to read
+      and follow several news websites at a glance without the need to browse from
+      one website to another. '
+    digest: 9473fbdf75bb7925926a8d9786dfcca064894ef73b9a0b78e1525d9b5356110a
+    home: http://freshrss.github.io/FreshRSS/
+    keywords:
+    - rss
+    maintainers:
+    - name: jasonb5
+    name: freshrss
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/freshrss
+    - https://github.com/FreshRSS/FreshRSS
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/freshrss-0.1.2/freshrss-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.23.1
     created: "2024-01-26T20:33:58.075693947-08:00"
     dependencies:
     - name: common
@@ -628,6 +749,28 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/freshrss-0.1.0/freshrss-0.1.0.tgz
     version: 0.1.0
   gotify:
+  - apiVersion: v2
+    appVersion: 2.4.0
+    created: "2024-03-10T14:50:47.410715497-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'a simple server for sending and receiving messages '
+    digest: ef83a6d1829794274edab5e694231056c4142ec5e7253f929e4b734a3ad0dec1
+    home: https://gotify.net/
+    keywords:
+    - push-notifications
+    maintainers:
+    - name: jasonb5
+    name: gotify
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/gotify
+    - https://github.com/gotify/server
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/gotify-0.1.4/gotify-0.1.4.tgz
+    version: 0.1.4
   - apiVersion: v2
     appVersion: 2.4.0
     created: "2024-01-26T20:33:33.68527181-08:00"
@@ -697,6 +840,29 @@ entries:
   grocy:
   - apiVersion: v2
     appVersion: 4.1.0
+    created: "2024-03-10T14:50:47.620049381-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Grocy is a web-based self-hosted groceries & household management
+      solution for your home.  Open Source. Built with passion.  '
+    digest: b30bd90183d3c9960a70b76b82ef49814dfabadf00ce82697041e7d0edfe7403
+    home: https://grocy.info/
+    keywords:
+    - groceries
+    maintainers:
+    - name: jasonb5
+    name: grocy
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/grocy
+    - https://github.com/grocy/grocy
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/grocy-0.1.3/grocy-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 4.1.0
     created: "2024-02-10T09:16:59.19556175Z"
     dependencies:
     - name: common
@@ -742,6 +908,33 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/grocy-0.1.0/grocy-0.1.0.tgz
     version: 0.1.0
   homarr:
+  - apiVersion: v2
+    appVersion: 0.15.0
+    created: "2024-03-10T14:50:47.81970166-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Simplify the management of your server with Homarr - a sleek, modern
+      dashboard that puts all of your apps and services at your fingertips. With Homarr,
+      you can access and control everything in one convenient location. Homarr seamlessly
+      integrates with the apps you''ve added, providing you with valuable information
+      and giving you complete control. Installation is a breeze, and Homarr supports
+      a wide range of deployment methods. '
+    digest: 59d6351e09675dc5395ee4c6975c4eb7fd29d7e9277dbeb11d9bbdb7f7d2d784
+    home: https://homarr.dev/
+    keywords:
+    - dashboard
+    maintainers:
+    - name: jasonb5
+    name: homarr
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homarr
+    - https://github.com/ajnart/homarr
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homarr-0.1.6/homarr-0.1.6.tgz
+    version: 0.1.6
   - apiVersion: v2
     appVersion: 0.15.0
     created: "2024-02-22T05:35:26.797461711Z"
@@ -905,6 +1098,30 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/homarr-0.1.0/homarr-0.1.0.tgz
     version: 0.1.0
   homeassistant:
+  - apiVersion: v2
+    appVersion: 2024.3.0
+    created: "2024-03-10T14:50:48.023677974-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "\U0001F3E1 Open source home automation that puts local control and
+      privacy first.  "
+    digest: 96ca02f5a9f35f537d86c3a0d4c218019be15991f78edcf15a6e09a3b3ff6385
+    home: https://www.home-assistant.io/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: homeassistant
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homeassistant
+    - https://github.com/home-assistant/core
+    - https://github.com/linuxserver/docker-homeassistant
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homeassistant-0.1.15/homeassistant-0.1.15.tgz
+    version: 0.1.15
   - apiVersion: v2
     appVersion: 2024.3.0
     created: "2024-03-10T09:39:47.286646715Z"
@@ -1268,6 +1485,30 @@ entries:
   homebox:
   - apiVersion: v2
     appVersion: v0.10.3
+    created: "2024-03-10T14:50:48.231784776-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Homebox is the inventory and organization system built for the Home
+      User! With a focus on simplicity and ease of use, Homebox is the perfect solution
+      for your home inventory, organization, and management needs. '
+    digest: 94cccca1fc31b9abe7f3dbda9856ab6c64949d924c55899f587324fdb309b7d4
+    home: https://hay-kot.github.io/homebox/
+    keywords:
+    - inventory
+    maintainers:
+    - name: jasonb5
+    name: homebox
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homebox
+    - https://github.com/hay-kot/homebox
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homebox-0.1.2/homebox-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v0.10.3
     created: "2024-01-26T20:36:36.307132446-08:00"
     dependencies:
     - name: common
@@ -1317,6 +1558,28 @@ entries:
   it-tools:
   - apiVersion: v2
     appVersion: 2023.12.21-5ed3693
+    created: "2024-03-10T14:50:48.45141361-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Useful tools for developer and people working in IT. '
+    digest: a450d564c657e70c8a8d687c87610c933c7abc768a8afc39b61c656839dcdee6
+    home: https://it-tools.tech/
+    keywords:
+    - tools
+    maintainers:
+    - name: jasonb5
+    name: it-tools
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/it-tools
+    - https://github.com/CorentinTh/it-tools
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/it-tools-0.1.2/it-tools-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 2023.12.21-5ed3693
     created: "2024-01-26T20:34:00.826476467-08:00"
     dependencies:
     - name: common
@@ -1362,6 +1625,31 @@ entries:
   jellyfin:
   - apiVersion: v2
     appVersion: 10.8.13
+    created: "2024-03-10T14:50:48.737753063-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Jellyfin is the volunteer-built media solution that puts you in
+      control of your media. Stream to any device from your own server, with no strings
+      attached. Your media, your server, your way. '
+    digest: 532b875bca6f37fec42671372d3c47d4b3c84d1328997aa42cb45b7a1d00d0ed
+    home: https://jellyfin.org/
+    keywords:
+    - media
+    maintainers:
+    - name: jasonb5
+    name: jellyfin
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/jellyfin
+    - https://github.com/jellyfin/jellyfin
+    - https://github.com/linuxserver/docker-jellyfin
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.2/jellyfin-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 10.8.13
     created: "2023-12-29T13:03:46.019266714-08:00"
     dependencies:
     - name: common
@@ -1386,6 +1674,34 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.0/jellyfin-0.1.0.tgz
     version: 0.1.0
   mealie:
+  - apiVersion: v2
+    appVersion: v1.0.0-RC2
+    created: "2024-03-10T14:50:48.948374546-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Mealie is a self hosted recipe manager and meal planner with a RestAPI
+      backend and a reactive frontend application built in Vue for a pleasant user
+      experience for the whole family. Easily add recipes into your database by providing
+      the URL and Mealie will automatically import the relevant data, or add a family
+      recipe with the UI editor. Mealie also provides an API for interactions from
+      3rd party applications. '
+    digest: 83f8e3c3e5f19a6a15d630717362935b48b8bc80ae10eead0d2376666920cd5a
+    home: https://mealie.io/
+    keywords:
+    - recipe
+    - manager
+    maintainers:
+    - name: jasonb5
+    name: mealie
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/mealie
+    - https://github.com/mealie-recipes/mealie
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/mealie-0.1.2/mealie-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: v1.0.0-RC2
     created: "2024-01-26T20:36:25.488469135-08:00"
@@ -1443,6 +1759,28 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
     version: 0.1.0
   node-red:
+  - apiVersion: v2
+    appVersion: 3.1.6
+    created: "2024-03-10T14:50:49.154323595-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Low-code programming for event-driven applications '
+    digest: 1a0b61831ed59062e3fb63f790826e356dc8ef94743478e2f7ed22aa75e32c96
+    home: https://nodered.org/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: node-red
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/node-red
+    - https://github.com/node-red/node-red
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/node-red-0.1.6/node-red-0.1.6.tgz
+    version: 0.1.6
   - apiVersion: v2
     appVersion: 3.1.6
     created: "2024-03-02T06:29:38.870407955Z"
@@ -1578,6 +1916,27 @@ entries:
   ollama:
   - apiVersion: v2
     appVersion: 0.1.32
+    created: "2024-03-10T14:50:49.354907661-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Ollama makes it easy to get up and running with large language models
+      locally. '
+    digest: ddb91928d706fa922b74911b5b45a67deaf9d9c159da35735139aa73baa9711b
+    home: https://ollama.ai/
+    maintainers:
+    - name: jasonb5
+    name: ollama
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/ollama
+    - https://github.com/jmorganca/ollama
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/ollama-0.1.4/ollama-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 0.1.32
     created: "2024-02-02T08:52:04.858005618Z"
     dependencies:
     - name: common
@@ -1663,6 +2022,25 @@ entries:
   ollama-webui:
   - apiVersion: v2
     appVersion: main
+    created: "2024-03-10T14:50:49.562825388-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "ChatGPT-Style Web Interface for Ollama \U0001F999 "
+    digest: 5766eb6983b72541b60cbf897aec9297e9beffcc7ad233cba97c175ef6c25569
+    home: https://github.com/ollama-webui/ollama-webui
+    maintainers:
+    - name: jasonb5
+    name: ollama-webui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/ollama-webui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/ollama-webui-0.1.2/ollama-webui-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: main
     created: "2024-01-26T20:36:29.033582717-08:00"
     dependencies:
     - name: common
@@ -1702,6 +2080,30 @@ entries:
   photoprism:
   - apiVersion: v2
     appVersion: 231128-ce
+    created: "2024-03-10T14:50:49.769610892-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "AI-Powered Photos App for the Decentralized Web \U0001F308\U0001F48E✨
+      \ "
+    digest: a014b5a5265f4f90d875531803b2d932de5f1110c9cd5d4ba3c7d435489f658e
+    home: https://www.photoprism.app/
+    keywords:
+    - media
+    - images
+    maintainers:
+    - name: jasonb5
+    name: photoprism
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/photoprism
+    - https://github.com/photoprism/photoprism
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.2/photoprism-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 231128-ce
     created: "2023-12-29T14:49:58.828187359-08:00"
     dependencies:
     - name: common
@@ -1725,6 +2127,30 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.0/photoprism-0.1.0.tgz
     version: 0.1.0
   silverbullet:
+  - apiVersion: v2
+    appVersion: 0.7.5
+    created: "2024-03-10T14:50:49.967056039-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'SilverBullet aims to be a **workshop for the mind**: a creative
+      space where you collect, create and expand your personal knowledge, while simultaneously
+      letting you evolve the tools you use to do so. '
+    digest: 846c0856bf7f933ebae6c5c9283c1108f17334b71ba4c3a4bd37dc37a43b05a2
+    home: https://silverbullet.md/
+    keywords:
+    - note-taking
+    maintainers:
+    - name: jasonb5
+    name: silverbullet
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/silverbullet
+    - https://github.com/silverbulletmd/silverbullet
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/silverbullet-0.1.8/silverbullet-0.1.8.tgz
+    version: 0.1.8
   - apiVersion: v2
     appVersion: 0.7.5
     created: "2024-03-02T06:26:00.863309667Z"
@@ -2113,6 +2539,29 @@ entries:
   zwave-js-ui:
   - apiVersion: v2
     appVersion: 9.9.1
+    created: "2024-03-10T14:50:50.379248596-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
+      Nodejs, and Vue/Vuetify  '
+    digest: 520380e0545425888d8f8428855fc72d387003c01a8bf7af2ad0a5d4dde4283e
+    home: https://zwave-js.github.io/zwave-js-ui/#/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: zwave-js-ui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+    - https://github.com/zwave-js/zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.9/zwave-js-ui-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 9.9.1
     created: "2024-03-10T07:33:50.838683712Z"
     dependencies:
     - name: common
@@ -2318,4 +2767,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-10T09:56:19.717634922Z"
+generated: "2024-03-10T14:50:50.380150871-07:00"
