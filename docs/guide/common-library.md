@@ -140,3 +140,92 @@ addons:
       config:
         type: pvc
 ```
+
+### Rclone
+
+This addon will attach a sidecar running `cron` and will run either `rclone sync` or `restic backup` depending on the configuration. The addon will automatically detect a persistent mount name `config` to use as a source.
+
+Sample `rclone` configuration.
+
+```yaml
+secrets:
+  rclone:
+    rclone.conf: |
+      [minio]
+      type = s3
+      provider = Minio
+      endpoint = https://s3.local
+
+persistence:
+  config:
+    enabled: true
+    type: pvc
+
+addons:
+  rclone:
+    cronSchedule: '0 */6 * * *'
+
+    rclone:
+      destination: minio:apps
+
+    persistence:
+      rclone:
+        type: secret
+        subPath: rclone.conf
+        mountPath: /root/.config/rclone/rclone.conf
+```
+
+#### Restic
+
+Sample `restic` configuration.
+
+```yaml
+secrets:
+  rclone:
+    rclone.conf: |
+      [minio]
+      type = s3
+      provider = Minio
+      endpoint = https://s3.local
+
+  restic:
+    restic.txt: |
+      secret-password-thing
+
+persistence:
+  config:
+    enabled: true
+    type: pvc
+
+addons:
+  rclone:
+    cronSchedule: '0 */6 * * *'
+
+    globalFlags: "--password-file /root/.config/restic.txt"
+
+    restic:
+      enabled: true
+
+      repo: rclone:minio:apps
+
+    persistence:
+      rclone:
+        type: secret
+        subPath: rclone.conf
+        mountPath: /root/.config/rclone/rclone.conf
+
+      restic:
+        type: secret
+        subPath: restic.txt
+        mountPath: /root/.config/restic.txt
+```
+
+#### Restore
+
+If `restore` is set to `true` then an initContainer is added to restore to the `config` mount.
+
+```yaml
+addons:
+  rclone:
+    restore: true
+```
