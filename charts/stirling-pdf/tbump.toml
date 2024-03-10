@@ -17,3 +17,4 @@ tag_template = "stirling-pdf_v{new_version}"
 
 [[file]]
 src = "Chart.yaml"
+search = "version: {current_version}"

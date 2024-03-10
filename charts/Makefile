@@ -56,8 +56,9 @@ changelog:
 
 
 .PHONY: bump-%
+bump-%: ARGS ?= --no-tag
 bump-%:
-	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
+	tbump $(ARGS) $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
 template:
@@ -71,13 +72,15 @@ lint:
 test:
 	helm unittest $(ARGS) $(CHART_DIR) | grep -v trim
 
-.PHONY: update-dep
-update-dep:
-	helm dep update $(CHART_DIR)
+.PHONY: dep
+dep:
+	helm dep update $(ARGS) $(CHART_DIR)
 
-.PHONY: update-all-dep
-update-all-dep:
-	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\)' | xargs -I% -P 4 make -C % update-dep
+.PHONY: update-common-dep
+update-common-dep:
+	helm repo update
+	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\|\.cr-index-packages\)' \
+		| xargs -I% -P 4 /bin/bash -c "pushd %; make dep ARGS='--skip-refresh'; make bump-patch ARGS='--non-interactive --only-patch'"
 
 .PHONY: clean
 clean:
