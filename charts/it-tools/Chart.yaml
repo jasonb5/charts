@@ -1,6 +1,6 @@
 apiVersion: v2
 name: it-tools
-version: 0.1.1
+version: 0.1.2
 description: |
   Useful tools for developer and people working in IT.
 type: application
