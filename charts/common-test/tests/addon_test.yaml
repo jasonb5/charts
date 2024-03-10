@@ -6,17 +6,80 @@ templates:
 chart:
   appVersion: 0.1.0
 tests:
-  - it: should add rclone sidecar
+  - it: should enable restic
     set:
       workload: deployment
+
+      persistence:
+        config:
+          enabled: true
+          type: emptydir
 
       addons:
         rclone:
           enabled: true
+
+          restic:
+            enabled: true
+            repo: rclone:minio:apps
     asserts:
+      - equal:
+          path: spec.template.spec.containers[1]
+          value:
+            env:
+              - name: BACKUP_APP
+                value: restic
+              - name: CRON
+                value: 0 2 * * *
+              - name: RESTIC_PATH
+                value: /config
+              - name: RESTIC_REPO
+                value: rclone:minio:apps
+            image: ghcr.io/jasonb5/rclone:0.1.1
+            name: rclone
+            volumeMounts:
+              - mountPath: /config
+                name: config
+        documentIndex: 0
       - hasDocuments:
           count: 2
-  - it: should add codeserver sidecar
+  - it: should enable rclone
+    set:
+      workload: deployment
+
+      persistence:
+        config:
+          enabled: true
+          type: emptydir
+
+      addons:
+        rclone:
+          enabled: true
+
+          rclone:
+            destination: minio:apps
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[1]
+          value:
+            env:
+              - name: BACKUP_APP
+                value: rclone
+              - name: CRON
+                value: 0 2 * * *
+              - name: RCLONE_DESTINATION
+                value: minio:apps
+              - name: RCLONE_SOURCE
+                value: /config
+            image: ghcr.io/jasonb5/rclone:0.1.1
+            name: rclone
+            volumeMounts:
+              - mountPath: /config
+                name: config
+        documentIndex: 0
+      - hasDocuments:
+          count: 2
+  - it: should enable codeserver
     set:
       workload: deployment
 
@@ -24,5 +87,16 @@ tests:
         codeserver:
           enabled: true
     asserts:
+      - equal:
+          path: spec.template.spec.containers[1]
+          value:
+            image: ghcr.io/linuxserver/code-server:4.17.1
+            name: codeserver
+            ports:
+              - containerPort: 8443
+                name: codeserver
+                protocol: TCP
+            volumeMounts: null
+        documentIndex: 0
       - hasDocuments:
           count: 2
