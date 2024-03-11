@@ -217,7 +217,7 @@ addons:
     # -- (object) Rclone image
     image:
       repository: ghcr.io/jasonb5/rclone
-      tag: 0.1.1
+      tag: 0.1.2
 
     # -- (string) Cron schedule
     cronSchedule: '0 2 * * *'
