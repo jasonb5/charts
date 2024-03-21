@@ -82,7 +82,7 @@ jobs:
           make bump-patch ARGS="--non-interactive"
 
           # Must update after semver bump
-          make update-dep
+          make dep
           make docs
 
           if [[ "${{ matrix.chart }}" == "common" ]];
