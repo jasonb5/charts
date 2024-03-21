@@ -82,7 +82,7 @@ jobs:
           pip install requests
       - name: Lint Helm chart
         run: |
-          make update-dep
+          make dep
           make lint
       - name: Unittest Helm chart
         run: |
