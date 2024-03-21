@@ -999,6 +999,29 @@ entries:
     version: 0.1.1
   grocy:
   - apiVersion: v2
+    appVersion: 4.2.0
+    created: "2024-03-21T04:22:11.58110582Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Grocy is a web-based self-hosted groceries & household management
+      solution for your home.  Open Source. Built with passion.  '
+    digest: 31d5f533eeb841a08fc091d53d5038c34c0c71bd11601536db255e69a6a2de4e
+    home: https://grocy.info/
+    keywords:
+    - groceries
+    maintainers:
+    - name: jasonb5
+    name: grocy
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/grocy
+    - https://github.com/grocy/grocy
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/grocy-0.1.5/grocy-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
     appVersion: 4.1.0
     created: "2024-03-10T20:23:03.163519365-07:00"
     dependencies:
@@ -3314,4 +3337,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-21T04:18:15.218327756Z"
+generated: "2024-03-21T04:22:11.581281539Z"
