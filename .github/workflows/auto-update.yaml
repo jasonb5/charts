@@ -87,7 +87,7 @@ jobs:
 
           pushd charts/${{ matrix.chart }}
 
-          make update-dep
+          make dep
 
           git add .
           git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
