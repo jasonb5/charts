@@ -9,4 +9,4 @@ port: 80
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/gotify/server
-version: 2.4.0
+version: 0.1.5

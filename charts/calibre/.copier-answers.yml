@@ -12,4 +12,4 @@ port: 8080
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/kovidgoyal/calibre,https://github.com/linuxserver/docker-calibre
-version: 7.3.0
+version: 0.1.7
