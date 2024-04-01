@@ -53,6 +53,7 @@ mariadb_version:
 postgresql_enabled:
   type: bool
   help: Enable PostgreSQL dependency.
+  when: "{{ not mariadb_enabled }}"
 
 postgresql_version:
   type: str
