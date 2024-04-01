@@ -1,0 +1,70 @@
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
+workload: deployment
+
+image:
+  # -- Container image repository
+  repository: quay.io/invidious/invidious
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+# -- Required HMAC Key
+hmacKey:
+
+env:
+  # -- Set the timezone
+  TZ: UTC
+  INVIDIOUS_CONFIG: |
+    db:
+      dbname: {{ .Values.postgresql.auth.database }}
+      user: {{ .Values.postgresql.auth.username }}
+      password: {{ .Values.postgresql.auth.password }}
+      host: {{ printf "%s-postgresql" .Release.Name }}
+      port: 5432
+    check_tables: true
+    external_port: 443
+    domain: {{ get (first .Values.ingress.hosts) "host" }}
+    https_only: true
+    statistics_enabled: true
+    hmac_key: {{ .Values.hmacKey }}
+
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
+service:
+  ports:
+    default:
+      # -- Default port
+      port: 3000
+
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
+ingress:
+  # -- Enable/disable ingress
+  enabled: false
+  hosts:
+    # -- Reference default service
+  - name: default
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
+    enabled: false
+
+# -- PostgreSQL server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#parameters)
+postgresql:
+  enabled: true
+  architecture: standalone
+  auth:
+    # -- Root database password
+    postgresPassword:
+    database: invidious
+    username: invidious
+    # -- Database password
+    password:
+  primary:
+    persistence:
+      enabled: false
+  readReplicas:
+    persistence:
+      enabled: false
+  metrics:
+    enabled: false

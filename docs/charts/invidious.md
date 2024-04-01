@@ -1,0 +1,1 @@
+../../charts/invidious/README.md

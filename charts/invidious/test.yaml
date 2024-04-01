@@ -1,0 +1,5 @@
+
+postgresql:
+  auth:
+    postgresPassword: abcd1234
+    password: abcd1234

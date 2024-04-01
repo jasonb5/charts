@@ -1,0 +1,13 @@
+_src_path: ../template/
+description: An open source alternative front-end to YouTube.
+homepage: https://invidious.io/
+image: quay.io/invidious/invidious
+keywords: video,audio,youtube
+mariadb_enabled: false
+name: invidious
+port: 3000
+postgresql_enabled: true
+postgresql_version: 14.x.x
+redis_enabled: false
+sources: https://github.com/iv-org
+version: 2024.03.31-08390ac
