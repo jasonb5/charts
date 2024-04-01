@@ -1,0 +1,12 @@
+{%- if mariadb_enabled %}
+mariadb:
+  auth:
+    rootPassword: abcd1234
+    password: abcd1234
+{% endif -%}
+{%- if postgresql_enabled %}
+postgresql:
+  auth:
+    postgresPassword: abcd1234
+    password: abcd1234
+{% endif -%}

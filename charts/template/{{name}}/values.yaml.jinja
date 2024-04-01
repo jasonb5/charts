@@ -11,6 +11,25 @@ image:
 env:
   # -- Set the timezone
   TZ: UTC
+{%- if redis_enabled %}
+  REDIS_HOST:
+{% endif -%}
+{%- if mariadb_enabled %}
+{% raw %}
+  DB_HOST:
+  DB_NAME: "{{ .Values.mariadb.auth.database }}"
+  DB_USER: "{{ .Values.mariadb.auth.username }}"
+  DB_PASS: "{{ .Values.mariadb.auth.password }}"
+{% endraw %}
+{% endif -%}
+{%- if postgresql_enabled %}
+{% raw %}
+  DB_HOST:
+  DB_NAME: "{{ .Values.postgresql.auth.database }}"
+  DB_USER: "{{ .Values.postgresql.auth.username }}"
+  DB_PASS: "{{ .Values.postgresql.auth.password }}"
+{% endraw %}
+{% endif -%}
 
 # -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
 service:
@@ -43,10 +62,10 @@ persistence:
     # -- Size of volume
     size: 1Gi
 
-{% if redis_enabled %}
+{%- if redis_enabled %}
 # -- Redis server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/redis#parameters)
 redis:
-  enabled: false
+  enabled: true
   architecture: standalone
   auth:
     enabled: false
@@ -66,12 +85,12 @@ redis:
 {%- if mariadb_enabled %}
 # -- MariaDB server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#parameters)
 mariadb:
-  enabled: false
+  enabled: true
   architecture: standalone
   auth:
     rootPassword:
-    database:
-    username:
+    database: {{ name }}
+    username: {{ name }}
     password:
   primary:
     persistence:
@@ -85,12 +104,12 @@ mariadb:
 {%- if postgresql_enabled %}
 # -- PostgreSQL server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#parameters)
 postgresql:
-  enabled: false
+  enabled: true
   architecture: standalone
   auth:
     postgresPassword:
-    database:
-    username:
+    database: {{ name }}
+    username: {{ name }}
     password:
   primary:
     persistence:
