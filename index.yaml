@@ -1980,6 +1980,35 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/homebox-0.1.0/homebox-0.1.0.tgz
     version: 0.1.0
+  invidious:
+  - apiVersion: v2
+    appVersion: 2024.03.31-08390ac
+    created: "2024-03-31T19:24:17.538676389-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.x.x
+    description: 'An open source alternative front-end to YouTube. '
+    digest: 48d41625f7d9d87807b117b2dd0256b3975426661b22c9e3a09311364aaa0c27
+    home: https://invidious.io/
+    keywords:
+    - video
+    - audio
+    - youtube
+    maintainers:
+    - name: jasonb5
+    name: invidious
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/invidious
+    - https://github.com/iv-org
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/invidious-0.1.0/invidious-0.1.0.tgz
+    version: 0.1.0
   it-tools:
   - apiVersion: v2
     appVersion: 2023.12.21-5ed3693
@@ -3603,4 +3632,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-31T20:47:45.441123111Z"
+generated: "2024-03-31T19:24:17.539276951-07:00"
