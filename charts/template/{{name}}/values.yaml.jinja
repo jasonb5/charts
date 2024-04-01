@@ -68,8 +68,10 @@ redis:
   enabled: true
   architecture: standalone
   auth:
+    # -- Enable/disable authentication
     enabled: false
     sentinel: false
+    # -- Instance password
     password:
   master:
     persistence:
@@ -81,16 +83,18 @@ redis:
     enabled: false
   metrics:
     enabled: false
-{% endif -%}
+{%- endif %}
 {%- if mariadb_enabled %}
 # -- MariaDB server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#parameters)
 mariadb:
   enabled: true
   architecture: standalone
   auth:
+    # -- Root database password
     rootPassword:
     database: {{ name }}
     username: {{ name }}
+    # -- Database password
     password:
   primary:
     persistence:
@@ -100,16 +104,18 @@ mariadb:
       enabled: false
   metrics:
     enabled: false
-{% endif -%}
+{%- endif %}
 {%- if postgresql_enabled %}
 # -- PostgreSQL server, see Bitnami chart for [values](https://github.com/bitnami/charts/tree/main/bitnami/postgresql#parameters)
 postgresql:
   enabled: true
   architecture: standalone
   auth:
+    # -- Root database password
     postgresPassword:
     database: {{ name }}
     username: {{ name }}
+    # -- Database password
     password:
   primary:
     persistence:
@@ -119,4 +125,4 @@ postgresql:
       enabled: false
   metrics:
     enabled: false
-{% endif -%}
+{%- endif %}
