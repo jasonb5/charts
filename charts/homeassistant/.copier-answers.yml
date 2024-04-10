@@ -9,4 +9,4 @@ port: 8123
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/home-assistant/core,https://github.com/linuxserver/docker-homeassistant
-version: 2023.12.4
+version: 0.1.19

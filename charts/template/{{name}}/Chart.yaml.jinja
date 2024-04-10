@@ -6,17 +6,17 @@ description: |
 type: application
 {%- if keywords %}
 keywords:
-  {%- for item in keywords.split(',') %}
-  - {{ item|trim }}
-  {%- endfor %}
+{%- for item in keywords.split(',') %}
+- {{ item|trim }}
+{%- endfor %}
 {%- endif %}
 home: {{ homepage }}
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/{{ name }}
+- https://github.com/jasonb5/charts/tree/main/charts/{{ name }}
 {%- if sources %}
-  {%- for item in sources.split(',') %}
-  - {{ item|trim }}
-  {%- endfor %}
+{%- for item in sources.split(',') %}
+- {{ item|trim }}
+{%- endfor %}
 {%- endif %}
 dependencies:
 - name: common
