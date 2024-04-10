@@ -3122,6 +3122,33 @@ entries:
     version: 0.1.0
   stirling-pdf:
   - apiVersion: v2
+    appVersion: 0.22.8
+    created: "2024-04-10T09:28:20.186424329Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'This is a powerful locally hosted web based PDF manipulation tool
+      using docker that allows you to perform various operations on PDF files, such
+      as splitting merging, converting, reorganizing, adding images, rotating, compressing,
+      and more. This locally hosted web application started as a 100% ChatGPT-made
+      application and has evolved to include a wide range of features to handle all
+      your PDF needs. '
+    digest: e753cd45b260b5ff545f0cfc9e924480b8770b5eec1845a0d3eafc84dc4a64bc
+    home: https://github.com/Stirling-Tools/Stirling-PDF
+    keywords:
+    - pdf
+    maintainers:
+    - name: jasonb5
+    name: stirling-pdf
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/stirling-pdf
+    - https://github.com/Stirling-Tools/Stirling-PDF
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/stirling-pdf-0.1.15/stirling-pdf-0.1.15.tgz
+    version: 0.1.15
+  - apiVersion: v2
     appVersion: 0.22.7
     created: "2024-04-10T04:06:05.73532116Z"
     dependencies:
@@ -3799,4 +3826,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-10T09:27:18.738837114Z"
+generated: "2024-04-10T09:28:20.186784761Z"
