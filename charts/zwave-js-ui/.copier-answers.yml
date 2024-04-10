@@ -10,4 +10,4 @@ port: 8091
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/zwave-js/zwave-js-ui
-version: 9.6.2
+version: 0.1.12

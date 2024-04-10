@@ -14,4 +14,4 @@ port: 9000
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/mealie-recipes/mealie
-version: v1.0.0-RC2
+version: 0.1.3

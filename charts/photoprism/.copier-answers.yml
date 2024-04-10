@@ -9,4 +9,4 @@ port: 2342
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/photoprism/photoprism
-version: 231128-ce
+version: 0.1.3
