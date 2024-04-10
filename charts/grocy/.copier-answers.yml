@@ -13,4 +13,4 @@ port: 9283
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/grocy/grocy
-version: 4.0.3
+version: 0.1.5
