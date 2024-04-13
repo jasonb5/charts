@@ -51,7 +51,7 @@ new-chart:
 	copier copy $(ARGS) template/ .
 
 .PHONY: init-chart
-init-chart: update-dep docs
+init-chart: dep docs
 
 .PHONY: update-chart
 update-chart:
