@@ -13,7 +13,7 @@ env:
   TZ: UTC
 {%- if redis_enabled %}
   REDIS_HOST:
-{% endif -%}
+{% endif %}
 {%- if mariadb_enabled %}
 {% raw %}
   DB_HOST:
@@ -21,7 +21,7 @@ env:
   DB_USER: "{{ .Values.mariadb.auth.username }}"
   DB_PASS: "{{ .Values.mariadb.auth.password }}"
 {% endraw %}
-{% endif -%}
+{% endif %}
 {%- if postgresql_enabled %}
 {% raw %}
   DB_HOST:
@@ -29,7 +29,7 @@ env:
   DB_USER: "{{ .Values.postgresql.auth.username }}"
   DB_PASS: "{{ .Values.postgresql.auth.password }}"
 {% endraw %}
-{% endif -%}
+{% endif %}
 
 # -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
 service:
