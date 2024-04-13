@@ -1,0 +1,1 @@
+../../charts/wallabag/README.md

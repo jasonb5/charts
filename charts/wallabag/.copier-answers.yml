@@ -1,0 +1,18 @@
+_src_path: template/
+description: 'wallabag is a self hostable application for saving web pages. Unlike
+    other services, wallabag is free (as in freedom) and open source.
+
+
+    With this application you will not miss content anymore. Click, save, read it
+    when you want. It saves the content you select so that you can read it when you
+    have time.'
+homepage: https://wallabag.org/
+image: wallabag/wallabag
+keywords: archive
+mariadb_enabled: false
+name: wallabag
+port: 80
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/wallabag/wallabag
+version: 2.6.9

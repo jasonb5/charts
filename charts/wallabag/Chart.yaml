@@ -1,0 +1,21 @@
+apiVersion: v2
+name: wallabag
+version: 0.1.0
+description: |
+  wallabag is a self hostable application for saving web pages. Unlike other services, wallabag is free (as in freedom) and open source.
+
+  With this application you will not miss content anymore. Click, save, read it when you want. It saves the content you select so that you can read it when you have time.
+type: application
+keywords:
+- archive
+home: https://wallabag.org/
+sources:
+- https://github.com/jasonb5/charts/tree/main/charts/wallabag
+- https://github.com/wallabag/wallabag
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 2.6.9

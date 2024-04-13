@@ -1,0 +1,48 @@
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
+workload: deployment
+
+image:
+  # -- Container image repository
+  repository: wallabag/wallabag
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+env:
+  # -- Set the timezone
+  TZ: UTC
+  # -- Secret key used to generate security-related tokens
+  SYMFONY__ENV__SECRET:
+    # -- Full url of install e.g. http://127.0.0.1:80
+  SYMFONY__ENV__DOMAIN_NAME:
+
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
+service:
+  ports:
+    default:
+      # -- Default port
+      port: 80
+
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
+ingress:
+  # -- Enable/disable ingress
+  enabled: false
+  hosts:
+    # -- Reference default service
+  - name: default
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
+    enabled: false
+
+# -- [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence)
+persistence:
+  config:
+    # -- Enable/disable persistence
+    enabled: false
+    # -- Type of volume mount
+    type: pvc
+    # -- Size of volume
+    size: 1Gi

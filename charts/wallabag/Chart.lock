@@ -1,0 +1,6 @@
+dependencies:
+- name: common
+  repository: https://jasonb5.github.io/charts
+  version: 0.1.3
+digest: sha256:60cd71d08279529690fad4b81cd7dec16dbf8ac4cbe107004f8f9c3f98378205
+generated: "2024-04-12T22:52:31.650526937-07:00"

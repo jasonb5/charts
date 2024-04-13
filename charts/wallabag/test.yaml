@@ -1,0 +1,3 @@
+env:
+  SYMFONY__ENV__SECRET: abcd1234
+  SYMFONY__ENV__DOMAIN_NAME: http://127.0.0.1:8080
