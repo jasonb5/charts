@@ -1,0 +1,1 @@
+../../charts/linkding/README.md

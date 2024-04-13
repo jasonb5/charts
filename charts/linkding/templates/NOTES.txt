@@ -1,0 +1,42 @@
+Create initial user with the following command:
+
+kubectl exec -it $(kubectl get pod -l app.kubernetes.io/name=linkding -oname) -- /bin/bash -c "DJANGO_SUPERUSER_PASSWORD=<password> python manage.py createsuperuser --username <username> --email <email> --noinput"
+
+Methods for accessing the application:
+
+{{- with .Values.ingress }}
+
+Open a browser to any of the following URLs:
+{{- $tls := hasKey . "tls" }}
+{{- if .enabled }}
+{{- range $host := .hosts }}
+  {{- $paths := ternary $host.paths (list (dict "path" "/" "pathType" "ImplementationSpecific")) (hasKey $host "paths") }}
+  {{- range $paths }}
+  http{{ if $tls }}s{{ end }}://{{ ternary "*" $host.host (eq $host.host "default") }}{{ default "/" .path }}
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- with .Values.service }}
+{{- range $name, $port := .ports }}
+
+Access the {{ $name | quote }} service using:
+{{- $type := default "ClusterIP" $port.type }}
+{{- if eq $type "NodePort" }}
+  export NODE_PORT=$(kubectl get --namespace {{ $.Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "common.fullname" $ }}
+  export NODE_IP=$(kubectl get nodes --namespace {{ $.Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo http://$NODE_IP:$NODE_PORT
+{{- else if eq $type "LoadBalancer" }}
+     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+           You can watch the status of by running 'kubectl get --namespace {{ $.Release.Namespace }} svc -w {{ include "common.fullname" $ }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ $.Release.Namespace }} {{ include "common.fullname" $ }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo http://$SERVICE_IP:{{ $port.port }}
+{{- else if eq $type "ClusterIP" }}
+  export POD_NAME=$(kubectl get pods --namespace {{ $.Release.Namespace }} -l "app.kubernetes.io/name={{ include "common.name" $ }},app.kubernetes.io/instance={{ $.Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace {{ $.Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace {{ $.Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
+{{- end }}
+{{- end }}
+{{- end }}

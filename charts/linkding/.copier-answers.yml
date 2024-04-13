@@ -1,0 +1,13 @@
+_src_path: template/
+description: linkding is a bookmark manager that you can host yourself. It's designed
+    be to be minimal, fast, and easy to set up using Docker.
+homepage: https://github.com/sissbruecker/linkding
+image: sissbruecker/linkding
+keywords: bookmark
+mariadb_enabled: false
+name: linkding
+port: 9090
+postgresql_enabled: false
+redis_enabled: false
+sources: https://github.com/sissbruecker/linkding
+version: 1.28.0
