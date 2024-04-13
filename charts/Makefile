@@ -48,7 +48,9 @@ version:
 
 .PHONY: new-chart
 new-chart:
-	copier copy $(ARGS) template/ .
+	copier copy -d name=$(NAME) $(ARGS) template/ .
+
+	pushd $(NAME); make init-chart
 
 .PHONY: init-chart
 init-chart: dep docs
@@ -66,9 +68,9 @@ uninstall:
 	helm delete $(shell basename $(PWD))
 
 .PHONY: open
-open: NAME := $(shell basename $(PWD))
-open: POD := $(shell kubectl get pod -l app.kubernetes.io/name=$(NAME) -oname)
-open: PORT := $(shell kubectl get service -l app.kubernetes.io/name=$(NAME) -ojsonpath="{.items[0].spec.ports[0].port}")
+open: NAME ?= $(shell basename $(PWD))
+open: POD ?= $(shell kubectl get pod -l app.kubernetes.io/name=$(NAME) -oname)
+open: PORT ?= $(shell kubectl get service -l app.kubernetes.io/name=$(NAME) -ojsonpath="{.items[0].spec.ports[0].port}")
 open:
 	kubectl port-forward $(POD) 8080:$(PORT)
 
