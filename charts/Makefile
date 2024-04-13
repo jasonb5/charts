@@ -4,11 +4,11 @@ CHART_DIR ?= .
 
 include $(wildcard custom.mk)
 
-package upload index: CR_ARGS = $(if $(wildcard ../../cr.yaml),--config ../../cr.yaml,) $(ARGS) 
+package upload index: _ARGS = $(if $(wildcard ../../cr.yaml),--config ../../cr.yaml,) $(ARGS) 
 
 .PHONY: package
 package:
-	cr package $(CR_ARGS) $(CHART_DIR)
+	cr package $(_ARGS) $(CHART_DIR)
 
 .PHONY: package-all
 package-all:
@@ -17,26 +17,42 @@ package-all:
 
 .PHONY: upload
 upload:
-	cr upload $(CR_ARGS) --git-repo charts $(CHART_DIR)
+	cr upload $(_ARGS) --token $(GH_TOKEN) --git-repo charts $(CHART_DIR)
 
 .PHONY: upload-all
 upload-all:
 	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common.*\|template\|\.cr-.*\)' \
-		| xargs -I% -P 4 /bin/bash -c "pushd %; make upload ARGS='--package-path ../.cr-release-packages $(ARGS)'"
+		| xargs -I% -P 4 /bin/bash -c "pushd %; make upload ARGS='--package-path ../.cr-release-packages $(ARGS)' GH_TOKEN=$(GH_TOKEN)"
 
 .PHONY: index
 index:
 	mkdir .cr-index || exit 0
-	cr index $(CR_ARGS) --git-repo charts $(CHART_DIR)
+	git checkout gh-pages; git pull; git checkout main
+	cr index $(_ARGS) --token $(GH_TOKEN) --git-repo charts $(CHART_DIR)
 
 .PHONY: index-all
 index-all:
 	mkdir .cr-index || exit 0
 	git checkout gh-pages; git pull; git checkout main
-	cr index --config ../cr.yaml --git-repo charts --package-path .cr-release-packages $(ARGS) $(CHART_DIR)
+	cr index $(_ARGS) --token $(GH_TOKEN) --git-repo charts --package-path .cr-release-packages $(CHART_DIR)
+
+.PHONY: dep
+dep:
+	helm dep update $(ARGS) $(CHART_DIR)
+
+.PHONY: dep-all
+dep-all:
+	helm repo update
+	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\|\.cr-index-packages\)' \
+		| xargs -I% -P 4 /bin/bash -c "pushd %; make dep ARGS='--skip-refresh'"
+
+.PHONY: bump-all
+bump-all:
+	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\|\.cr-index-packages\)' \
+		| xargs -I% -P 1 /bin/bash -c "pushd %; make bump-patch ARGS='--non-interactive --only-patch'"
 
 .PHONY: release-all
-release-all: package-all upload-all index-all
+release-all: dep-all bump-all package-all upload-all index-all
 
 .PHONY: update
 update:
@@ -107,16 +123,6 @@ lint:
 .PHONY: test
 test:
 	helm unittest $(ARGS) $(CHART_DIR) | grep -v trim
-
-.PHONY: dep
-dep:
-	helm dep update $(ARGS) $(CHART_DIR)
-
-.PHONY: update-common-dep
-update-common-dep:
-	helm repo update
-	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\|\.cr-index-packages\)' \
-		| xargs -I% -P 4 /bin/bash -c "pushd %; make dep ARGS='--skip-refresh'; make bump-patch ARGS='--non-interactive --only-patch'"
 
 .PHONY: clean
 clean:
