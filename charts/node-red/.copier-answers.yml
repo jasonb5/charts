@@ -9,4 +9,4 @@ port: 1880
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/node-red/node-red
-version: 0.1.9
+version: 0.1.10
