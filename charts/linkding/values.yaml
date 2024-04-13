@@ -42,3 +42,4 @@ persistence:
     type: pvc
     # -- Size of volume
     size: 1Gi
+    mountPath: /etc/linkding/data
