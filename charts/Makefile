@@ -57,6 +57,21 @@ init-chart: dep docs
 update-chart:
 	copier copy $(ARGS) -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
 
+.PHONY: install
+install:
+	helm upgrade -f test.yaml --wait --install $(shell basename $(PWD)) .
+
+.PHONY: uninstall
+uninstall:
+	helm delete $(shell basename $(PWD))
+
+.PHONY: open
+open: NAME := $(shell basename $(PWD))
+open: POD := $(shell kubectl get pod -l app.kubernetes.io/name=$(NAME) -oname)
+open: PORT := $(shell kubectl get service -l app.kubernetes.io/name=$(NAME) -ojsonpath="{.items[0].spec.ports[0].port}")
+open:
+	kubectl port-forward $(POD) 8080:$(PORT)
+
 .PHONY: docs
 docs:
 	helm-docs --log-level DEBUG --sort-values-order file $(CHART_DIR)
