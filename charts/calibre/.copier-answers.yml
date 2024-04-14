@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: Calibre is a powerful and easy to use e-book manager. Users say it's
     outstanding and a must-have. It'll allow you to do nearly everything and it takes
     things a step beyond normal e-book software. It's also completely free and open
@@ -11,5 +11,6 @@ name: calibre
 port: 8080
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/kovidgoyal/calibre,https://github.com/linuxserver/docker-calibre
-version: 0.1.7
+version: 7.8.0
