@@ -73,7 +73,7 @@ init-chart: dep docs
 
 .PHONY: update-chart
 update-chart:
-	copier copy $(ARGS) -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
+	copier copy $(ARGS) -s tbump.toml -s values.yaml -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
 
 .PHONY: install
 install:
@@ -127,3 +127,7 @@ test:
 .PHONY: clean
 clean:
 	rm -rf .cr-release-packages
+
+.PHONY: sync-version
+sync-version:
+	sed -i"" "s/version:.*/version: $(shell python ../../scripts/chart.py version .)/g" .copier-answers.yml
