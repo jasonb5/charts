@@ -12,11 +12,13 @@ env:
   # -- Set the timezone
   TZ: UTC
 {%- if redis_enabled %}
-  REDIS_HOST:
+{% raw %}
+  REDIS_HOST: '{{ include "common.name" . }}-redis'
+{% endraw %}
 {% endif %}
 {%- if mariadb_enabled %}
 {% raw %}
-  DB_HOST:
+  DB_HOST: '{{ include "common.name" . }}-mariadb'
   DB_NAME: "{{ .Values.mariadb.auth.database }}"
   DB_USER: "{{ .Values.mariadb.auth.username }}"
   DB_PASS: "{{ .Values.mariadb.auth.password }}"
@@ -24,7 +26,8 @@ env:
 {% endif %}
 {%- if postgresql_enabled %}
 {% raw %}
-  DB_HOST:
+  DB_URL: '{{ include "common.postgresql.url" . }}'
+  DB_HOST: '{{ include "common.name" . }}-postgresql'
   DB_NAME: "{{ .Values.postgresql.auth.database }}"
   DB_USER: "{{ .Values.postgresql.auth.username }}"
   DB_PASS: "{{ .Values.postgresql.auth.password }}"
