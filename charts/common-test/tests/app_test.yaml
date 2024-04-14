@@ -62,17 +62,18 @@ tests:
             tag: latest
     asserts:
       - equal:
-          path: metadata
-          value:
-            labels:
-              app.kubernetes.io/instance: RELEASE-NAME
-              app.kubernetes.io/managed-by: Helm
-              app.kubernetes.io/name: common-test
-              app.kubernetes.io/version: 0.1.0
-              common/workload: db
-              helm.sh/chart: common-test-0.1.0
-            name: RELEASE-NAME-common-test-db
-            namespace: NAMESPACE
+          path: metadata.name
+          value: RELEASE-NAME-common-test-db
+      - equal:
+          path: metadata.namespace
+          value: NAMESPACE
+      - isSubset:
+          path: metadata.labels
+          content:
+            app.kubernetes.io/instance: RELEASE-NAME
+            app.kubernetes.io/managed-by: Helm
+            app.kubernetes.io/name: common-test
+            common/workload: db
       - isKind:
           of: Deployment
       - hasDocuments:

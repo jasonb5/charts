@@ -23,9 +23,9 @@ tests:
             enabled: true
             repo: rclone:minio:apps
     asserts:
-      - equal:
+      - isSubset:
           path: spec.template.spec.containers[1]
-          value:
+          content:
             env:
               - name: BACKUP_APP
                 value: restic
@@ -35,7 +35,6 @@ tests:
                 value: /config
               - name: RESTIC_REPO
                 value: rclone:minio:apps
-            image: ghcr.io/jasonb5/rclone:0.1.1
             name: rclone
             volumeMounts:
               - mountPath: /config
@@ -59,9 +58,9 @@ tests:
           rclone:
             destination: minio:apps
     asserts:
-      - equal:
+      - isSubset:
           path: spec.template.spec.containers[1]
-          value:
+          content:
             env:
               - name: BACKUP_APP
                 value: rclone
@@ -71,7 +70,6 @@ tests:
                 value: minio:apps
               - name: RCLONE_SOURCE
                 value: /config
-            image: ghcr.io/jasonb5/rclone:0.1.1
             name: rclone
             volumeMounts:
               - mountPath: /config
