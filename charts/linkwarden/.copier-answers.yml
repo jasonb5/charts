@@ -1,0 +1,20 @@
+_src_path: template/
+description: Linkwarden is a self-hosted, open-source collaborative bookmark manager
+    to collect, organize and archive webpages. The objective is to organize useful
+    webpages and articles you find across the web in one place, and since useful webpages
+    can go away (see the inevitability of Link Rot), Linkwarden also saves a copy
+    of each webpage as a Screenshot and PDF, ensuring accessibility even if the original
+    content is no longer available. Additionally, Linkwarden is designed with collaboration
+    in mind, sharing links with the public and/or allowing multiple users to work
+    together seamlessly.
+homepage: https://linkwarden.app/
+image: ghcr.io/linkwarden/linkwarden
+keywords: bookmark,archive
+mariadb_enabled: false
+name: linkwarden
+port: 3000
+postgresql_enabled: true
+postgresql_version: 12.10.x
+redis_enabled: false
+sources: https://github.com/linkwarden/linkwarden
+version: v2.5.1

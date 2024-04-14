@@ -1,0 +1,1 @@
+../../charts/linkwarden/README.md
