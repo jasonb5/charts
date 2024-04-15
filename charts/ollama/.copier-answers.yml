@@ -10,4 +10,4 @@ port: 11434
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/jmorganca/ollama
-version: 0.1.5
+version: 0.1.32

@@ -10,4 +10,4 @@ port: 8080
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/Lissy93/dashy
-version: 0.1.5
+version: 2.1.2

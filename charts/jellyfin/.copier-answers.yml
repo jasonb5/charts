@@ -11,4 +11,4 @@ port: 8096
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/jellyfin/jellyfin,https://github.com/linuxserver/docker-jellyfin
-version: 0.1.3
+version: 10.8.13

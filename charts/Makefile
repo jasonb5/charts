@@ -130,4 +130,4 @@ clean:
 
 .PHONY: sync-version
 sync-version:
-	sed -i"" "s/version:.*/version: $(shell python ../../scripts/chart.py version .)/g" .copier-answers.yml
+	sed -i"" "s/^version:.*/version: $(shell python ../../scripts/chart.py version .)/g" .copier-answers.yml

@@ -9,4 +9,4 @@ port: 80
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/CorentinTh/it-tools
-version: 0.1.3
+version: 2023.12.21-5ed3693

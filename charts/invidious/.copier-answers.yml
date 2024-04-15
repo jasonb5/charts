@@ -10,4 +10,4 @@ postgresql_enabled: true
 postgresql_version: 0.1.0
 redis_enabled: false
 sources: https://github.com/iv-org
-version: 0.1.0
+version: 2024.03.31-08390ac

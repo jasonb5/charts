@@ -10,4 +10,4 @@ port: 80
 postgresql_enabled: false
 redis_enabled: false
 sources: https://github.com/esphome/esphome
-version: 0.1.12
+version: 2024.3.2
