@@ -3676,6 +3676,33 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/stirling-pdf-0.1.0/stirling-pdf-0.1.0.tgz
     version: 0.1.0
+  wallabag:
+  - apiVersion: v2
+    appVersion: 2.6.9
+    created: "2024-04-14T22:24:29.730314859-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'wallabag is a self hostable application for saving web pages. Unlike
+      other services, wallabag is free (as in freedom) and open source.  With this
+      application you will not miss content anymore. Click, save, read it when you
+      want. It saves the content you select so that you can read it when you have
+      time. '
+    digest: 38500ac2e416e8fcdaf214cceb3c7ecdab505f02f92f32993cb43cce747cf8b1
+    home: https://wallabag.org/
+    keywords:
+    - archive
+    maintainers:
+    - name: jasonb5
+    name: wallabag
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/wallabag
+    - https://github.com/wallabag/wallabag
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/wallabag-0.1.0/wallabag-0.1.0.tgz
+    version: 0.1.0
   zwave-js-ui:
   - apiVersion: v2
     appVersion: 9.10.3
@@ -3999,4 +4026,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-14T22:23:11.630117609-07:00"
+generated: "2024-04-14T22:24:29.730939144-07:00"
