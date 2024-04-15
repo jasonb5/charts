@@ -8,5 +8,6 @@ name: gotify
 port: 80
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/gotify/server
-version: 0.1.5
+version: 2.4.0

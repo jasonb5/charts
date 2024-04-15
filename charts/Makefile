@@ -51,8 +51,11 @@ bump-all:
 	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\|\.cr-index-packages\)' \
 		| xargs -I% -P 1 /bin/bash -c "pushd %; make bump-patch ARGS='--non-interactive --only-patch'"
 
+.PHONY: release
+release: dep package upload index
+
 .PHONY: release-all
-release-all: dep-all bump-all package-all upload-all index-all
+release-all: dep-all package-all upload-all index-all
 
 .PHONY: update
 update:
@@ -73,7 +76,7 @@ init-chart: dep docs
 
 .PHONY: update-chart
 update-chart:
-	copier copy $(ARGS) -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
+	copier copy $(ARGS) -s tbump.toml -s values.yaml -s Chart.yaml -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
 
 .PHONY: install
 install:
@@ -127,3 +130,7 @@ test:
 .PHONY: clean
 clean:
 	rm -rf .cr-release-packages
+
+.PHONY: sync-version
+sync-version:
+	sed -i"" "s/^version:.*/version: $(shell python ../../scripts/chart.py version .)/g" .copier-answers.yml

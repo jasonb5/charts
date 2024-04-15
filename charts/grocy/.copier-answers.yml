@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: 'Grocy is a web-based self-hosted groceries & household management solution
     for your home.
 
@@ -12,5 +12,6 @@ name: grocy
 port: 9283
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/grocy/grocy
-version: 0.1.5
+version: 4.2.0

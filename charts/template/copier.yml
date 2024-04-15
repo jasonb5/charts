@@ -60,3 +60,8 @@ postgresql_version:
   help: Version of Bitnami PostgreSQL Helm chart.
   default: 12.10.x
   when: "{{ postgresql_enabled }}"
+
+relative_makefile:
+  type: str
+  help: Relative path to main Makefile (DO NOT EDIT)
+  default: ../

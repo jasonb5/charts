@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: Low-code programming for event-driven applications
 homepage: https://nodered.org/
 image: nodered/node-red
@@ -8,5 +8,6 @@ name: node-red
 port: 1880
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/node-red/node-red
-version: 0.1.10
+version: 3.1.9

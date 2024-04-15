@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: Simplify the management of your server with Homarr - a sleek, modern
     dashboard that puts all of your apps and services at your fingertips. With Homarr,
     you can access and control everything in one convenient location. Homarr seamlessly
@@ -13,5 +13,6 @@ name: homarr
 port: 7575
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/ajnart/homarr
-version: 0.1.8
+version: 0.15.2
