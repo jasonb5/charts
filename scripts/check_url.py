@@ -14,7 +14,9 @@ print(args)
 
 try:
     response = requests.get(args["url"], verify=not args["skip_verify"])
-except Exception:
+except Exception as e:
+    print(e)
+
     sys.exit(1)
 
 for status_code in args["success"]:

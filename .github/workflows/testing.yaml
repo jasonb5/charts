@@ -96,7 +96,7 @@ jobs:
 
           sleep 2
 
-          python ../../scripts/check_url.py http://127.0.0.1:8080 --success 200
+          python ../../scripts/check_url.py http://127.0.0.1:8080 --success 200 --skip-verify
       - name: Remove needs-testing label on success
         if: ${{ success() }}
         env:
