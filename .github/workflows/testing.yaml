@@ -82,6 +82,7 @@ jobs:
           pip install requests selenium
       - name: Lint Helm chart
         run: |
+          make dep
           make lint
       - name: Unittest Helm chart
         run: |
