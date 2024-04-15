@@ -79,10 +79,9 @@ jobs:
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
 
-          pip install requests
+          pip install requests selenium
       - name: Lint Helm chart
         run: |
-          make dep
           make lint
       - name: Unittest Helm chart
         run: |
@@ -90,14 +89,17 @@ jobs:
       - name: Install helm chart
         if: ${{ ! contains(matrix.chart, 'common') }}
         run: |
-          pip install selenium
-          helm install --wait test .
-          name=$(kubectl get pods -oname)
-          port=$(cat values.yaml | yq '.service.ports.default.port')
+          make install
+
           trap "killall kubectl" 0
-          kubectl port-forward $name 8000:${port} &
+
+          make open &
+
           sleep 2
-          python ../../scripts/check_url.py http://127.0.0.1:8000 --success 200
+
+          python ../../scripts/check_url.py http://127.0.0.1:8080 --success 200
+
+          killall kubectl
       - name: Remove needs-testing label on success
         if: ${{ success() }}
         env:
