@@ -51,8 +51,11 @@ bump-all:
 	find . -maxdepth 1 -mindepth 1 -type d -not -regex '.*\(common\|template\|\.cr-index-packages\)' \
 		| xargs -I% -P 1 /bin/bash -c "pushd %; make bump-patch ARGS='--non-interactive --only-patch'"
 
+.PHONY: release
+release: dep package upload index
+
 .PHONY: release-all
-release-all: dep-all bump-all package-all upload-all index-all
+release-all: dep-all package-all upload-all index-all
 
 .PHONY: update
 update:
