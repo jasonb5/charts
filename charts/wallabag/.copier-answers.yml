@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: 'wallabag is a self hostable application for saving web pages. Unlike
     other services, wallabag is free (as in freedom) and open source.
 
@@ -14,5 +14,6 @@ name: wallabag
 port: 80
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/wallabag/wallabag
 version: 2.6.9

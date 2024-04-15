@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: 'SilverBullet aims to be a **workshop for the mind**: a creative space
     where you collect, create and expand your personal knowledge, while simultaneously
     letting you evolve the tools you use to do so.'
@@ -10,5 +10,6 @@ name: silverbullet
 port: 3000
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/silverbulletmd/silverbullet
 version: 0.7.6

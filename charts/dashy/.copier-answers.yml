@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: Dashy is an open source, highly customizable, easy to use, privacy-respecting
     dashboard app.
 homepage: https://dashy.to/
@@ -9,5 +9,6 @@ name: dashy
 port: 8080
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/Lissy93/dashy
 version: 2.1.2

@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: 'AI-Powered Photos App for the Decentralized Web 🌈💎✨ '
 homepage: https://www.photoprism.app/
 image: photoprism/photoprism
@@ -8,5 +8,6 @@ name: photoprism
 port: 2342
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/photoprism/photoprism
 version: 231128-ce

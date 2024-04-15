@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../template/
 description: ESPHome is the perfect solution for creating custom firmwares for your
     ESP8266/ESP32 boards.
 homepage: https://esphome.io/
@@ -9,5 +9,6 @@ name: esphome
 port: 80
 postgresql_enabled: false
 redis_enabled: false
+relative_makefile: ../
 sources: https://github.com/esphome/esphome
 version: 2024.3.2
