@@ -92,15 +92,11 @@ jobs:
         run: |
           make install
 
-          trap "killall kubectl" 0
-
           make open &
 
           sleep 2
 
           python ../../scripts/check_url.py http://127.0.0.1:8080 --success 200
-
-          killall make
       - name: Remove needs-testing label on success
         if: ${{ success() }}
         env:
