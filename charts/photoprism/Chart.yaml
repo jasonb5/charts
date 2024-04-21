@@ -1,20 +1,20 @@
 apiVersion: v2
 name: photoprism
 version: 0.1.3
-description: |
-  AI-Powered Photos App for the Decentralized Web 🌈💎✨ 
+description: "AI-Powered Photos App for the Decentralized Web \U0001F308\U0001F48E\
+  \u2728 \n"
 type: application
 keywords:
-  - media
-  - images
+- media
+- images
 home: https://www.photoprism.app/
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/photoprism
-  - https://github.com/photoprism/photoprism
+- https://github.com/jasonb5/charts/tree/main/charts/photoprism
+- https://github.com/photoprism/photoprism
 dependencies:
 - name: common
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 231128-ce
+- name: jasonb5
+appVersion: 240420.0.0-ce
