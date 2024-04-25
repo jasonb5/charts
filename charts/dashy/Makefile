@@ -1,6 +1,6 @@
 include ../Makefile
 
-install: $(ARGS) --timeout 8m
+install: ARGS := --timeout 8m
 
 .PHONY: test
 test:
