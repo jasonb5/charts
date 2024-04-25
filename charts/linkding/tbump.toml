@@ -1,7 +1,7 @@
 github_url = "https://github.com/jasonb5/charts/"
 
 [version]
-current = "0.1.0"
+current = "0.1.1"
 
 regex = '''
   (?P<major>\d+)
@@ -18,6 +18,3 @@ tag_template = "linkding_v{new_version}"
 [[file]]
 src = "Chart.yaml"
 search = "version: {current_version}"
-
-[[file]]
-src = ".copier-answers.yml"
