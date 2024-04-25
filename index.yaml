@@ -2340,6 +2340,29 @@ entries:
   linkding:
   - apiVersion: v2
     appVersion: 1.28.0
+    created: "2024-04-24T22:52:23.219832161-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'linkding is a bookmark manager that you can host yourself. It''s
+      designed be to be minimal, fast, and easy to set up using Docker. '
+    digest: 44dae03e6a0605227239e63b2e6b92aeb1bacbd07db4c10913d22ae651a6d236
+    home: https://github.com/sissbruecker/linkding
+    keywords:
+    - bookmark
+    maintainers:
+    - name: jasonb5
+    name: linkding
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/linkding
+    - https://github.com/sissbruecker/linkding
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/linkding-0.1.1/linkding-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.28.0
     created: "2024-04-14T22:14:55.865101016-07:00"
     dependencies:
     - name: common
@@ -4026,4 +4049,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-14T22:24:29.730939144-07:00"
+generated: "2024-04-24T22:52:23.220404308-07:00"
