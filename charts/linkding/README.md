@@ -1,6 +1,6 @@
 # linkding
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.28.0](https://img.shields.io/badge/AppVersion-1.28.0-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.30.0](https://img.shields.io/badge/AppVersion-1.30.0-informational?style=flat-square)
 
 linkding is a bookmark manager that you can host yourself. It's designed be to be minimal, fast, and easy to set up using Docker.
 
@@ -39,7 +39,7 @@ linkding is a bookmark manager that you can host yourself. It's designed be to b
 | ingress.hosts[0].host | string | `nil` | Ingress hostname |
 | ingress.tls | object | `{"enabled":false}` | [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls) |
 | ingress.tls.enabled | bool | `false` | Enable/disable tls |
-| persistence | object | `{"config":{"enabled":false,"size":"1Gi","type":"pvc"}}` | [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence) |
+| persistence | object | `{"config":{"enabled":false,"mountPath":"/etc/linkding/data","size":"1Gi","type":"pvc"}}` | [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence) |
 | persistence.config.enabled | bool | `false` | Enable/disable persistence |
 | persistence.config.type | string | `"pvc"` | Type of volume mount |
 | persistence.config.size | string | `"1Gi"` | Size of volume |
