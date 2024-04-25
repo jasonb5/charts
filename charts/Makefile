@@ -80,7 +80,7 @@ update-chart:
 
 .PHONY: install
 install:
-	helm upgrade -f test.yaml --wait --install $(shell basename $(PWD)) .
+	helm upgrade -f test.yaml --wait --install $(ARGS) $(shell basename $(PWD)) .
 
 .PHONY: uninstall
 uninstall:
