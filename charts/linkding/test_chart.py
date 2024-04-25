@@ -34,7 +34,7 @@ class TestChart:
         self.driver.save_screenshot(self.image_dir / image_name)
 
     @pytest.mark.parametrize("url,status_codes", [
-        (None, (200,)),
+        ("/login", (200,)),
     ])
     def test_url(self, url, status_codes):
         if url is None:
