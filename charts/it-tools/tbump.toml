@@ -18,6 +18,3 @@ tag_template = "it-tools_v{new_version}"
 [[file]]
 src = "Chart.yaml"
 search = "version: {current_version}"
-
-[[file]]
-src = ".copier-answers.yml"
