@@ -79,27 +79,18 @@ jobs:
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
 
-          pip install requests selenium
+          pip install requests selenium pytest
+      - name: Update Helm chart
+        run: make dep
       - name: Lint Helm chart
-        run: |
-          make lint
-      - name: Unittest Helm chart
-        run: |
-          make test
-      - name: Install helm chart
+        run: make lint
+      - name: Install Helm chart
         if: ${{ ! contains(matrix.chart, 'common') }}
         run: |
           make install
-
-          trap "killall kubectl" 0
-
           make open &
-
-          sleep 2
-
-          python ../../scripts/check_url.py http://127.0.0.1:8080 --success 200
-
-          killall kubectl
+      - name: Unittest Helm chart
+        run: make test
       - name: Remove needs-testing label on success
         if: ${{ success() }}
         env:
