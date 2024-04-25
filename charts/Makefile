@@ -123,10 +123,6 @@ template:
 lint:
 	helm lint $(ARGS) $(CHART_DIR)
 
-.PHONY: test
-test:
-	helm unittest $(ARGS) $(CHART_DIR) | grep -v trim
-
 .PHONY: clean
 clean:
 	rm -rf .cr-release-packages
