@@ -3097,6 +3097,30 @@ entries:
     version: 0.1.0
   photoprism:
   - apiVersion: v2
+    appVersion: 240420-ce
+    created: "2024-04-26T03:52:34.625827158Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "AI-Powered Photos App for the Decentralized Web \U0001F308\U0001F48E✨
+      \ "
+    digest: 7acf8c853422cba8939b060241b80a8ed5f04f9efd120280257c4d6220afe660
+    home: https://www.photoprism.app/
+    keywords:
+    - media
+    - images
+    maintainers:
+    - name: jasonb5
+    name: photoprism
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/photoprism
+    - https://github.com/photoprism/photoprism
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.4/photoprism-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     appVersion: 231128-ce
     created: "2024-03-10T20:23:06.054335915-07:00"
     dependencies:
@@ -4215,4 +4239,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-25T06:14:17.342032664Z"
+generated: "2024-04-26T03:52:34.626082846Z"
