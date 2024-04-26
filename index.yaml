@@ -520,6 +520,29 @@ entries:
     version: 0.1.0
   dashy:
   - apiVersion: v2
+    appVersion: 3.0.0
+    created: "2024-04-26T04:35:15.945986714Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Dashy is an open source, highly customizable, easy to use, privacy-respecting
+      dashboard app. '
+    digest: 288ea17e2f693676579bd30c1c2ee91cd7f9788c0c44523d216cd53ad5f28513
+    home: https://dashy.to/
+    keywords:
+    - dashboard
+    maintainers:
+    - name: jasonb5
+    name: dashy
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/dashy
+    - https://github.com/Lissy93/dashy
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/dashy-0.1.6/dashy-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
     appVersion: 2.1.2
     created: "2024-03-10T20:23:02.010408481-07:00"
     dependencies:
@@ -4239,4 +4262,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-26T03:52:34.626082846Z"
+generated: "2024-04-26T04:35:15.946274942Z"
