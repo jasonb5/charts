@@ -17,7 +17,7 @@ service:
   ports:
     default:
       # -- Default port
-      port: 80
+      port: 8080
 
 # -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
 ingress:
