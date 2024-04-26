@@ -111,9 +111,8 @@ changelog:
 
 
 .PHONY: bump-%
-bump-%: ARGS ?= --no-tag
 bump-%:
-	tbump $(ARGS) $(shell pysemver bump $* $(shell tbump current-version))
+	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
 template:
