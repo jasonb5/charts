@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dashy
-version: 0.1.5
+version: 0.1.6
 description: |
   Dashy is an open source, highly customizable, easy to use, privacy-respecting dashboard app.
 type: application
@@ -16,4 +16,4 @@ dependencies:
   repository: https://jasonb5.github.io/charts
 maintainers:
 - name: jasonb5
-appVersion: 2.1.2
+appVersion: 3.0.0
