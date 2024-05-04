@@ -2,6 +2,33 @@ apiVersion: v1
 entries:
   calibre:
   - apiVersion: v2
+    appVersion: 7.10.0
+    created: "2024-05-04T08:44:03.235794817Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Calibre is a powerful and easy to use e-book manager. Users say
+      it''s outstanding and a must-have. It''ll allow you to do nearly everything
+      and it takes things a step beyond normal e-book software. It''s also completely
+      free and open source and great for both casual users and computer experts. '
+    digest: 9b10584f541d8891eb574b38301caf40c1c2431b153ad949516506b53976a42d
+    home: https://calibre-ebook.com/
+    keywords:
+    - ebooks
+    - management
+    maintainers:
+    - name: jasonb5
+    name: calibre
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/calibre
+    - https://github.com/kovidgoyal/calibre
+    - https://github.com/linuxserver/docker-calibre
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/calibre-0.1.10/calibre-0.1.10.tgz
+    version: 0.1.10
+  - apiVersion: v2
     appVersion: 7.9.0
     created: "2024-04-25T06:03:08.020075087Z"
     dependencies:
@@ -1630,6 +1657,30 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/homarr-0.1.0/homarr-0.1.0.tgz
     version: 0.1.0
   homeassistant:
+  - apiVersion: v2
+    appVersion: 2024.5.1
+    created: "2024-05-04T08:44:03.395878059Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "\U0001F3E1 Open source home automation that puts local control and
+      privacy first.  "
+    digest: 93d639bb7e25d08aeadecb6f756d54d542ea6ef9f7470e65c7ab82c672d09730
+    home: https://www.home-assistant.io/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: homeassistant
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homeassistant
+    - https://github.com/home-assistant/core
+    - https://github.com/linuxserver/docker-homeassistant
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homeassistant-0.1.25/homeassistant-0.1.25.tgz
+    version: 0.1.25
   - apiVersion: v2
     appVersion: 2024.5.0
     created: "2024-05-04T08:25:22.924447558Z"
@@ -4425,4 +4476,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-04T08:31:28.904100703Z"
+generated: "2024-05-04T08:44:03.396300087Z"
