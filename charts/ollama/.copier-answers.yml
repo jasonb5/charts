@@ -3,7 +3,7 @@ description: Ollama makes it easy to get up and running with large language mode
     locally.
 homepage: https://ollama.ai/
 image: ollama/ollama
-keywords: ''
+keywords: ai
 mariadb_enabled: false
 name: ollama
 port: 11434
