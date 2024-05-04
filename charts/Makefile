@@ -75,8 +75,9 @@ new-chart:
 init-chart: dep docs
 
 .PHONY: update-chart
+update-chart: SKIP := -s test_chart.py -s test.yaml -s values.yaml
 update-chart:
-	copier copy $(ARGS) -s test_chart.py -s test.yaml -s tbump.toml -s values.yaml -s Chart.yaml -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
+	copier copy $(ARGS) $(SKIP) -a $(shell basename `pwd`)/.copier-answers.yml ../template/ ../
 
 .PHONY: install
 install:
