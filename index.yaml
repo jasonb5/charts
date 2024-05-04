@@ -520,6 +520,29 @@ entries:
     version: 0.1.0
   dashy:
   - apiVersion: v2
+    appVersion: 3.0.1
+    created: "2024-05-04T07:27:12.709294016Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Dashy is an open source, highly customizable, easy to use, privacy-respecting
+      dashboard app. '
+    digest: 344698b0ea75fa86482010becec4f9a9daebab93ba32d2075ed77b060331aa49
+    home: https://dashy.to/
+    keywords:
+    - dashboard
+    maintainers:
+    - name: jasonb5
+    name: dashy
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/dashy
+    - https://github.com/Lissy93/dashy
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/dashy-0.1.7/dashy-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
     appVersion: 3.0.0
     created: "2024-04-26T04:35:15.945986714Z"
     dependencies:
@@ -3458,6 +3481,33 @@ entries:
     version: 0.1.0
   stirling-pdf:
   - apiVersion: v2
+    appVersion: 0.23.1
+    created: "2024-05-04T07:27:12.809656312Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'This is a powerful locally hosted web based PDF manipulation tool
+      using docker that allows you to perform various operations on PDF files, such
+      as splitting merging, converting, reorganizing, adding images, rotating, compressing,
+      and more. This locally hosted web application started as a 100% ChatGPT-made
+      application and has evolved to include a wide range of features to handle all
+      your PDF needs. '
+    digest: ab7f11a95e3e3df6e8801fba007e075fd457bdd5ccf0bbaf8b6c11a96b37c972
+    home: https://github.com/Stirling-Tools/Stirling-PDF
+    keywords:
+    - pdf
+    maintainers:
+    - name: jasonb5
+    name: stirling-pdf
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/stirling-pdf
+    - https://github.com/Stirling-Tools/Stirling-PDF
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/stirling-pdf-0.1.17/stirling-pdf-0.1.17.tgz
+    version: 0.1.17
+  - apiVersion: v2
     appVersion: 0.23.0
     created: "2024-04-25T06:09:46.122987507Z"
     dependencies:
@@ -4262,4 +4312,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-26T04:35:15.946274942Z"
+generated: "2024-05-04T07:27:12.80994922Z"
