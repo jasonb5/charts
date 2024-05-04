@@ -1,0 +1,1 @@
+../../charts/anythingllm/README.md
