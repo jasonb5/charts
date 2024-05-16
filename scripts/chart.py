@@ -21,7 +21,7 @@ yaml.add_representer(str, str_presenter)
 
 BASEVERSION = r"""
                   ^
-                  (?:(?P<prefix>[a-zA-Z-]*)-)?
+                  (?:(?P<prefix>[a-zA-Z-]*)-?)?
                   (?P<major>0|[1-9]\d*)
                   (?:
                     \.
