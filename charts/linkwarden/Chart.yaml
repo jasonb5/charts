@@ -20,5 +20,5 @@ dependencies:
   repository: oci://registry-1.docker.io/bitnamicharts
   condition: postgresql.enabled
 maintainers:
-  - name: jasonb5
-appVersion: v2.5.1
+- name: jasonb5
+appVersion: 2.5.3
