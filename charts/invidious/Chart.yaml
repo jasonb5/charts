@@ -5,19 +5,19 @@ description: |
   An open source alternative front-end to YouTube.
 type: application
 keywords:
-  - video
-  - audio
-  - youtube
+- video
+- audio
+- youtube
 home: https://invidious.io/
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/invidious
-  - https://github.com/iv-org
+- https://github.com/jasonb5/charts/tree/main/charts/invidious
+- https://github.com/iv-org
 dependencies:
 - name: common
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 - name: postgresql
-  version: 14.x.x
+  version: 0.1.0
   repository: oci://registry-1.docker.io/bitnamicharts
   condition: postgresql.enabled
 maintainers:

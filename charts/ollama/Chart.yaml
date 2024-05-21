@@ -4,6 +4,8 @@ version: 0.1.7
 description: |
   Ollama makes it easy to get up and running with large language models locally.
 type: application
+keywords:
+- ai
 home: https://ollama.ai/
 sources:
 - https://github.com/jasonb5/charts/tree/main/charts/ollama
@@ -13,5 +15,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-- name: jasonb5
+  - name: jasonb5
 appVersion: 0.1.34

@@ -1,4 +1,5 @@
-_src_path: ../template/
+_src_path: ../../charts/template
+app_version: latest
 description: A full-stack application that enables you to turn any document, resource,
     or piece of content into context that any LLM can use as references during chatting.
     This application allows you to pick and choose which LLM or Vector Database you
@@ -11,6 +12,6 @@ name: anythingllm
 port: 3001
 postgresql_enabled: false
 redis_enabled: false
-relative_makefile: ../
+root_directory: ../..
 sources: https://github.com/Mintplex-Labs/anything-llm,https://docs.useanything.com/
-version: latest
+version: 0.1.1

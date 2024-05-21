@@ -1,4 +1,5 @@
-_src_path: ../template/
+_src_path: ../../charts/template
+app_version: 2024.03.31-08390ac
 description: An open source alternative front-end to YouTube.
 homepage: https://invidious.io/
 image: quay.io/invidious/invidious
@@ -9,6 +10,6 @@ port: 3000
 postgresql_enabled: true
 postgresql_version: 0.1.0
 redis_enabled: false
-relative_makefile: ../
+root_directory: ../..
 sources: https://github.com/iv-org
-version: 2024.03.31-08390ac
+version: 0.1.0

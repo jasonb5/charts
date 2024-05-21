@@ -1,4 +1,5 @@
-_src_path: ../template/
+_src_path: ../../charts/template
+app_version: 2.4.0
 description: a simple server for sending and receiving messages
 homepage: https://gotify.net/
 image: gotify/server
@@ -8,6 +9,6 @@ name: gotify
 port: 80
 postgresql_enabled: false
 redis_enabled: false
-relative_makefile: ../
+root_directory: ../..
 sources: https://github.com/gotify/server
-version: 2.4.0
+version: 0.1.5

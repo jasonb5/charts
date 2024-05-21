@@ -5,11 +5,11 @@ description: |
   FreshRSS is an RSS aggregator and reader. It allows you to read and follow several news websites at a glance without the need to browse from one website to another.
 type: application
 keywords:
-  - rss
+- rss
 home: http://freshrss.github.io/FreshRSS/
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/freshrss
-  - https://github.com/FreshRSS/FreshRSS
+- https://github.com/jasonb5/charts/tree/main/charts/freshrss
+- https://github.com/FreshRSS/FreshRSS
 dependencies:
 - name: common
   version: 0.1.x

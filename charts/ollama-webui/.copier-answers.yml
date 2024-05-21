@@ -1,4 +1,5 @@
-_src_path: ../template/
+_src_path: ../../charts/template
+app_version: main
 description: ChatGPT-Style Web Interface for Ollama 🦙
 homepage: https://github.com/ollama-webui/ollama-webui
 image: ghcr.io/ollama-webui/ollama-webui
@@ -8,6 +9,6 @@ name: ollama-webui
 port: 8080
 postgresql_enabled: false
 redis_enabled: false
-relative_makefile: ../
+root_directory: ../..
 sources: ''
-version: main
+version: 0.1.3

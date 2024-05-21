@@ -1,4 +1,5 @@
-_src_path: ../template/
+_src_path: ../../charts/template
+app_version: 0.1.34
 description: Ollama makes it easy to get up and running with large language models
     locally.
 homepage: https://ollama.ai/
@@ -9,6 +10,6 @@ name: ollama
 port: 11434
 postgresql_enabled: false
 redis_enabled: false
-relative_makefile: ../
+root_directory: ../..
 sources: https://github.com/jmorganca/ollama
-version: 0.1.32
+version: 0.1.7

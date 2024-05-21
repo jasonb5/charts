@@ -5,11 +5,11 @@ description: |
   Useful tools for developer and people working in IT.
 type: application
 keywords:
-  - tools
+- tools
 home: https://it-tools.tech/
 sources:
-  - https://github.com/jasonb5/charts/tree/main/charts/it-tools
-  - https://github.com/CorentinTh/it-tools
+- https://github.com/jasonb5/charts/tree/main/charts/it-tools
+- https://github.com/CorentinTh/it-tools
 dependencies:
 - name: common
   version: 0.1.x
