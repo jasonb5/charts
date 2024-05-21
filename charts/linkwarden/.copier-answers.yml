@@ -18,4 +18,4 @@ postgresql_version: 12.10.x
 redis_enabled: false
 relative_makefile: ../
 sources: https://github.com/linkwarden/linkwarden
-version: v2.5.1
+version: v2.5.3
