@@ -1,6 +1,6 @@
 apiVersion: v2
 name: homarr
-version: 0.1.8
+version: 0.1.9
 description: |
   Simplify the management of your server with Homarr - a sleek, modern dashboard that puts all of your apps and services at your fingertips. With Homarr, you can access and control everything in one convenient location. Homarr seamlessly integrates with the apps you've added, providing you with valuable information and giving you complete control. Installation is a breeze, and Homarr supports a wide range of deployment methods.
 type: application
