@@ -61,7 +61,7 @@ postgresql_version:
   default: 12.10.x
   when: "{{ postgresql_enabled }}"
 
-relative_makefile:
+root_directory:
   type: str
-  help: Relative path to main Makefile (DO NOT EDIT)
+  help: Path to the root directory (DO NOT EDIT)
   default: ../

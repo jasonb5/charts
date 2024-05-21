@@ -1,4 +1,8 @@
-include {{ relative_makefile|default("../", true) }}Makefile
+ROOT_DIR := {{ root_directory }}
+
+COMMON_MAKEFILE := $(ROOT_DIR)/charts/common.mk
+
+include $(COMMON_MAKEFILE)
 
 .PHONY: test
 test:
