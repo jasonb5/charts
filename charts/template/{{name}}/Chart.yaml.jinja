@@ -1,6 +1,6 @@
 apiVersion: v2
 name: {{ name }}
-version: 0.1.0
+version: {{ version }}
 description: |
   {{ description }}
 type: application
@@ -42,4 +42,4 @@ dependencies:
 {%- endif %}
 maintainers:
   - name: jasonb5
-appVersion: {{ version }}
+appVersion: {{ app_version }}

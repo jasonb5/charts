@@ -94,7 +94,8 @@ def get_args():
     )
     os_check_parser.add_argument("chart_dir", help="path to chart directory")
 
-    version_parser = subparsers.add_parser("version", help="Prints chart version")
+    version_parser = subparsers.add_parser("version", help="Prints chart/app version")
+    version_parser.add_argument("--chart", help="Prints chart version", action="store_true")
     version_parser.add_argument("chart_dir", help="path to chart directory")
 
     list_parser = subparsers.add_parser("list", help="list candidates")
@@ -119,7 +120,7 @@ def get_args():
 
 
 def update_chart(**args):
-    chart_repo, tag = parse_helm_chart(**args)
+    chart_repo, _, tag = parse_helm_chart(**args)
 
     try:
         prefix, parsed_tag = coerce_version(tag, BASEPATTERN)
@@ -192,7 +193,7 @@ def search_docker_hub(chart_repo, **_):
 
 
 def list_versions(chart_dir, raw, newer, match_prerelease, **args):
-    chart_repo, app_version = parse_helm_chart(chart_dir)
+    chart_repo, _, app_version = parse_helm_chart(chart_dir)
 
     current_prefix, current_version = coerce_version(app_version, BASEPATTERN)
 
@@ -358,7 +359,7 @@ def update_chart_tag(chart_dir, tag, in_place, **args):
 
 
 def os_check(chart_dir, **args):
-    chart_repo, app_version = parse_helm_chart(chart_dir)
+    chart_repo, _, app_version = parse_helm_chart(chart_dir)
 
     cmd = f"docker run -it --rm --entrypoint=cat {chart_repo}:{app_version} /etc/os-release"
 
@@ -373,10 +374,13 @@ def os_check(chart_dir, **args):
     print(f"{data['ID']}")
 
 
-def version(chart_dir, **args):
-    _, app_version = parse_helm_chart(chart_dir)
+def version(chart_dir, chart, **args):
+    _, version, app_version = parse_helm_chart(chart_dir)
 
-    print(f"{app_version}")
+    if chart:
+        print(f"{version}")
+    else:
+        print(f"{app_version}")
 
 
 def get_candidate_versions(chart_repo, **args):
@@ -407,7 +411,9 @@ def parse_helm_chart(chart_dir, **_):
 
     logger.info(f"Using appVersion {app_version!r}")
 
-    return chart_repo, app_version
+    version = data["version"]
+
+    return chart_repo, version, app_version
 
 
 if __name__ == "__main__":

@@ -25,16 +25,19 @@ release: dep package upload index
 
 .PHONY: update
 update:
-	python $(ROOT_DIR)scripts/chart.py $(GLOBAL) update $(ARGS) $(CHART_DIR)
+	python $(ROOT_DIR)/scripts/chart.py $(GLOBAL) update $(ARGS) $(CHART_DIR)
 
 .PHONY: version
 version:
-	@printf "%s\n" $(shell python $(ROOT_DIR)scripts/chart.py $(GLOBAL) version $(ARGS) $(CHART_DIR))
+	@printf "%s\n" $(shell python $(ROOT_DIR)/scripts/chart.py version $(CHART_DIR))
 
 .PHONY: update-template
+update-template: CHART_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py version --chart $(CHART_DIR))
+update-template: APP_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py version $(CHART_DIR))
+update-template: ANSWERS_FILE := $(shell basename `pwd`)/.copier-answers.yml
 update-template: SKIP := -s test_chart.py -s test.yaml -s values.yaml
 update-template:
-	copier copy $(ARGS) $(SKIP) -a $(shell basename `pwd`)/.copier-answers.yml $(ROOT_DIR)charts/template/ $(ROOT_DIR)charts/
+	copier copy $(ARGS) $(SKIP) -a $(ANSWERS_FILE) -d version=$(CHART_VERSION) -d app_version=$(APP_VERSION) $(ROOT_DIR)/charts/template $(ROOT_DIR)/charts
 
 .PHONY: install
 install:
@@ -78,7 +81,3 @@ template:
 .PHONY: lint
 lint:
 	helm lint $(ARGS) $(CHART_DIR)
-
-.PHONY: sync-version
-sync-version:
-	sed -i"" "s/^version:.*/version: $(shell python $(ROOT_DIR)scripts/chart.py version .)/g" .copier-answers.yml

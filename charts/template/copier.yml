@@ -24,6 +24,11 @@ image:
 
 version:
   type: str
+  help: Chart version.
+  default: 0.1.0
+
+app_version:
+  type: str
   help: Application version.
 
 port:
