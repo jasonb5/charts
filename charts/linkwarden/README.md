@@ -1,6 +1,6 @@
 # linkwarden
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.5.1](https://img.shields.io/badge/AppVersion-v2.5.1-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v2.5.3](https://img.shields.io/badge/AppVersion-v2.5.3-informational?style=flat-square)
 
 Linkwarden is a self-hosted, open-source collaborative bookmark manager to collect, organize and archive webpages. The objective is to organize useful webpages and articles you find across the web in one place, and since useful webpages can go away (see the inevitability of Link Rot), Linkwarden also saves a copy of each webpage as a Screenshot and PDF, ensuring accessibility even if the original content is no longer available. Additionally, Linkwarden is designed with collaboration in mind, sharing links with the public and/or allowing multiple users to work together seamlessly.
 
@@ -42,7 +42,7 @@ Linkwarden is a self-hosted, open-source collaborative bookmark manager to colle
 | ingress.hosts[0].host | string | `nil` | Ingress hostname |
 | ingress.tls | object | `{"enabled":false}` | [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls) |
 | ingress.tls.enabled | bool | `false` | Enable/disable tls |
-| persistence | object | `{"config":{"enabled":false,"size":"1Gi","type":"pvc"}}` | [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence) |
+| persistence | object | `{"config":{"enabled":false,"mountPath":"/data/data","size":"1Gi","type":"pvc"}}` | [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence) |
 | persistence.config.enabled | bool | `false` | Enable/disable persistence |
 | persistence.config.type | string | `"pvc"` | Type of volume mount |
 | persistence.config.size | string | `"1Gi"` | Size of volume |
