@@ -37,7 +37,7 @@ update-template: APP_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py vers
 update-template: ANSWERS_FILE := $(shell basename `pwd`)/.copier-answers.yml
 update-template: SKIP := -s test_chart.py -s test.yaml -s values.yaml
 update-template:
-	copier copy $(ARGS) $(SKIP) -a $(ANSWERS_FILE) -d version=$(CHART_VERSION) -d app_version=$(APP_VERSION) $(ROOT_DIR)/charts/template $(ROOT_DIR)/charts
+	copier copy $(ARGS) $(SKIP) -a $(ANSWERS_FILE) -d version=$(CHART_VERSION) -d app_version=$(APP_VERSION) $(ROOT_DIR)/charts/template $(CHART_DIR)/..
 
 .PHONY: install
 install:
