@@ -39,6 +39,7 @@ BASEVERSION = r"""
                     [0-9a-zA-Z-]+
                     (?:\.[0-9a-zA-Z-]+)*
                   ))?
+                  (?P<postfix>.*)?
                   $
                """
 
@@ -95,7 +96,9 @@ def get_args():
     os_check_parser.add_argument("chart_dir", help="path to chart directory")
 
     version_parser = subparsers.add_parser("version", help="Prints chart/app version")
-    version_parser.add_argument("--chart", help="Prints chart version", action="store_true")
+    version_parser.add_argument(
+        "--chart", help="Prints chart version", action="store_true"
+    )
     version_parser.add_argument("chart_dir", help="path to chart directory")
 
     list_parser = subparsers.add_parser("list", help="list candidates")
@@ -123,7 +126,7 @@ def update_chart(**args):
     chart_repo, _, tag = parse_helm_chart(**args)
 
     try:
-        prefix, parsed_tag = coerce_version(tag, BASEPATTERN)
+        prefix, parsed_tag, postfix = coerce_version(tag, BASEPATTERN)
     except ValueError:
         print(f"Could not parse tag {tag}")
 
@@ -131,7 +134,9 @@ def update_chart(**args):
 
     candidates = get_candidate_versions(chart_repo, **args)
 
-    new_tag = search_new_tag(parsed_tag, candidates, BASEPATTERN, prefix, **args)
+    new_tag = search_new_tag(
+        parsed_tag, candidates, BASEPATTERN, prefix, postfix, **args
+    )
 
     if new_tag is None:
         print("Found no updated tag")
@@ -195,7 +200,9 @@ def search_docker_hub(chart_repo, **_):
 def list_versions(chart_dir, raw, newer, match_prerelease, **args):
     chart_repo, _, app_version = parse_helm_chart(chart_dir)
 
-    current_prefix, current_version = coerce_version(app_version, BASEPATTERN)
+    current_prefix, current_version, current_postfix = coerce_version(
+        app_version, BASEPATTERN
+    )
 
     candidates = get_candidate_versions(chart_repo, **args)
 
@@ -206,7 +213,7 @@ def list_versions(chart_dir, raw, newer, match_prerelease, **args):
             print(version)
         else:
             try:
-                prefix, new_version = coerce_version(version, BASEPATTERN)
+                prefix, new_version, postfix = coerce_version(version, BASEPATTERN)
             except ValueError:
                 logger.debug(f"Could not parse {version}")
 
@@ -241,14 +248,19 @@ def list_versions(chart_dir, raw, newer, match_prerelease, **args):
                 continue
 
 
-def search_new_tag(tag, candidates, pattern, prefix, match_prerelease, **args):
+def search_new_tag(tag, candidates, pattern, prefix, postfix, match_prerelease, **args):
     new_tag = None
+    new_version = None
 
     skip_prerelease = tag.prerelease is None
 
     for x in candidates:
+        if x == "1.17.2.4511-ls70":
+            breakpoint()
         try:
-            candidate_prefix, candidate_tag = coerce_version(x, pattern)
+            candidate_prefix, candidate_tag, candidate_postfix = coerce_version(
+                x, pattern
+            )
         except ValueError as e:
             logger.info(e)
 
@@ -274,6 +286,12 @@ def search_new_tag(tag, candidates, pattern, prefix, match_prerelease, **args):
         if new_tag is None:
             if candidate_tag > tag:
                 new_tag = candidate_tag
+                new_version = x
+
+                logger.info(f"Found new tag {new_tag}")
+            elif candidate_tag == tag and candidate_postfix > postfix:
+                new_tag = candidate_tag
+                new_version = x
 
                 logger.info(f"Found new tag {new_tag}")
             else:
@@ -281,22 +299,25 @@ def search_new_tag(tag, candidates, pattern, prefix, match_prerelease, **args):
         else:
             if candidate_tag > new_tag:
                 new_tag = candidate_tag
+                new_version = x
+
+                logger.info(f"Found new tag {new_tag}")
+            elif candidate_tag == new_tag and candidate_postfix > postfix:
+                new_tag = candidate_tag
+                new_version = x
 
                 logger.info(f"Found new tag {new_tag}")
             else:
                 logger.info(f"Tag {x} is not newer than {tag}")
 
-    if new_tag is not None:
-        new_tag = str(new_tag)
-
-    return new_tag
+    return new_version
 
 
 def coerce_tag(tag, **args):
     pattern = re.compile(BASEVERSION, re.VERBOSE)
 
     try:
-        prefix, coerced_tag = coerce_version(tag, pattern)
+        prefix, coerced_tag, postfix = coerce_version(tag, pattern)
     except ValueError as e:
         print(e)
     else:
@@ -312,6 +333,7 @@ def coerce_version(version, pattern):
         pass
     else:
         prefix = ""
+        postfix = ""
 
     if ver is None:
         match = pattern.match(version)
@@ -323,8 +345,7 @@ def coerce_version(version, pattern):
 
         prefix = groups.pop("prefix", "")
 
-        if prefix is None:
-            prefix = ""
+        postfix = groups.pop("postfix", "")
 
         # set defaults so 2 and 2.0 can be parsed
         for x in ["major", "minor", "patch"]:
@@ -338,7 +359,7 @@ def coerce_version(version, pattern):
 
     logger.info(f"Coerced version {version} to {str(ver)} with prefix {prefix!r}")
 
-    return prefix, ver
+    return prefix, ver, postfix
 
 
 def update_chart_tag(chart_dir, tag, in_place, **args):
