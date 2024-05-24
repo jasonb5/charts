@@ -195,12 +195,15 @@ def main():
     elif action == "current":
         pattern = re.compile(SEMVER_EXTENDED)
 
-        _, version, chart_version = parse_chart(args["chart"], pattern)
-
-        if args["chart_version"]:
-            print(f"{chart_version}")
+        try:
+            _, version, chart_version = parse_chart(args["chart"], pattern)
+        except ParseError:
+            logger.info("Could not parse chart")
         else:
-            print(f"{version!s}")
+            if args["chart_version"]:
+                print(f"{chart_version}")
+            else:
+                print(f"{version!s}")
     elif action == "update":
         update_chart(**args)
 
@@ -230,7 +233,9 @@ def get_args():
         "current", parents=[logging_parser], help="List current chart appVersion"
     )
     current_parser.add_argument("chart", type=Path, help="Path to chart")
-    current_parser.add_argument("--chart-version", action="store_true", help="Print chart version")
+    current_parser.add_argument(
+        "--chart-version", action="store_true", help="Print chart version"
+    )
 
     update_parser = subparsers.add_parser(
         "update", parents=[logging_parser], help="Updates charts Chart.yaml"
@@ -268,14 +273,24 @@ def list_image_tags(chart, newer, **kwargs):
 def update_chart(chart, inplace, **kwargs):
     pattern = re.compile(SEMVER_EXTENDED)
 
-    repository, current, _ = parse_chart(chart, pattern)
+    try:
+        repository, current, _ = parse_chart(chart, pattern)
+    except ParseError as e:
+        logger.info(f"{e}")
+
+        return
 
     tags = get_tags(repository, pattern, **kwargs)
 
     newest = None
 
     for version in tags:
-        if version.newer(newest or current):
+        try:
+            newer = version.newer(newest or current)
+        except ValueError:
+            continue
+
+        if newer:
             newest = version
 
     if newest is not None:
