@@ -333,8 +333,12 @@ def parse_chart(chart, pattern):
 def get_tags(repository, pattern, **kwargs):
     if "ghcr.io" in repository:
         tags = search_ghcr(repository, **kwargs)
-    else:
+    elif repository.count("/") == 1:
         tags = search_docker_hub(repository, **kwargs)
+    else:
+        logger.info(f"The {repository!r} is not supported")
+
+        return []
 
     data = []
 
