@@ -2907,6 +2907,34 @@ entries:
     version: 0.1.0
   mealie:
   - apiVersion: v2
+    appVersion: v1.7.0
+    created: "2024-05-24T07:42:44.412946995Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Mealie is a self hosted recipe manager and meal planner with a RestAPI
+      backend and a reactive frontend application built in Vue for a pleasant user
+      experience for the whole family. Easily add recipes into your database by providing
+      the URL and Mealie will automatically import the relevant data, or add a family
+      recipe with the UI editor. Mealie also provides an API for interactions from
+      3rd party applications. '
+    digest: da2c5c91d97e07dedcfda58e67847097a53cd49af52b0c0820f5bef0cb3be4a2
+    home: https://mealie.io/
+    keywords:
+    - recipe
+    - manager
+    maintainers:
+    - name: jasonb5
+    name: mealie
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/mealie
+    - https://github.com/mealie-recipes/mealie
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/mealie-0.1.4/mealie-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     appVersion: v1.0.0-RC2
     created: "2024-03-10T20:23:04.933051335-07:00"
     dependencies:
@@ -4802,4 +4830,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-24T07:41:57.368657582Z"
+generated: "2024-05-24T07:42:44.413213351Z"
