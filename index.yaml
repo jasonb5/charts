@@ -1139,6 +1139,30 @@ entries:
     version: 0.1.0
   freshrss:
   - apiVersion: v2
+    appVersion: 1.24.0
+    created: "2024-05-23T23:40:15.756122818-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'FreshRSS is an RSS aggregator and reader. It allows you to read
+      and follow several news websites at a glance without the need to browse from
+      one website to another. '
+    digest: 381fa76a3401fa201bf0017e6366ea49c3e725dd012a3fee9f5133f8c797216b
+    home: http://freshrss.github.io/FreshRSS/
+    keywords:
+    - rss
+    maintainers:
+    - name: jasonb5
+    name: freshrss
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/freshrss
+    - https://github.com/FreshRSS/FreshRSS
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/freshrss-0.1.4/freshrss-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     appVersion: 1.23.1
     created: "2024-03-10T20:23:02.619882221-07:00"
     dependencies:
@@ -4734,4 +4758,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-21T04:54:04.053149379Z"
+generated: "2024-05-23T23:40:15.756730803-07:00"
