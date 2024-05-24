@@ -49,8 +49,7 @@ jobs:
           pushd main/charts/${{ matrix.chart }}
 
           make update \
-            GLOBAL="--log --log-level DEBUG" \
-            ARGS="--in-place --token ${{secrets.GITHUB_TOKEN}}"
+            ARGS="--log --log-level DEBUG -i --token ${{secrets.GITHUB_TOKEN}}"
 
           new_version=`make version`
 

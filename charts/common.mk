@@ -25,15 +25,15 @@ release: dep package upload index
 
 .PHONY: update
 update:
-	python $(ROOT_DIR)/scripts/chart.py $(GLOBAL) update $(ARGS) $(CHART_DIR)
+	python $(ROOT_DIR)/scripts/chart.py update $(ARGS) $(CHART_DIR)
 
 .PHONY: version
 version:
-	@printf "%s\n" $(shell python $(ROOT_DIR)/scripts/chart.py version $(CHART_DIR))
+	@printf "%s\n" $(shell python $(ROOT_DIR)/scripts/chart.py current $(CHART_DIR))
 
 .PHONY: update-template
-update-template: CHART_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py version --chart $(CHART_DIR))
-update-template: APP_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py version $(CHART_DIR))
+update-template: CHART_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py current --chart-version $(CHART_DIR))
+update-template: APP_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py current $(CHART_DIR))
 update-template: ANSWERS_FILE := $(shell basename `pwd`)/.copier-answers.yml
 update-template: SKIP := -s test_chart.py -s test.yaml -s values.yaml
 update-template:

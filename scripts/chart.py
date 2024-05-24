@@ -5,7 +5,10 @@ import re
 import requests
 import json
 import yaml
+import functools
 import subprocess
+import pytest
+from pathlib import Path
 from semver.version import Version
 
 logger = logging.getLogger("chart")
@@ -19,133 +22,322 @@ def str_presenter(dumper, data):
 
 yaml.add_representer(str, str_presenter)
 
-BASEVERSION = r"""
-                  ^
-                  (?:(?P<prefix>[a-zA-Z-]*)-?)?
-                  (?P<major>0|[1-9]\d*)
-                  (?:
-                    \.
-                    (?P<minor>0|[1-9]\d*)
-                    (?:
-                        \.
-                        (?P<patch>0|[1-9]\d*)
-                    )?
-                  )?
-                  (?:-(?P<prerelease>
-                      (?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)
-                      (?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*
-                  ))?
-                  (?:\+(?P<build>
-                    [0-9a-zA-Z-]+
-                    (?:\.[0-9a-zA-Z-]+)*
-                  ))?
-                  (?P<postfix>.*)?
-                  $
-               """
+yaml_load = functools.partial(yaml.load, Loader=yaml.SafeLoader)
+
+LETTER = "[a-zA-Z]"
+POSITIVE_DIGIT = "[1-9]"
+DIGIT = f"(?:0|{POSITIVE_DIGIT})"
+DIGITS = f"{DIGIT}+"
+NON_DIGIT = f"(?:{LETTER}|-)"
+IDENTIFIER_CHARACTER = f"(?:{DIGIT}|{NON_DIGIT})"
+IDENTIFIER_CHARACTERS = f"{IDENTIFIER_CHARACTER}+"
+NUMERIC_IDENTIFIER = f"(?:0|(?:{POSITIVE_DIGIT}(?:{DIGITS})?))"
+ALPHANUMBERIC_IDENTIFIER = f"(?:(?:{NON_DIGIT}(?:{IDENTIFIER_CHARACTERS})?)|(?:{IDENTIFIER_CHARACTERS}{NON_DIGIT}(?:{IDENTIFIER_CHARACTERS})?))"
+BUILD_IDENTIFIER = f"(?:{ALPHANUMBERIC_IDENTIFIER}|{DIGITS})"
+PRERELEASE_IDENTIFIER = f"(?:{ALPHANUMBERIC_IDENTIFIER}|{NUMERIC_IDENTIFIER})"
+BUILD = f"(?:\\+(?P<build>{BUILD_IDENTIFIER}(?:\\.(?:{BUILD_IDENTIFIER}))*))?"
+PRERELEASE = (
+    f"(?:-(?P<prerelease>{PRERELEASE_IDENTIFIER}(?:\\.(?:{PRERELEASE_IDENTIFIER}))*))?"
+)
+VERSION_CORE = f"(?:(?P<major>{NUMERIC_IDENTIFIER})(?:\\.(?P<minor>{NUMERIC_IDENTIFIER})(?:\\.(?P<patch>{NUMERIC_IDENTIFIER}))?)?)"
+SEMVER = f"{VERSION_CORE}{PRERELEASE}{BUILD}"
+SEMVER_EXTENDED = f"(?P<prefix>(?:.*-)*v?)?{SEMVER}(?P<postfix>.*)?"
 
 
-BASEPATTERN = re.compile(BASEVERSION, re.VERBOSE)
+@pytest.mark.parametrize(
+    "value,test,expected",
+    (
+        (SEMVER, "0.1.12", ("0", "1", "12", None, None)),
+        (SEMVER, "1.0.0-alpha", ("1", "0", "0", "alpha", None)),
+        (SEMVER, "1.0.0-alpha.1", ("1", "0", "0", "alpha.1", None)),
+        (SEMVER, "1.0.0-0.3.7", ("1", "0", "0", "0.3.7", None)),
+        (SEMVER, "1.0.0-x.7.z.92", ("1", "0", "0", "x.7.z.92", None)),
+        (SEMVER, "1.0.0-x-y-z.--", ("1", "0", "0", "x-y-z.--", None)),
+        (SEMVER, "1.0.0-alpha+001", ("1", "0", "0", "alpha", "001")),
+        (
+            SEMVER,
+            "1.0.0-beta+exp.sha.5114f85",
+            ("1", "0", "0", "beta", "exp.sha.5114f85"),
+        ),
+        (
+            SEMVER,
+            "1.0.0+21AF26D3----117B344092BD",
+            ("1", "0", "0", None, "21AF26D3----117B344092BD"),
+        ),
+        (SEMVER, "1.0.0+20130313144700", ("1", "0", "0", None, "20130313144700")),
+        (BUILD, "+001", ("001",)),
+        (BUILD, "+20130313144700", ("20130313144700",)),
+        (BUILD, "+exp.sha.5114f85", ("exp.sha.5114f85",)),
+        (BUILD, "+21AF26D3----117B344092BD", ("21AF26D3----117B344092BD",)),
+        (PRERELEASE, "--", ("-",)),
+        (PRERELEASE, "-alpha", ("alpha",)),
+        (PRERELEASE, "-alpha.1", ("alpha.1",)),
+        (PRERELEASE, "-0.3.7", ("0.3.7",)),
+        (PRERELEASE, "-x.7.z.92", ("x.7.z.92",)),
+        (PRERELEASE, "-x-y-z.--", ("x-y-z.--",)),
+        (VERSION_CORE, "0", ("0", None, None)),
+        (VERSION_CORE, "1", ("1", None, None)),
+        (VERSION_CORE, "10", ("10", None, None)),
+        (VERSION_CORE, "0.0", ("0", "0", None)),
+        (VERSION_CORE, "0.1", ("0", "1", None)),
+        (VERSION_CORE, "0.10", ("0", "10", None)),
+        (VERSION_CORE, "0.0.0", ("0", "0", "0")),
+        (VERSION_CORE, "0.0.1", ("0", "0", "1")),
+        (VERSION_CORE, "0.0.10", ("0", "0", "10")),
+        (VERSION_CORE, "00", None),
+        (VERSION_CORE, "0.00", None),
+        (VERSION_CORE, "0.0.00", None),
+        (VERSION_CORE, "0.0.0.0", None),
+        (VERSION_CORE, "a", None),
+        (VERSION_CORE, "0.a", None),
+        (VERSION_CORE, "0.0.a", None),
+    ),
+)
+def test_pattern(value, test, expected):
+    pattern = re.compile(value)
+
+    match = pattern.fullmatch(test)
+
+    if expected is None:
+        assert match is None
+    else:
+        assert match is not None
+        assert match.groups() == expected
+
+
+class ParsedVersion:
+    def __init__(self, version, prefix, postfix):
+        self.version = version
+        self.prefix = prefix
+        self.postfix = postfix
+
+    @classmethod
+    def parse(cls, tag, pattern):
+        try:
+            version = Version.parse(tag)
+        except ValueError:
+            prefix, version, postfix = cls.coerce_version(tag, pattern)
+        else:
+            prefix, postfix = "", ""
+
+        return cls(version, prefix, postfix)
+
+    @staticmethod
+    def coerce_version(tag, pattern):
+        match = pattern.fullmatch(tag)
+
+        try:
+            groups = match.groupdict()
+        except AttributeError:
+            raise ParseError(f"Could not parse {tag}")
+
+        prefix = groups.pop("prefix")
+
+        postfix = groups.pop("postfix")
+
+        groups = {x: "" if y is None else y for x, y in groups.items()}
+
+        for key in groups.keys():
+            if key in ("major", "minor", "patch"):
+                if groups[key] == "":
+                    groups[key] = 0
+                else:
+                    groups[key] = int(groups[key])
+            else:
+                if groups[key] is None:
+                    groups[key] = ""
+
+        version = Version(**groups)
+
+        return prefix, version, postfix
+
+    def newer(self, version):
+        if self.prefix != version.prefix:
+            raise ValueError(
+                f"Missmatched prefixes {self.prefix!r} and {version.prefix!r}"
+            )
+
+        if self.version <= version.version:
+            logger.debug("{} is not newer than {}".format(version, self.version))
+
+            return False
+
+        if (
+            self.postfix != ""
+            and version.postfix != ""
+            and self.postfix <= version.postfix
+        ):
+            return False
+
+        return True
+
+    def __repr__(self):
+        return f"Prefix: {self.prefix} Version: {self.version} Postfix: {self.postfix}"
+
+    def __str__(self):
+        return f"{self.prefix}{self.version!s}{self.postfix}"
+
+
+class ParseError(Exception):
+    pass
 
 
 def main():
     args = get_args()
 
-    if args["log"]:
-        logging.basicConfig(filename=args["log_file"], level=args["log_level"])
+    action = args.pop("action")
 
-    if args["action"] == "update":
+    if args["log"]:
+        logging.basicConfig(level=args["log_level"])
+
+    if action == "list":
+        list_image_tags(**args)
+    elif action == "current":
+        pattern = re.compile(SEMVER_EXTENDED)
+
+        _, version, chart_version = parse_chart(args["chart"], pattern)
+
+        if args["chart_version"]:
+            print(f"{chart_version}")
+        else:
+            print(f"{version!s}")
+    elif action == "update":
         update_chart(**args)
-    elif args["action"] == "coerce":
-        coerce_tag(**args)
-    elif args["action"] == "os-check":
-        os_check(**args)
-    elif args["action"] == "version":
-        version(**args)
-    elif args["action"] == "list":
-        list_versions(**args)
 
 
 def get_args():
     parser = argparse.ArgumentParser(prog="chart")
 
-    parser.add_argument("--log", action="store_true", help="enable logging")
-    levels = ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL")
-    parser.add_argument(
-        "--log-level", choices=levels, default="INFO", help="logging level"
-    )
-    parser.add_argument("--log-file", help="file to write logs")
-
     subparsers = parser.add_subparsers(dest="action")
 
-    update_parser = subparsers.add_parser("update", help="update Helm chart")
-    update_parser.add_argument("chart_dir", help="path to chart directory")
-    update_parser.add_argument(
-        "--in-place", action="store_true", help="update chart yaml in place"
+    logging_parser = subparsers.add_parser("logging", add_help=False)
+    logging_parser.add_argument("--log", action="store_true", help="Enable logging")
+    levels = ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL")
+    logging_parser.add_argument(
+        "--log-level", choices=levels, default="INFO", help="Logging level"
     )
+
+    list_parser = subparsers.add_parser(
+        "list", parents=[logging_parser], help="List versions for a chart"
+    )
+    list_parser.add_argument("chart", type=Path, help="Path to chart")
+    list_parser.add_argument("--token", help="GitHub token")
+    list_parser.add_argument(
+        "--newer", action="store_true", help="Only print newer versions"
+    )
+
+    current_parser = subparsers.add_parser(
+        "current", parents=[logging_parser], help="List current chart appVersion"
+    )
+    current_parser.add_argument("chart", type=Path, help="Path to chart")
+    current_parser.add_argument("--chart-version", action="store_true", help="Print chart version")
+
+    update_parser = subparsers.add_parser(
+        "update", parents=[logging_parser], help="Updates charts Chart.yaml"
+    )
+    update_parser.add_argument("chart", type=Path, help="Path to chart")
     update_parser.add_argument("--token", help="GitHub token")
     update_parser.add_argument(
-        "--match-prerelease", action="store_true", help="Pre-release must match"
-    )
-
-    coerce_parser = subparsers.add_parser("coerce", help="coerce tag")
-    coerce_parser.add_argument("tag", help="tag to coerce")
-
-    os_check_parser = subparsers.add_parser(
-        "os-check", help="Prints content of /etc/os-release"
-    )
-    os_check_parser.add_argument("chart_dir", help="path to chart directory")
-
-    version_parser = subparsers.add_parser("version", help="Prints chart/app version")
-    version_parser.add_argument(
-        "--chart", help="Prints chart version", action="store_true"
-    )
-    version_parser.add_argument("chart_dir", help="path to chart directory")
-
-    list_parser = subparsers.add_parser("list", help="list candidates")
-    list_parser.add_argument("chart_dir", help="path to chart directory")
-    list_parser.add_argument("--token", help="GitHub token", required=True)
-    list_parser.add_argument("--raw", action="store_true", help="Print raw tags")
-    list_parser.add_argument(
-        "--newer", action="store_true", help="Filters only newer versions"
-    )
-    list_parser.add_argument(
-        "--match-prerelease",
-        action="store_true",
-        help="List versions that match prerelease",
+        "--inplace", "-i", action="store_true", help="Updates chart in-place"
     )
 
     args = vars(parser.parse_args())
 
-    if args["log_file"]:
-        args["log"] = True
+    logger.debug(f"{args}")
 
     return args
 
 
-def update_chart(**args):
-    chart_repo, _, tag = parse_helm_chart(**args)
+def list_image_tags(chart, newer, **kwargs):
+    pattern = re.compile(SEMVER_EXTENDED)
 
-    try:
-        prefix, parsed_tag, postfix = coerce_version(tag, BASEPATTERN)
-    except ValueError:
-        print(f"Could not parse tag {tag}")
+    repository, current, _ = parse_chart(chart, pattern)
 
-        return
+    tags = get_tags(repository, pattern, **kwargs)
 
-    candidates = get_candidate_versions(chart_repo, **args)
+    for version in tags:
+        try:
+            if newer and version.newer(current):
+                print(f"{version!s} is newer than {current!s}")
+            elif not newer:
+                print(f"{version!s}")
+        except ValueError as e:
+            logger.debug(str(e))
 
-    new_tag = search_new_tag(
-        parsed_tag, candidates, BASEPATTERN, prefix, postfix, **args
-    )
 
-    if new_tag is None:
-        print("Found no updated tag")
+def update_chart(chart, inplace, **kwargs):
+    pattern = re.compile(SEMVER_EXTENDED)
+
+    repository, current, _ = parse_chart(chart, pattern)
+
+    tags = get_tags(repository, pattern, **kwargs)
+
+    newest = None
+
+    for version in tags:
+        if version.newer(newest or current):
+            newest = version
+
+    if newest is not None:
+        with (chart / "Chart.yaml").open() as fd:
+            data = yaml_load(fd.read())
+
+        data["appVersion"] = str(newest)
+
+        if inplace:
+            with (chart / "Chart.yaml").open("wb") as fd:
+                yaml.dump(data, fd, encoding="utf-8", sort_keys=False)
+
+            print(newest)
+        else:
+            print(yaml.dump(data, sort_keys=False))
+
+
+def parse_chart(chart, pattern):
+    chart_yaml_path = chart / "Chart.yaml"
+
+    with chart_yaml_path.open() as fd:
+        data = yaml_load(fd)
+
+    app_version = data["appVersion"]
+
+    version = data["version"]
+
+    values_yaml_path = chart / "values.yaml"
+
+    with values_yaml_path.open() as fd:
+        data = yaml_load(fd)
+
+    repository = data["image"]["repository"]
+
+    logger.info(f"Parsed repository {repository!r} with tag {app_version!r}")
+
+    return repository, ParsedVersion.parse(app_version, pattern), version
+
+
+def get_tags(repository, pattern, **kwargs):
+    if "ghcr.io" in repository:
+        tags = search_ghcr(repository, **kwargs)
     else:
-        update_chart_tag(tag=new_tag, **args)
+        tags = search_docker_hub(repository, **kwargs)
+
+    data = []
+
+    for x in tags:
+        try:
+            version = ParsedVersion.parse(x, pattern)
+        except ParseError as e:
+            logger.debug(f"Parsing error: {e}")
+
+            continue
+
+        data.append(version)
+
+    return data
 
 
-def search_ghcr(chart_repo, token, **_):
-    org, package_name = chart_repo.split("/")[1:]
+def search_ghcr(repository, token, **_):
+    org, package_name = repository.split("/")[1:]
 
     url = (
         f"https://api.github.com/orgs/{org}/packages/container/{package_name}/versions"
@@ -170,17 +362,15 @@ def search_ghcr(chart_repo, token, **_):
 
     data = response.json()
 
-    # logger.debug(f"Raw response\n{data}")
+    tags = [y for x in data for y in x["metadata"]["container"]["tags"]]
 
-    candidates = [y for x in data for y in x["metadata"]["container"]["tags"]]
+    logger.info(f"Found {len(tags)} candidates")
 
-    logger.info(f"Found {len(candidates)} candidates")
-
-    return candidates
+    return tags
 
 
-def search_docker_hub(chart_repo, **_):
-    namespace, repository = chart_repo.split("/")
+def search_docker_hub(repository, **_):
+    namespace, repository = repository.split("/")
 
     url = f"https://hub.docker.com/v2/namespaces/{namespace}/repositories/{repository}/tags"
 
@@ -190,251 +380,11 @@ def search_docker_hub(chart_repo, **_):
 
     data = response.json()
 
-    candidates = [x["name"] for x in data["results"]]
+    tags = [x["name"] for x in data["results"]]
 
-    logger.info(f"Found {len(candidates)} candidates")
+    logger.info(f"Found {len(tags)} candidates")
 
-    return candidates
-
-
-def list_versions(chart_dir, raw, newer, match_prerelease, **args):
-    chart_repo, _, app_version = parse_helm_chart(chart_dir)
-
-    current_prefix, current_version, current_postfix = coerce_version(
-        app_version, BASEPATTERN
-    )
-
-    candidates = get_candidate_versions(chart_repo, **args)
-
-    skip_prerelease = current_version.prerelease is None
-
-    for version in candidates:
-        if raw:
-            print(version)
-        else:
-            try:
-                prefix, new_version, postfix = coerce_version(version, BASEPATTERN)
-            except ValueError:
-                logger.debug(f"Could not parse {version}")
-
-                continue
-
-            if (
-                match_prerelease
-                and new_version.prerelease != current_version.prerelease
-            ):
-                logger.info(f"Skipping, missmatched prerelease")
-
-                continue
-
-            if skip_prerelease and new_version.prerelease is not None:
-                logger.debug(f"Skipping verion {new_version!s} with pre-release")
-
-                continue
-
-            if current_prefix != prefix:
-                logger.debug(f"Missmatched prefixes {current_prefix} != {prefix}")
-
-                continue
-
-            if not newer or (newer and new_version > current_version):
-                if prefix == "":
-                    print(f"{version}")
-                else:
-                    print(f"{prefix}-{version}")
-            else:
-                logger.debug(f"Skipping old version {version}")
-
-                continue
-
-
-def search_new_tag(tag, candidates, pattern, prefix, postfix, match_prerelease, **args):
-    new_tag = None
-    new_version = None
-
-    skip_prerelease = tag.prerelease is None
-
-    for x in candidates:
-        if x == "1.17.2.4511-ls70":
-            breakpoint()
-        try:
-            candidate_prefix, candidate_tag, candidate_postfix = coerce_version(
-                x, pattern
-            )
-        except ValueError as e:
-            logger.info(e)
-
-            continue
-
-        if match_prerelease and tag.prerelease != candidate_tag.prerelease:
-            logger.info(f"Skipping, missmatched prerelease")
-
-            continue
-
-        if skip_prerelease and candidate_tag.prerelease is not None:
-            logger.debug(f"Skipping {x}, current version doesn't allow prerelease")
-
-            continue
-
-        if prefix != candidate_prefix:
-            logger.debug(
-                f"Skipping {x} mismatch prefixes {prefix!r} and {candidate_prefix!r}"
-            )
-
-            continue
-
-        if new_tag is None:
-            if candidate_tag > tag:
-                new_tag = candidate_tag
-                new_version = x
-
-                logger.info(f"Found new tag {new_tag}")
-            elif candidate_tag == tag and candidate_postfix > postfix:
-                new_tag = candidate_tag
-                new_version = x
-
-                logger.info(f"Found new tag {new_tag}")
-            else:
-                logger.info(f"Tag {x} is not newer than {tag}")
-        else:
-            if candidate_tag > new_tag:
-                new_tag = candidate_tag
-                new_version = x
-
-                logger.info(f"Found new tag {new_tag}")
-            elif candidate_tag == new_tag and candidate_postfix > postfix:
-                new_tag = candidate_tag
-                new_version = x
-
-                logger.info(f"Found new tag {new_tag}")
-            else:
-                logger.info(f"Tag {x} is not newer than {tag}")
-
-    return new_version
-
-
-def coerce_tag(tag, **args):
-    pattern = re.compile(BASEVERSION, re.VERBOSE)
-
-    try:
-        prefix, coerced_tag, postfix = coerce_version(tag, pattern)
-    except ValueError as e:
-        print(e)
-    else:
-        print(f"Coerced tag {tag} to {str(coerced_tag)}, prefix {prefix!r}")
-
-
-def coerce_version(version, pattern):
-    ver = None
-
-    try:
-        ver = Version.parse(version)
-    except ValueError as e:
-        pass
-    else:
-        prefix = ""
-        postfix = ""
-
-    if ver is None:
-        match = pattern.match(version)
-
-        if match is None:
-            raise ValueError(f"Could not parse {version!r}")
-
-        groups = match.groupdict()
-
-        prefix = groups.pop("prefix", "")
-
-        postfix = groups.pop("postfix", "")
-
-        # set defaults so 2 and 2.0 can be parsed
-        for x in ["major", "minor", "patch"]:
-            if groups[x] is None:
-                groups[x] = 0
-
-        try:
-            ver = Version(**groups)
-        except ValueError:
-            raise ValueError(f"Could not parse {version!r}") from None
-
-    logger.info(f"Coerced version {version} to {str(ver)} with prefix {prefix!r}")
-
-    return prefix, ver, postfix
-
-
-def update_chart_tag(chart_dir, tag, in_place, **args):
-    chart_file = os.path.join(chart_dir, "Chart.yaml")
-
-    with open(chart_file) as fd:
-        data = yaml.load(fd, Loader=yaml.SafeLoader)
-
-    data["appVersion"] = tag
-
-    if in_place:
-        with open(chart_file, "wb") as fd:
-            yaml.dump(data, fd, encoding="utf-8", sort_keys=False)
-
-        print(tag)
-    else:
-        print(yaml.dump(data, sort_keys=False))
-
-
-def os_check(chart_dir, **args):
-    chart_repo, _, app_version = parse_helm_chart(chart_dir)
-
-    cmd = f"docker run -it --rm --entrypoint=cat {chart_repo}:{app_version} /etc/os-release"
-
-    result = subprocess.run(cmd.split(" "), capture_output=True)
-
-    output = result.stdout.decode("utf-8")
-
-    logger.debug(f"Output\n{output}")
-
-    data = dict([x.split("=") for x in output.split("\r\n") if x != ""])
-
-    print(f"{data['ID']}")
-
-
-def version(chart_dir, chart, **args):
-    _, version, app_version = parse_helm_chart(chart_dir)
-
-    if chart:
-        print(f"{version}")
-    else:
-        print(f"{app_version}")
-
-
-def get_candidate_versions(chart_repo, **args):
-    if "ghcr.io" in chart_repo:
-        candidates = search_ghcr(chart_repo, **args)
-    else:
-        candidates = search_docker_hub(chart_repo, **args)
-
-    return candidates
-
-
-def parse_helm_chart(chart_dir, **_):
-    values_file = os.path.join(chart_dir, "values.yaml")
-
-    with open(values_file) as fd:
-        data = yaml.load(fd, Loader=yaml.SafeLoader)
-
-    chart_repo = data["image"]["repository"]
-
-    logger.info(f"Using chart repo {chart_repo!r}")
-
-    chart_file = os.path.join(chart_dir, "Chart.yaml")
-
-    with open(chart_file) as fd:
-        data = yaml.load(fd, Loader=yaml.SafeLoader)
-
-    app_version = data["appVersion"]
-
-    logger.info(f"Using appVersion {app_version!r}")
-
-    version = data["version"]
-
-    return chart_repo, version, app_version
+    return tags
 
 
 if __name__ == "__main__":
