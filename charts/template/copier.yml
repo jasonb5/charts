@@ -5,6 +5,7 @@ name:
 description:
   type: str
   help: Helm chart description.
+  multiline: True
 
 homepage:
   type: str

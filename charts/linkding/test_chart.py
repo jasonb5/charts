@@ -1,51 +1,74 @@
+import time
 import pytest
 import requests
+import subprocess
 from pathlib import Path
 from selenium import webdriver
 
+@pytest.fixture(scope="session")
+def selenium(kubernetes):
+    options = webdriver.FirefoxOptions()
+    options.add_argument("-headless")
 
-class TestChart:
-    def setup_method(self, method):
-        options = webdriver.FirefoxOptions()
-        options.add_argument("-headless")
+    driver = webdriver.Firefox(options)
+    driver.set_window_size(1920, 1080)
 
-        self.driver = webdriver.Firefox(options)
-        self.vars = {}
-        self.driver.set_window_size(1920, 1080)
-        self.image_dir = Path(".", "images").absolute()
+    yield driver
 
-    def teardown_method(self, method):
-        self.driver.quit()
+    driver.quit()
 
-    @pytest.mark.parametrize("url,image_name", [
-    ])
-    def test_capture_screenshot(self, url, image_name):
-        if url is None:
-            url = "http://127.0.0.1:8080"
-        elif url.startswith("/"):
-            url = f"http://127.0.0.1:8080{url}"
+@pytest.fixture
+def image_dir():
+    pwd = Path.cwd()
 
-        self.driver.get(url)
+    image_dir = pwd / "images"
 
-        image_path = self.image_dir / image_name
+    image_dir.mkdir(parents=True, exist_ok=True)
 
-        image_path = image_path.with_suffix(".png")
+    return image_dir
 
-        self.driver.save_screenshot(self.image_dir / image_name)
+@pytest.fixture(scope="session")
+def kubernetes():
+    port_forward = subprocess.Popen(["make", "open"])
 
-    @pytest.mark.parametrize("url,status_codes", [
-        ("/login", (200,)),
-    ])
-    def test_url(self, url, status_codes):
-        if url is None:
-            url = "http://127.0.0.1:8080"
-        elif url.startswith("/"):
-            url = f"http://127.0.0.1:8080{url}"
+    time.sleep(1)
 
-        response = requests.get(
-            url,
-            verify=False,
-            timeout=2
-        )
+    yield
 
-        assert response.status_code in status_codes
+    port_forward.terminate()
+
+@pytest.mark.parametrize("url,image_name", [
+    (None, "test"),
+])
+def test_capture_screenshot(url, image_name, selenium, image_dir):
+    if url is None:
+        url = "http://127.0.0.1:8080"
+    elif url.startswith("/"):
+        url = f"http://127.0.0.1:8080{url}"
+
+    selenium.get(url)
+
+    image_path = image_dir / image_name
+
+    image_path = image_path.with_suffix(".png")
+
+    time.sleep(1)
+
+    selenium.save_screenshot(image_path)
+
+@pytest.mark.parametrize("url,status_codes", [
+    (None, (200,)),
+])
+def test_url(url, status_codes, kubernetes):
+    if url is None:
+        url = "http://127.0.0.1:8080"
+    elif url.startswith("/"):
+        url = f"http://127.0.0.1:8080{url}"
+
+    response = requests.get(
+        url,
+        verify=False,
+        timeout=2
+    )
+
+    assert response.status_code in status_codes

@@ -1,10 +1,7 @@
 _src_path: ../../charts/template
 app_version: 4.2.0
 description: 'Grocy is a web-based self-hosted groceries & household management solution
-    for your home.
-
-
-    Open Source. Built with passion. '
+    for your home. Open Source. Built with passion. '
 homepage: https://grocy.info/
 image: ghcr.io/linuxserver/grocy
 keywords: groceries

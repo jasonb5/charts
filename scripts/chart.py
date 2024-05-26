@@ -23,6 +23,7 @@ def str_presenter(dumper, data):
 yaml.add_representer(str, str_presenter)
 
 yaml_load = functools.partial(yaml.load, Loader=yaml.SafeLoader)
+yaml_dump = functools.partial(yaml.dump, Dumper=yaml.SafeDumper)
 
 LETTER = "[a-zA-Z]"
 POSITIVE_DIGIT = "[1-9]"
@@ -299,11 +300,11 @@ def update_chart(chart, inplace, **kwargs):
 
         if inplace:
             with (chart / "Chart.yaml").open("wb") as fd:
-                yaml.dump(data, fd, encoding="utf-8", sort_keys=False)
+                yaml_dump(data, fd, encoding="utf-8", sort_keys=False)
 
             print(newest)
         else:
-            print(yaml.dump(data, sort_keys=False))
+            print(yaml_dump(data, sort_keys=False))
 
 
 def parse_chart(chart, pattern=None):
