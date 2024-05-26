@@ -1,4 +1,4 @@
-_src_path: template/
+_src_path: ../../charts/template
 app_version: 0.9.5-nginx
 description: Baïkal is a lightweight CalDAV+CardDAV server. It offers an extensive
     web interface with easy management of users, address books and calendars. It is

@@ -15,4 +15,8 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+include-markdown "../../charts/stirling-pdf/CUSTOM.md"
+%}
+
 {{ template "helm-docs.versionFooter" . }}

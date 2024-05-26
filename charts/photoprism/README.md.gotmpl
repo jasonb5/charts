@@ -15,4 +15,8 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+include-markdown "../../charts/photoprism/CUSTOM.md"
+%}
+
 {{ template "helm-docs.versionFooter" . }}

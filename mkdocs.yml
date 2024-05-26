@@ -29,5 +29,6 @@ plugins:
   - search
   - awesome-pages
   - htmlproofer
+  - include-markdown
 
 dev_addr: 0.0.0.0:8000

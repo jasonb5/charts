@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: v2.5.1
+app_version: v2.5.3
 description: Linkwarden is a self-hosted, open-source collaborative bookmark manager
     to collect, organize and archive webpages. The objective is to organize useful
     webpages and articles you find across the web in one place, and since useful webpages
@@ -19,4 +19,4 @@ postgresql_version: 12.10.x
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/linkwarden/linkwarden
-version: 0.1.0
+version: 0.1.1

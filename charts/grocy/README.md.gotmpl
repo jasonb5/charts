@@ -15,4 +15,8 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+include-markdown "../../charts/grocy/CUSTOM.md"
+%}
+
 {{ template "helm-docs.versionFooter" . }}

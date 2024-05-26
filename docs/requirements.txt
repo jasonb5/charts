@@ -4,5 +4,6 @@ mkdocs-include-markdown-plugin
 mkdocs-material
 mkdocs-material-extensions
 mkdocs-htmlproofer-plugin
+mkdocs-include-markdown-plugin
 Pygments
 pymdown-extensions

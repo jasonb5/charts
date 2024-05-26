@@ -15,4 +15,8 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+include-markdown "../../charts/jellyfin/CUSTOM.md"
+%}
+
 {{ template "helm-docs.versionFooter" . }}

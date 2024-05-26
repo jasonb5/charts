@@ -1,8 +1,8 @@
 apiVersion: v2
 name: homeassistant
 version: 0.1.28
-description: "\U0001F3E1 Open source home automation that puts local control and privacy\
-  \ first. \n"
+description: |
+   🏡 Open source home automation that puts local control and privacy first. 
 type: application
 keywords:
 - automation
@@ -16,5 +16,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-- name: jasonb5
+  - name: jasonb5
 appVersion: 2024.5.5

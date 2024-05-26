@@ -1,3 +1,4 @@
+{% raw -%}
 {{ template "chart.header" . }}
 {{ template "chart.deprecationWarning" . }}
 
@@ -15,4 +16,11 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+{% endraw -%}
+  include-markdown "../../charts/{{ name }}/CUSTOM.md"
+{%- raw %}
+%}
+
 {{ template "helm-docs.versionFooter" . }}
+{% endraw -%}

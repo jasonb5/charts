@@ -15,4 +15,8 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+include-markdown "../../charts/node-red/CUSTOM.md"
+%}
+
 {{ template "helm-docs.versionFooter" . }}

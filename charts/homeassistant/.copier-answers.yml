@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 2024.5.4
+app_version: 2024.5.5
 description: ' 🏡 Open source home automation that puts local control and privacy first. '
 homepage: https://www.home-assistant.io/
 image: ghcr.io/linuxserver/homeassistant
@@ -11,4 +11,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/home-assistant/core,https://github.com/linuxserver/docker-homeassistant
-version: 0.1.27
+version: 0.1.28
