@@ -42,7 +42,7 @@ jobs:
       - uses: actions/setup-python@v4
       - id: get-current-version
         run: |
-          pip install tbump
+          pip install -r requirements.txt
 
           pushd dockerfiles/${{ matrix.chart_dir }}
 

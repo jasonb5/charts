@@ -193,10 +193,8 @@ def main():
     if action == "list":
         list_image_tags(**args)
     elif action == "current":
-        pattern = re.compile(SEMVER_EXTENDED)
-
         try:
-            _, version, chart_version = parse_chart(args["chart"], pattern)
+            _, version, chart_version = parse_chart(args["chart"])
         except ParseError:
             logger.info("Could not parse chart")
         else:
@@ -308,7 +306,7 @@ def update_chart(chart, inplace, **kwargs):
             print(yaml.dump(data, sort_keys=False))
 
 
-def parse_chart(chart, pattern):
+def parse_chart(chart, pattern=None):
     chart_yaml_path = chart / "Chart.yaml"
 
     with chart_yaml_path.open() as fd:
@@ -327,7 +325,10 @@ def parse_chart(chart, pattern):
 
     logger.info(f"Parsed repository {repository!r} with tag {app_version!r}")
 
-    return repository, ParsedVersion.parse(app_version, pattern), version
+    if pattern is not None:
+        app_version = ParsedVersion.parse(app_version, pattern)
+
+    return repository, app_version, version
 
 
 def get_tags(repository, pattern, **kwargs):

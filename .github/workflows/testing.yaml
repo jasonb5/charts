@@ -79,7 +79,7 @@ jobs:
         run: |
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
 
-          pip install requests selenium pytest semver
+          pip install -r requirements.txt
       - name: Update Helm chart
         run: make dep
       - name: Lint Helm chart
