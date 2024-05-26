@@ -28,6 +28,33 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/anythingllm-0.1.1/anythingllm-0.1.1.tgz
     version: 0.1.1
+  baikal:
+  - apiVersion: v2
+    appVersion: 0.9.5-nginx
+    created: "2024-05-26T09:52:48.376750497-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Baïkal is a lightweight CalDAV+CardDAV server. It offers an extensive
+      web interface with easy management of users, address books and calendars. It
+      is fast and simple to install and only needs a basic php capable server. '
+    digest: c3c2b555bc767db0dd6ab857589860bc19fd8fc4a02d9c810c6ef67244ebac0d
+    home: https://sabre.io/baikal/
+    keywords:
+    - caldav
+    - carddav
+    - webdav
+    maintainers:
+    - name: jasonb5
+    name: baikal
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/baikal
+    - https://github.com/ckulka/baikal-docker
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/baikal-0.1.0/baikal-0.1.0.tgz
+    version: 0.1.0
   calibre:
   - apiVersion: v2
     appVersion: 7.11.0
@@ -4908,4 +4935,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-26T06:02:08.628788706Z"
+generated: "2024-05-26T09:52:48.377234432-07:00"
