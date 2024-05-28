@@ -44,7 +44,7 @@ jobs:
       - name: Check for container tag update
         id: check_chart
         run: |
-          pip install semver requests tbump pyyaml pytest
+          pip install -r requirements.txt
 
           pushd main/charts/${{ matrix.chart }}
 

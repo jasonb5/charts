@@ -5,6 +5,7 @@ name:
 description:
   type: str
   help: Helm chart description.
+  multiline: True
 
 homepage:
   type: str
@@ -69,4 +70,4 @@ postgresql_version:
 root_directory:
   type: str
   help: Path to the root directory (DO NOT EDIT)
-  default: ../
+  default: ../..

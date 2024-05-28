@@ -1,0 +1,16 @@
+_src_path: ../../charts/template
+app_version: 0.9.5-nginx
+description: Baïkal is a lightweight CalDAV+CardDAV server. It offers an extensive
+    web interface with easy management of users, address books and calendars. It is
+    fast and simple to install and only needs a basic php capable server.
+homepage: https://sabre.io/baikal/
+image: ckulka/baikal
+keywords: caldav,carddav,webdav
+mariadb_enabled: false
+name: baikal
+port: 80
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/ckulka/baikal-docker
+version: 0.1.0

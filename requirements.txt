@@ -1,0 +1,7 @@
+requests
+pyyaml
+pytest
+semver
+copier
+tbump
+selenium

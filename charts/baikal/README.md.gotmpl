@@ -15,4 +15,8 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+include-markdown "../../charts/baikal/CUSTOM.md"
+%}
+
 {{ template "helm-docs.versionFooter" . }}

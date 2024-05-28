@@ -15,4 +15,8 @@
 
 {{ template "chart.valuesSection" . }}
 
+{%
+include-markdown "../../charts/calibre-web/CUSTOM.md"
+%}
+
 {{ template "helm-docs.versionFooter" . }}
