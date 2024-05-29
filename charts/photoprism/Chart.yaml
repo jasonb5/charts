@@ -1,6 +1,10 @@
 apiVersion: v2
 name: photoprism
+<<<<<<< HEAD
 version: 0.1.4
+=======
+version: 0.1.5
+>>>>>>> main
 description: "AI-Powered Photos App for the Decentralized Web \U0001F308\U0001F48E\
   \u2728 \n"
 type: application
