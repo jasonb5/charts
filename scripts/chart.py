@@ -107,7 +107,8 @@ def test_pattern(value, test, expected):
 
 
 class ParsedVersion:
-    def __init__(self, version, prefix, postfix):
+    def __init__(self, original, version, prefix, postfix):
+        self.original = original
         self.version = version
         self.prefix = prefix
         self.postfix = postfix
@@ -121,7 +122,7 @@ class ParsedVersion:
         else:
             prefix, postfix = "", ""
 
-        return cls(version, prefix, postfix)
+        return cls(tag, version, prefix, postfix)
 
     @staticmethod
     def coerce_version(tag, pattern):
@@ -132,9 +133,9 @@ class ParsedVersion:
         except AttributeError:
             raise ParseError(f"Could not parse {tag}")
 
-        prefix = groups.pop("prefix")
+        prefix = groups.pop("prefix", "")
 
-        postfix = groups.pop("postfix")
+        postfix = groups.pop("postfix", "")
 
         groups = {x: "" if y is None else y for x, y in groups.items()}
 
@@ -173,10 +174,10 @@ class ParsedVersion:
         return True
 
     def __repr__(self):
-        return f"Prefix: {self.prefix} Version: {self.version} Postfix: {self.postfix}"
+        return f"Original: {self.original} Prefix: {self.prefix} Version: {self.version} Postfix: {self.postfix}"
 
     def __str__(self):
-        return f"{self.prefix}{self.version!s}{self.postfix}"
+        return f"{self.original}"
 
 
 class ParseError(Exception):
@@ -227,6 +228,9 @@ def get_args():
     list_parser.add_argument(
         "--newer", action="store_true", help="Only print newer versions"
     )
+    list_parser.add_argument(
+        "--format", "-f", default="{SEMVER_EXTENDED}", help="Format to parse version"
+    )
 
     current_parser = subparsers.add_parser(
         "current", parents=[logging_parser], help="List current chart appVersion"
@@ -234,6 +238,9 @@ def get_args():
     current_parser.add_argument("chart", type=Path, help="Path to chart")
     current_parser.add_argument(
         "--chart-version", action="store_true", help="Print chart version"
+    )
+    current_parser.add_argument(
+        "--format", "-f", default="{SEMVER_EXTENDED}", help="Format to parse version"
     )
 
     update_parser = subparsers.add_parser(
@@ -244,6 +251,9 @@ def get_args():
     update_parser.add_argument(
         "--inplace", "-i", action="store_true", help="Updates chart in-place"
     )
+    update_parser.add_argument(
+        "--format", "-f", default="{SEMVER_EXTENDED}", help="Format to parse version"
+    )
 
     args = vars(parser.parse_args())
 
@@ -252,10 +262,15 @@ def get_args():
     return args
 
 
-def list_image_tags(chart, newer, **kwargs):
-    pattern = re.compile(SEMVER_EXTENDED)
+def list_image_tags(chart, newer, format, **kwargs):
+    pattern = re.compile(f"{format}")
 
-    repository, current, _ = parse_chart(chart, pattern)
+    try:
+        repository, current, _ = parse_chart(chart, pattern)
+    except ParseError as e:
+        logger.info(f"{e}")
+
+        return
 
     tags = get_tags(repository, pattern, **kwargs)
 
@@ -313,9 +328,9 @@ def parse_chart(chart, pattern=None):
     with chart_yaml_path.open() as fd:
         data = yaml_load(fd)
 
-    app_version = data["appVersion"]
+    app_version = str(data["appVersion"])
 
-    version = data["version"]
+    version = str(data["version"])
 
     values_yaml_path = chart / "values.yaml"
 
@@ -347,7 +362,7 @@ def get_tags(repository, pattern, **kwargs):
     for x in tags:
         try:
             version = ParsedVersion.parse(x, pattern)
-        except ParseError as e:
+        except (ParseError, ValueError) as e:
             logger.debug(f"Parsing error: {e}")
 
             continue
