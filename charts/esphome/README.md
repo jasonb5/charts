@@ -1,6 +1,6 @@
 # esphome
 
-![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2024.6.0-dev20240528](https://img.shields.io/badge/AppVersion-2024.6.0--dev20240528-informational?style=flat-square)
+![Version: 0.1.21](https://img.shields.io/badge/Version-0.1.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2024.6.0-dev20240530](https://img.shields.io/badge/AppVersion-2024.6.0--dev20240530-informational?style=flat-square)
 
 ESPHome is the perfect solution for creating custom firmwares for your ESP8266/ESP32 boards.
 
