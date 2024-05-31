@@ -25,7 +25,7 @@ release: dep package upload index
 
 .PHONY: update
 update:
-	python $(ROOT_DIR)/scripts/chart.py update $(ARGS) $(CHART_DIR)
+	python $(ROOT_DIR)/scripts/chart.py update $(ARGS) $(if $(FORMAT),-f $(FORMAT),) $(CHART_DIR)
 
 .PHONY: version
 version:
