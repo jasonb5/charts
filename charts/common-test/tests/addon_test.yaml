@@ -22,6 +22,12 @@ tests:
           restic:
             enabled: true
             repo: rclone:minio:apps
+
+          persistence:
+            rclone:
+              enabled: true
+              type: emptydir
+              mountPath: /root/.config
     asserts:
       - isSubset:
           path: spec.template.spec.containers[1]
@@ -39,6 +45,16 @@ tests:
             volumeMounts:
               - mountPath: /config
                 name: config
+              - mountPath: /root/.config
+                name: rclone
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.containers[1].volumeMounts
+          value:
+            - mountPath: /config
+              name: config
+            - mountPath: /root/.config
+              name: rclone
         documentIndex: 0
       - hasDocuments:
           count: 2

@@ -43,7 +43,8 @@
 {{- $_ := set $env "POST_SCRIPT" $addon.postScript }}
 {{- end }}
 {{- $_ := set $addon "env" $env }}
-{{- $_ := set $addon "persistence" (dict "config" $config) }}
+{{- $persistence := mustMerge (default dict $addon.persistence) (dict "config" $config) }}
+{{- $_ := set $addon "persistence" $persistence }}
 {{- $extraContainers := default dict .extraContainers }}
 {{- $extraContainers = mustMerge $extraContainers (dict "rclone" $addon) }}
 {{- $_ := set . "extraContainers" $extraContainers }}
