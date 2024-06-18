@@ -1,6 +1,10 @@
 CHART_DIR = ../common-test
 
-include ../Makefile
+ROOT_DIR := ../..
+
+COMMON_MAKEFILE := $(ROOT_DIR)/charts/common.mk
+
+include $(COMMON_MAKEFILE)
 
 package upload index: CHART_DIR = .
 
