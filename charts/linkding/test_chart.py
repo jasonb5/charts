@@ -57,7 +57,7 @@ def test_capture_screenshot(url, image_name, selenium, image_dir):
     selenium.save_screenshot(image_path)
 
 @pytest.mark.parametrize("url,status_codes", [
-    (None, (200,)),
+    ("/login", (200,)),
 ])
 def test_url(url, status_codes, kubernetes):
     if url is None:
