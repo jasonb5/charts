@@ -18,4 +18,4 @@ dependencies:
   repository: https://jasonb5.github.io/charts
 maintainers:
 - name: jasonb5
-appVersion: 0.1.44
+appVersion: 0.1.45-rc3-rocm
