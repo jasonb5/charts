@@ -1,4 +1,4 @@
-build run: IMAGE := ghcr.io/jasonb5/rclone:$(shell tbump current-version)
+build run push: IMAGE := ghcr.io/jasonb5/rclone:$(shell tbump current-version)
 
 .PHONY: build
 build:
@@ -7,3 +7,7 @@ build:
 .PHONY: run
 run:
 	docker run -it --rm $(ARGS) $(if $(ENTRYPOINT),--entrypoint $(ENTRYPOINT),) $(IMAGE)
+
+.PHONY: push
+push:
+	docker push $(IMAGE)
