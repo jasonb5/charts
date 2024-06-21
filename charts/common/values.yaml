@@ -222,6 +222,9 @@ addons:
     # -- (string) Cron schedule
     cronSchedule: '0 2 * * *'
 
+    # -- (string) Cron args
+    cronArgs:
+
     # -- (bool) Enable restoring the destination to the source
     restore: false
 
