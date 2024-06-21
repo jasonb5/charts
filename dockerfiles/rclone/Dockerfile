@@ -2,12 +2,12 @@ FROM alpine:3.18.4
 
 ENV VERSION=0.1.2
 
-RUN apk add rclone restic tini && \
-	mkdir -p /root/.config/rclone && \
-	touch /root/.config/rclone/rclone.conf
+RUN apk add rclone restic tini bash
 
 COPY entrypoint.sh /entrypoint.sh
 
+SHELL ["/bin/bash", "-c"]
+
 ENTRYPOINT ["tini", "-g"]
 
-CMD ["/bin/sh", "/entrypoint.sh"]
+CMD ["/bin/bash", "/entrypoint.sh"]
