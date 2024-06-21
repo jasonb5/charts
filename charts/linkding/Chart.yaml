@@ -1,6 +1,6 @@
 apiVersion: v2
 name: linkding
-version: 0.1.3
+version: 0.1.4
 description: 'linkding is a bookmark manager that you can host yourself. It''s designed
   be to be minimal, fast, and easy to set up using Docker.
 

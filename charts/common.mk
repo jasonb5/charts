@@ -4,7 +4,7 @@ include $(wildcard custom.mk)
 
 .PHONY: package
 package:
-	cr package --config ../../cr.yaml $(ARGS) $(CHART_DIR)
+	cr package --config ../../cr.yaml --package-path $(ROOT_DIR)/.cr-release-packages $(ARGS) $(CHART_DIR)
 
 .PHONY: upload
 upload:
@@ -71,8 +71,9 @@ changelog:
 	echo '{{- end }}' >> $(FILENAME)
 
 .PHONY: bump-%
+bump-%: ARGS ?= --no-tag
 bump-%:
-	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
+	tbump $(ARGS) $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
 template:

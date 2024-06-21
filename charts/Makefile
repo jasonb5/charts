@@ -15,3 +15,17 @@ dep:
 		-maxdepth 1 -mindepth 1 -type d \
 		-not -regex '.*\(common\|template\|cr-release\).*' \
 		-exec bash -c "pushd {}; make dep" \;
+
+.PHONY: bump-%
+bump-%:
+	find . \
+		-maxdepth 1 -mindepth 1 -type d \
+		-not -regex '.*\(common\|template\|cr-release\).*' \
+		-exec bash -c "pushd {}; make bump-$* ARGS='--only-patch --non-interactive'" \;
+
+.PHONY: package
+package:
+	find . \
+		-maxdepth 1 -mindepth 1 -type d \
+		-not -regex '.*\(common\|template\|cr-release\).*' \
+		-exec bash -c "pushd {}; make package" \;
