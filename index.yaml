@@ -3918,6 +3918,28 @@ entries:
     version: 0.1.0
   node-red:
   - apiVersion: v2
+    appVersion: "4.0"
+    created: "2024-06-22T11:43:24.201954095-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Low-code programming for event-driven applications '
+    digest: cd198c20f1809bab70bc74d449e8b7da9eb14e70e44bd5cf00d506ef4fb8b7b2
+    home: https://nodered.org/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: node-red
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/node-red
+    - https://github.com/node-red/node-red
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/node-red-0.1.13/node-red-0.1.13.tgz
+    version: 0.1.13
+  - apiVersion: v2
     appVersion: 3.1.10
     created: "2024-06-21T02:53:36.421395294-07:00"
     dependencies:
@@ -6080,4 +6102,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-22T11:42:10.796619446-07:00"
+generated: "2024-06-22T11:43:27.380417669-07:00"
