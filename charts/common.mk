@@ -14,7 +14,7 @@ upload:
 index:
 	mkdir .cr-index || exit 0
 	git checkout gh-pages; git pull; git checkout main
-	cr index --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path $(ROOT_DIR)/.cr-release-packages --index-path $(ROOT_DIR)/.cr-index $(ARGS) $(CHART_DIR)
+	cr index --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path $(ROOT_DIR)/.cr-release-packages --index-path $(ROOT_DIR)/index.yaml $(ARGS) $(CHART_DIR)
 
 .PHONY: dep
 dep:
