@@ -19,26 +19,57 @@ tests:
         rclone:
           enabled: true
 
+          destination: rclone:minio:apps
+
+          globalArgs: -p /root/.config/restic.txt
+
+          backupArgs: --host test
+
+          restoreArgs: --host test 
+
           restic:
             enabled: true
-            repo: rclone:minio:apps
+
+            snapshot: 000000
+
+          persistence:
+            rclone:
+              enabled: true
+              type: emptydir
+              mountPath: /root/.config
     asserts:
       - isSubset:
           path: spec.template.spec.containers[1]
           content:
             env:
-              - name: BACKUP_APP
-                value: restic
-              - name: CRON
+              - name: RCLONE_ARGS
+                value: -p /root/.config/restic.txt
+              - name: RCLONE_BACKUP_ARGS
+                value: --host test
+              - name: RCLONE_CROND_SCHEDULE
                 value: 0 2 * * *
-              - name: RESTIC_PATH
-                value: /config
-              - name: RESTIC_REPO
+              - name: RCLONE_DESTINATION
                 value: rclone:minio:apps
+              - name: RCLONE_RESTORE_ARGS
+                value: --host test
+              - name: RCLONE_SOURCE
+                value: /config
+              - name: RCLONE_USE_RESTIC
+                value: "yes"
             name: rclone
             volumeMounts:
               - mountPath: /config
                 name: config
+              - mountPath: /root/.config
+                name: rclone
+        documentIndex: 0
+      - equal:
+          path: spec.template.spec.containers[1].volumeMounts
+          value:
+            - mountPath: /config
+              name: config
+            - mountPath: /root/.config
+              name: rclone
         documentIndex: 0
       - hasDocuments:
           count: 2
@@ -55,16 +86,13 @@ tests:
         rclone:
           enabled: true
 
-          rclone:
-            destination: minio:apps
+          destination: minio:apps
     asserts:
       - isSubset:
           path: spec.template.spec.containers[1]
           content:
             env:
-              - name: BACKUP_APP
-                value: rclone
-              - name: CRON
+              - name: RCLONE_CROND_SCHEDULE
                 value: 0 2 * * *
               - name: RCLONE_DESTINATION
                 value: minio:apps
