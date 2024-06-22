@@ -1,6 +1,6 @@
 apiVersion: v2
 name: baikal
-version: 0.1.0
+version: 0.1.1
 description: |
   Baïkal is a lightweight CalDAV+CardDAV server. It offers an extensive web interface with easy management of users, address books and calendars. It is fast and simple to install and only needs a basic php capable server.
 type: application
