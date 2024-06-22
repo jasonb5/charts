@@ -222,31 +222,27 @@ addons:
     # -- (string) Cron schedule
     cronSchedule: '0 2 * * *'
 
+    # -- (string) Cron args
+    cronArgs:
+
     # -- (bool) Enable restoring the destination to the source
     restore: false
 
-    # -- (string) Global flags used for either rclone or restic
-    globalFlags:
+    # -- (string) Global arguments for backup/restore command
+    globalArgs:
 
-    # -- (string) Flags for `rclone sync` or `restic backup`
-    flags:
+    # -- (string) Arguments for backup command
+    backupArgs:
 
-    # -- (string) Path to script to run before each job
-    preScript:
+    # -- (string) Arguments for restore command
+    restoreArgs:
 
-    # -- (string) Path to script to run after each job
-    postScript:
-
-    rclone:
-      # -- (string) Name of destination could be local path or rclone remote
-      destination:
+    # -- (string) Backup destination
+    destination:
 
     restic:
       # -- (bool) Enable using restic rather than rclone
       enabled: false
-
-      # -- (string) Restic repo to use as destination
-      repo:
 
       # -- (string) Snapshot to use when restoring
       snapshot:

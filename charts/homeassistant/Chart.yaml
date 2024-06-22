@@ -1,6 +1,6 @@
 apiVersion: v2
 name: homeassistant
-version: 0.1.32
+version: 0.1.33
 description: "\U0001F3E1 Open source home automation that puts local control and privacy\
   \ first. \n"
 type: application
