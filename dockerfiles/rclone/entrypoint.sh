@@ -1,38 +1,47 @@
-#!/bin/sh
+#!/bin/bash
 
-RESTORE="${RESTORE:-false}"
-BACKUP_APP="${BACKUP_APP:-rclone}"
+RCLONE_CROND_SCHEDULE="${RCLONE_CROND_SCHEDULE:-0 2 * * *}"
+RCLONE_CROND_ARGS="${RCLONE_CROND_ARGS:--d 8}"
+RCLONE_USE_RESTIC="${RCLONE_USE_RESTIC:-no}"
+RCLONE_RESTORE="${RCLONE_RESTORE:-no}"
 
-if [[ "${RESTORE}" == "true" ]]; then
-	if [[ "${BACKUP_APP}" == "rclone" ]]; then
-		rclone ${RCLONE_GLOBAL_FLAGS} sync ${RCLONE_FLAGS} ${RCLONE_SOURCE} ${RCLONE_DESTINATION}
-	elif [[ "${BACKUP_APP}" == "restic" ]]; then
-		restic -r ${RESTIC_REPO} ${RESTIC_GLOBAL_FLAGS} restore ${RESTIC_SNAPSHOT:-latest} --target ${RESTIC_PATH} ${RESTIC_FLAGS} 
+function require_env() {
+	if [[ -z "${!1}" ]]; then
+		echo "Required environment variable ${1} is missing"
+		exit 1
 	fi
+}
+
+require_env RCLONE_SOURCE
+require_env RCLONE_DESTINATION
+
+if [[ "${RCLONE_USE_RESTIC}" == "yes" ]]; then
+	export RESTIC_REPOSITORY="${RCLONE_DESTINATION}"
+
+	BACKUP_COMMAND="restic ${RCLONE_ARGS} backup ${RCLONE_BACKUP_ARGS} ${RCLONE_SOURCE}"
+	RESTORE_COMMAND="restic ${RCLONE_ARGS} restore ${RCLONE_RESTIC_SNAPSHOT:-latest} ${RCLONE_RESTORE_ARGS} --target ${RCLONE_SOURCE}"
 else
-	if [[ "${BACKUP_APP}" == "rclone" ]]; then
-		CRON_ENTRY="rclone ${RCLONE_GLOBAL_FLAGS} sync ${RCLONE_FLAGS} ${RCLONE_SOURCE} ${RCLONE_DESTINATION}"
-	elif [[ "${BACKUP_APP}" == "restic" ]]; then
-		CRON_ENTRY="restic -r ${RESTIC_REPO} ${RESTIC_GLOBAL_FLAGS} backup ${RESTIC_FLAGS} ${RESTIC_PATH}"
-	fi
+	BACKUP_COMMAND="rclone sync ${RCLONE_ARGS} ${RCLONE_BACKUP_ARGS} ${RCLONE_SOURCE} ${RCLONE_DESTINATION}"
+	RESTORE_COMMAND="rclone sync ${RCLONE_ARGS} ${RCLONE_RESTORE_ARGS} ${RCLONE_DESTINATION} ${RCLONE_SOURCE}"
+fi
 
-	if [[ -n "${PRE_SCRIPT}" ]] && [[ -e "${PRE_SCRIPT}" ]]; then
-		CRON_ENTRY="${PRE_SCRIPT}; ${CRON_ENTRY}"
-	fi
+echo "Backup command: ${BACKUP_COMMAND}"
+echo "Restore command: ${RESTORE_COMMAND}"
 
-	if [[ -n "${POST_SCRIPT}" ]] && [[ -e "${POST_SCRIPT}" ]]; then
-		CRON_ENTRY="${CRON_ENTRY}; ${POST_SCRIPT}"
-	fi
+RESTORE_FILE="${RCLONE_SOURCE}/.restored"
 
-	echo "Adding cron entry \"${CRON} ${CRON_ENTRY}\""
+if [[ "${RCLONE_RESTORE}" == "yes" ]]; then
+	"${RESTORE_COMMAND}"
 
+	echo `date` >> "${RESTORE_FILE}"
+fi
+
+if [[ "${RCLONE_DAEMON:-yes}" == "yes" ]]; then
 cat << EOF | crontab -
-${CRON} ${CRON_ENTRY}
+${RCLONE_CROND_SCHEDULE} ${BACKUP_COMMAND}
 EOF
 
-	CROND_ARGS="-f ${CROND_ARGS:--d 8}"
+	echo "Starting crond with \"${RCLONE_CROND_ARGS}\""
 
-	echo "Running crond with \"${CROND_ARGS}\""
-
-	crond ${CROND_ARGS}
+	crond ${RCLONE_CROND_ARGS}
 fi

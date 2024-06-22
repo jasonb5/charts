@@ -4,17 +4,17 @@ include $(wildcard custom.mk)
 
 .PHONY: package
 package:
-	cr package --config ../../cr.yaml $(ARGS) $(CHART_DIR)
+	cr package --config ../../cr.yaml --package-path $(ROOT_DIR)/.cr-release-packages $(ARGS) $(CHART_DIR)
 
 .PHONY: upload
 upload:
-	cr upload --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts $(CHART_DIR)
+	cr upload --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path $(ROOT_DIR)/.cr-release-packages $(ARGS) $(CHART_DIR)
 
 .PHONY: index
 index:
 	mkdir .cr-index || exit 0
 	git checkout gh-pages; git pull; git checkout main
-	cr index --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts $(CHART_DIR)
+	cr index --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path $(ROOT_DIR)/.cr-release-packages --index-path $(ROOT_DIR)/index.yaml $(ARGS) $(CHART_DIR)
 
 .PHONY: dep
 dep:
@@ -71,8 +71,9 @@ changelog:
 	echo '{{- end }}' >> $(FILENAME)
 
 .PHONY: bump-%
+bump-%: ARGS ?= --no-tag
 bump-%:
-	tbump $(ARGS) --no-tag $(shell pysemver bump $* $(shell tbump current-version))
+	tbump $(ARGS) $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
 template:
