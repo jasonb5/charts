@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dashy
-version: 0.1.8
+version: 0.1.9
 description: 'Dashy is an open source, highly customizable, easy to use, privacy-respecting
   dashboard app.
 
