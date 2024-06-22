@@ -1,9 +1,9 @@
 dependencies:
 - name: common
   repository: https://jasonb5.github.io/charts
-  version: 0.1.3
+  version: 0.1.5
 - name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 14.3.3
-digest: sha256:1f5650279ab140161971a09211f6ab6112e59570bc249fc6b32e0236c11bc647
-generated: "2024-03-31T16:44:28.440574953-07:00"
+  version: 15.5.9
+digest: sha256:ab3a9b813e9b337101d76fce5e89bb73b43452e65b084ad09db3bbfef652544c
+generated: "2024-06-21T02:34:20.360678713-07:00"

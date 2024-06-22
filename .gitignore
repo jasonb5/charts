@@ -39,3 +39,4 @@ Session.vim
 site/
 .cr-release-packages/
 .cr-index/
+index.yaml
