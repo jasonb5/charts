@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - id: list-charts
         run: |
-          echo "charts=$(make list-charts)" >> $GITHUB_OUTPUT
+          echo "charts=$(ls charts/ | grep -vE 'common(-test)?|template|Makefile' | jq --raw-input --slurp --compact-output 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
   check-update:
     runs-on: ubuntu-latest
