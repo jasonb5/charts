@@ -10,19 +10,19 @@ on:
       - 'charts/**'
 
 jobs:
-  changed_files:
+  changed-files:
     runs-on: ubuntu-latest
     name: Get changed Helm charts
     outputs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
-      head_ref: ${{ steps.issue_ref.outputs.head_ref }}
+      head_ref: ${{ steps.issue-ref.outputs.head_ref }}
     if: ${{ github.event.label.name == 'merge' }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Checkout PR
-        id: issue_ref
+        id: issue-ref
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -43,16 +43,16 @@ jobs:
             template/**
             common-test/**
           fetch_depth: 0
-          base_sha: ${{ steps.issue_ref.outputs.base_ref }}
-          sha: ${{ steps.issue_ref.outputs.head_ref }}
-  update_charts:
+          base_sha: ${{ steps.issue-ref.outputs.base_ref }}
+          sha: ${{ steps.issue-ref.outputs.head_ref }}
+  update-charts:
     runs-on: ubuntu-latest
     name: Auto merge PR based on label
-    needs: changed_files
+    needs: changed-files
     strategy:
       max-parallel: 1
       matrix:
-        chart: ${{ fromJSON(needs.changed_files.outputs.all_modified_files) }}
+        chart: ${{ fromJSON(needs.changed-files.outputs.all_modified_files) }}
     defaults:
       run:
         working-directory: ${{ format('charts/{0}', matrix.chart) }}
@@ -63,9 +63,9 @@ jobs:
           fetch-depth: 0
       - name: Setup helm-docs
         uses: ./.github/actions/setup-helm-docs
-      - name: Instll tools
+      - name: Install tools
         run: |
-          pip install tbump semver
+          pip install -r requirements.txt
       - name: Configure git
         run: |
           git config user.email ${{ github.actor }}@users.noreply.github.com
@@ -81,8 +81,6 @@ jobs:
         run: |
           make bump-patch ARGS="--non-interactive"
 
-          # Must update after semver bump
-          make dep
           make docs
 
           if [[ "${{ matrix.chart }}" == "common" ]];
@@ -90,18 +88,17 @@ jobs:
             helm dep update ../common-test
           fi
 
-          # back out to root, to add linked docs
           git add ../../
           git commit -m "Updates ${{ matrix.chart }} docs and dependencies"
           git push -u origin ${{ github.head_ref }}
-  auto_merge:
+  auto-merge:
     runs-on: ubuntu-latest
     name: Auto merge PR based on label
-    needs: update_charts
+    needs: update-charts
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.changed_files.outputs.head_ref }}
+          ref: ${{ needs.changed-files.outputs.head_ref }}
       - name: Merge PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -110,7 +107,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     name: Release Helm charts
-    needs: auto_merge
+    needs: auto-merge
     permissions:
       contents: write
     steps:
