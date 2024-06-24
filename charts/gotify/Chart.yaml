@@ -1,8 +1,9 @@
 apiVersion: v2
 name: gotify
-version: 0.1.6
-description: |
-  a simple server for sending and receiving messages
+version: 0.1.7
+description: 'a simple server for sending and receiving messages
+
+  '
 type: application
 keywords:
 - push-notifications
@@ -15,5 +16,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 2.4.0
+- name: jasonb5
+appVersion: 2.5.0
