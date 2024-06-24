@@ -10,7 +10,7 @@ on:
       - created
 
 jobs:
-  changed_files:
+  changed-files:
     runs-on: ubuntu-latest
     name: Get changed Helm charts
     outputs:
@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Checkout PR
-        id: issue_ref
+        id: issue-ref
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -52,15 +52,15 @@ jobs:
             template/**
             common-test/**
           fetch_depth: 0
-          base_sha: ${{ steps.issue_ref.outputs.base_ref }}
-          sha: ${{ steps.issue_ref.outputs.head_ref }}
-  test_chart:
+          base_sha: ${{ steps.issue-ref.outputs.base_ref }}
+          sha: ${{ steps.issue-ref.outputs.head_ref }}
+  test-chart:
     runs-on: ubuntu-latest
     name: Test Helm chart
-    needs: changed_files
+    needs: changed-files
     strategy:
       matrix:
-        chart: ${{ fromJSON(needs.changed_files.outputs.all_modified_files) }}
+        chart: ${{ fromJSON(needs.changed-files.outputs.all_modified_files) }}
     defaults:
       run:
         working-directory: ${{ format('charts/{0}', matrix.chart) }}
@@ -80,8 +80,6 @@ jobs:
           helm plugin install https://github.com/helm-unittest/helm-unittest.git
 
           pip install -r ../../requirements.txt
-      - name: Update Helm chart
-        run: make dep
       - name: Lint Helm chart
         run: make lint
       - name: Install Helm chart
