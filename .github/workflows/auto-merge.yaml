@@ -91,6 +91,14 @@ jobs:
           git add ../../
           git commit -m "Updates ${{ matrix.chart }} docs and dependencies"
           git push -u origin ${{ github.head_ref }}
+      - name: Remove merge label on failure
+        if: ${{ failure() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.number && github.event.number || github.event.issue.pull_request.url }}
+        run: |
+          PR_NUM=${PR_URL##*/}
+          gh pr edit $PR_NUM --remove-label merge
   auto-merge:
     runs-on: ubuntu-latest
     name: Auto merge PR based on label
