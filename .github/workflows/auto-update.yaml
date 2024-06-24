@@ -7,21 +7,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  list_charts:
+  list-charts:
     runs-on: ubuntu-latest
     name: List charts
     outputs:
-      charts: ${{ steps.list_charts.outputs.charts }}
+      charts: ${{ steps.list-charts.outputs.charts }}
     steps:
       - uses: actions/checkout@v4
-      - id: list_charts
+      - id: list-charts
         run: |
-          echo "charts=$(ls charts/ | grep -vE 'common(-test)?|template|Makefile' | jq --raw-input --slurp --compact-output 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+          echo "charts=$(make list-charts)" >> $GITHUB_OUTPUT
 
-  check_update:
+  check-update:
     runs-on: ubuntu-latest
     name: Check for chart updates
-    needs: list_charts
+    needs: list-charts
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
     permissions:
@@ -29,7 +29,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        chart: ${{ fromJson(needs.list_charts.outputs.charts) }}
+        chart: ${{ fromJson(needs.list-charts.outputs.charts) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -42,7 +42,7 @@ jobs:
           git reset --hard HEAD
           git checkout main
       - name: Check for container tag update
-        id: check_chart
+        id: check-chart
         run: |
           pip install -r requirements.txt
 
@@ -77,7 +77,7 @@ jobs:
           fi
       - name: Make new branch and create PR
         working-directory: ./main
-        if: steps.check_chart.outputs.changed == 'true'
+        if: steps.check-chart.outputs.changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -89,7 +89,7 @@ jobs:
           make dep
 
           git add .
-          git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check_chart.outputs.new_version }}"
-          git push -u origin ${{ steps.check_chart.outputs.branch_name }}
+          git commit -m "Updates ${{ matrix.chart }} to ${{ steps.check-chart.outputs.new_version }}"
+          git push -u origin ${{ steps.check-chart.outputs.branch_name }}
 
           gh pr create --fill --label needs-testing
