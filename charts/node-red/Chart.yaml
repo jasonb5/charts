@@ -17,4 +17,4 @@ dependencies:
   repository: https://jasonb5.github.io/charts
 maintainers:
 - name: jasonb5
-appVersion: '4.0'
+appVersion: 4.0.1-debian
