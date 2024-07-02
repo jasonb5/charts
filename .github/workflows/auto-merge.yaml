@@ -69,6 +69,7 @@ jobs:
           fetch-depth: 0
       - name: Setup helm-docs
         uses: ./.github/actions/setup-helm-docs
+      - uses: actions/setup-python
       - name: Install tools
         run: |
           pip install -r requirements.txt
