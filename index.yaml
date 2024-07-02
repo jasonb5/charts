@@ -4049,6 +4049,28 @@ entries:
     version: 0.1.0
   node-red:
   - apiVersion: v2
+    appVersion: 4.0.1-debian
+    created: "2024-07-02T09:01:10.172990977Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Low-code programming for event-driven applications '
+    digest: 72e20dcaf21479c764f188f5093709861ab00596d309aa3455c80580ceb60602
+    home: https://nodered.org/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: node-red
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/node-red
+    - https://github.com/node-red/node-red
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/node-red-0.1.14/node-red-0.1.14.tgz
+    version: 0.1.14
+  - apiVersion: v2
     appVersion: "4.0"
     created: "2024-06-22T11:43:24.201954095-07:00"
     dependencies:
@@ -5797,6 +5819,29 @@ entries:
     version: 0.1.0
   zwave-js-ui:
   - apiVersion: v2
+    appVersion: 9.14.3
+    created: "2024-07-02T09:01:10.303246902Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
+      Nodejs, and Vue/Vuetify  '
+    digest: 65f09460c4579235209434eccc60e237c1c2a676ff8cdecdd713bc934cca7518
+    home: https://zwave-js.github.io/zwave-js-ui/#/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: zwave-js-ui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+    - https://github.com/zwave-js/zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.23/zwave-js-ui-0.1.23.tgz
+    version: 0.1.23
+  - apiVersion: v2
     appVersion: 9.14.2
     created: "2024-06-24T04:45:30.36282873Z"
     dependencies:
@@ -6256,4 +6301,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-02T09:00:06.154733066Z"
+generated: "2024-07-02T09:01:10.304065902Z"
