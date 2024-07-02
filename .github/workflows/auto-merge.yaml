@@ -69,9 +69,10 @@ jobs:
           fetch-depth: 0
       - name: Setup helm-docs
         uses: ./.github/actions/setup-helm-docs
+      - uses: actions/setup-python@v5
       - name: Install tools
         run: |
-          pip install -r requirements.txt
+          pip install -r ../../requirements.txt
       - name: Configure git
         run: |
           git config user.email ${{ github.actor }}@users.noreply.github.com
