@@ -1054,6 +1054,27 @@ entries:
     version: 0.1.0
   esphome:
   - apiVersion: v2
+    appVersion: 2024.7.0-dev20240629
+    created: "2024-07-02T09:12:58.032449262Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'ESPHome is the perfect solution for creating custom firmwares for
+      your ESP8266/ESP32 boards. '
+    digest: 9f4ee6ecb8242687f88d9807d34c34b86621af81722d1c77a168c980004eb264
+    home: https://esphome.io/
+    maintainers:
+    - name: jasonb5
+    name: esphome
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/esphome
+    - https://github.com/esphome/esphome
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/esphome-0.1.40/esphome-0.1.40.tgz
+    version: 0.1.40
+  - apiVersion: v2
     appVersion: 2024.7.0-dev20240628
     created: "2024-07-02T09:04:22.558340324Z"
     dependencies:
@@ -4097,6 +4118,28 @@ entries:
     version: 0.1.0
   node-red:
   - apiVersion: v2
+    appVersion: 4.0.2
+    created: "2024-07-02T09:12:58.152217502Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Low-code programming for event-driven applications '
+    digest: 16554a87ecb1998f62c565e439aa004b3efb39ebd263fd8413bb163660c26448
+    home: https://nodered.org/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: node-red
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/node-red
+    - https://github.com/node-red/node-red
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/node-red-0.1.15/node-red-0.1.15.tgz
+    version: 0.1.15
+  - apiVersion: v2
     appVersion: 4.0.1-debian
     created: "2024-07-02T09:01:10.172990977Z"
     dependencies:
@@ -6395,4 +6438,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-02T09:10:37.595816177Z"
+generated: "2024-07-02T09:12:58.152769716Z"
