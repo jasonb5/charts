@@ -3721,6 +3721,32 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.0/jellyfin-0.1.0.tgz
     version: 0.1.0
+  lazylibrarian:
+  - apiVersion: v2
+    appVersion: b0386174-ls65
+    created: "2024-07-04T04:08:49.13439069-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Lazylibrarian is a program to follow authors and grab metadata for
+      all your digital reading needs. It uses a combination of Goodreads Librarything
+      and optionally GoogleBooks as sources for author info and book info. This container
+      is based on the DobyTang fork. '
+    digest: c26c858db12dd17abd22d01e192839fe46b0661efc0b533e0de266bf1dde83fa
+    home: https://lazylibrarian.gitlab.io/
+    keywords:
+    - ebooks
+    maintainers:
+    - name: jasonb5
+    name: lazylibrarian
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/lazylibrarian
+    - https://github.com/linuxserver/docker-lazylibrarian
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/lazylibrarian-0.1.0/lazylibrarian-0.1.0.tgz
+    version: 0.1.0
   linkding:
   - apiVersion: v2
     appVersion: 1.31.0
@@ -6482,4 +6508,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-02T09:18:22.254536521Z"
+generated: "2024-07-04T04:08:49.134825397-07:00"
