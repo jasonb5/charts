@@ -5114,6 +5114,31 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.0/photoprism-0.1.0.tgz
     version: 0.1.0
+  searxng:
+  - apiVersion: v2
+    appVersion: 2024.7.5-c835f920e
+    created: "2024-07-05T11:28:20.973965446-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'SearXNG is a free internet metasearch engine which aggregates results
+      from more than 70 search services. Users are neither tracked nor profiled. Additionally,
+      SearXNG can be used over Tor for online anonymity. '
+    digest: 1ed3ce266df8441aeb7e631f4a1246e76f8866cc3d0d007fdfbced991aa302d2
+    home: https://docs.searxng.org/
+    keywords:
+    - search
+    maintainers:
+    - name: jasonb5
+    name: searxng
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/searxng
+    - https://github.com/searxng/searxng
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/searxng-0.1.0/searxng-0.1.0.tgz
+    version: 0.1.0
   silverbullet:
   - apiVersion: v2
     appVersion: 0.7.7
@@ -6558,4 +6583,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-05T02:05:50.4477291-07:00"
+generated: "2024-07-05T11:28:20.974205436-07:00"
