@@ -20,6 +20,10 @@ index:
 dep:
 	helm dep update $(ARGS) $(CHART_DIR)
 
+.PHONY: test
+test:
+	pytest -vvv $(ARGS) ../test_chart.py
+
 .PHONY: release
 release: dep package upload index
 
@@ -35,7 +39,7 @@ version:
 update-template: CHART_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py current --chart-version $(CHART_DIR))
 update-template: APP_VERSION := $(shell python $(ROOT_DIR)/scripts/chart.py current $(CHART_DIR))
 update-template: ANSWERS_FILE := $(shell basename `pwd`)/.copier-answers.yml
-update-template: SKIP := -s test_chart.py -s test.yaml -s values.yaml -s CUSTOM.md
+update-template: SKIP := -s test_config.py -s test.yaml -s values.yaml -s CUSTOM.md
 update-template:
 	copier copy $(ARGS) $(SKIP) -a $(ANSWERS_FILE) -d version=$(CHART_VERSION) -d app_version=$(APP_VERSION) $(ROOT_DIR)/charts/template $(CHART_DIR)/..
 

@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 3.1.9
+app_version: 4.0.2
 description: Low-code programming for event-driven applications
 homepage: https://nodered.org/
 image: nodered/node-red
@@ -11,4 +11,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/node-red/node-red
-version: 0.1.10
+version: 0.1.15

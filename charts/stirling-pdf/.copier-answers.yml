@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 0.24.6
+app_version: 0.26.1
 description: This is a powerful locally hosted web based PDF manipulation tool using
     docker that allows you to perform various operations on PDF files, such as splitting
     merging, converting, reorganizing, adding images, rotating, compressing, and more.
@@ -15,4 +15,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/Stirling-Tools/Stirling-PDF
-version: 0.1.20
+version: 0.1.27
