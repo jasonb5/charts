@@ -4969,6 +4969,31 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/ollama-webui-0.1.0/ollama-webui-0.1.0.tgz
     version: 0.1.0
+  openwebui:
+  - apiVersion: v2
+    appVersion: git-45fae65-ollama
+    created: "2024-07-05T12:23:33.456826726-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Open WebUI is an extensible, feature-rich, and user-friendly self-hosted
+      WebUI designed to operate entirely offline. It supports various LLM runners,
+      including Ollama and OpenAI-compatible APIs. '
+    digest: d144b3423e2d3ac79057623fdf9c11fe4bd8daac8ab040d85f1215e9670c951b
+    home: https://openwebui.com/
+    keywords:
+    - ai
+    maintainers:
+    - name: jasonb5
+    name: openwebui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/openwebui
+    - https://github.com/open-webui/open-webui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/openwebui-0.1.0/openwebui-0.1.0.tgz
+    version: 0.1.0
   photoprism:
   - apiVersion: v2
     appVersion: "240531"
@@ -6583,4 +6608,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-05T11:28:20.974205436-07:00"
+generated: "2024-07-05T12:23:33.621339685-07:00"
