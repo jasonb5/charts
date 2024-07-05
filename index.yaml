@@ -1729,6 +1729,31 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/esphome-0.1.0/esphome-0.1.0.tgz
     version: 0.1.0
+  freecad:
+  - apiVersion: v2
+    appVersion: 0.20.2
+    created: "2024-07-05T02:05:50.231444766-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'FreeCAD is a general-purpose parametric 3D computer-aided design
+      (CAD) modeler and a building information modeling (BIM) software application
+      with finite element method (FEM) support. '
+    digest: b26766268328defee588b4322786f6fc5821c5fd33493391920a28b62af79c3b
+    home: https://www.freecad.org/
+    keywords:
+    - cad
+    maintainers:
+    - name: jasonb5
+    name: freecad
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/freecad
+    - https://github.com/linuxserver/docker-freecad
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/freecad-0.1.0/freecad-0.1.0.tgz
+    version: 0.1.0
   freshrss:
   - apiVersion: v2
     appVersion: 1.24.1
@@ -6533,4 +6558,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-05T01:41:03.023894206-07:00"
+generated: "2024-07-05T02:05:50.4477291-07:00"
