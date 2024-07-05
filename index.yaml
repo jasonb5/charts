@@ -1052,6 +1052,31 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/dashy-0.1.0/dashy-0.1.0.tgz
     version: 0.1.0
+  emulatorjs:
+  - apiVersion: v2
+    appVersion: 1.9.0
+    created: "2024-07-05T01:41:02.869133156-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Emulatorjs - In browser web based emulation portable to nearly any
+      device for many retro consoles. A mix of emulators is used between Libretro
+      and EmulatorJS. '
+    digest: 781a743749f2a9edc6a467ee6cdb5300e7fb28b8c4af12cdd0742766582c47eb
+    home: https://docs.linuxserver.io/images/docker-emulatorjs/
+    keywords:
+    - emulator
+    maintainers:
+    - name: jasonb5
+    name: emulatorjs
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/emulatorjs
+    - https://github.com/linuxserver/emulatorjs
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/emulatorjs-0.1.0/emulatorjs-0.1.0.tgz
+    version: 0.1.0
   esphome:
   - apiVersion: v2
     appVersion: 2024.7.0-dev20240702
@@ -6508,4 +6533,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-04T04:08:49.134825397-07:00"
+generated: "2024-07-05T01:41:03.023894206-07:00"
