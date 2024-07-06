@@ -1729,6 +1729,32 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/esphome-0.1.0/esphome-0.1.0.tgz
     version: 0.1.0
+  faster-whisper:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2024-07-05T21:30:25.40474262-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Faster-whisper is a reimplementation of OpenAI''s Whisper model
+      using CTranslate2, which is a fast inference engine for Transformer models.
+      This container provides a Wyoming protocol server for faster-whisper. '
+    digest: 071d8781d58ffad82f568c1f24414bd021ee7cc93d87cda3e1aa1ed8986ca75f
+    home: https://github.com/SYSTRAN/faster-whisper
+    keywords:
+    - ai
+    - speech
+    maintainers:
+    - name: jasonb5
+    name: faster-whisper
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/faster-whisper
+    - https://github.com/SYSTRAN/faster-whisper
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/faster-whisper-0.1.0/faster-whisper-0.1.0.tgz
+    version: 0.1.0
   freecad:
   - apiVersion: v2
     appVersion: 0.20.2
@@ -6608,4 +6634,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-05T12:23:33.621339685-07:00"
+generated: "2024-07-05T21:30:26.126104503-07:00"
