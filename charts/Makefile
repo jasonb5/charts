@@ -16,6 +16,13 @@ dep:
 		-not -regex '.*\(common\|template\|cr-release\).*' \
 		-exec bash -c "pushd {}; make dep" \;
 
+.PHONY: docs
+docs:
+	find . \
+		-maxdepth 1 -mindepth 1 -type d \
+		-not -regex '.*\(common\|template\|cr-release\).*' \
+		-exec bash -c "pushd {}; make docs" \;
+
 .PHONY: bump-%
 bump-%:
 	find . \
