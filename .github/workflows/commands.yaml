@@ -17,4 +17,4 @@ jobs:
           PR_URL: ${{ github.event.number && github.event.number || github.event.issue.pull_request.url }}
         run: |
           PR_NUMBER=${PR_URL##*/}
-          gh pr edit $PR_NUMBER --add-lavel needs-testing
+          gh pr edit $PR_NUMBER --add-label needs-testing
