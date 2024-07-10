@@ -16,5 +16,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: v1.9.0
+- name: jasonb5
+appVersion: v1.10.1
