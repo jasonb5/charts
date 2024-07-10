@@ -1,0 +1,16 @@
+_src_path: template/
+app_version: 2.0.0
+description: Faster-whisper is a reimplementation of OpenAI's Whisper model using
+    CTranslate2, which is a fast inference engine for Transformer models. This container
+    provides a Wyoming protocol server for faster-whisper.
+homepage: https://github.com/SYSTRAN/faster-whisper
+image: ghcr.io/linuxserver/faster-whisper
+keywords: ai,speech
+mariadb_enabled: false
+name: faster-whisper
+port: 10300
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/SYSTRAN/faster-whisper
+version: 0.1.0

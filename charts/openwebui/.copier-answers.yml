@@ -1,0 +1,16 @@
+_src_path: template/
+app_version: git-45fae65
+description: Open WebUI is an extensible, feature-rich, and user-friendly self-hosted
+    WebUI designed to operate entirely offline. It supports various LLM runners, including
+    Ollama and OpenAI-compatible APIs.
+homepage: https://openwebui.com/
+image: ghcr.io/open-webui/open-webui
+keywords: ai
+mariadb_enabled: false
+name: openwebui
+port: 3000
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/open-webui/open-webui
+version: 0.1.0

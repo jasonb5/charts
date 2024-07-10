@@ -1,0 +1,1 @@
+../../charts/faster-whisper/README.md
