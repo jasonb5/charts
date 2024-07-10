@@ -1,9 +1,8 @@
 apiVersion: v2
 name: node-red
 version: 0.1.15
-description: 'Low-code programming for event-driven applications
-
-  '
+description: |
+  Low-code programming for event-driven applications
 type: application
 keywords:
 - automation
@@ -16,5 +15,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-- name: jasonb5
+  - name: jasonb5
 appVersion: 4.0.2

@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 9.12.0
+app_version: 9.14.4
 description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
     Nodejs, and Vue/Vuetify '
 homepage: https://zwave-js.github.io/zwave-js-ui/#/
@@ -12,4 +12,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/zwave-js/zwave-js-ui
-version: 0.1.15
+version: 0.1.24

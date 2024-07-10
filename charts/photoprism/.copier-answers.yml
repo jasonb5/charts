@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 240420-ce
+app_version: '240531'
 description: 'AI-Powered Photos App for the Decentralized Web 🌈💎✨ '
 homepage: https://www.photoprism.app/
 image: photoprism/photoprism
@@ -11,4 +11,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/photoprism/photoprism
-version: 0.1.4
+version: 0.1.8

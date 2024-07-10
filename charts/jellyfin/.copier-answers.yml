@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 10.9.2
+app_version: 10.9.7
 description: Jellyfin is the volunteer-built media solution that puts you in control
     of your media. Stream to any device from your own server, with no strings attached.
     Your media, your server, your way.
@@ -13,4 +13,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/jellyfin/jellyfin,https://github.com/linuxserver/docker-jellyfin
-version: 0.1.4
+version: 0.1.10
