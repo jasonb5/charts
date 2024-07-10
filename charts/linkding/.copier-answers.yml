@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 1.30.0
+app_version: 1.31.0
 description: linkding is a bookmark manager that you can host yourself. It's designed
     be to be minimal, fast, and easy to set up using Docker.
 homepage: https://github.com/sissbruecker/linkding
@@ -12,4 +12,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/sissbruecker/linkding
-version: 0.1.2
+version: 0.1.4

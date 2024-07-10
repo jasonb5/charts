@@ -1,0 +1,44 @@
+# -- The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type
+workload: deployment
+
+image:
+  # -- Container image repository
+  repository: ghcr.io/linuxserver/freecad
+  # -- Image tag
+  # @default -- Chart.AppVersion
+  tag:
+
+env:
+  # -- Set the timezone
+  TZ: UTC
+
+# -- [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service)
+service:
+  ports:
+    default:
+      # -- Default port
+      port: 3000
+
+# -- [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress)
+ingress:
+  # -- Enable/disable ingress
+  enabled: false
+  hosts:
+    # -- Reference default service
+  - name: default
+    # -- Ingress hostname
+    host:
+  # -- [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls)
+  tls:
+    # -- Enable/disable tls
+    enabled: false
+
+# -- [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence)
+persistence:
+  config:
+    # -- Enable/disable persistence
+    enabled: false
+    # -- Type of volume mount
+    type: pvc
+    # -- Size of volume
+    size: 1Gi
