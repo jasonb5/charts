@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Adds needs-testing label
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           PR_URL: ${{ github.event.number && github.event.number || github.event.issue.pull_request.url }}
         run: |
           PR_NUMBER=${PR_URL##*/}
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Adds merge label
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           PR_URL: ${{ github.event.number && github.event.number || github.event.issue.pull_request.url }}
         run: |
           PR_NUMBER=${PR_URL##*/}
