@@ -14,4 +14,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/wallabag/wallabag
-version: 0.1.0
+version: 0.1.1

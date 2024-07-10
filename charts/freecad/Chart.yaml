@@ -1,0 +1,19 @@
+apiVersion: v2
+name: freecad
+version: 0.1.0
+description: |
+  FreeCAD is a general-purpose parametric 3D computer-aided design (CAD) modeler and a building information modeling (BIM) software application with finite element method (FEM) support.
+type: application
+keywords:
+- cad
+home: https://www.freecad.org/
+sources:
+- https://github.com/jasonb5/charts/tree/main/charts/freecad
+- https://github.com/linuxserver/docker-freecad
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 0.20.2
