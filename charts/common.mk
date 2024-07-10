@@ -45,7 +45,7 @@ update-template:
 
 install uninstall open docs: NAME ?= $(shell basename $(PWD))
 
-install uninstall open: INSTALL_NAME ?= test-$(NAME)
+install uninstall: INSTALL_NAME ?= test-$(NAME)
 
 .PHONY: install
 install:
@@ -56,8 +56,8 @@ uninstall:
 	helm delete $(INSTALL_NAME)
 
 .PHONY: open
-open: POD ?= $(shell kubectl get pod -l app.kubernetes.io/name=$(INSTALL_NAME) -oname)
-open: PORT ?= $(shell kubectl get service -l app.kubernetes.io/name=$(INSTALL_NAME) -ojsonpath="{.items[0].spec.ports[0].port}")
+open: POD ?= $(shell kubectl get pod -l app.kubernetes.io/name=$(NAME) -oname)
+open: PORT ?= $(shell kubectl get service -l app.kubernetes.io/name=$(NAME) -ojsonpath="{.items[0].spec.ports[0].port}")
 open:
 	kubectl port-forward $(POD) 8080:$(PORT)
 
