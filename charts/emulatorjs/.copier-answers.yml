@@ -1,0 +1,15 @@
+_src_path: template/
+app_version: 1.9.0
+description: Emulatorjs - In browser web based emulation portable to nearly any device
+    for many retro consoles. A mix of emulators is used between Libretro and EmulatorJS.
+homepage: https://docs.linuxserver.io/images/docker-emulatorjs/
+image: ghcr.io/linuxserver/emulatorjs
+keywords: emulator
+mariadb_enabled: false
+name: emulatorjs
+port: 3000
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/linuxserver/emulatorjs
+version: 0.1.0

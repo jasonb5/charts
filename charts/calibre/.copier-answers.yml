@@ -1,5 +1,5 @@
 _src_path: ../../charts/template
-app_version: 7.11.0
+app_version: 7.13.0
 description: Calibre is a powerful and easy to use e-book manager. Users say it's
     outstanding and a must-have. It'll allow you to do nearly everything and it takes
     things a step beyond normal e-book software. It's also completely free and open
@@ -14,4 +14,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/kovidgoyal/calibre,https://github.com/linuxserver/docker-calibre
-version: 0.1.11
+version: 0.1.14

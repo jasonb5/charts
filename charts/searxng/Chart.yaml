@@ -1,0 +1,19 @@
+apiVersion: v2
+name: searxng
+version: 0.1.0
+description: |
+  SearXNG is a free internet metasearch engine which aggregates results from more than 70 search services. Users are neither tracked nor profiled. Additionally, SearXNG can be used over Tor for online anonymity.
+type: application
+keywords:
+- search
+home: https://docs.searxng.org/
+sources:
+- https://github.com/jasonb5/charts/tree/main/charts/searxng
+- https://github.com/searxng/searxng
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 2024.7.5-c835f920e
