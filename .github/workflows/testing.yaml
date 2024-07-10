@@ -2,11 +2,12 @@ name: testing
 
 on:
   pull_request:
+    types:
+      - labeled
+    branches:
+      - main
     paths:
       - 'charts/**'
-
-  issue_comment:
-    types: [created]
 
 jobs:
   changed-files:
@@ -14,7 +15,9 @@ jobs:
     name: Get changed Helm charts
     outputs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
-    if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'needs-testing') }}
+    if: |
+      github.event.name == 'pull_request' ||
+      github.event.label.name == 'needs-testing'
     steps:
       - uses: actions/checkout@v4
         with:
