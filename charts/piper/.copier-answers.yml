@@ -1,0 +1,16 @@
+_src_path: template/
+app_version: 1.4.0
+description: Piper is a fast, local neural text to speech system that sounds great
+    and is optimized for the Raspberry Pi 4. This container provides a Wyoming protocol
+    server for Piper.
+homepage: https://github.com/rhasspy/piper/
+image: ghcr.io/linuxserver/piper
+keywords: automation,tts
+mariadb_enabled: false
+name: piper
+port: 10200
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://rhasspy.github.io/piper-samples/
+version: 0.1.0

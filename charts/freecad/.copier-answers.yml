@@ -1,0 +1,16 @@
+_src_path: template/
+app_version: 0.20.2
+description: FreeCAD is a general-purpose parametric 3D computer-aided design (CAD)
+    modeler and a building information modeling (BIM) software application with finite
+    element method (FEM) support.
+homepage: https://www.freecad.org/
+image: ghcr.io/linuxserver/freecad
+keywords: cad
+mariadb_enabled: false
+name: freecad
+port: 3000
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/linuxserver/docker-freecad
+version: 0.1.0
