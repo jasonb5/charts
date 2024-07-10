@@ -11,6 +11,7 @@ jobs:
     name: Process /test comment
     if: contains(github.event.comment.body, '/test')
     steps:
+      - uses: actions/checkout@v4
       - name: Adds needs-testing label
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,6 +24,7 @@ jobs:
     name: Process /merge comment
     if: contains(github.event.comment.body, '/merge')
     steps:
+      - uses: actions/checkout@v4
       - name: Adds merge label
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
