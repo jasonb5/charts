@@ -516,6 +516,32 @@ entries:
     version: 0.1.0
   calibre-web:
   - apiVersion: v2
+    appVersion: 0.6.22
+    created: "2024-07-10T07:38:41.436146818Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Calibre-web is a web app providing a clean interface for browsing,
+      reading and downloading eBooks using an existing Calibre database. It is also
+      possible to integrate google drive and edit metadata and your calibre library
+      through the app itself. '
+    digest: eb58f3a0af5fa65c041123290a48fae9eea0f397b93c55f125335a3da7a57c07
+    home: https://github.com/janeczku/calibre-web
+    keywords:
+    - ebooks
+    - management
+    maintainers:
+    - name: jasonb5
+    name: calibre-web
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/calibre-web
+    - https://github.com/linuxserver/docker-calibre-web
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/calibre-web-0.1.6/calibre-web-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
     appVersion: 0.6.21
     created: "2024-06-21T02:53:29.969417718-07:00"
     dependencies:
@@ -6848,4 +6874,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-10T07:30:09.585655537Z"
+generated: "2024-07-10T07:38:41.436542069Z"
