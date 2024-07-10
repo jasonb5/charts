@@ -1,8 +1,12 @@
 apiVersion: v2
 name: calibre-web
-version: 0.1.4
-description: |
-  Calibre-web is a web app providing a clean interface for browsing, reading and downloading eBooks using an existing Calibre database. It is also possible to integrate google drive and edit metadata and your calibre library through the app itself.
+version: 0.1.6
+description: 'Calibre-web is a web app providing a clean interface for browsing, reading
+  and downloading eBooks using an existing Calibre database. It is also possible to
+  integrate google drive and edit metadata and your calibre library through the app
+  itself.
+
+  '
 type: application
 keywords:
 - ebooks
@@ -16,5 +20,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 0.6.21
+- name: jasonb5
+appVersion: 0.6.22

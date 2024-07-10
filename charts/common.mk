@@ -2,19 +2,22 @@ CHART_DIR ?= .
 
 include $(wildcard custom.mk)
 
+.PHONY: release
+release: dep package upload index
+
 .PHONY: package
 package:
-	cr package --config ../../cr.yaml --package-path $(ROOT_DIR)/.cr-release-packages $(ARGS) $(CHART_DIR)
+	cr package --config ../../cr.yaml --package-path /tmp/cr/packages $(ARGS) $(CHART_DIR)
 
 .PHONY: upload
 upload:
-	cr upload --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path $(ROOT_DIR)/.cr-release-packages $(ARGS) $(CHART_DIR)
+	cr upload --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path /tmp/cr/packages $(ARGS) $(CHART_DIR)
 
 .PHONY: index
+index: BRANCH ?= $(shell git branch --show-current)
 index:
-	mkdir .cr-index || exit 0
-	git checkout gh-pages; git pull; git checkout main
-	cr index --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path $(ROOT_DIR)/.cr-release-packages --index-path $(ROOT_DIR)/index.yaml $(ARGS) $(CHART_DIR)
+	git checkout gh-pages; git pull; git checkout $(BRANCH)
+	cr index --config ../../cr.yaml --token $(GH_TOKEN) --git-repo charts --package-path /tmp/cr/packages --index-path /tmp/cr/index.yaml $(ARGS) $(CHART_DIR)
 
 .PHONY: dep
 dep:
@@ -22,14 +25,11 @@ dep:
 
 .PHONY: test
 test:
-	pytest -vvv $(ARGS) ../test_chart.py
-
-.PHONY: release
-release: dep package upload index
+	pytest -vvv $(ARGS) $(ROOT_DIR)/charts/test_chart.py
 
 .PHONY: update
 update:
-	python $(ROOT_DIR)/scripts/chart.py update $(ARGS) $(if $(FORMAT),-f $(FORMAT),) $(CHART_DIR)
+	python $(ROOT_DIR)/scripts/chart.py update -i $(if $(FORMAT),-f $(FORMAT),) $(ARGS) $(CHART_DIR)
 
 .PHONY: version
 version:
@@ -43,16 +43,19 @@ update-template: SKIP := -s test_config.py -s test.yaml -s values.yaml -s CUSTOM
 update-template:
 	copier copy $(ARGS) $(SKIP) -a $(ANSWERS_FILE) -d version=$(CHART_VERSION) -d app_version=$(APP_VERSION) $(ROOT_DIR)/charts/template $(CHART_DIR)/..
 
+install uninstall open docs: NAME ?= $(shell basename $(PWD))
+
+install uninstall: INSTALL_NAME ?= test-$(NAME)
+
 .PHONY: install
 install:
-	helm upgrade -f test.yaml --wait --install $(ARGS) $(shell basename $(PWD)) .
+	helm upgrade -f test.yaml --wait --install $(ARGS) $(INSTALL_NAME) .
 
 .PHONY: uninstall
 uninstall:
-	helm delete $(shell basename $(PWD))
+	helm delete $(INSTALL_NAME)
 
 .PHONY: open
-open: NAME ?= $(shell basename $(PWD))
 open: POD ?= $(shell kubectl get pod -l app.kubernetes.io/name=$(NAME) -oname)
 open: PORT ?= $(shell kubectl get service -l app.kubernetes.io/name=$(NAME) -ojsonpath="{.items[0].spec.ports[0].port}")
 open:
@@ -61,10 +64,7 @@ open:
 .PHONY: docs
 docs:
 	helm-docs --log-level DEBUG --sort-values-order file $(CHART_DIR)
-ifneq ($(wildcard ../../docs/charts),)
-	chart=$(shell basename $(PWD)); \
-    ln -sf ../../charts/$${chart}/README.md ../../docs/charts/$${chart}.md
-endif
+	ln -sf $(ROOT_DIR)/charts/$(NAME)/README.md $(ROOT_DIR)/docs/charts/$(NAME).md
 
 .PHONY: changelog
 changelog: FILENAME := _changelog.gotmpl
@@ -75,9 +75,8 @@ changelog:
 	echo '{{- end }}' >> $(FILENAME)
 
 .PHONY: bump-%
-bump-%: ARGS ?= --no-tag
 bump-%:
-	tbump $(ARGS) $(shell pysemver bump $* $(shell tbump current-version))
+	tbump --no-tag $(ARGS) $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
 template:

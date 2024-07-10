@@ -1,6 +1,6 @@
 apiVersion: v2
 name: esphome
-version: 0.1.41
+version: 0.1.46
 description: |
   ESPHome is the perfect solution for creating custom firmwares for your ESP8266/ESP32 boards.
 type: application
@@ -13,5 +13,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 2024.7.0-dev20240702
+- name: jasonb5
+appVersion: 2024.7.0-dev20240710
