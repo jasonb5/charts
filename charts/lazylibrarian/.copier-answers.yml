@@ -1,5 +1,5 @@
-_src_path: template/
-app_version: 'b0386174-ls65 '
+_src_path: ../../charts/template
+app_version: b0386174-ls65
 description: Lazylibrarian is a program to follow authors and grab metadata for all
     your digital reading needs. It uses a combination of Goodreads Librarything and
     optionally GoogleBooks as sources for author info and book info. This container
@@ -14,4 +14,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/linuxserver/docker-lazylibrarian
-version: 'b0386174-ls65 '
+version: 0.1.0

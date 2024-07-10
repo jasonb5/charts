@@ -1,9 +1,8 @@
 apiVersion: v2
 name: it-tools
 version: 0.1.5
-description: 'Useful tools for developer and people working in IT.
-
-  '
+description: |
+  Useful tools for developer and people working in IT.
 type: application
 keywords:
 - tools
@@ -16,5 +15,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-- name: jasonb5
+  - name: jasonb5
 appVersion: 2024.5.13-a0bc346

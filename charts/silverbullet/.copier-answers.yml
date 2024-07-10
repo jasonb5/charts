@@ -13,4 +13,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/silverbulletmd/silverbullet
-version: 0.1.11
+version: 0.1.12

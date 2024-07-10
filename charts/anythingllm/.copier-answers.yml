@@ -14,4 +14,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/Mintplex-Labs/anything-llm,https://docs.useanything.com/
-version: 0.1.1
+version: 0.1.2
