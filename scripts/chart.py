@@ -1,12 +1,10 @@
+import sys
 import argparse
 import logging
-import os
 import re
 import requests
-import json
 import yaml
 import functools
-import subprocess
 import pytest
 from pathlib import Path
 from semver.version import Version
@@ -160,7 +158,7 @@ class ParsedVersion:
             )
 
         if self.version <= version.version:
-            logger.debug("{} is not newer than {}".format(version, self.version))
+            logger.debug("{} is not newer than {}".format(self.version, version))
 
             return False
 
@@ -192,11 +190,20 @@ def main():
     if args["log"]:
         logging.basicConfig(level=args["log_level"])
 
+    format_pattern = getattr(sys.modules[__name__], args["format"])
+
+    args["pattern"] = re.compile(format_pattern)
+
+    if "ignore" in args and args["ignore"] is not None:
+        args["ignore_pattern"] = re.compile(args["ignore"])
+    else:
+        args["ignore_pattern"] = None
+
     if action == "list":
         list_image_tags(**args)
     elif action == "current":
         try:
-            _, version, chart_version = parse_chart(args["chart"])
+            _, version, chart_version = parse_chart(**args)
         except ParseError:
             logger.info("Could not parse chart")
         else:
@@ -229,7 +236,10 @@ def get_args():
         "--newer", action="store_true", help="Only print newer versions"
     )
     list_parser.add_argument(
-        "--format", "-f", default="{SEMVER_EXTENDED}", help="Format to parse version"
+        "--format", "-f", default="SEMVER_EXTENDED", help="Format to parse version"
+    )
+    list_parser.add_argument(
+        "--ignore", help="Regex pattern to ignore"
     )
 
     current_parser = subparsers.add_parser(
@@ -240,7 +250,7 @@ def get_args():
         "--chart-version", action="store_true", help="Print chart version"
     )
     current_parser.add_argument(
-        "--format", "-f", default="{SEMVER_EXTENDED}", help="Format to parse version"
+        "--format", "-f", default="SEMVER_EXTENDED", help="Format to parse version"
     )
 
     update_parser = subparsers.add_parser(
@@ -252,8 +262,12 @@ def get_args():
         "--inplace", "-i", action="store_true", help="Updates chart in-place"
     )
     update_parser.add_argument(
-        "--format", "-f", default="{SEMVER_EXTENDED}", help="Format to parse version"
+        "--format", "-f", default="SEMVER_EXTENDED", help="Format to parse version"
     )
+    update_parser.add_argument(
+        "--ignore", help="Regex pattern to ignore"
+    )
+
 
     args = vars(parser.parse_args())
 
@@ -262,9 +276,7 @@ def get_args():
     return args
 
 
-def list_image_tags(chart, newer, format, **kwargs):
-    pattern = re.compile(f"{format}")
-
+def list_image_tags(chart, newer, pattern, ignore_pattern, **kwargs):
     try:
         repository, current, _ = parse_chart(chart, pattern)
     except ParseError as e:
@@ -276,6 +288,16 @@ def list_image_tags(chart, newer, format, **kwargs):
 
     for version in tags:
         try:
+            m = ignore_pattern.search(f"{version}")
+        except AttributeError:
+            pass
+        else:
+            if m is not None:
+                logger.debug("Ignoring {!s}".format(version))
+
+                continue
+
+        try:
             if newer and version.newer(current):
                 print(f"{version!s} is newer than {current!s}")
             elif not newer:
@@ -284,9 +306,7 @@ def list_image_tags(chart, newer, format, **kwargs):
             logger.debug(str(e))
 
 
-def update_chart(chart, inplace, **kwargs):
-    pattern = re.compile(SEMVER_EXTENDED)
-
+def update_chart(chart, inplace, pattern, ignore_pattern, **kwargs):
     try:
         repository, current, _ = parse_chart(chart, pattern)
     except ParseError as e:
@@ -298,13 +318,25 @@ def update_chart(chart, inplace, **kwargs):
 
     newest = None
 
-    for version in tags:
+    for version in reversed(tags):
         try:
             newer = version.newer(newest or current)
         except ValueError:
             continue
 
         if newer:
+            logger.info("Found newer version {} than {}".format(version, newest or current))
+
+            try:
+                ignore = ignore_pattern.search(f"{version}")
+            except AttributeError:
+                pass
+            else: 
+                if ignore is not None:
+                    logger.debug("Ignoring {!s}".format(version))
+
+                    continue
+                    
             newest = version
 
     if newest is not None:
@@ -322,7 +354,7 @@ def update_chart(chart, inplace, **kwargs):
             print(yaml_dump(data, sort_keys=False))
 
 
-def parse_chart(chart, pattern=None):
+def parse_chart(chart, pattern=None, **kwargs):
     chart_yaml_path = chart / "Chart.yaml"
 
     with chart_yaml_path.open() as fd:

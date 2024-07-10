@@ -29,7 +29,7 @@ test:
 
 .PHONY: update
 update:
-	python $(ROOT_DIR)/scripts/chart.py update -i $(if $(FORMAT),-f $(FORMAT),) $(ARGS) $(CHART_DIR)
+	python $(ROOT_DIR)/scripts/chart.py update $(if $(FORMAT),-f $(FORMAT),) $(if $(IGNORE),--ignore $(IGNORE),) $(ARGS) $(CHART_DIR)
 
 .PHONY: version
 version:
