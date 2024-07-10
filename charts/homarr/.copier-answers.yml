@@ -16,4 +16,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/ajnart/homarr
-version: 0.1.9
+version: 0.1.10

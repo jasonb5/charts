@@ -13,4 +13,4 @@ postgresql_enabled: false
 redis_enabled: false
 root_directory: ../..
 sources: https://github.com/hay-kot/homebox
-version: 0.1.3
+version: 0.1.4
