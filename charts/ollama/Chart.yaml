@@ -1,10 +1,8 @@
 apiVersion: v2
 name: ollama
 version: 0.1.17
-description: 'Ollama makes it easy to get up and running with large language models
-  locally.
-
-  '
+description: |
+  Ollama makes it easy to get up and running with large language models locally.
 type: application
 keywords:
 - ai
@@ -17,5 +15,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-- name: jasonb5
+  - name: jasonb5
 appVersion: 0.1.48

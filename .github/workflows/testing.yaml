@@ -2,12 +2,13 @@ name: testing
 
 on:
   pull_request:
+    types:
+      - labeled
+      - synchronize
+    branches:
+      - main
     paths:
       - 'charts/**'
-
-  issue_comment:
-    types:
-      - created
 
 jobs:
   changed-files:
@@ -16,8 +17,8 @@ jobs:
     outputs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
     if: |
-      github.event_name == 'pull_request' ||
-      contains(github.event.comment.body, '/test')
+      github.event.name == 'pull_request' ||
+      github.event.label.name == 'needs-testing'
     steps:
       - uses: actions/checkout@v4
         with:

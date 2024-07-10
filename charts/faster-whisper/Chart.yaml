@@ -1,0 +1,20 @@
+apiVersion: v2
+name: faster-whisper
+version: 0.1.0
+description: |
+  Faster-whisper is a reimplementation of OpenAI's Whisper model using CTranslate2, which is a fast inference engine for Transformer models. This container provides a Wyoming protocol server for faster-whisper.
+type: application
+keywords:
+- ai
+- speech
+home: https://github.com/SYSTRAN/faster-whisper
+sources:
+- https://github.com/jasonb5/charts/tree/main/charts/faster-whisper
+- https://github.com/SYSTRAN/faster-whisper
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 2.0.0

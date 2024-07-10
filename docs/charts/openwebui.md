@@ -1,0 +1,1 @@
+../../charts/openwebui/README.md

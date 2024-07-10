@@ -1,0 +1,16 @@
+_src_path: template/
+app_version: 2024.7.5-c835f920e
+description: SearXNG is a free internet metasearch engine which aggregates results
+    from more than 70 search services. Users are neither tracked nor profiled. Additionally,
+    SearXNG can be used over Tor for online anonymity.
+homepage: https://docs.searxng.org/
+image: searxng/searxng
+keywords: search
+mariadb_enabled: false
+name: searxng
+port: 8080
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/searxng/searxng
+version: 0.1.0
