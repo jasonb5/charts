@@ -17,9 +17,7 @@ jobs:
     outputs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
       head_ref: ${{ steps.issue-ref.outputs.head_ref }}
-    if: |
-      github.event_name == 'pull_request' ||
-      (github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'merge'))
+    if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'merge') }}
     steps:
       - uses: actions/checkout@v4
         with:
