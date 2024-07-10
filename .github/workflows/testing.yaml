@@ -17,7 +17,7 @@ jobs:
     outputs:
       all_modified_files: ${{ steps.changed-files-yaml.outputs.all_modified_files }}
     if: |
-      github.event.pull_request ||
+      ( github.event.pull_request && ! contains(github.event.pull_request.labels.*.name, 'merge') ) ||
       github.event.label.name == 'needs-testing'
     steps:
       - uses: actions/checkout@v4
