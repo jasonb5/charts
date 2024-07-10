@@ -18,3 +18,15 @@ jobs:
         run: |
           PR_NUMBER=${PR_URL##*/}
           gh pr edit $PR_NUMBER --add-label needs-testing
+  merge:
+    runs-on: ubuntu-latest
+    name: Process /merge comment
+    if: contains(github.event.comment.body, '/merge')
+    steps:
+      - name: Adds merge label
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.number && github.event.number || github.event.issue.pull_request.url }}
+        run: |
+          PR_NUMBER=${PR_URL##*/}
+          gh pr edit $PR_NUMBER --add-label merge
