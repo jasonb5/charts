@@ -1,8 +1,11 @@
 apiVersion: v2
 name: silverbullet
 version: 0.1.12
-description: |
-  SilverBullet aims to be a **workshop for the mind**: a creative space where you collect, create and expand your personal knowledge, while simultaneously letting you evolve the tools you use to do so.
+description: 'SilverBullet aims to be a **workshop for the mind**: a creative space
+  where you collect, create and expand your personal knowledge, while simultaneously
+  letting you evolve the tools you use to do so.
+
+  '
 type: application
 keywords:
 - note-taking
@@ -15,5 +18,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 0.7.7
+- name: jasonb5
+appVersion: 0.8.1
