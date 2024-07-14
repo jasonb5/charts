@@ -55,6 +55,33 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/anythingllm-0.1.1/anythingllm-0.1.1.tgz
     version: 0.1.1
+  apprise-api:
+  - apiVersion: v2
+    appVersion: 1.1.4
+    created: "2024-07-14T13:08:24.774969114-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Apprise-api Takes advantage of Apprise through your network with
+      a user-friendly API.    Send notifications to more then 65+ services.   An incredibly
+      lightweight gateway to Apprise.   A production ready micro-service at your disposal.  Apprise
+      API was designed to easily fit into existing (and new) eco-systems that are
+      looking for a simple notification solution. '
+    digest: d732e806e21b594f991cfe6311563bb80ffe9142114e70c4afd9acf38a5ae059
+    home: https://github.com/caronc/apprise-api
+    keywords:
+    - notifications
+    maintainers:
+    - name: jasonb5
+    name: apprise-api
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/apprise-api
+    - https://github.com/linuxserver/docker-apprise-api
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/apprise-api-0.1.0/apprise-api-0.1.0.tgz
+    version: 0.1.0
   baikal:
   - apiVersion: v2
     appVersion: 0.9.5-nginx
@@ -6991,4 +7018,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-13T13:59:22.690512323-07:00"
+generated: "2024-07-14T13:08:25.021383775-07:00"
