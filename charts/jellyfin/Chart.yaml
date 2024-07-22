@@ -1,8 +1,11 @@
 apiVersion: v2
 name: jellyfin
 version: 0.1.10
-description: |
-  Jellyfin is the volunteer-built media solution that puts you in control of your media. Stream to any device from your own server, with no strings attached. Your media, your server, your way.
+description: 'Jellyfin is the volunteer-built media solution that puts you in control
+  of your media. Stream to any device from your own server, with no strings attached.
+  Your media, your server, your way.
+
+  '
 type: application
 keywords:
 - media
@@ -16,5 +19,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 10.9.7
+- name: jasonb5
+appVersion: 10.9.8ubu2204-ls23
