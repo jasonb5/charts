@@ -5424,6 +5424,30 @@ entries:
     version: 0.1.0
   photoprism:
   - apiVersion: v2
+    appVersion: "240711"
+    created: "2024-07-26T16:23:36.505646398Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "AI-Powered Photos App for the Decentralized Web \U0001F308\U0001F48E✨
+      \ "
+    digest: 1602a361ddfe7028ea34f0c195422db47d8a652a20103cdc2ab87548e2b9a03f
+    home: https://www.photoprism.app/
+    keywords:
+    - media
+    - images
+    maintainers:
+    - name: jasonb5
+    name: photoprism
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/photoprism
+    - https://github.com/photoprism/photoprism
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/photoprism-0.1.9/photoprism-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
     appVersion: "240531"
     created: "2024-06-21T02:53:37.95786734-07:00"
     dependencies:
@@ -5643,6 +5667,30 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/searxng-0.1.0/searxng-0.1.0.tgz
     version: 0.1.0
   silverbullet:
+  - apiVersion: v2
+    appVersion: 0.8.1
+    created: "2024-07-26T16:23:36.614114428Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'SilverBullet aims to be a **workshop for the mind**: a creative
+      space where you collect, create and expand your personal knowledge, while simultaneously
+      letting you evolve the tools you use to do so. '
+    digest: 725e0b8fc80cf7f3e9cf2b5fe531c7d4f5339e0ac68842b502f181dcf620fc22
+    home: https://silverbullet.md/
+    keywords:
+    - note-taking
+    maintainers:
+    - name: jasonb5
+    name: silverbullet
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/silverbullet
+    - https://github.com/silverbulletmd/silverbullet
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/silverbullet-0.1.13/silverbullet-0.1.13.tgz
+    version: 0.1.13
   - apiVersion: v2
     appVersion: 0.7.7
     created: "2024-06-21T02:53:38.279271936-07:00"
@@ -7109,4 +7157,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-26T16:20:01.216893216Z"
+generated: "2024-07-26T16:23:36.614617541Z"
