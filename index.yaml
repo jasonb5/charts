@@ -2748,6 +2748,30 @@ entries:
     version: 0.1.0
   homeassistant:
   - apiVersion: v2
+    appVersion: 2024.7.2
+    created: "2024-07-26T16:20:01.098106037Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: "\U0001F3E1 Open source home automation that puts local control and
+      privacy first.  "
+    digest: 09d4858b1c62a41815b0ad09459961227e45746047b65c134c82ba55f281a75b
+    home: https://www.home-assistant.io/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: homeassistant
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/homeassistant
+    - https://github.com/home-assistant/core
+    - https://github.com/linuxserver/docker-homeassistant
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/homeassistant-0.1.37/homeassistant-0.1.37.tgz
+    version: 0.1.37
+  - apiVersion: v2
     appVersion: 2024.7.1
     created: "2024-07-10T07:18:12.591658189Z"
     dependencies:
@@ -4902,6 +4926,29 @@ entries:
     - https://github.com/jasonb5/charts/releases/download/node-red-0.1.0/node-red-0.1.0.tgz
     version: 0.1.0
   ollama:
+  - apiVersion: v2
+    appVersion: 0.2.2
+    created: "2024-07-26T16:20:01.21620409Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Ollama makes it easy to get up and running with large language models
+      locally. '
+    digest: 01facb678a6cb21f0ed9751f00eb361ca6fd4e7ee3523c25eedd7046befe0cb1
+    home: https://ollama.ai/
+    keywords:
+    - ai
+    maintainers:
+    - name: jasonb5
+    name: ollama
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/ollama
+    - https://github.com/jmorganca/ollama
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/ollama-0.1.20/ollama-0.1.20.tgz
+    version: 0.1.20
   - apiVersion: v2
     appVersion: 0.2.1
     created: "2024-07-10T07:56:49.855609599Z"
@@ -7062,4 +7109,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-26T16:19:36.906718088Z"
+generated: "2024-07-26T16:20:01.216893216Z"
