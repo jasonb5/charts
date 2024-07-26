@@ -1158,6 +1158,27 @@ entries:
     version: 0.1.0
   esphome:
   - apiVersion: v2
+    appVersion: 2024.7.0b1
+    created: "2024-07-26T16:19:36.758964636Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'ESPHome is the perfect solution for creating custom firmwares for
+      your ESP8266/ESP32 boards. '
+    digest: a032cc8b39b117392efdfb324d88681b6c72a8c9a7799cc831fc8a7ab8946d23
+    home: https://esphome.io/
+    maintainers:
+    - name: jasonb5
+    name: esphome
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/esphome
+    - https://github.com/esphome/esphome
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/esphome-0.1.47/esphome-0.1.47.tgz
+    version: 0.1.47
+  - apiVersion: v2
     appVersion: 2024.7.0-dev20240710
     created: "2024-07-10T07:49:10.838886417Z"
     dependencies:
@@ -6513,6 +6534,29 @@ entries:
     version: 0.1.0
   zwave-js-ui:
   - apiVersion: v2
+    appVersion: 9.14.5
+    created: "2024-07-26T16:19:36.905985989Z"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
+      Nodejs, and Vue/Vuetify  '
+    digest: 8956d54841204372bfed23d27c015fd950a0578f1227d5ed84bd3c2dc1d7f245
+    home: https://zwave-js.github.io/zwave-js-ui/#/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: zwave-js-ui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+    - https://github.com/zwave-js/zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.25/zwave-js-ui-0.1.25.tgz
+    version: 0.1.25
+  - apiVersion: v2
     appVersion: 9.14.4
     created: "2024-07-02T09:10:37.595403698Z"
     dependencies:
@@ -7018,4 +7062,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-14T13:08:25.021383775-07:00"
+generated: "2024-07-26T16:19:36.906718088Z"
