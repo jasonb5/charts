@@ -1,14 +1,11 @@
 apiVersion: v2
 name: apprise-api
 version: 0.1.0
-description: |
-  Apprise-api Takes advantage of Apprise through your network with a user-friendly API.
-
-    Send notifications to more then 65+ services.
-    An incredibly lightweight gateway to Apprise.
-    A production ready micro-service at your disposal.
-
-  Apprise API was designed to easily fit into existing (and new) eco-systems that are looking for a simple notification solution.
+description: "Apprise-api Takes advantage of Apprise through your network with a user-friendly\
+  \ API.\n\n  Send notifications to more then 65+ services.\n  An incredibly lightweight\
+  \ gateway to Apprise.\n  A production ready micro-service at your disposal.\n\n\
+  Apprise API was designed to easily fit into existing (and new) eco-systems that\
+  \ are looking for a simple notification solution.\n"
 type: application
 keywords:
 - notifications
@@ -21,5 +18,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: 1.1.4
+- name: jasonb5
+appVersion: 1.1.5
