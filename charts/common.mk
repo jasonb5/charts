@@ -3,7 +3,7 @@ CHART_DIR ?= .
 include $(wildcard custom.mk)
 
 .PHONY: release
-release: dep package upload index
+release: dep bump-patch package upload index
 
 .PHONY: package
 package:
@@ -76,7 +76,7 @@ changelog:
 
 .PHONY: bump-%
 bump-%:
-	tbump --no-tag $(ARGS) $(shell pysemver bump $* $(shell tbump current-version))
+	tbump --no-tag $(ARGS) $(TBUMP_ARGS) $(shell pysemver bump $* $(shell tbump current-version))
 
 .PHONY: template
 template:
