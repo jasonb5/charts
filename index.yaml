@@ -1185,6 +1185,27 @@ entries:
     version: 0.1.0
   esphome:
   - apiVersion: v2
+    appVersion: 2024.8.0-dev20240722
+    created: "2024-07-30T00:08:50.484617181-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'ESPHome is the perfect solution for creating custom firmwares for
+      your ESP8266/ESP32 boards. '
+    digest: 9a15376c15fce6a1b0c6822f0ff1d3ed87d01ae459007e5e0fb2683fd71bd6dc
+    home: https://esphome.io/
+    maintainers:
+    - name: jasonb5
+    name: esphome
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/esphome
+    - https://github.com/esphome/esphome
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/esphome-0.1.55/esphome-0.1.55.tgz
+    version: 0.1.55
+  - apiVersion: v2
     appVersion: 2024.8.0-dev20240720
     created: "2024-07-30T00:07:44.435167675-07:00"
     dependencies:
@@ -7614,4 +7635,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-30T00:07:46.583655491-07:00"
+generated: "2024-07-30T00:08:52.620598767-07:00"
