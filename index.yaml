@@ -4280,6 +4280,31 @@ entries:
     version: 0.1.0
   jellyfin:
   - apiVersion: v2
+    appVersion: 10.9.8ubu2204-ls23
+    created: "2024-07-30T00:37:40.323814233-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Jellyfin is the volunteer-built media solution that puts you in
+      control of your media. Stream to any device from your own server, with no strings
+      attached. Your media, your server, your way. '
+    digest: 52985f628a1c36745e843016e1b22468802258715ab04f0ca842b8965a9b7651
+    home: https://jellyfin.org/
+    keywords:
+    - media
+    maintainers:
+    - name: jasonb5
+    name: jellyfin
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/jellyfin
+    - https://github.com/jellyfin/jellyfin
+    - https://github.com/linuxserver/docker-jellyfin
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/jellyfin-0.1.11/jellyfin-0.1.11.tgz
+    version: 0.1.11
+  - apiVersion: v2
     appVersion: 10.9.7
     created: "2024-07-02T08:51:21.122780184Z"
     dependencies:
@@ -8145,4 +8170,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-30T00:36:37.148387139-07:00"
+generated: "2024-07-30T00:37:45.750613136-07:00"
