@@ -930,6 +930,31 @@ entries:
     version: 0.1.0
   darktable:
   - apiVersion: v2
+    appVersion: 2024-07-19-ls155
+    created: "2024-07-30T00:23:39.101804366-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'darktable is an open source photography workflow application and
+      raw developer. A virtual lighttable and darkroom for photographers. It manages
+      your digital negatives in a database, lets you view them through a zoomable
+      lighttable and enables you to develop raw images and enhance them. '
+    digest: c573e05b6ac9f02d6a320b48a9b61b3375ac7caed01dff2527df2a5031201b04
+    home: https://www.darktable.org
+    keywords:
+    - images
+    maintainers:
+    - name: jasonb5
+    name: darktable
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/darktable
+    - https://github.com/linuxserver/docker-darktable
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/darktable-0.1.1/darktable-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 2024-07-12-ls153
     created: "2024-07-13T13:59:22.69014397-07:00"
     dependencies:
@@ -7883,4 +7908,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-30T00:22:20.768314264-07:00"
+generated: "2024-07-30T00:23:44.219476215-07:00"
