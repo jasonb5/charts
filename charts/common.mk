@@ -3,7 +3,7 @@ CHART_DIR ?= .
 include $(wildcard custom.mk)
 
 .PHONY: release
-release: dep bump-patch package upload index
+release: $(if $(SKIP_DEP),,dep) $(if $(SKIP_BUMP),,bump-patch) package upload index
 
 .PHONY: package
 package:
