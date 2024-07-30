@@ -5206,6 +5206,29 @@ entries:
     version: 0.1.0
   ollama:
   - apiVersion: v2
+    appVersion: 0.2.7
+    created: "2024-07-30T00:15:05.671773208-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Ollama makes it easy to get up and running with large language models
+      locally. '
+    digest: ce3334e653fa3dfbb74df2cbfe029a2f76fc7297e4cbe15dd47e0bcdbbec63bd
+    home: https://ollama.ai/
+    keywords:
+    - ai
+    maintainers:
+    - name: jasonb5
+    name: ollama
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/ollama
+    - https://github.com/jmorganca/ollama
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/ollama-0.1.24/ollama-0.1.24.tgz
+    version: 0.1.24
+  - apiVersion: v2
     appVersion: 0.2.6
     created: "2024-07-30T06:37:12.124688387Z"
     dependencies:
@@ -7740,4 +7763,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-30T00:13:28.697177835-07:00"
+generated: "2024-07-30T00:15:08.098324462-07:00"
