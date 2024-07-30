@@ -1,6 +1,6 @@
 # searxng
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2024.7.7-ef103ba80](https://img.shields.io/badge/AppVersion-2024.7.7--ef103ba80-informational?style=flat-square)
+![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2024.7.14-e56f4b315](https://img.shields.io/badge/AppVersion-2024.7.14--e56f4b315-informational?style=flat-square)
 
 SearXNG is a free internet metasearch engine which aggregates results from more than 70 search services. Users are neither tracked nor profiled. Additionally, SearXNG can be used over Tor for online anonymity.
 

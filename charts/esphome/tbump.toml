@@ -1,7 +1,7 @@
 github_url = "https://github.com/jasonb5/charts/"
 
 [version]
-current = "0.1.46"
+current = "0.1.49"
 
 regex = '''
   (?P<major>\d+)
