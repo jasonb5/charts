@@ -1,0 +1,18 @@
+_src_path: template/
+app_version: 1.1.4
+description: "Apprise-api Takes advantage of Apprise through your network with a user-friendly\
+    \ API.\n\n    Send notifications to more then 65+ services.\n    An incredibly\
+    \ lightweight gateway to Apprise.\n    A production ready micro-service at your\
+    \ disposal.\n\nApprise API was designed to easily fit into existing (and new)\
+    \ eco-systems that are looking for a simple notification solution."
+homepage: https://github.com/caronc/apprise-api
+image: ghcr.io/linuxserver/apprise-api
+keywords: notifications
+mariadb_enabled: false
+name: apprise-api
+port: 8000
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/linuxserver/docker-apprise-api
+version: 0.1.0

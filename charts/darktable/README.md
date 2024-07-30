@@ -1,10 +1,10 @@
-# silverbullet
+# darktable
 
-![Version: 0.1.13](https://img.shields.io/badge/Version-0.1.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.1](https://img.shields.io/badge/AppVersion-0.8.1-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2024-07-12-ls153](https://img.shields.io/badge/AppVersion-2024--07--12--ls153-informational?style=flat-square)
 
-SilverBullet aims to be a **workshop for the mind**: a creative space where you collect, create and expand your personal knowledge, while simultaneously letting you evolve the tools you use to do so.
+darktable is an open source photography workflow application and raw developer. A virtual lighttable and darkroom for photographers. It manages your digital negatives in a database, lets you view them through a zoomable lighttable and enables you to develop raw images and enhance them.
 
-**Homepage:** <https://silverbullet.md/>
+**Homepage:** <https://www.darktable.org>
 
 ## Maintainers
 
@@ -14,8 +14,8 @@ SilverBullet aims to be a **workshop for the mind**: a creative space where you 
 
 ## Source Code
 
-* <https://github.com/jasonb5/charts/tree/main/charts/silverbullet>
-* <https://github.com/silverbulletmd/silverbullet>
+* <https://github.com/jasonb5/charts/tree/main/charts/darktable>
+* <https://github.com/linuxserver/docker-darktable>
 
 ## Requirements
 
@@ -28,9 +28,10 @@ SilverBullet aims to be a **workshop for the mind**: a creative space where you 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | workload | string | `"deployment"` | The default [workload](https://jasonb5.github.io/charts/site/guide/common-library/#workload) type |
-| image.repository | string | `"zefhemel/silverbullet"` | Container image repository |
+| image.repository | string | `"ghcr.io/linuxserver/darktable"` | Container image repository |
 | image.tag | string | Chart.AppVersion | Image tag |
 | env.TZ | string | `"UTC"` | Set the timezone |
+| env.NO_DECOR | string | `"true"` | Start application without window borders |
 | service | object | `{"ports":{"default":{"port":3000}}}` | [Service](https://jasonb5.github.io/charts/site/guide/common-library/#service) |
 | service.ports.default.port | int | `3000` | Default port |
 | ingress | object | `{"enabled":false,"hosts":[{"host":null,"name":"default"}],"tls":{"enabled":false}}` | [Ingress](https://jasonb5.github.io/charts/site/guide/common-library/#ingress) |
@@ -39,14 +40,13 @@ SilverBullet aims to be a **workshop for the mind**: a creative space where you 
 | ingress.hosts[0].host | string | `nil` | Ingress hostname |
 | ingress.tls | object | `{"enabled":false}` | [TLS](https://jasonb5.github.io/charts/site/guide/common-library/#tls) |
 | ingress.tls.enabled | bool | `false` | Enable/disable tls |
-| persistence | object | `{"config":{"enabled":false,"mountPath":"/space","size":"1Gi","type":"pvc"}}` | [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence) |
+| persistence | object | `{"config":{"enabled":false,"size":"1Gi","type":"pvc"}}` | [Persistence](https://jasonb5.github.io/charts/site/guide/common-library/#persistence) |
 | persistence.config.enabled | bool | `false` | Enable/disable persistence |
 | persistence.config.type | string | `"pvc"` | Type of volume mount |
 | persistence.config.size | string | `"1Gi"` | Size of volume |
-| persistence.config.mountPath | string | `"/space"` | Volume mount path |
 
 {%
-include-markdown "../../charts/silverbullet/CUSTOM.md"
+include-markdown "../../charts/darktable/CUSTOM.md"
 %}
 
 ----------------------------------------------
