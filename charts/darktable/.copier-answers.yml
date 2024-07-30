@@ -1,0 +1,17 @@
+_src_path: template/
+app_version: 2024-07-12-ls153
+description: darktable is an open source photography workflow application and raw
+    developer. A virtual lighttable and darkroom for photographers. It manages your
+    digital negatives in a database, lets you view them through a zoomable lighttable
+    and enables you to develop raw images and enhance them.
+homepage: https://www.darktable.org
+image: ghcr.io/linuxserver/darktable
+keywords: images
+mariadb_enabled: false
+name: darktable
+port: 3000
+postgresql_enabled: false
+redis_enabled: false
+root_directory: ../..
+sources: https://github.com/linuxserver/docker-darktable
+version: 0.1.0

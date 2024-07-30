@@ -1,0 +1,19 @@
+apiVersion: v2
+name: darktable
+version: 0.1.0
+description: |
+  darktable is an open source photography workflow application and raw developer. A virtual lighttable and darkroom for photographers. It manages your digital negatives in a database, lets you view them through a zoomable lighttable and enables you to develop raw images and enhance them.
+type: application
+keywords:
+- images
+home: https://www.darktable.org
+sources:
+- https://github.com/jasonb5/charts/tree/main/charts/darktable
+- https://github.com/linuxserver/docker-darktable
+dependencies:
+- name: common
+  version: 0.1.x
+  repository: https://jasonb5.github.io/charts
+maintainers:
+  - name: jasonb5
+appVersion: 2024-07-12-ls153
