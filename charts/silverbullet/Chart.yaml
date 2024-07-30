@@ -1,6 +1,6 @@
 apiVersion: v2
 name: silverbullet
-version: 0.1.14
+version: 0.1.15
 description: 'SilverBullet aims to be a **workshop for the mind**: a creative space
   where you collect, create and expand your personal knowledge, while simultaneously
   letting you evolve the tools you use to do so.
