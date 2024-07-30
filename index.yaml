@@ -6137,6 +6137,30 @@ entries:
     version: 0.1.0
   searxng:
   - apiVersion: v2
+    appVersion: 2024.7.27-e31b06b68
+    created: "2024-07-30T00:31:31.977842416-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'SearXNG is a free internet metasearch engine which aggregates results
+      from more than 70 search services. Users are neither tracked nor profiled. Additionally,
+      SearXNG can be used over Tor for online anonymity. '
+    digest: 30c06354d671a11fc37b4101d8f779e2d54e1a696316abd75856b358b9910ab1
+    home: https://docs.searxng.org/
+    keywords:
+    - search
+    maintainers:
+    - name: jasonb5
+    name: searxng
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/searxng
+    - https://github.com/searxng/searxng
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/searxng-0.1.8/searxng-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
     appVersion: 2024.7.26-319afe031
     created: "2024-07-30T00:30:10.069532481-07:00"
     dependencies:
@@ -8005,4 +8029,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-30T00:30:12.143980713-07:00"
+generated: "2024-07-30T00:31:33.934510073-07:00"
