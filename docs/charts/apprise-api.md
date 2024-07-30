@@ -1,0 +1,1 @@
+../../charts/apprise-api/README.md
