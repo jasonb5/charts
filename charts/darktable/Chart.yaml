@@ -1,6 +1,6 @@
 apiVersion: v2
 name: darktable
-version: 0.1.0
+version: 0.1.1
 description: 'darktable is an open source photography workflow application and raw
   developer. A virtual lighttable and darkroom for photographers. It manages your
   digital negatives in a database, lets you view them through a zoomable lighttable
