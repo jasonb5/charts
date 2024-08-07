@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ollama
-version: 0.1.27
+version: 0.1.28
 description: 'Ollama makes it easy to get up and running with large language models
   locally.
 
