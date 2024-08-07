@@ -7529,6 +7529,29 @@ entries:
     version: 0.1.0
   zwave-js-ui:
   - apiVersion: v2
+    appVersion: 9.16.4
+    created: "2024-08-06T22:24:49.909225558-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Full featured Z-Wave Control Panel UI and MQTT gateway. Built using
+      Nodejs, and Vue/Vuetify  '
+    digest: 33986c49c5611e69215fde94f33dcf9e1ccc8dd59cf04b8ac3a06ea890ff0f95
+    home: https://zwave-js.github.io/zwave-js-ui/#/
+    keywords:
+    - automation
+    maintainers:
+    - name: jasonb5
+    name: zwave-js-ui
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/zwave-js-ui
+    - https://github.com/zwave-js/zwave-js-ui
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.33/zwave-js-ui-0.1.33.tgz
+    version: 0.1.33
+  - apiVersion: v2
     appVersion: 9.16.3
     created: "2024-07-30T00:01:21.555209579-07:00"
     dependencies:
@@ -8195,4 +8218,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-30T00:38:42.070473367-07:00"
+generated: "2024-08-06T22:24:49.909632579-07:00"
