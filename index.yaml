@@ -137,6 +137,33 @@ entries:
     version: 0.1.0
   calibre:
   - apiVersion: v2
+    appVersion: 7.16.0
+    created: "2024-08-06T22:42:39.464675752-07:00"
+    dependencies:
+    - name: common
+      repository: https://jasonb5.github.io/charts
+      version: 0.1.x
+    description: 'Calibre is a powerful and easy to use e-book manager. Users say
+      it''s outstanding and a must-have. It''ll allow you to do nearly everything
+      and it takes things a step beyond normal e-book software. It''s also completely
+      free and open source and great for both casual users and computer experts. '
+    digest: d87262539375b8246b240a6a6f4ef78b9a8159da9218a2ad682eb31349e7c910
+    home: https://calibre-ebook.com/
+    keywords:
+    - ebooks
+    - management
+    maintainers:
+    - name: jasonb5
+    name: calibre
+    sources:
+    - https://github.com/jasonb5/charts/tree/main/charts/calibre
+    - https://github.com/kovidgoyal/calibre
+    - https://github.com/linuxserver/docker-calibre
+    type: application
+    urls:
+    - https://github.com/jasonb5/charts/releases/download/calibre-0.1.17/calibre-0.1.17.tgz
+    version: 0.1.17
+  - apiVersion: v2
     appVersion: 7.15.0
     created: "2024-07-30T00:20:19.212218342-07:00"
     dependencies:
@@ -8541,4 +8568,4 @@ entries:
     urls:
     - https://github.com/jasonb5/charts/releases/download/zwave-js-ui-0.1.0/zwave-js-ui-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-06T22:41:36.364810412-07:00"
+generated: "2024-08-06T22:42:42.29439896-07:00"
