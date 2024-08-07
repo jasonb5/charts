@@ -1,8 +1,13 @@
 apiVersion: v2
 name: mealie
 version: 0.1.8
-description: |
-  Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family. Easily add recipes into your database by providing the URL and Mealie will automatically import the relevant data, or add a family recipe with the UI editor. Mealie also provides an API for interactions from 3rd party applications.
+description: 'Mealie is a self hosted recipe manager and meal planner with a RestAPI
+  backend and a reactive frontend application built in Vue for a pleasant user experience
+  for the whole family. Easily add recipes into your database by providing the URL
+  and Mealie will automatically import the relevant data, or add a family recipe with
+  the UI editor. Mealie also provides an API for interactions from 3rd party applications.
+
+  '
 type: application
 keywords:
 - recipe
@@ -17,4 +22,4 @@ dependencies:
   repository: https://jasonb5.github.io/charts
 maintainers:
 - name: jasonb5
-appVersion: v1.10.2
+appVersion: v1.11.0
