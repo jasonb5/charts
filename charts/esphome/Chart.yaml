@@ -1,6 +1,6 @@
 apiVersion: v2
 name: esphome
-version: 0.1.62
+version: 0.1.63
 description: 'ESPHome is the perfect solution for creating custom firmwares for your
   ESP8266/ESP32 boards.
 
