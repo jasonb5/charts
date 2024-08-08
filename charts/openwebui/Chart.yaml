@@ -1,8 +1,11 @@
 apiVersion: v2
 name: openwebui
 version: 0.1.0
-description: |
-  Open WebUI is an extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline. It supports various LLM runners, including Ollama and OpenAI-compatible APIs.
+description: 'Open WebUI is an extensible, feature-rich, and user-friendly self-hosted
+  WebUI designed to operate entirely offline. It supports various LLM runners, including
+  Ollama and OpenAI-compatible APIs.
+
+  '
 type: application
 keywords:
 - ai
@@ -15,5 +18,5 @@ dependencies:
   version: 0.1.x
   repository: https://jasonb5.github.io/charts
 maintainers:
-  - name: jasonb5
-appVersion: git-45fae65-ollama
+- name: jasonb5
+appVersion: git-3715994
